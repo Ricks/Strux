@@ -1,0 +1,198 @@
+//
+//  BSNodeDescriptionTests.swift
+//  DataStructures
+//
+//  Created by Richard Clark on 4/25/20.
+//  Copyright © 2020 Richard Clark. All rights reserved.
+//  MIT License (see LICENSE file).
+//
+
+import XCTest
+import Foundation
+@testable import Strux
+
+class BSNodeDescriptionTests: XCTestCase {
+
+    func checkDesc(_ desc: String, _ expected: String) {
+        if desc != expected {
+            let expectedLines = expected.split(separator: "\n").map { $0 + "|" }
+            let expectedTerminated = expectedLines.joined(separator: "\n")
+            let descLines = desc.split(separator: "\n").map { $0 + "|" }
+            let descTerminated = descLines.joined(separator: "\n")
+            XCTFail("\n\nExpected:\n\(expectedTerminated)\n\nGot:\n\(descTerminated)")
+        }
+    }
+
+    func testDescription1() {
+        let god = BNode()
+        let root = BSNode(42, parent: god, direction: .left)
+        let expectedRootDescrip = "42"
+        XCTAssertEqual(root.description, expectedRootDescrip)
+        root.insert(12)
+        let expectedRootDescrip2 = "   42\n" +
+                                   "  /  \n" +
+                                   "12   "
+        checkDesc(root.description, expectedRootDescrip2)
+    }
+
+    func testDescription2() {
+        let god = BNode()
+        let root = BSNode(42, parent: god, direction: .left)
+        var expectedRootDescrip = "42"
+        XCTAssertEqual(root.description, expectedRootDescrip)
+        root.insert(70)
+        expectedRootDescrip = "42   \n" +
+                              "  \\  \n" +
+                              "   70"
+        checkDesc(root.description, expectedRootDescrip)
+        root.insert(13)
+        expectedRootDescrip = "   42   \n" +
+                              "  /  \\  \n" +
+                              "13    70"
+        checkDesc(root.description, expectedRootDescrip)
+        root.insert(17)
+        expectedRootDescrip = "   __42_   \n" +
+                              "  /     \\  \n" +
+                              "13       70\n" +
+                              "  \\        \n" +
+                              "   17      "
+        print(root.description)
+        checkDesc(root.description, expectedRootDescrip)
+        root.insert(69)
+        expectedRootDescrip = "   ___42___   \n" +
+                              "  /        \\  \n" +
+                              "13          70\n" +
+                              "  \\        /  \n" +
+                              "   17    69   "
+        checkDesc(root.description, expectedRootDescrip)
+        root.insert(12)
+        expectedRootDescrip = "      ___42___   \n" +
+                              "     /        \\  \n" +
+                              "   13          70\n" +
+                              "  /  \\        /  \n" +
+                              "12    17    69   "
+        checkDesc(root.description, expectedRootDescrip)
+        root.insert(68)
+        expectedRootDescrip = "      ___42___      \n" +
+                              "     /        \\     \n" +
+                              "   13          69   \n" +
+                              "  /  \\        /  \\  \n" +
+                              "12    17    68    70"
+        checkDesc(root.description, expectedRootDescrip)
+    }
+
+    func testDescription3() {
+        let god = BNode()
+        let root = BSNode(42, parent: god, direction: .left)
+        let node69 = BSNode(69, parent: root, direction: .right)
+        _ = BSNode(68, parent: node69, direction: .left)
+        _ = BSNode(70, parent: node69, direction: .right)
+        let expectedRootDescrip = "42      \n" +
+                                  "  \\     \n" +
+                                  "   69   \n" +
+                                  "  /  \\  \n" +
+                                  "68    70"
+        checkDesc(root.description, expectedRootDescrip)
+    }
+
+    func testDescription4() {
+        let god = BNode()
+        let root = BSNode(142, parent: god, direction: .left)
+        let node69 = BSNode(69, parent: root, direction: .right)
+        _ = BSNode(68, parent: node69, direction: .left)
+        _ = BSNode(70, parent: node69, direction: .right)
+        let expectedRootDescrip = "142      \n" +
+                                  "   \\     \n" +
+                                  "    69   \n" +
+                                  "   /  \\  \n" +
+                                  " 68    70"
+        checkDesc(root.description, expectedRootDescrip)
+    }
+
+    func testDescription5() {
+        let god = BNode()
+        let root = BSNode(42, parent: god, direction: .left)
+        let node69 = BSNode(69, parent: root, direction: .right)
+        _ = BSNode(168, parent: node69, direction: .left)
+        _ = BSNode(70, parent: node69, direction: .right)
+        let expectedRootDescrip = " 42      \n" +
+                                  "   \\     \n" +
+                                  "    69   \n" +
+                                  "   /  \\  \n" +
+                                  "168    70"
+        checkDesc(root.description, expectedRootDescrip)
+    }
+
+    func testDescription6() {
+        let god = BNode()
+        let root = BSNode(42, parent: god, direction: .left)
+        let node69 = BSNode(69, parent: root, direction: .left)
+        _ = BSNode(68, parent: node69, direction: .left)
+        _ = BSNode(70, parent: node69, direction: .right)
+        let expectedRootDescrip = "      42\n" +
+                                  "     /  \n" +
+                                  "   69   \n" +
+                                  "  /  \\  \n" +
+                                  "68    70"
+        checkDesc(root.description, expectedRootDescrip)
+    }
+
+    func testDescription7() {
+        let god = BNode()
+        let root = BSNode(142, parent: god, direction: .left)
+        let node69 = BSNode(69, parent: root, direction: .left)
+        _ = BSNode(68, parent: node69, direction: .left)
+        _ = BSNode(70, parent: node69, direction: .right)
+        let expectedRootDescrip = "      142\n" +
+                                  "     /   \n" +
+                                  "   69    \n" +
+                                  "  /  \\   \n" +
+                                  "68    70 "
+        checkDesc(root.description, expectedRootDescrip)
+    }
+
+    func testDescription8() {
+        let god = BNode()
+        let root = BSNode(14, parent: god, direction: .left)
+        let node69 = BSNode(69, parent: root, direction: .left)
+        _ = BSNode(68, parent: node69, direction: .left)
+        _ = BSNode(170, parent: node69, direction: .right)
+        let expectedRootDescrip = "      14 \n" +
+                                  "     /   \n" +
+                                  "   69    \n" +
+                                  "  /  \\   \n" +
+                                  "68    170"
+        checkDesc(root.description, expectedRootDescrip)
+        let tree2: BSTree<Int> = []
+        checkDesc(tree2.description, "")
+    }
+
+    func testDescriptionWithHeight() {
+        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let expectedHeightDescription = "           _____0-3_____               \n" +
+                                        "          /             \\              \n" +
+                                        "      -9-1         ______6-2______     \n" +
+                                        "     /            /               \\    \n" +
+                                        "-20-0          3-1                 65-1\n" +
+                                        "                  \\               /    \n" +
+                                        "                   4(2)-0     12-0     "
+        checkDesc(tree.descriptionWithHeight, expectedHeightDescription)
+        let tree2: BSTree<Int> = []
+        checkDesc(tree2.descriptionWithHeight, "")
+    }
+
+    func testDescriptionWithNext() {
+        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let expectedNextDescription =   "              ______0->3_______                     \n" +
+                                        "             /                 \\                    \n" +
+                                        "        -9->0           ________6->12_______        \n" +
+                                        "       /               /                    \\       \n" +
+                                        "-20->-9            3->4                      65->nil\n" +
+                                        "                       \\                    /       \n" +
+                                        "                        4(2)->6       12->65        "
+        checkDesc(tree.descriptionWithNext, expectedNextDescription)
+        let tree2: BSTree<Int> = []
+        checkDesc(tree2.descriptionWithNext, "")
+    }
+
+}
