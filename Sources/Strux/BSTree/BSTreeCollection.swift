@@ -25,10 +25,10 @@ extension BSTree: Collection {
 
 }
 
-struct BSTreeIndex<T: Comparable>: Comparable {
+public struct BSTreeIndex<T: Comparable>: Comparable {
     weak var node: BSNode<T>?
 
-    static func == (lhs: BSTreeIndex<T>, rhs: BSTreeIndex<T>) -> Bool {
+    public static func == (lhs: BSTreeIndex<T>, rhs: BSTreeIndex<T>) -> Bool {
         if let lnode = lhs.node, let rnode = rhs.node {
             return lnode === rnode
         } else {
@@ -36,7 +36,7 @@ struct BSTreeIndex<T: Comparable>: Comparable {
         }
     }
 
-    static func < (lhs: BSTreeIndex<T>, rhs: BSTreeIndex<T>) -> Bool {
+    public static func < (lhs: BSTreeIndex<T>, rhs: BSTreeIndex<T>) -> Bool {
         if let lnode = lhs.node, let rnode = rhs.node {
             return lnode.value < rnode.value
         } else {

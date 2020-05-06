@@ -10,7 +10,7 @@
 import Foundation
 
 // Basic binary node behavior, ensuring integrity of parent node pointer.
-class BNode {
+public class BNode {
     private var leftNodeStorage: BNode?
     private var rightNodeStorage: BNode?
     private var parentNodeStorage: BNode?

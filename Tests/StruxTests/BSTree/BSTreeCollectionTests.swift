@@ -28,7 +28,7 @@ class BSTCollectionTests: XCTestCase {
     }
 
     func testIndexEquality() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree = BSTree([4, -9, 12, 3, 0, 65, -20, 4, 6])
         var i1 = tree.startIndex
         var i2 = tree.startIndex
         var n = 0

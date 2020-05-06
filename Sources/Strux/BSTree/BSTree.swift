@@ -16,9 +16,9 @@ import Foundation
 /// of the tree must meet the same condition.
 ///
 /// BSTree is a BNode so that it can serve as the parent of root.
-class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral {
-    typealias Element = (value: T, count: Int)
-    typealias Index = BSTreeIndex<T>
+public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral {
+    public typealias Element = (value: T, count: Int)
+    public typealias Index = BSTreeIndex<T>
 
     /// The root node of the tree, or nil if the tree is empty. The root node has the tree as parent, so that
     /// all the BSNodes of the tree have parents.
@@ -28,7 +28,7 @@ class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral {
     }
 
     /// The number of elements in the tree (NOT the sum of all value counts)
-    private(set) var count = 0
+    private(set) public var count = 0
 
     private func initializeWithCountedSet(_ countedSet: NSCountedSet) {
         let values = countedSet.allObjects as! [T]
@@ -37,12 +37,12 @@ class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral {
         }
     }
 
-    init(countedSet: NSCountedSet) {
+    public init(countedSet: NSCountedSet) {
         super.init()
         initializeWithCountedSet(countedSet)
     }
 
-    init(_ values: [T] = [T]()) {
+    public init(_ values: [T] = [T]()) {
         super.init()
         initializeWithCountedSet(NSCountedSet(array: values))
     }
@@ -191,7 +191,7 @@ extension BSTree: CustomStringConvertible {
 
 extension BSTree: Equatable {
 
-    static func == (lhs: BSTree<T>, rhs: BSTree<T>) -> Bool {
+    public static func == (lhs: BSTree<T>, rhs: BSTree<T>) -> Bool {
         if lhs.count != rhs.count { return false }
         var lIndex = lhs.startIndex
         var rIndex = rhs.startIndex
