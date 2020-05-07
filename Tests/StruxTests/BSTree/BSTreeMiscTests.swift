@@ -62,4 +62,25 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertFalse(tree === tree2)
         XCTAssertTrue(tree == tree2)
     }
+
+    func testDocumentation() {
+        let tree: BSTree = [14, -2, 32, 14]
+        tree.insert(42, 2)
+        tree.deleteAll(14)
+        XCTAssertTrue(tree.contains(value: -2))
+        let expectedDescrip = "   32      \n" +
+                              "  /  \\     \n" +
+                              "-2    42(2)"
+        XCTAssertEqual(tree.description, expectedDescrip)
+        XCTAssertEqual(tree.height, 1)
+        XCTAssertEqual(tree.count, 3)
+        XCTAssertEqual(tree.min?.value, -2)
+        XCTAssertEqual(tree.min?.count, 1)
+        XCTAssertEqual(tree.max?.value, 42)
+        XCTAssertEqual(tree.max?.count, 2)
+        let array = Array(tree)
+        XCTAssertTrue(array[0] == (value: -2, count: 1))
+        XCTAssertTrue(array[1] == (value: 32, count: 1))
+        XCTAssertTrue(array[2] == (value: 42, count: 2))
+    }
 }

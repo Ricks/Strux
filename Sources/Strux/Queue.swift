@@ -10,7 +10,8 @@
 import Foundation
 
 /// Standard Queue (FIFO) type - items are added at one end of the queue, and removed from the other.
-/// add() and remove() are O(1) (amortized for remove()).
+/// add() and remove() are O(1) (amortized for remove()). Queue conforms to the Collection and
+/// ExpressibleByArrayLiteral protocols.
 ///
 /// ```
 /// var q = Queue<Int>()

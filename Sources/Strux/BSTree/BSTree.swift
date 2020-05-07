@@ -9,12 +9,41 @@
 
 import Foundation
 
-/// A counted, self-balancing (AVL) binary search tree. Counted means that there are no duplicate nodes with
-/// the same value, but values have counts associated with them. To be a valid BST, the value of the root node must be **strictly**greater than any value in the subtree, if any, with its left child as root, and
-/// **strictly** less than any value in the subtree, if any, with its right child as root, and all subtrees
-/// of the tree must meet the same condition.
+/// A counted, self-balancing (AVL) binary search tree. Counted means that there are no duplicate nodes
+/// with the same value, but values have counts associated with them. To be a valid BST, the value of the
+/// root node must be **strictly** greater than any value in the subtree, if any, with its left child as
+/// root, and **strictly** less than any value in the subtree, if any, with its right child as root, and
+/// all subtrees of the tree must meet the same condition.
 ///
-/// BSTree is a BNode so that it can serve as the parent of root.
+/// Insertions, deletions, and queries have time complexity O(log(n)). Returning the count (of unique
+/// values), tree height, min (first), and max (last) values are all O(1). Traversing the tree in order,
+/// min to max, is O(n).
+///
+/// BSTree conforms to the Collection protocol, and meets all of Collection's expected performance
+/// requirements (see above). It also conforms to Equatable, NSCopying, and ExpressibleByArrayLiteral.
+///
+/// The elements of the Collection are tuples of the form (value: T, count: Int). The indices of the
+/// Collection are of non-numeric type BSTreeIndex<T>.
+///
+/// ```
+/// let tree: BSTree = [14, -2, 32, 14]  // BSTree is a class, so it can be a "let"
+/// tree.insert(42, 2)             // Insert 2 of value 42
+/// tree.deleteAll(14)             // Delete both 14's
+/// tree.contains(value: -2)       // true
+/// print(tree)
+///
+///    32
+///   /  \
+/// -2    42(2)
+///
+/// tree.height                    // 1
+/// tree.count                     // 3
+/// tree.min.value                 // -2
+/// tree.min.count                 // 1
+/// tree.max.value                 // 42
+/// tree.max.count                 // 2
+/// Array(tree)                    // [(value: -2, count: 1), (value: 32, count: 1), (value: 42, count: 2)]
+/// ```
 public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral {
     public typealias Element = (value: T, count: Int)
     public typealias Index = BSTreeIndex<T>
@@ -26,7 +55,8 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         set { leftNode = newValue }
     }
 
-    /// The number of elements in the tree (NOT the sum of all value counts)
+    /// The number of elements (values) in the tree (NOT the sum of all value counts).
+    /// Time complexity: O(1)
     public private(set) var count = 0
 
     private func initializeWithCountedSet(_ countedSet: NSCountedSet) {
@@ -177,6 +207,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     }
 
     /// Return the elements of the tree "in order" (from min to max).
+    /// Time complexity: O(n)
     /// - Returns: An array of elements
     public func traverseInOrder() -> [Element] {
         // Using next pointers is faster than recursive BSNode traverseInOrder
@@ -201,7 +232,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         return root?.traversePostOrder() ?? []
     }
 
-    /// Return the elements of the tree in level order, starting with the root and working downward.
+    /// Return the elements of the tree in "level" order, starting with the root and working downward.
     /// - Returns: An array of elements
     public func traverseLevelNodes() -> [Element] {
         return root?.traverseLevel() ?? []
