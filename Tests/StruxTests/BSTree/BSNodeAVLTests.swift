@@ -10,6 +10,44 @@ import XCTest
 import Foundation
 @testable import Strux
 
+extension BSNode {
+    
+    private func isNextCorrectHelper() -> Bool {
+        if let pred = inOrderPredecessor {
+            if pred.next !== self { return false }
+        }
+        if next !== inOrderSuccessor { return false }
+        if let thisLeft = left {
+            if !thisLeft.isNextCorrectHelper() { return false }
+        }
+        if let thisRight = right {
+            if !thisRight.isNextCorrectHelper() { return false }
+        }
+        return true
+    }
+
+    var isNextCorrect: Bool {
+        if !isNextCorrectHelper() { return false }
+        var elems1 = [Element]()
+        var node: BSNode<T>? = minNode
+        while let thisNode = node {
+            elems1.append((thisNode.value, Int(thisNode.valueCount)))
+            node = thisNode.next
+        }
+        let elems2 = traverseInOrder()
+        if elems1.count != elems2.count {
+            return false
+        }
+        for i in 0 ..< elems1.count {
+            if !(elems1[i].value == elems2[i].value && elems1[i].count == elems2[i].count) {
+                return false
+            }
+        }
+        return true
+    }
+
+}
+
 func dumpNextPointers<T>(_ tree: BSTree<T>) {
     let elems1 = tree.root?.traverseInOrder() ?? []
     print("traverseInOrder:")
@@ -346,5 +384,13 @@ class BSNodeAVLTests: XCTestCase {
                 validateTree(tree, "Tree \(treeIndex)")
             }
         }
+    }
+
+    func testRotateWrongNode() {
+        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        print(tree)
+        let nodeMinus20 = tree.root!.find(-20)!
+        nodeMinus20.rotateLeft()
+        nodeMinus20.rotateRight()
     }
 }

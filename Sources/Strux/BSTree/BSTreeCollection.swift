@@ -15,7 +15,7 @@ extension BSTree: Collection {
     public var endIndex: Index { BSTreeIndex(node: nil) }
 
     public subscript(i: Index) -> Element {
-        precondition((startIndex..<endIndex).contains(i), "Index out of bounds")
+        assert((startIndex..<endIndex).contains(i), "Index out of bounds")
         return (i.node!.value, Int(i.node!.valueCount))
     }
 
@@ -31,18 +31,16 @@ public struct BSTreeIndex<T: Comparable>: Comparable {
     public static func == (lhs: BSTreeIndex<T>, rhs: BSTreeIndex<T>) -> Bool {
         if let lnode = lhs.node, let rnode = rhs.node {
             return lnode === rnode
-        } else {
-            return lhs.node == nil && rhs.node == nil
         }
+        return lhs.node == nil && rhs.node == nil
     }
 
     public static func < (lhs: BSTreeIndex<T>, rhs: BSTreeIndex<T>) -> Bool {
         if let lnode = lhs.node, let rnode = rhs.node {
             return lnode.value < rnode.value
-        } else {
-            // nil means endIndex, which all other indices are less than
-            return lhs.node != nil && rhs.node == nil
         }
+        // nil means endIndex, which all other indices are less than
+        return lhs.node != nil && rhs.node == nil
     }
 
 }

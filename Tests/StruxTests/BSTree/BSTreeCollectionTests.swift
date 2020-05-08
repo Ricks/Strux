@@ -35,6 +35,8 @@ class BSTCollectionTests: XCTestCase {
         while i1 < tree.endIndex {
             n += 1
             XCTAssertEqual(i1, i2)
+            XCTAssertEqual(tree[i1].value, tree[i2].value)
+            XCTAssertEqual(tree[i1].count, tree[i2].count)
             i1 = tree.index(after: i1)
             i2 = tree.index(after: i2)
         }

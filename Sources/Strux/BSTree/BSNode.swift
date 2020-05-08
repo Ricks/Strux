@@ -130,9 +130,8 @@ class BSNode<T: Comparable>: BNode {
             return self
         } else if val < value {
             return left?.find(val)
-        } else {
-            return right?.find(val)
         }
+        return right?.find(val)
     }
 
     var element: Element {

@@ -28,40 +28,6 @@ extension BSNode {
         return (height == max(lh, rh) + 1) && lihc && rihc
     }
 
-    private func isNextCorrectHelper() -> Bool {
-        if let pred = inOrderPredecessor {
-            if pred.next !== self { return false }
-        }
-        if next !== inOrderSuccessor { return false }
-        if let thisLeft = left {
-            if !thisLeft.isNextCorrectHelper() { return false }
-        }
-        if let thisRight = right {
-            if !thisRight.isNextCorrectHelper() { return false }
-        }
-        return true
-    }
-
-    var isNextCorrect: Bool {
-        if !isNextCorrectHelper() { return false }
-        var elems1 = [Element]()
-        var node: BSNode<T>? = minNode
-        while let thisNode = node {
-            elems1.append((thisNode.value, Int(thisNode.valueCount)))
-            node = thisNode.next
-        }
-        let elems2 = traverseInOrder()
-        if elems1.count != elems2.count {
-            return false
-        }
-        for i in 0 ..< elems1.count {
-            if !(elems1[i].value == elems2[i].value && elems1[i].count == elems2[i].count) {
-                return false
-            }
-        }
-        return true
-    }
-
     private func isValidHelper() -> (isValid: Bool, minVal: T, maxVal: T) {
         var isValid = true
         var minVal: T?

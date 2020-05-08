@@ -70,22 +70,18 @@ public struct Queue<T>: Collection, ExpressibleByArrayLiteral {
     public func peek() -> T? {
         if !left.isEmpty {
             return left.last
-        } else {
-            return right.first
         }
+        return right.first
     }
 
     public subscript(pos: Int) -> T {
-        precondition((startIndex..<endIndex).contains(pos), "Index out of bounds")
         if pos < left.endIndex {
             return left[left.endIndex - pos - 1]
-        } else {
-            return right[pos - left.endIndex]
         }
+        return right[pos - left.endIndex]
     }
 
     public func index(after i: Int) -> Int {
-        precondition((startIndex..<endIndex).contains(i), "Index out of bounds")
         return i + 1
     }
 }

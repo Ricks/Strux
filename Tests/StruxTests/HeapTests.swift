@@ -279,4 +279,29 @@ class HeapTests: XCTestCase {
         XCTAssertEqual(Array(pqMin).sorted(), [0, 1, 2, 3, 4, 5, 6, 7, 7, 8, 9])
         XCTAssertEqual(pqMin[0], 0)
     }
+//
+//    func testPerformance() {
+//        measure {
+//            (0..<1).forEach { heapIndex in
+//                print("Heap \(heapIndex) ...")
+//                let initialValues = [44, -12, 3]
+//                let heapSizish = seededRandom(in: 0..<100000)
+//                var heap = Heap<Int>(isMin: true, startingValues: initialValues)
+//                (0..<heapSizish).forEach { _ in
+//                    let val = seededRandom(in: -5..<100)
+//                    let choice = seededRandom(in: 0..<10)
+//                    switch choice {
+//                    case 0:
+//                        heap.remove(val)
+//                    case 1:
+//                        heap.removeAll(val)
+//                    case 2:
+//                        heap.pop()
+//                    default:
+//                        heap.push(val)
+//                    }
+//                }
+//            }
+//        }
+//    }
 }

@@ -79,4 +79,9 @@ class BSNodeModifyTests: XCTestCase {
         }
     }
 
+    func testInsertZero() {
+        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let node6 = tree.root!.right!
+        node6.insert(13, 0)
+    }
 }

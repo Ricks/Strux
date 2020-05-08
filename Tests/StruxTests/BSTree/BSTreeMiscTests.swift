@@ -83,4 +83,12 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertTrue(array[1] == (value: 32, count: 1))
         XCTAssertTrue(array[2] == (value: 42, count: 2))
     }
+
+    func testNodeCheck() {
+        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        XCTAssertTrue(tree.root!.isNextCorrect)
+        let node6 = tree.root!.right!
+        tree.root!.next = node6
+        XCTAssertFalse(tree.root!.isNextCorrect)
+    }
 }
