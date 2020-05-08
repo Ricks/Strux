@@ -28,7 +28,7 @@ class BSNode<T: Comparable>: BNode {
     /// Height of the subtree having this node as parent. Zero if this node is a leaf (no children).
     var height: Int32 = 0
     /// Next node in order, i.e. the node with the next highest value.
-    var next: BSNode<T>?
+    weak var next: BSNode<T>?
 
     // Constructor with value and count
     // - Parameters:

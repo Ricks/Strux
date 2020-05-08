@@ -13,7 +13,7 @@ import Foundation
 public class BNode {
     private var leftNodeStorage: BNode?
     private var rightNodeStorage: BNode?
-    private var parentNodeStorage: BNode?
+    weak private var parentNodeStorage: BNode?
 
     /// Left child node, or nil if none
     var leftNode: BNode? {
