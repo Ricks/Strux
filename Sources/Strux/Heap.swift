@@ -10,8 +10,8 @@
 import Foundation
 
 /// Min (default) or max heap. A heap is a tree-based data structure that can be used to efficiently
-/// implement a priority queue. It gives O(1) read (peek) access to the min or max value, and can be
-/// updated via a pop or push in O(log(n)) time. Removing an arbitrary element takes O(n) time.
+/// implement a priority queue. It gives *O(1)* read (peek) access to the min or max value, and can be
+/// updated via a pop or push in *O(log(n))* time. Removing an arbitrary element takes *O(n)* time.
 /// ```
 /// var pq = Heap<Int>(isMin: false, startingValues: [5, -1, 3, 42, 68, 99, 72])     // Max heap
 /// pq.isEmpty                 // false
@@ -28,15 +28,13 @@ import Foundation
 /// pq.clear()                 // Removes all values
 /// pq.isEmpty                 // true
 /// ```
-struct Heap<T: Comparable>: Collection {
-    typealias ArrayLiteralElement = T
-
+public struct Heap<T: Comparable>: Collection {
     // State
     private var array = [T]()
     private var isMin = true
 
-    var startIndex: Int { return 0 }
-    var endIndex: Int { return array.count }
+    public var startIndex: Int { return 0 }
+    public var endIndex: Int { return array.count }
 
     /******************* Private methods *******************/
 
@@ -94,14 +92,17 @@ struct Heap<T: Comparable>: Collection {
             push(value)
         }
     }
-    /// Push an item onto the heap. Complexity is O(log(n)).
+
+    /// Push an item onto the heap. Complexity is *O(log(n)*).
     /// - Parameter item: item to add to the heap
     public mutating func push(_ item: T) {
         array.append(item)
         bubbleUp(count - 1)
     }
-    /// Remove and return the min or max value from the heap. Complexity is O(log(n)).
+    
+    /// Remove and return the min or max value from the heap. Complexity is *O(log(n))*.
     /// - Returns: optional item (nil if the heap is empty)
+    @discardableResult
     public mutating func pop() -> T? {
         let out = array.first
         if !isEmpty {
@@ -111,11 +112,13 @@ struct Heap<T: Comparable>: Collection {
         }
         return out
     }
-    /// Return the min or max value of the heap. Complexity is O(1).
+
+    /// Return the min or max value of the heap. Complexity is *O(1)*.
     public func peek() -> T? {
         return array.first
     }
-    /// Remove the first occurrence of the given item from the heap. Complexity is O(n).
+
+    /// Remove the first occurrence of the given item from the heap. Complexity is *O(n)*.
     /// - Parameter item: item to remove
     public mutating func remove(_ item: T) {
         guard let index = array.firstIndex(of: item) else { return }
@@ -126,7 +129,8 @@ struct Heap<T: Comparable>: Collection {
             bubbleDown(index)
         }
     }
-    /// Remove all occurrences of the given item from the heap. Complexity is O(n).
+
+    /// Remove all occurrences of the given item from the heap. Complexity is *O(n)*.
     /// - Parameter item: item to remove
     public mutating func removeAll(_ item: T) {
         var prevCount = 0
@@ -135,6 +139,7 @@ struct Heap<T: Comparable>: Collection {
             remove(item)
         } while count != prevCount
     }
+
     /// Remove all items from the heap.
     public mutating func clear() {
         array.removeAll()

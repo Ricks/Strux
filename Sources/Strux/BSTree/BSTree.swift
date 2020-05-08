@@ -114,7 +114,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
 
     /// Insert the given number of the given value into the tree. If the value is already in the tree,
     /// the count is incremented by the given number.
-    /// Time complexity: O(log(n))
+    /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to insert n of
     ///   - n: The number of val to insert
@@ -136,7 +136,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
 
     /// Insert one of the given value into the tree. If the value is already in the tree,
     /// the count is incremented by one.
-    /// Time complexity: O(log(n))
+    /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to insert one of
     public func insert(_ val: T) {
@@ -154,7 +154,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
 
     /// Delete the given number of the given value from the tree. If the given number is >= the number
     /// of the value in the tree, the value is removed completed.
-    /// Time complexity: O(log(n))
+    /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to remove n of
     ///   - n: The number of val to remove
@@ -166,7 +166,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
 
     /// Delete one of the given value from the tree. If the number of the value already in the tree is
     /// more than one, the number is decremented by one, otherwise the value is removed from the tree.
-    /// Time complexity: O(log(n))
+    /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to remove one of
     public func delete(_ val: T) {
@@ -174,7 +174,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     }
 
     /// Delete all occurrences of the given value from the tree.
-    /// Time complexity: O(log(n))
+    /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to remove all occurrences of
     public func deleteAll(_ val: T) {
@@ -185,29 +185,30 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
 
     /// The height of the tree, i.e. the number of levels minus 1. An empty tree has a height of -1, a
     /// tree with just a root node has height 0, and a tree with two nodes has height 1.
-    /// Time complexity: O(1)
+    /// Time complexity: *O(1)*.
     public var height: Int {
         Int(root?.height ?? -1)
     }
 
     var maxNode: BSNode<T>?
     /// The maximum element in the tree.
-    /// Time complexity: O(1)
+    /// Time complexity: *O(1)*.
     public var max: Element? {
         maxNode?.element
     }
     /// The last (maximum) element of the tree.
+    /// Time complexity: *O(1)*.
     public var last: Element? { max }
 
     var minNode: BSNode<T>?
     /// The minimum element in the tree.
-    /// Time complexity: O(1)
+    /// Time complexity: *O(1)*.
     public var min: Element? {
         minNode?.element
     }
 
     /// Return the elements of the tree "in order" (from min to max).
-    /// Time complexity: O(n)
+    /// Time complexity: *O(n)*.
     /// - Returns: An array of elements
     public func traverseInOrder() -> [Element] {
         // Using next pointers is faster than recursive BSNode traverseInOrder

@@ -9,8 +9,8 @@
 
 import Foundation
 
-/// Standard Queue (FIFO) type - items are added at one end of the queue, and removed from the other.
-/// add() and remove() are O(1) (amortized for remove()). Queue conforms to the Collection and
+/// Standard queue (FIFO) - items are added at one end of the queue, and removed from the other.
+/// add() and remove() are *O(1)* (amortized for remove()). Queue conforms to the Collection and
 /// ExpressibleByArrayLiteral protocols.
 ///
 /// ```
@@ -26,15 +26,15 @@ import Foundation
 /// q.peek()              // 7
 /// q.contains(7)         // true
 /// ```
-struct Queue<T>: Collection, ExpressibleByArrayLiteral {
-    typealias ArrayLiteralElement = T
+public struct Queue<T>: Collection, ExpressibleByArrayLiteral {
+    public typealias ArrayLiteralElement = T
 
     //State
     private var left: [T] = []
     private var right: [T] = []
 
-    var startIndex: Int { return 0 }
-    var endIndex: Int { return left.count + right.count }
+    public var startIndex: Int { return 0 }
+    public var endIndex: Int { return left.count + right.count }
 
     private init(left: [T], right: [T]) {
         self.left = left
@@ -46,14 +46,14 @@ struct Queue<T>: Collection, ExpressibleByArrayLiteral {
         self.init(left: elements.reversed(), right: [])
     }
 
-    /// Adds (enqueues) an item. Complexity is O(1).
+    /// Adds (enqueues) an item. Complexity is *O(1)*.
     /// - Parameter item: item to be added
     public mutating func add(_ item: T) {
         right.append(item)
     }
 
     /// Removes (dequeues) an item from the opposite end of the queue from which items are added.
-    /// Complexity is O(1) (amortized).
+    /// Complexity is *O(1)* (amortized).
     /// - Returns: optional item (nil if the queue is empty)
     @discardableResult
     public mutating func remove() -> T? {
@@ -65,7 +65,7 @@ struct Queue<T>: Collection, ExpressibleByArrayLiteral {
     }
 
     /// Return the next item to be removed (dequeued) without actually removing it.
-    /// Complexity is O(1).
+    /// Complexity is *O(1)*.
     /// - Returns: optional item (nil if the queue is empty)
     public func peek() -> T? {
         if !left.isEmpty {
