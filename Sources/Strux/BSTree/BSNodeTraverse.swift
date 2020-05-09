@@ -11,9 +11,10 @@ import Foundation
 
 extension BSNode {
 
-    // Returns the nodes in the subtree having this node as root, in sorted order (the nodes in the left child
-    // subtree, if any, followed by this node, followed by the nodes in the right child subtree, if any).
-    // - Returns: The node array
+    /// Returns the nodes in the subtree having this node as root, in sorted order (the nodes in the left
+    /// child subtree, if any, followed by this node, followed by the nodes in the right child subtree,
+    /// if any).
+    ///  - Returns: The node array
     func traverseInOrderNodes() -> [BSNode] {
         var out = [BSNode]()
         if let left = left { out = out + left.traverseInOrderNodes() }
@@ -22,6 +23,10 @@ extension BSNode {
         return out
     }
 
+    /// Returns the elements in the subtree having this node as root, in sorted order (the nodes in the left
+    /// child subtree, if any, followed by this node, followed by the nodes in the right child subtree,
+    /// if any).
+    ///  - Returns: The element array
     func traverseInOrder() -> [Element] {
         var out = [Element]()
         if let left = left { out = out + left.traverseInOrder() }
@@ -30,9 +35,9 @@ extension BSNode {
         return out
     }
 
-    // Returns the nodes in the subtree having this node as root, in "pre-order" (this node, followed by
-    // the nodes in the left child subtree, if any, followed by the nodes in the right child subtree, if any).
-    // - Returns: The node array
+    /// Returns the elements in the subtree having this node as root, in "pre-order" (this node, followed by
+    /// the nodes in the left child subtree, if any, followed by the nodes in the right child subtree, if any).
+    /// - Returns: The node array
     func traversePreOrder() -> [Element] {
         var out = [(value, Int(valueCount))]
         if let left = left { out = out + left.traversePreOrder() }
@@ -40,9 +45,9 @@ extension BSNode {
         return out
     }
 
-    // Returns the nodes in the subtree having this node as root, in "post-order" (the nodes in the left child
-    // subtree, if any, followed by the nodes in the right child subtree, if any, followed by this node).
-    // - Returns: The node array
+    /// Returns the nodes in the subtree having this node as root, in "post-order" (the nodes in the left child
+    /// subtree, if any, followed by the nodes in the right child subtree, if any, followed by this node).
+    /// - Returns: The node array
     func traversePostOrder() -> [Element] {
         var out = [Element]()
         if let left = left { out = out + left.traversePostOrder() }
@@ -51,9 +56,9 @@ extension BSNode {
         return out
     }
 
-    // Returns the nodes in the subtree having this node as root, each level of the tree at
-    // a time, from the root downward. This is a breadth-first traversal.
-    // - Returns: The node array
+    /// Returns the nodes in the subtree having this node as root, each level of the tree at
+    /// a time, from the root downward. This is a breadth-first traversal.
+    /// - Returns: The node array
     func traverseLevel() -> [Element] {
         var out = [Element]()
         var q = Queue<BSNode<T>>()

@@ -15,9 +15,9 @@ import Foundation
 /// root, and **strictly** less than any value in the subtree, if any, with its right child as root, and
 /// all subtrees of the tree must meet the same condition.
 ///
-/// Insertions, deletions, and queries have time complexity O(log(n)). Returning the count (of unique
-/// values), tree height, min (first), and max (last) values are all O(1). Traversing the tree in order,
-/// min to max, is O(n).
+/// Insertions, deletions, and queries have time complexity *O(log(n))*. Returning the count (of unique
+/// values), tree height, min (first), and max (last) values are all *O(1)*. Traversing the tree in order,
+/// min to max, is *O(n)*.
 ///
 /// BSTree conforms to the Collection protocol, and meets all of Collection's expected performance
 /// requirements (see above). It also conforms to Equatable, NSCopying, and ExpressibleByArrayLiteral.
@@ -56,7 +56,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     }
 
     /// The number of elements (values) in the tree (NOT the sum of all value counts).
-    /// Time complexity: O(1)
+    /// Time complexity: *O(1)*
     public private(set) var count = 0
 
     private func initializeWithCountedSet(_ countedSet: NSCountedSet) {
@@ -73,14 +73,14 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         initializeWithCountedSet(countedSet)
     }
 
-    /// Initialize with an array of values, which can contain duplicates.
+    /// Initialize with an unsorted array of values, which can contain duplicates.
     /// - Parameter values: Array
     public init(_ values: [T] = [T]()) {
         super.init()
         initializeWithCountedSet(NSCountedSet(array: values))
     }
 
-    /// Constructor using array literal. The array can contain duplicates.
+    /// Constructor using unsorted array literal. The array can contain duplicates.
     /// - Parameter values: Array literal
     required public init(arrayLiteral values: T...) {
         super.init()
@@ -88,16 +88,16 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     }
 
     /// Return the index (BSTreeIndex) of the value, or nil if the tree doesn't have the value.
-    /// Time complexity: O(log(n))
+    /// Time complexity: *O(log(n))*
     /// - Parameter val: The value to look for
-    /// - Returns: index (optional)
+    /// - Returns: index, or nil if not found
     public func indexOf(_ val: T) -> Index? {
         let node = root?.find(val)
         return (node == nil) ? nil : BSTreeIndex(node: node)
     }
 
     /// Return true if the tree contains the given value, false otherwise.
-    /// Time complexity: O(log(n))
+    /// Time complexity: *O(log(n))*
     /// - Parameter value: The value to look for
     /// - Returns: true or false
     public func contains(value: T) -> Bool {
@@ -105,7 +105,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     }
 
     /// Returns the count of the value in the tree. Zero if the tree doesn't contain the value.
-    /// Time complexity: O(log(n))
+    /// Time complexity: *O(log(n))*
     /// - Parameter value: The value get the count of
     /// - Returns: Integer count
     public func count(of val: T) -> Int {
@@ -183,7 +183,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         }
     }
 
-    /// The height of the tree, i.e. the number of levels minus 1. An empty tree has a height of -1, a
+    /// The height of the tree, i.e. the number of levels minus 1. An empty tree has height -1, a
     /// tree with just a root node has height 0, and a tree with two nodes has height 1.
     /// Time complexity: *O(1)*.
     public var height: Int {
@@ -211,7 +211,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// Time complexity: *O(n)*.
     /// - Returns: An array of elements
     public func traverseInOrder() -> [Element] {
-        // Using next pointers is faster than recursive BSNode traverseInOrder
+        // Using next pointers (i.e. Collection) is faster than recursive BSNode traverseInOrder.
         var out = [Element]()
         for element in self {
             out.append(element)

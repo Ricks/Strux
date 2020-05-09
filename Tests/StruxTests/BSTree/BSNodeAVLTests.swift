@@ -46,6 +46,14 @@ extension BSNode {
         return true
     }
 
+    var isHeightCorrect: Bool {
+        let lh = left?.height ?? -1
+        let rh = right?.height ?? -1
+        let lihc = left?.isHeightCorrect ?? true
+        let rihc = right?.isHeightCorrect ?? true
+        return (height == max(lh, rh) + 1) && lihc && rihc
+    }
+
 }
 
 func dumpNextPointers<T>(_ tree: BSTree<T>) {

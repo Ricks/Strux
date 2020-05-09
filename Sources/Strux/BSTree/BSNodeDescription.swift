@@ -31,20 +31,22 @@ enum TreeDescriptionType {
 
 extension BSNode: CustomStringConvertible {
 
-    // An ASCII-graphics representation of the subtree having this node as root.
+    /// An ASCII-graphics representation of the subtree having this node as root.
     var description: String {
         return descriptionBox(.plain).lines.joined(separator: "\n")
     }
 
+    /// Description with each node's height also shown.
     var descriptionWithHeight: String {
         return descriptionBox(.withHeight).lines.joined(separator: "\n")
     }
 
+    /// Description with each node's "next" pointer shown.
     var descriptionWithNext: String {
         return descriptionBox(.withNext).lines.joined(separator: "\n")
     }
 
-    struct DescriptionBox {
+    private struct DescriptionBox {
         var lines = [String]()    // All lines same length
         var height: Int { lines.count }
         var width: Int { lines.isEmpty ? 0 : lines[0].count }
@@ -56,7 +58,7 @@ extension BSNode: CustomStringConvertible {
         return String(repeating: " ", count: len)
     }
 
-    func descriptionBox(_ type: TreeDescriptionType) -> DescriptionBox {
+    private func descriptionBox(_ type: TreeDescriptionType) -> DescriptionBox {
         var box = DescriptionBox()  // Have to fill in valueStart, valueEnd, lines
         var valueStr = valueCount == 1 ? "\(value)" : "\(value)(\(valueCount))"
         if type == .withHeight {
@@ -97,7 +99,6 @@ extension BSNode: CustomStringConvertible {
             let leftBox = left!.descriptionBox(type)
             let rightBox = right!.descriptionBox(type)
             let leftBoxValueInsetRight = leftBox.width - leftBox.valueEnd - 1
-//            let boxGap = valueStr.count + max(0, 2 - leftBoxValueInsetRight - rightBox.valueStart)
             let boxGap = valueStr.count + 2
             let rightBoxPos = leftBox.width + boxGap
             let boxWidth = rightBoxPos + rightBox.width

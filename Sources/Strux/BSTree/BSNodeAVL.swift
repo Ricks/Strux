@@ -9,9 +9,10 @@
 
 import Foundation
 
-// The AVL algorithm methods
+/// The AVL algorithm methods
 extension BSNode {
 
+    /// Update the node's height based on the height of its children.
     @discardableResult
     func updateHeight() -> Bool {
         let newHeight = 1 + max(leftHeight, rightHeight)
@@ -20,16 +21,17 @@ extension BSNode {
         return changed
     }
 
-    // After rotation, the only nodes whose height can be different are the rotated node (previous root
-    // of the subtree), and its parent (new root node of the subtree). The height of the sibling node
-    // may also have changed, but that's taken care of by the recursive rotation call.
+    /// After rotation of this node, update the heights in the subtree that this node was the root of (and
+    /// is now the left or right child of the new root). The only nodes whose height can be different are this
+    /// node (old root) and its parent (new root). The height of the sibling node may also have changed, but
+    /// that's taken care of by the recursive rotation call, which calls this method.
     private func updateHeightAfterRotation() {
         updateHeight()
         let bsParent = parent as! BSNode
         bsParent.updateHeight()
     }
 
-    // Rotate Left
+    /// Rotate Left
     //
     // Case 1: nodeB is leaf.
     //
@@ -76,7 +78,7 @@ extension BSNode {
         updateHeightAfterRotation()
     }
 
-    // Rotate Right
+    /// Rotate Right
     //
     // Case 1: nodeB is leaf.
     //
@@ -123,8 +125,8 @@ extension BSNode {
         updateHeightAfterRotation()
     }
 
-    // If the node has become unbalanced, rotate to balance it. Adjust the height of the subtree having
-    // this node as root. If the height changes, invoke this method on the parent.
+    /// If the node has become unbalanced, rotate to balance it. Adjust the height of the subtree having
+    /// this node as root. If the height changes, invoke this method on the parent.
     func rebalanceIfNecessary() {
         let bsParent = parent as? BSNode  // Save now because rotation will change it
         var rotated = false
