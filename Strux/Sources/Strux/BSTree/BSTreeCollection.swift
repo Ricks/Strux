@@ -9,7 +9,7 @@
 
 import Foundation
 
-extension BSTree: Collection {
+extension BSTree: BidirectionalCollection {
 
     public var startIndex: Index { BSTreeIndex(node: minNode) }
     public var endIndex: Index { BSTreeIndex(node: nil) }
@@ -21,6 +21,10 @@ extension BSTree: Collection {
 
     public func index(after i: Index) -> Index {
         return BSTreeIndex(node: i.node?.next)
+    }
+
+    public func index(before i: Index) -> Index {
+        return BSTreeIndex(node: i.node?.prev ?? maxNode)
     }
 
 }

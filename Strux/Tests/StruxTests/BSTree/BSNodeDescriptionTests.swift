@@ -183,13 +183,14 @@ class BSNodeDescriptionTests: XCTestCase {
 
     func testDescriptionWithNext() {
         let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
-        let expectedNextDescription =   "              ______0->3_______                     \n" +
-                                        "             /                 \\                    \n" +
-                                        "        -9->0           ________6->12_______        \n" +
-                                        "       /               /                    \\       \n" +
-                                        "-20->-9            3->4                      65->nil\n" +
-                                        "                       \\                    /       \n" +
-                                        "                        4(2)->6       12->65        "
+        let expectedNextDescription =
+            "                        _________-9<-0->3__________                               \n" +
+            "                       /                           \\                              \n" +
+            "             -20<--9->0                  ___________4<-6->12__________            \n" +
+            "            /                           /                             \\           \n" +
+            "nil<--20->-9                     0<-3->4                               12<-65->nil\n" +
+            "                                        \\                             /           \n" +
+            "                                         3<-4(2)->6          6<-12->65            "
         checkDesc(tree.descriptionWithNext, expectedNextDescription)
         let tree2: BSTree<Int> = []
         checkDesc(tree2.descriptionWithNext, "")

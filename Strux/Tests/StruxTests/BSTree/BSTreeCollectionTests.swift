@@ -43,4 +43,30 @@ class BSTCollectionTests: XCTestCase {
         XCTAssertEqual(n, 8)
     }
 
+    func testIndexEqualityBackwards() {
+        let tree = BSTree([4, -9, 12, 3, 0, 65, -20, 4, 6])
+        var i1 = tree.endIndex
+        var i2 = tree.endIndex
+        var n = 0
+        while i1 > tree.startIndex {
+            n += 1
+            i1 = tree.index(before: i1)
+            i2 = tree.index(before: i2)
+            XCTAssertEqual(i1, i2)
+            XCTAssertEqual(tree[i1].value, tree[i2].value)
+            XCTAssertEqual(tree[i1].count, tree[i2].count)
+        }
+        XCTAssertEqual(n, 8)
+    }
+
+    func testBidirectionalCollection() {
+        let tree = BSTree([4, -9, 12, 3, 0, 65, -20, 4, 6])
+        var elems1 = tree.traverseInOrder()
+        elems1.reverse()
+        let elems2 = Array(tree.reversed())
+        XCTAssertEqual(elems1.count, elems2.count)
+        for i in 0 ..< elems1.count {
+            XCTAssertTrue(elems1[i] == elems2[i])
+        }
+    }
 }

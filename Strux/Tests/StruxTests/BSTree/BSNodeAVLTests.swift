@@ -11,7 +11,7 @@ import Foundation
 @testable import Strux
 
 extension BSNode {
-    
+
     private func isNextCorrectHelper() -> Bool {
         if let pred = inOrderPredecessor {
             if pred.next !== self { return false }
@@ -35,6 +35,40 @@ extension BSNode {
             node = thisNode.next
         }
         let elems2 = traverseInOrder()
+        if elems1.count != elems2.count {
+            return false
+        }
+        for i in 0 ..< elems1.count {
+            if !(elems1[i].value == elems2[i].value && elems1[i].count == elems2[i].count) {
+                return false
+            }
+        }
+        return true
+    }
+
+    private func isPrevCorrectHelper() -> Bool {
+        if let next = inOrderSuccessor {
+            if next.prev !== self { return false }
+        }
+        if prev !== inOrderPredecessor { return false }
+        if let thisLeft = left {
+            if !thisLeft.isPrevCorrectHelper() { return false }
+        }
+        if let thisRight = right {
+            if !thisRight.isPrevCorrectHelper() { return false }
+        }
+        return true
+    }
+
+    var isPrevCorrect: Bool {
+        if !isPrevCorrectHelper() { return false }
+        var elems1 = [Element]()
+        var node: BSNode<T>? = maxNode
+        while let thisNode = node {
+            elems1.append((thisNode.value, Int(thisNode.valueCount)))
+            node = thisNode.prev
+        }
+        let elems2 = Array(traverseInOrder().reversed())
         if elems1.count != elems2.count {
             return false
         }
@@ -95,6 +129,11 @@ func validateTree<T: Comparable>(_ tree: BSTree<T>, _ id: String) {
     }
     if let root = tree.root, !root.isNextCorrect {
         XCTFail("\(id) has incorrect next pointers")
+        print(tree.descriptionWithNext)
+        dumpNextPointers(tree)
+    }
+    if let root = tree.root, !root.isPrevCorrect {
+        XCTFail("\(id) has incorrect prev pointers")
         print(tree.descriptionWithNext)
         dumpNextPointers(tree)
     }

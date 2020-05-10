@@ -64,7 +64,7 @@ extension BSNode: CustomStringConvertible {
         if type == .withHeight {
             valueStr += "-\(height)"
         } else if type == .withNext {
-            valueStr += "->\(valOrNil(next?.value))"
+            valueStr = "\(valOrNil(prev?.value))<-" + valueStr + "->\(valOrNil(next?.value))"
         }
         if left == nil && right == nil {
             box.valueStart = 0

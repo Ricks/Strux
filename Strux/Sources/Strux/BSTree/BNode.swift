@@ -9,11 +9,13 @@
 
 import Foundation
 
-/// Basic binary node behavior, ensuring integrity of parent node pointer.
+/// Basic binary node behavior, ensuring integrity of parent and next/prev node pointers.
 public class BNode {
     private var leftNodeStorage: BNode?
     private var rightNodeStorage: BNode?
     weak private var parentNodeStorage: BNode?
+    weak private var nextNodeStorage: BNode?
+    weak private var prevNodeStorage: BNode?
 
     /// Left child node, or nil if none
     var leftNode: BNode? {
@@ -21,6 +23,7 @@ public class BNode {
             return leftNodeStorage
         }
         set {
+//            leftNodeStorage?.parentNodeStorage = nil
             newValue?.parentNodeStorage = self
             leftNodeStorage = newValue
         }
@@ -32,6 +35,7 @@ public class BNode {
             return rightNodeStorage
         }
         set {
+//            rightNodeStorage?.parentNodeStorage = nil
             newValue?.parentNodeStorage = self
             rightNodeStorage = newValue
         }
@@ -40,6 +44,23 @@ public class BNode {
     /// Parent node, or nil if none
     var parentNode: BNode? {
         parentNodeStorage
+    }
+
+    /// Next node, or nil if none
+    var nextNode: BNode? {
+        get {
+            return nextNodeStorage
+        }
+        set {
+//            nextNodeStorage?.prevNodeStorage = nil
+            newValue?.prevNodeStorage = self
+            nextNodeStorage = newValue
+        }
+    }
+
+    /// Previous node, or nil if none
+    var prevNode: BNode? {
+        prevNodeStorage
     }
 
     /// True if this is a left child node. 
