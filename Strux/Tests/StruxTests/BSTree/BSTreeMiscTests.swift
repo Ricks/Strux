@@ -40,9 +40,9 @@ class BSTreeMiscTests: XCTestCase {
     func testDeleteMinNode() {
         let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
         tree.delete(-20)
-        XCTAssertEqual(tree.min!.value, -9)
+        XCTAssertEqual(tree.minimum!.value, -9)
         tree.delete(65)
-        XCTAssertEqual(tree.max!.value, 12)
+        XCTAssertEqual(tree.maximum!.value, 12)
     }
 
     func testEmptyTree() {
@@ -74,10 +74,10 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertEqual(tree.description, expectedDescrip)
         XCTAssertEqual(tree.height, 1)
         XCTAssertEqual(tree.count, 3)
-        XCTAssertEqual(tree.min?.value, -2)
-        XCTAssertEqual(tree.min?.count, 1)
-        XCTAssertEqual(tree.max?.value, 42)
-        XCTAssertEqual(tree.max?.count, 2)
+        XCTAssertEqual(tree.minimum?.value, -2)
+        XCTAssertEqual(tree.minimum?.count, 1)
+        XCTAssertEqual(tree.maximum?.value, 42)
+        XCTAssertEqual(tree.maximum?.count, 2)
         let array = Array(tree)
         XCTAssertTrue(array[0] == (value: -2, count: 1))
         XCTAssertTrue(array[1] == (value: 32, count: 1))

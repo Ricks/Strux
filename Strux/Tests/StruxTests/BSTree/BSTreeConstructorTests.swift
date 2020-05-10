@@ -21,8 +21,8 @@ class BSTreeConstructorTests: XCTestCase {
         tree.insert(4)
         tree.insert(5, 2)
         XCTAssertEqual(tree.count, 2)
-        XCTAssertEqual(tree.min!.value, 4)
-        XCTAssertEqual(tree.max!.value, 5)
+        XCTAssertEqual(tree.minimum!.value, 4)
+        XCTAssertEqual(tree.maximum!.value, 5)
     }
 
     func testInitWithCountedSet() {

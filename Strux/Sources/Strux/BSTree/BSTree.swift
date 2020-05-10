@@ -59,6 +59,10 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// Time complexity: *O(1)*
     public private(set) var count = 0
 
+    /// The sum of all value counts).
+    /// Time complexity: *O(1)*
+    public private(set) var totalCount = 0
+
     private func initializeWithCountedSet(_ countedSet: NSCountedSet) {
         let values = countedSet.allObjects as! [T]
         for val in values {
@@ -120,6 +124,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     ///   - n: The number of val to insert
     public func insert(_ val: T, _ n: Int) {
         guard n >= 1 else { return }
+        totalCount += n
         if let root = root {
             if let newNode = root.insert(val, n) {
                 count += 1
@@ -159,6 +164,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     ///   - val: The value to remove n of
     ///   - n: The number of val to remove
     public func delete(_ val: T, _ n: Int) {
+        totalCount -= Swift.min(n, count(of: val))
         if let thisRoot = root, thisRoot.delete(val, n) {
             processDeleteNode(val)
         }
@@ -178,6 +184,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// - Parameters:
     ///   - val: The value to remove all occurrences of
     public func deleteAll(_ val: T) {
+        totalCount -= count(of: val)
         if let thisRoot = root, thisRoot.deleteAll(val) {
             processDeleteNode(val)
         }
@@ -193,18 +200,31 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     var maxNode: BSNode<T>?
     /// The maximum element in the tree.
     /// Time complexity: *O(1)*.
-    public var max: Element? {
+    public var maximum: Element? {
         maxNode?.element
     }
     /// The last (maximum) element of the tree.
     /// Time complexity: *O(1)*.
-    public var last: Element? { max }
+    public var last: Element? { maximum }
 
     var minNode: BSNode<T>?
     /// The minimum element in the tree.
     /// Time complexity: *O(1)*.
-    public var min: Element? {
+    public var minimum: Element? {
         minNode?.element
+    }
+
+    var medianNode: BSNode<T>?
+    /// The i'th (zero-based) member of the count members having this value that is
+    /// the actual median. If the offset is < the count - 1, then the median value is
+    /// the value given by the node, whether or not the total count of values is odd.
+    var medianOffset = 0
+    public func median() -> (index: Index, includesNextIndex: Bool, offset: Int) {
+        var includesNextIndex = false
+        if let medianNode = medianNode {
+            includesNextIndex = (totalCount % 2 == 1) && (medianOffset == medianNode.valueCount - 1)
+        }
+        return (BSTreeIndex(node: medianNode), includesNextIndex, medianOffset)
     }
 
     /// Return the elements of the tree "in order" (from min to max).

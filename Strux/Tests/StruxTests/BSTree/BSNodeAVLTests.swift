@@ -142,7 +142,11 @@ func validateTree<T: Comparable>(_ tree: BSTree<T>, _ id: String) {
         XCTFail("\(id) has count of \(tree.count), expected \(expectedCount)")
         print(tree.description)
     }
-}
+    let expectedTotalCount = tree.reduce(0) { $0 + $1.count }
+    if expectedTotalCount != tree.totalCount {
+        XCTFail("\(id) has totalCount of \(tree.totalCount), expected \(expectedTotalCount)")
+        print(tree.description)
+    }}
 
 class BSNodeAVLTests: XCTestCase {
 
