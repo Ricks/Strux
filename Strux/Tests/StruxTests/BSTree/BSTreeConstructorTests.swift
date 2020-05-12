@@ -16,8 +16,8 @@ class BSTreeConstructorTests: XCTestCase {
     func testBasicConstructor() {
         let tree = BSTree<Int>()
         XCTAssertEqual(tree.count, 0)
-        XCTAssertNil(tree.min)
-        XCTAssertNil(tree.max)
+        XCTAssertNil(tree.minimum)
+        XCTAssertNil(tree.maximum)
         tree.insert(4)
         tree.insert(5, 2)
         XCTAssertEqual(tree.count, 2)

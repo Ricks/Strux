@@ -136,6 +136,8 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
             count = 1
             maxNode = root
             minNode = root
+            medianNode = root
+            medianOffset = n / 2
         }
     }
 
@@ -148,12 +150,15 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         insert(val, 1)
     }
 
-    private func processDeleteNode(_ val: T) {
-        count -= 1
-        if minNode?.value == val {
-            minNode = root?.minNode
-        } else if maxNode?.value == val {
-            maxNode = root?.maxNode
+    private func processDeletion(_ val: T, _ nodeWasRemoved: Bool, _ numDeleted: Int) {
+        totalCount -= numDeleted
+        if nodeWasRemoved {
+            count -= 1
+            if minNode?.value == val {
+                minNode = root?.minNode
+            } else if maxNode?.value == val {
+                maxNode = root?.maxNode
+            }
         }
     }
 
@@ -164,9 +169,9 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     ///   - val: The value to remove n of
     ///   - n: The number of val to remove
     public func delete(_ val: T, _ n: Int) {
-        totalCount -= Swift.min(n, count(of: val))
-        if let thisRoot = root, thisRoot.delete(val, n) {
-            processDeleteNode(val)
+        if let thisRoot = root {
+            let result = thisRoot.delete(val, n)
+            processDeletion(val, result.nodeWasRemoved, result.numDeleted)
         }
     }
 
@@ -184,9 +189,9 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// - Parameters:
     ///   - val: The value to remove all occurrences of
     public func deleteAll(_ val: T) {
-        totalCount -= count(of: val)
-        if let thisRoot = root, thisRoot.deleteAll(val) {
-            processDeleteNode(val)
+        if let thisRoot = root {
+            let result = thisRoot.deleteAll(val)
+            processDeletion(val, result.nodeWasRemoved, result.numDeleted)
         }
     }
 

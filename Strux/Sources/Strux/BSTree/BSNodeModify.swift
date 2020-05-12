@@ -104,30 +104,35 @@ extension BSNode {
     ///   - n: The number to decrease the count by
     /// - Returns: True if the node for this value existed and was deleted by this method
     @discardableResult
-    func delete(_ val: T, _ n: Int) -> Bool {
-        var nodeRemoved = false
+    func delete(_ val: T, _ n: Int) -> (nodeWasRemoved: Bool, numDeleted: Int) {
+        var nodeWasRemoved = false
+        var numDeleted = 0
         if let node = find(val) {
             if node.valueCount > n {
+                numDeleted = n
                 node.valueCount -= Int32(n)
             } else {
+                numDeleted = Int(node.valueCount)
+                nodeWasRemoved = true
                 node.deleteNode()
-                nodeRemoved = true
             }
         }
-        return nodeRemoved
+        return (nodeWasRemoved, numDeleted)
     }
 
     /// Delete all occurrences of this value from the subtree having this node as root.
     /// - Parameter val: The value to delete from the tree
     /// - Returns: True if there was a node for this value
     @discardableResult
-    func deleteAll(_ val: T) -> Bool {
-        var nodeRemoved = false
+    func deleteAll(_ val: T) -> (nodeWasRemoved: Bool, numDeleted: Int) {
+        var nodeWasRemoved = false
+        var numDeleted = 0
         if let node = find(val) {
+            numDeleted = Int(node.valueCount)
+            nodeWasRemoved = true
             node.deleteNode()
-            nodeRemoved = true
         }
-        return nodeRemoved
+        return (nodeWasRemoved, numDeleted)
     }
 
     /// Delete this node

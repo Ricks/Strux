@@ -90,4 +90,12 @@ class BSNodeModifyTests: XCTestCase {
         XCTAssertEqual(tree.count, 1)
         XCTAssertEqual(tree.totalCount, 1)
     }
+
+    func testReturnsFromInsertAndDelete() {
+        let tree = BSTree<Int>()
+        tree.insert(2)
+        XCTAssertNotNil(tree.root!.insert(42, 4))
+        XCTAssertNil(tree.root!.insert(42, 1))
+        XCTAssertTrue(tree.root!.delete(42, 2) == (false, 2))
+    }
 }

@@ -35,7 +35,6 @@ public class BNode {
             return rightNodeStorage
         }
         set {
-//            rightNodeStorage?.parentNodeStorage = nil
             newValue?.parentNodeStorage = self
             rightNodeStorage = newValue
         }
@@ -52,7 +51,6 @@ public class BNode {
             return nextNodeStorage
         }
         set {
-//            nextNodeStorage?.prevNodeStorage = nil
             newValue?.prevNodeStorage = self
             nextNodeStorage = newValue
         }

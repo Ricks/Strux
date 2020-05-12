@@ -52,8 +52,8 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertTrue(tree.isValid)
         XCTAssertEqual(tree.height, -1)
         XCTAssertEqual(tree.count, 0)
-        XCTAssertNil(tree.min)
-        XCTAssertNil(tree.max)
+        XCTAssertNil(tree.minimum)
+        XCTAssertNil(tree.maximum)
     }
 
     func testCopy() {
