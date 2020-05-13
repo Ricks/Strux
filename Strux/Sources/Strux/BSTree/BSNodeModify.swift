@@ -29,9 +29,9 @@ extension BSNode {
     ///   - n: The value count.
     /// - Returns: The new node
     @discardableResult
-    func insertLeftChildNode(_ val: T, _ n: Int) -> BSNode<T> {
+    func insertLeftChildNode(_ val: T) -> BSNode<T> {
         let pred = inOrderPredecessor
-        let newNode = BSNode(val, n, parent: self, direction: .left)
+        let newNode = BSNode(val, 1, parent: self, direction: .left)
         left = newNode
         pred?.next = left
         left!.next = self
@@ -46,8 +46,8 @@ extension BSNode {
     ///   - n: The value count.
     /// - Returns: The new node
     @discardableResult
-    func insertRightChildNode(_ val: T, _ n: Int) -> BSNode<T> {
-        let newNode = BSNode(val, n, parent: self, direction: .right)
+    func insertRightChildNode(_ val: T) -> BSNode<T> {
+        let newNode = BSNode(val, 1, parent: self, direction: .right)
         right = newNode
         right!.next = next
         next = right
@@ -55,84 +55,31 @@ extension BSNode {
         return newNode
     }
 
-    /// Increase the count of the value in the subtree having this node as root. If there is already a node
-    /// for this value, increase the count by **n**, otherwise insert a new node and initialize the count to
-    /// **n**.
+    /// Increase by one the count of the given value, in the subtree having this node as root. If there is
+    /// already a node for this value, increase the count by 1, otherwise insert a new node and initialize
+    /// the count to 1. Return the node for the value.
     /// Complexity is *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to insert or increment the count of
-    ///   - n: The number to increase the count by
-    /// - Returns: the node inserted, if there wasn't already a node for the value
+    /// - Returns: The existing or newly-inserted node, and a flag indicating whether the node is newly-created
     @discardableResult
-    func insert(_ val: T, _ n: Int) -> BSNode<T>? {
-        guard n >= 1 else { return nil }
-        var newNode: BSNode<T>?
+    func insert(_ val: T) -> (node: BSNode<T>, new: Bool) {
         if val == value {
-            valueCount += Int32(n)
+            valueCount += 1
+            return (self, false)
         } else if val < value {
             if let thisLeft = left {
-                newNode = thisLeft.insert(val, n)
+                return thisLeft.insert(val)
             } else {
-                newNode = insertLeftChildNode(val, n)
+                return (insertLeftChildNode(val), true)
              }
         } else {
             if let thisRight = right {
-                newNode = thisRight.insert(val, n)
+                return thisRight.insert(val)
             } else {
-                newNode = insertRightChildNode(val, n)
+                return (insertRightChildNode(val), true)
             }
         }
-        return newNode
-    }
-
-    /// Increase by one the count of the value in the subtree having this node as root. If there is already a
-    /// node for this value, increase the count by **n**, otherwise insert a new node and initialize the count
-    /// to **n**.
-    /// Complexity is *O(log(n))*.
-    /// - Parameters:
-    ///   - val: The value to insert or increment the count of
-    /// - Returns: the node inserted, if there wasn't already a node for the value
-    @discardableResult
-    func insert(_ val: T) -> BSNode<T>? {
-        return insert(val, 1)
-    }
-
-    /// Delete up to n occurrences of this value from the subtree having this node as root. If n is >= the
-    /// count of the value, remove that value's node.
-    /// - Parameters:
-    ///   - val: The value to decrement the count of, or outright delete
-    ///   - n: The number to decrease the count by
-    /// - Returns: True if the node for this value existed and was deleted by this method
-    @discardableResult
-    func delete(_ val: T, _ n: Int) -> (nodeWasRemoved: Bool, numDeleted: Int) {
-        var nodeWasRemoved = false
-        var numDeleted = 0
-        if let node = find(val) {
-            if node.valueCount > n {
-                numDeleted = n
-                node.valueCount -= Int32(n)
-            } else {
-                numDeleted = Int(node.valueCount)
-                nodeWasRemoved = true
-                node.deleteNode()
-            }
-        }
-        return (nodeWasRemoved, numDeleted)
-    }
-
-    /// Delete all occurrences of this value from the subtree having this node as root.
-    /// - Parameter val: The value to delete from the tree
-    /// - Returns: True if there was a node for this value
-    @discardableResult
-    func deleteAll(_ val: T) -> (nodeWasRemoved: Bool, numDeleted: Int) {
-        var nodeWasRemoved = false
-        var numDeleted = 0
-        if let node = find(val) {
-            numDeleted = Int(node.valueCount)
-            nodeWasRemoved = true
-            node.deleteNode()
-        }
-        return (nodeWasRemoved, numDeleted)
     }
 
     /// Delete this node

@@ -91,4 +91,16 @@ class BSTreeMiscTests: XCTestCase {
         tree.root!.next = node6
         XCTAssertFalse(tree.root!.isNextCorrect)
     }
+
+    func testDeleteMoreThanThereAre() {
+        let tree = BSTree<Int>()
+        tree.insert(2)
+        tree.insert(42, 4)
+        XCTAssertEqual(tree.count, 2)
+        XCTAssertEqual(tree.totalCount, 5)
+        tree.delete(42, 5)
+        XCTAssertEqual(tree.count, 1)
+        XCTAssertEqual(tree.totalCount, 1)
+    }
+
 }

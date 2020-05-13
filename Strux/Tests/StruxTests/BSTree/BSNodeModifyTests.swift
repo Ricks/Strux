@@ -27,19 +27,24 @@ class BSNodeModifyTests: XCTestCase {
                 let choice = seededRandom(in: 0..<10)
                 switch choice {
                 case 0:
+//                    print("deleteAll: \(val)")
                     tree.deleteAll(val)
                     let n = set.count(for: val)
                     for _ in 0 ..< n { set.remove(val) }
                 case 1:
+//                    print("delete: \(val)")
                     tree.delete(val)
                     set.remove(val)
                 case 2:
+//                    print("delete: \(count) of \(val)")
                     tree.delete(val, count)
                     for _ in 0 ..< count { set.remove(val) }
                 default:
                     if count == 1 {
+//                        print("insert: \(val)")
                         tree.insert(val)
                     } else {
+//                        print("insert: \(count) of \(val)")
                         tree.insert(val, count)
                     }
                     for _ in 0 ..< count { set.add(val) }
@@ -56,9 +61,11 @@ class BSNodeModifyTests: XCTestCase {
                 XCTAssertEqual(tree.count, vals.count)
                 let treeElements = tree.traverseInOrder()
                 XCTAssertEqual(treeElements.count, vals.count)
-                for i in 0..<vals.count {
-                    XCTAssertEqual(treeElements[i].value, vals[i])
-                    XCTAssertEqual(treeElements[i].count, set.count(for: vals[i]))
+                if vals.count > 0 {
+                    for i in 0..<vals.count {
+                        XCTAssertEqual(treeElements[i].value, vals[i])
+                        XCTAssertEqual(treeElements[i].count, set.count(for: vals[i]))
+                    }
                 }
                 if tree.minimum?.value != vals.min() {
                     XCTFail("Tree \(treeIndex) has min value of \(valOrNil(tree.minimum?.value)), " +
@@ -74,28 +81,16 @@ class BSNodeModifyTests: XCTestCase {
         }
     }
 
-    func testInsertZero() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
-        let node6 = tree.root!.right!
-        node6.insert(13, 0)
-    }
-
-    func testDeleteMoreThanThereAre() {
+    func testReturnsFromInsert() {
         let tree = BSTree<Int>()
         tree.insert(2)
-        tree.insert(42, 4)
-        XCTAssertEqual(tree.count, 2)
-        XCTAssertEqual(tree.totalCount, 5)
-        tree.delete(42, 5)
-        XCTAssertEqual(tree.count, 1)
-        XCTAssertEqual(tree.totalCount, 1)
-    }
-
-    func testReturnsFromInsertAndDelete() {
-        let tree = BSTree<Int>()
-        tree.insert(2)
-        XCTAssertNotNil(tree.root!.insert(42, 4))
-        XCTAssertNil(tree.root!.insert(42, 1))
-        XCTAssertTrue(tree.root!.delete(42, 2) == (false, 2))
+        let result1 = tree.root!.insert(42)
+        XCTAssertEqual(result1.node.value, 42)
+        XCTAssertEqual(result1.node.valueCount, 1)
+        XCTAssertTrue(result1.new)
+        let result2 = tree.root!.insert(42)
+        XCTAssertEqual(result2.node.value, 42)
+        XCTAssertEqual(result2.node.valueCount, 2)
+        XCTAssertFalse(result2.new)
     }
 }

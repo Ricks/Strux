@@ -16,8 +16,8 @@ import Foundation
 /// all subtrees of the tree must meet the same condition.
 ///
 /// Insertions, deletions, and queries have time complexity *O(log(n))*. Returning the count (of unique
-/// values), tree height, min (first), and max (last) values are all *O(1)*. Traversing the tree in order,
-/// min to max, is *O(n)*.
+/// values), tree height, minimum (first), and maximum (last) values are all *O(1)*. Traversing the tree in
+/// order, min to max, is *O(n)*.
 ///
 /// BSTree conforms to the Collection protocol, and meets all of Collection's expected performance
 /// requirements (see above). It also conforms to Equatable, NSCopying, and ExpressibleByArrayLiteral.
@@ -116,6 +116,73 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         return Int(root?.find(val)?.valueCount ?? 0)
     }
 
+    func updateMedianAfterInsertOne(of val: T) {
+        if totalCount == 1 {
+            medianNode = minNode
+            medianOffset = 0
+        } else if totalCount % 2 == 0 {
+            if medianNode != nil && val < medianNode!.value {
+                medianOffset -= 1
+                if medianOffset < 0 {
+                    medianNode = medianNode?.prev
+                    medianOffset = Int((medianNode?.valueCount ?? 0) - 1)
+                }
+            }
+        } else {
+            if medianNode != nil && val >= medianNode!.value {
+                medianOffset += 1
+                if medianOffset >= (medianNode?.valueCount ?? 0) {
+                    medianNode = medianNode?.next
+                    medianOffset = 0
+                }
+            }
+        }
+    }
+
+    func updateMedianBeforeDeleteOne(of val: T) {
+        if totalCount == 1 {
+            medianNode = nil
+            medianOffset = 0
+        } else if totalCount % 2 == 0 {
+            if medianNode != nil && (val < medianNode!.value ||
+                val == medianNode!.value && medianOffset == medianNode!.valueCount - 1) {
+                medianOffset += 1
+                if medianOffset >= (medianNode?.valueCount ?? 0) {
+                    medianNode = medianNode?.next
+                    medianOffset = 0
+                }
+            }
+        } else {
+            if medianNode != nil && val >= medianNode!.value {
+                medianOffset -= 1
+                if medianOffset < 0 {
+                    medianNode = medianNode?.prev
+                    medianOffset = Int((medianNode?.valueCount ?? 0) - 1)
+                }
+            }
+        }
+    }
+
+    func processNodeInsertion(_ newNode: BSNode<T>, _ val: T) {
+        count += 1
+        if minNode == nil || val < minNode!.value {
+            minNode = newNode
+        }
+        else if maxNode == nil || val > maxNode!.value {
+            maxNode = newNode
+        }
+    }
+
+    func processNodeDeletion(_ val: T) {
+        count -= 1
+        if minNode != nil && minNode!.value == val {
+            minNode = root?.minNode
+        }
+        else if maxNode != nil && maxNode!.value == val {
+            maxNode = root?.maxNode
+        }
+    }
+
     /// Insert the given number of the given value into the tree. If the value is already in the tree,
     /// the count is incremented by the given number.
     /// Time complexity: *O(log(n))*.
@@ -124,20 +191,29 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     ///   - n: The number of val to insert
     public func insert(_ val: T, _ n: Int) {
         guard n >= 1 else { return }
-        totalCount += n
-        if let root = root {
-            if let newNode = root.insert(val, n) {
-                count += 1
-                if val < minNode!.value { minNode = newNode }
-                else if val > maxNode!.value { maxNode = newNode }
+        var insertionNode: BSNode<T>?
+        for i in 0 ..< n {
+            if i == 0 {
+                // First time through, make sure we have an insertion node
+                var newNode: Bool
+                if root == nil {
+                    insertionNode = BSNode(val, 1, parent: self, direction: .left)
+                    root = insertionNode
+                    newNode = true
+                } else {
+                    let result = root!.insert(val)
+                    insertionNode = result.node
+                    newNode = result.new
+                }
+                if newNode && insertionNode != nil {
+                    processNodeInsertion(insertionNode!, val)
+                }
+            } else {
+                // Already have the node, just bump up the count
+                insertionNode?.valueCount += 1
             }
-        } else {
-            root = BSNode(val, n, parent: self, direction: .left)
-            count = 1
-            maxNode = root
-            minNode = root
-            medianNode = root
-            medianOffset = n / 2
+            totalCount += 1
+            updateMedianAfterInsertOne(of: val)
         }
     }
 
@@ -150,18 +226,6 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         insert(val, 1)
     }
 
-    private func processDeletion(_ val: T, _ nodeWasRemoved: Bool, _ numDeleted: Int) {
-        totalCount -= numDeleted
-        if nodeWasRemoved {
-            count -= 1
-            if minNode?.value == val {
-                minNode = root?.minNode
-            } else if maxNode?.value == val {
-                maxNode = root?.maxNode
-            }
-        }
-    }
-
     /// Delete the given number of the given value from the tree. If the given number is >= the number
     /// of the value in the tree, the value is removed completed.
     /// Time complexity: *O(log(n))*.
@@ -169,9 +233,18 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     ///   - val: The value to remove n of
     ///   - n: The number of val to remove
     public func delete(_ val: T, _ n: Int) {
-        if let thisRoot = root {
-            let result = thisRoot.delete(val, n)
-            processDeletion(val, result.nodeWasRemoved, result.numDeleted)
+        if let thisRoot = root, let deletionNode = thisRoot.find(val) {
+            let numToDelete = Swift.min(n, Int(deletionNode.valueCount))
+            for _ in 0 ..< numToDelete {
+                updateMedianBeforeDeleteOne(of: val)
+                totalCount -= 1
+                if deletionNode.valueCount > 1 {
+                    deletionNode.valueCount -= 1
+                } else {
+                    deletionNode.deleteNode()
+                    processNodeDeletion(val)
+                }
+            }
         }
     }
 
@@ -189,10 +262,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// - Parameters:
     ///   - val: The value to remove all occurrences of
     public func deleteAll(_ val: T) {
-        if let thisRoot = root {
-            let result = thisRoot.deleteAll(val)
-            processDeletion(val, result.nodeWasRemoved, result.numDeleted)
-        }
+        delete(val, Int.max)
     }
 
     /// The height of the tree, i.e. the number of levels minus 1. An empty tree has height -1, a
