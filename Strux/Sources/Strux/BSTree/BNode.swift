@@ -23,7 +23,6 @@ public class BNode {
             return leftNodeStorage
         }
         set {
-//            leftNodeStorage?.parentNodeStorage = nil
             newValue?.parentNodeStorage = self
             leftNodeStorage = newValue
         }
@@ -58,7 +57,13 @@ public class BNode {
 
     /// Previous node, or nil if none
     var prevNode: BNode? {
-        prevNodeStorage
+        get {
+            prevNodeStorage
+        }
+        set {
+            // This should only be use to nil the pointer
+            prevNodeStorage = newValue
+        }
     }
 
     /// True if this is a left child node. 
@@ -74,6 +79,67 @@ public class BNode {
     /// Number of nodes in the subtree having this node as root
     public var nodeCount: Int {
         1 + (leftNode?.nodeCount ?? 0) + (rightNode?.nodeCount ?? 0)
+    }
+
+    /// Replace this node with the given one, i.e. set this node's parent to point to the new node. This
+    /// assumes that the replacement doesn't change the node order, other than removing the current node
+    /// from it.
+    /// - Parameter with: The node to replace with, which can be nil
+    public func replace(with other: BNode?) {
+        if isLeft {
+            parentNode?.leftNode = other
+        } else {
+            parentNode?.rightNode = other
+        }
+    }
+
+    public func swap(with other: BNode) {
+        let thisIsLeft = isLeft
+        let thisParentNode = parentNode
+        let thisLeftNode = leftNode
+        let thisRightNode = rightNode
+        let thisNextNode = nextNode
+        let thisPrevNode = prevNode
+
+        let newParent = (other.parentNode === self) ? other : other.parentNode
+        let newLeftNode = (other.leftNode === self) ? other : other.leftNode
+        let newRightNode = (other.rightNode === self) ? other : other.rightNode
+        let newNextNode = (other.nextNode === self) ? other : other.nextNode
+        let newPrevNode = (other.prevNode === self) ? other : other.prevNode
+
+        if other.isLeft {
+            newParent?.leftNode = self
+        } else {
+            newParent?.rightNode = self
+        }
+        leftNode = newLeftNode
+        rightNode = newRightNode
+        nextNode = newNextNode
+        if newPrevNode != nil {
+            newPrevNode!.nextNode = self
+        } else {
+            prevNode = nil
+        }
+
+        let newOtherParent = (thisParentNode === other) ? self : thisParentNode
+        let newOtherLeftNode = (thisLeftNode === other) ? self : thisLeftNode
+        let newOtherRightNode = (thisRightNode === other) ? self : thisRightNode
+        let newOtherNextNode = (thisNextNode === other) ? self : thisNextNode
+        let newOtherPrevNode = (thisPrevNode === other) ? self : thisPrevNode
+
+        if thisIsLeft {
+            newOtherParent?.leftNode = other
+        } else {
+            newOtherParent?.rightNode = other
+        }
+        other.leftNode = newOtherLeftNode
+        other.rightNode = newOtherRightNode
+        other.nextNode = newOtherNextNode
+        if newOtherPrevNode != nil {
+            newOtherPrevNode!.nextNode = other
+        } else {
+            other.prevNode = nil
+        }
     }
 
 }

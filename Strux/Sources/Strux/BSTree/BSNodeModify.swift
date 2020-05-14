@@ -11,17 +11,6 @@ import Foundation
 
 extension BSNode {
 
-    /// Replace this node with the given one, i.e. set this node's parent to point to the new node. This
-    /// assumes that the replacement doesn't change the node order, other than removing the current node
-    /// from it. Parameter with: The node to replace with, which can be nil
-    public func replace(with node: BSNode?) {
-        if isLeft {
-            parent.leftNode = node
-        } else {
-            parent.rightNode = node
-        }
-    }
-
     /// Insert the given value/count as this node's left child, updating the "next" pointers and
     /// rebalancing as needed.
     /// - Parameters:
@@ -91,11 +80,11 @@ extension BSNode {
                 // Two children. Replace value with that of the in-order predecessor or successor.
                 if thisLeft.height > thisRight.height {
                     let predecessor = thisLeft.maxNode
-                    copyValueFrom(predecessor)
+//                    copyValueFrom(predecessor)
                     predecessor.deleteNode()
                 } else {
                     let successor = thisRight.minNode
-                    copyValueFrom(successor)
+ //                   copyValueFrom(successor)
                     next = successor.next
                     successor.deleteNode()
                 }

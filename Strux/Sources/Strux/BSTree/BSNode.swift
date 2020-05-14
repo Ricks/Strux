@@ -22,7 +22,7 @@ enum ChildDirection {
 class BSNode<T: Comparable>: BNode {
     typealias Element = (value: T, count: Int)
     /// The node's value
-    var value: T
+    let value: T
     /// The count of the value, always >= 1
     var valueCount: Int32 = 1
     /// Height of the subtree having this node as parent. Zero if this node is a leaf (no children).
@@ -75,13 +75,6 @@ class BSNode<T: Comparable>: BNode {
     /// Previous node in order, i.e. the node with the next lowest value.
     var prev: BSNode<T>? {
         prevNode as? BSNode
-    }
-
-    /// Copy the value and valueCount from another Node.
-    /// - Parameter otherNode: The node to copy from
-    func copyValueFrom(_ otherNode: BSNode<T>) {
-        value = otherNode.value
-        valueCount = otherNode.valueCount
     }
 
     /// The height of the subtree having the left child as root, or -1 if there's no left child.
