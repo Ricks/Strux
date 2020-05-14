@@ -146,7 +146,21 @@ func validateTree<T: Comparable>(_ tree: BSTree<T>, _ id: String) {
     if expectedTotalCount != tree.totalCount {
         XCTFail("\(id) has totalCount of \(tree.totalCount), expected \(expectedTotalCount)")
         print(tree.description)
-    }}
+    }
+    let array = tree.toValueArray()
+    var expectedMedians = [T]()
+    if array.count > 0 {
+        let medianIndex = (array.count + 1) / 2 - 1
+        expectedMedians.append(array[medianIndex])
+        if array.count % 2 == 0 && array[medianIndex + 1] != array[medianIndex] {
+            expectedMedians.append(array[medianIndex + 1])
+        }
+    }
+    if expectedMedians != tree.medians() {
+        XCTFail("\(id) has medians of \(tree.medians()), expected \(expectedMedians), totalCount = \(tree.totalCount)")
+        print(tree.descriptionWithTotalCount)
+    }
+}
 
 class BSNodeAVLTests: XCTestCase {
 

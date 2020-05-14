@@ -59,7 +59,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// Time complexity: *O(1)*
     public private(set) var count = 0
 
-    /// The sum of all value counts).
+    /// The sum of all value counts.
     /// Time complexity: *O(1)*
     public private(set) var totalCount = 0
 
@@ -232,9 +232,11 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// - Parameters:
     ///   - val: The value to remove n of
     ///   - n: The number of val to remove
-    public func delete(_ val: T, _ n: Int) {
+    @discardableResult
+    public func delete(_ val: T, _ n: Int) -> Int {
+        var numToDelete = 0
         if let thisRoot = root, let deletionNode = thisRoot.find(val) {
-            let numToDelete = Swift.min(n, Int(deletionNode.valueCount))
+            numToDelete = Swift.min(n, Int(deletionNode.valueCount))
             for _ in 0 ..< numToDelete {
                 updateMedianBeforeDeleteOne(of: val)
                 totalCount -= 1
@@ -246,6 +248,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
                 }
             }
         }
+        return numToDelete
     }
 
     /// Delete one of the given value from the tree. If the number of the value already in the tree is
@@ -290,16 +293,24 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     }
 
     var medianNode: BSNode<T>?
-    /// The i'th (zero-based) member of the count members having this value that is
-    /// the actual median. If the offset is < the count - 1, then the median value is
-    /// the value given by the node, whether or not the total count of values is odd.
+    // The i'th (zero-based) member of the count members having this value that is
+    // the actual median. If the offset is < the count - 1, then the median value is
+    // the value given by the node, whether or not the total count of values is odd.
     var medianOffset = 0
-    public func median() -> (index: Index, includesNextIndex: Bool, offset: Int) {
-        var includesNextIndex = false
+    /// Returns zero, one, or two median values. There will be zero values if and only if the tree is
+    /// empty. There will be two values if the tree has an even number of values (n), and the n/2 and
+    /// n/2 + 1 values (starting with 1) differ. Otherwise one value.
+    public func medians() -> [T] {
+        var out = [T]()
         if let medianNode = medianNode {
-            includesNextIndex = (totalCount % 2 == 1) && (medianOffset == medianNode.valueCount - 1)
+            out.append(medianNode.value)
+            if (totalCount % 2 == 0) && (medianOffset == medianNode.valueCount - 1) {
+                if let nextNode = medianNode.next {
+                    out.append(nextNode.value)
+                }
+            }
         }
-        return (BSTreeIndex(node: medianNode), includesNextIndex, medianOffset)
+        return out
     }
 
     /// Return the elements of the tree "in order" (from min to max).
@@ -363,6 +374,16 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         return set
     }
 
+    public func toValueArray() -> [T] {
+        var out = [T]()
+        for elem in self {
+            for _ in 0 ..< elem.count {
+                out.append(elem.value)
+            }
+        }
+        return out
+    }
+
     /// Returns a copy of the tree (a shallow copy if T is a reference type).
     public func copy(with zone: NSZone? = nil) -> Any {
         return BSTree(countedSet: toCountedSet())
@@ -382,10 +403,21 @@ extension BSTree: CustomStringConvertible {
         root?.descriptionWithHeight ?? ""
     }
 
-    /// An ASCII-graphics depiction of the tree, with the next node for each node shown (i.e. the nodes
-    /// in increasing order of value).
-    public var descriptionWithNext: String {
+    /// Description with each node's "next" pointer shown.
+    var descriptionWithNext: String {
         root?.descriptionWithNext ?? ""
+    }
+
+    /// Description with each node's node count (the number of nodes in the subtree having that node as root)
+    /// shown.
+    var descriptionWithNodeCount: String {
+        root?.descriptionWithNodeCount ?? ""
+    }
+
+    /// Description with each node's total count (the sum of all valueCount's in the subtree having that node
+    /// as root) shown.
+    var descriptionWithTotalCount: String {
+        root?.descriptionWithTotalCount ?? ""
     }
 
 }
@@ -402,6 +434,26 @@ extension BSTree: Equatable {
             rIndex = rhs.index(after: rIndex)
         }
         return true
+    }
+
+}
+
+class SummedBSTree<T>: BSTree<T> where T: AdditiveArithmetic & Comparable {
+
+    /// The sum of all values.
+    /// Time complexity: *O(1)*
+    public var sum = T.zero
+
+    override public func insert(_ val: T, _ n: Int) {
+        super.insert(val, n)
+        for _ in 0 ..< n { sum += val }
+    }
+
+    @discardableResult
+    override public func delete(_ val: T, _ n: Int) -> Int {
+        let numDeleted = super.delete(val, n)
+        for _ in 0 ..< numDeleted { sum -= val }
+        return numDeleted
     }
 
 }

@@ -27,7 +27,7 @@ class BSTreeModel: ObservableObject {
                 let tree = BSTree(initialValues)
                 (0..<treeSizish).forEach { _ in
                     let val = seededRandom(in: -5..<100)
-                    let count = seededRandom(in: 1..<4)
+                    let count = seededRandom(in: 1..<2)
                     let choice = seededRandom(in: 0..<10)
                     switch choice {
                     case 0:

@@ -155,4 +155,8 @@ class BSNode<T: Comparable>: BNode {
         (value, Int(valueCount))
     }
 
+    var totalCount: Int {
+        return Int(valueCount) + (left?.totalCount ?? 0) + (right?.totalCount ?? 0)
+    }
+
 }

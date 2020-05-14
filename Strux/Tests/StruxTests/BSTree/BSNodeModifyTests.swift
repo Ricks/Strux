@@ -25,29 +25,50 @@ class BSNodeModifyTests: XCTestCase {
                 let val = seededRandom(in: -5..<100)
                 let count = seededRandom(in: 1..<4)
                 let choice = seededRandom(in: 0..<10)
+                if treeIndex == 5 {
+                    print("--------------------------------------------------------------------------------------" +
+                          "--------------------------------------------------------------------------------------" +
+                          "--------------------------------------------")
+                }
                 switch choice {
                 case 0:
-//                    print("deleteAll: \(val)")
+                    if treeIndex == 5 {
+                        print("deleteAll: \(val)")
+                    }
                     tree.deleteAll(val)
                     let n = set.count(for: val)
                     for _ in 0 ..< n { set.remove(val) }
                 case 1:
-//                    print("delete: \(val)")
+                    if treeIndex == 5 {
+                        print("delete: \(val)")
+                    }
                     tree.delete(val)
                     set.remove(val)
                 case 2:
-//                    print("delete: \(count) of \(val)")
+                    if treeIndex == 5 {
+                        print("delete: \(count) of \(val)")
+                    }
                     tree.delete(val, count)
                     for _ in 0 ..< count { set.remove(val) }
                 default:
                     if count == 1 {
-//                        print("insert: \(val)")
+                        if treeIndex == 5 {
+                            print("insert: \(val)")
+                        }
                         tree.insert(val)
                     } else {
-//                        print("insert: \(count) of \(val)")
+                        if treeIndex == 5 {
+                            print("insert: \(count) of \(val)")
+                        }
                         tree.insert(val, count)
                     }
                     for _ in 0 ..< count { set.add(val) }
+                }
+                if treeIndex == 5 {
+                    let rootId = (tree.root == nil) ? "nil" : "\(ObjectIdentifier(tree.root!))"
+                    let medianNodeId = (tree.medianNode == nil) ? "nil" : "\(ObjectIdentifier(tree.medianNode!))"
+                    print("medianNode = \(valOrNil(tree.medianNode?.value)) (\(medianNodeId)), root = \(valOrNil(tree.root?.value)) (\(rootId)), medianOffset = \(tree.medianOffset)")
+                    print(tree.descriptionWithNext)
                 }
                 validateTree(tree, "Tree \(treeIndex)")
                 if tree.toCountedSet() != set {

@@ -27,6 +27,8 @@ enum TreeDescriptionType {
     case plain
     case withHeight
     case withNext
+    case withNodeCount
+    case withTotalCount
 }
 
 extension BSNode: CustomStringConvertible {
@@ -46,6 +48,16 @@ extension BSNode: CustomStringConvertible {
         return descriptionBox(.withNext).lines.joined(separator: "\n")
     }
 
+    /// Description with each node's nodeCount shown.
+    var descriptionWithNodeCount: String {
+        return descriptionBox(.withNodeCount).lines.joined(separator: "\n")
+    }
+
+    /// Description with each node's nodeCount shown.
+    var descriptionWithTotalCount: String {
+        return descriptionBox(.withTotalCount).lines.joined(separator: "\n")
+    }
+
     private struct DescriptionBox {
         var lines = [String]()    // All lines same length
         var height: Int { lines.count }
@@ -61,10 +73,17 @@ extension BSNode: CustomStringConvertible {
     private func descriptionBox(_ type: TreeDescriptionType) -> DescriptionBox {
         var box = DescriptionBox()  // Have to fill in valueStart, valueEnd, lines
         var valueStr = valueCount == 1 ? "\(value)" : "\(value)(\(valueCount))"
-        if type == .withHeight {
+        switch type {
+        case .plain:
+            break
+        case .withHeight:
             valueStr += "-\(height)"
-        } else if type == .withNext {
+        case .withNext:
             valueStr = "\(valOrNil(prev?.value))<-" + valueStr + "->\(valOrNil(next?.value))"
+        case .withNodeCount:
+            valueStr += "-\(nodeCount)"
+        case .withTotalCount:
+            valueStr += "-\(totalCount)"
         }
         if left == nil && right == nil {
             box.valueStart = 0
