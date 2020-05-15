@@ -73,21 +73,15 @@ extension BSNode {
 
     /// Delete this node
     func deleteNode() {
-        let pred = inOrderPredecessor
+        let predecessor = inOrderPredecessor
         var replaced = false
         if let thisLeft = left {
             if let thisRight = right {
                 // Two children. Replace value with that of the in-order predecessor or successor.
-                if thisLeft.height > thisRight.height {
-                    let predecessor = thisLeft.maxNode
-//                    copyValueFrom(predecessor)
-                    predecessor.deleteNode()
-                } else {
-                    let successor = thisRight.minNode
- //                   copyValueFrom(successor)
-                    next = successor.next
-                    successor.deleteNode()
-                }
+                let toSwapWith = (thisLeft.height > thisRight.height) ? thisLeft.maxNode : thisRight.minNode
+                swap(with: toSwapWith)
+                value = toSwapWith.value
+                deleteNode()
             } else {
                 // Only left child
                 replace(with: thisLeft)
@@ -105,7 +99,7 @@ extension BSNode {
             }
         }
         if replaced {
-            pred?.next = next
+            predecessor?.next = next
             if let bsParent = parent as? BSNode {
                 bsParent.rebalanceIfNecessary()
             }

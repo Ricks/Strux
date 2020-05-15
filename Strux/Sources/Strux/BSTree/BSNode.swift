@@ -22,7 +22,7 @@ enum ChildDirection {
 class BSNode<T: Comparable>: BNode {
     typealias Element = (value: T, count: Int)
     /// The node's value
-    let value: T
+    var value: T
     /// The count of the value, always >= 1
     var valueCount: Int32 = 1
     /// Height of the subtree having this node as parent. Zero if this node is a leaf (no children).
@@ -129,6 +129,13 @@ class BSNode<T: Comparable>: BNode {
             }
         }
         return nil
+    }
+
+    public func swap(with other: BSNode) {
+        let otherHeight = other.height
+        super.swap(with: other)
+        other.height = height
+        height = otherHeight
     }
 
     /// Find a value in the subtree having this node as root. Complexity is *O(log(n))*.
