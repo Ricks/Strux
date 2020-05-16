@@ -9,6 +9,11 @@
 
 import Foundation
 
+enum ChildDirection {
+    case left
+    case right
+}
+
 /// Basic binary node behavior, ensuring integrity of parent and next/prev node pointers.
 public class BNode {
     private var leftNodeStorage: BNode?

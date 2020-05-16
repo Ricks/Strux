@@ -9,11 +9,6 @@
 
 import Foundation
 
-enum ChildDirection {
-    case left
-    case right
-}
-
 /// Node for a counted, self-balancing (AVL) binary search tree. Counted means that there are no duplicate
 /// nodes with the same value, but values have counts associated with them. For a subtree to be a valid BST,
 /// the value of the root node of the subtree must be **strictly** greater than any value in the sub-subtree,

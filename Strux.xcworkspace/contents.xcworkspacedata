@@ -5,6 +5,9 @@
       location = "group:Strux">
    </FileRef>
    <FileRef
-      location = "group:StruxSampleApp/StruxApp.xcodeproj">
+      location = "group:StruxApp/StruxApp.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:StruxMacApp/StruxMacApp.xcodeproj">
    </FileRef>
 </Workspace>
