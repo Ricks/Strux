@@ -62,13 +62,12 @@ public class BNode {
 
     /// Previous node, or nil if none
     var prevNode: BNode? {
-        get {
-            prevNodeStorage
-        }
-        set {
-            // This should only be use to nil the pointer
-            prevNodeStorage = newValue
-        }
+        prevNodeStorage
+    }
+
+    /// Set the pointer to the previous node to nil
+    public func nilPrevNode() {
+        prevNodeStorage = nil
     }
 
     /// True if this is a left child node. 
@@ -91,10 +90,12 @@ public class BNode {
     /// from it.
     /// - Parameter with: The node to replace with, which can be nil
     public func replace(with other: BNode?) {
-        if isLeft {
-            parentNode?.leftNode = other
-        } else {
-            parentNode?.rightNode = other
+        if parentNode !== other {
+            if isLeft {
+                parentNode?.leftNode = other
+            } else {
+                parentNode?.rightNode = other
+            }
         }
     }
 
@@ -123,7 +124,7 @@ public class BNode {
         if newPrevNode != nil {
             newPrevNode!.nextNode = self
         } else {
-            prevNode = nil
+            nilPrevNode()
         }
 
         let newOtherParent = (thisParentNode === other) ? self : thisParentNode
@@ -143,7 +144,7 @@ public class BNode {
         if newOtherPrevNode != nil {
             newOtherPrevNode!.nextNode = other
         } else {
-            other.prevNode = nil
+            other.nilPrevNode()
         }
     }
 
