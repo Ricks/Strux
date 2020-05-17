@@ -66,7 +66,7 @@ public class BNode {
     }
 
     /// Set the pointer to the previous node to nil
-    public func nilPrevNode() {
+    private func nilPrevNode() {
         prevNodeStorage = nil
     }
 
@@ -80,7 +80,7 @@ public class BNode {
         parentNode?.rightNode === self
     }
 
-    /// Number of nodes in the subtree having this node as root
+    /// Number of nodes in the subtree having this node as root. Complexity is O(log(n)).
     public var nodeCount: Int {
         1 + (leftNode?.nodeCount ?? 0) + (rightNode?.nodeCount ?? 0)
     }
@@ -99,6 +99,8 @@ public class BNode {
         }
     }
 
+    /// Swap this node with the given one, i.e. swap all node pointers.
+    /// - Parameter with: The node to swap with
     public func swap(with other: BNode) {
         let thisIsLeft = isLeft
         let thisParentNode = parentNode

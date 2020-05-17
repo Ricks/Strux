@@ -17,59 +17,40 @@ class BSNodeModifyTests: XCTestCase {
         setSeed(5)
         (0..<100).forEach { treeIndex in
             print("Tree \(treeIndex) ...")
-            let initialValues = [44, -12, 3]
-            let set = NSCountedSet(array: initialValues)
+            let numInitial = seededRandom(in: 0..<9)
+            var initialValues = [Int]()
+            for _ in 0 ..< numInitial {
+                initialValues.append(seededRandom(in: -5..<100))
+            }
+            var set = NSCountedSet(array: initialValues)
             let treeSizish = seededRandom(in: 0..<1000)
             let tree = BSTree(initialValues)
             (0..<treeSizish).forEach { _ in
                 let val = seededRandom(in: -5..<100)
                 let count = seededRandom(in: 1..<4)
-                let choice = seededRandom(in: 0..<10)
-//                if treeIndex == 5 {
-//                    print("--------------------------------------------------------------------------------------" +
-//                          "--------------------------------------------------------------------------------------" +
-//                          "--------------------------------------------")
-//                }
+                let choice = seededRandom(in: 0..<100)
                 switch choice {
-                case 0:
-//                    if treeIndex == 5 {
-//                        print("deleteAll: \(val)")
-//                    }
+                case 0-9:
                     tree.deleteAll(val)
                     let n = set.count(for: val)
                     for _ in 0 ..< n { set.remove(val) }
-                case 1:
-//                    if treeIndex == 5 {
-//                        print("delete: \(val)")
-//                    }
+                case 10-19:
                     tree.delete(val)
                     set.remove(val)
-                case 2:
-//                    if treeIndex == 5 {
-//                        print("delete: \(count) of \(val)")
-//                    }
+                case 20-29:
                     tree.delete(val, count)
                     for _ in 0 ..< count { set.remove(val) }
+                case 30-32:
+                    tree.clear()
+                    set = NSCountedSet()
                 default:
                     if count == 1 {
-//                        if treeIndex == 5 {
-//                            print("insert: \(val)")
-//                        }
                         tree.insert(val)
                     } else {
-//                        if treeIndex == 5 {
-//                            print("insert: \(count) of \(val)")
-//                        }
                         tree.insert(val, count)
                     }
                     for _ in 0 ..< count { set.add(val) }
                 }
-//                if treeIndex == 5 {
-//                    let rootId = (tree.root == nil) ? "nil" : "\(ObjectIdentifier(tree.root!))"
-//                    let medianNodeId = (tree.medianNode == nil) ? "nil" : "\(ObjectIdentifier(tree.medianNode!))"
-//                    print("medianNode = \(valOrNil(tree.medianNode?.value)) (\(medianNodeId)), root = \(valOrNil(tree.root?.value)) (\(rootId)), medianOffset = \(tree.medianOffset)")
-//                    print(tree.descriptionWithNext)
-//                }
                 validateTree(tree, "Tree \(treeIndex)")
                 if tree.toCountedSet() != set {
                     XCTFail("Tree \(treeIndex) has counts \(tree.toCountedSet()), expected \(set)")

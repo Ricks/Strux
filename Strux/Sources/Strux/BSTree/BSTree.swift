@@ -48,12 +48,22 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     public typealias Element = (value: T, count: Int)
     public typealias Index = BSTreeIndex<T>
 
+    // MARK: State
+
     /// The root node of the tree, or nil if the tree is empty. The root node has the tree as parent, so
     /// that all the BSNodes of the tree have parents.
     var root: BSNode<T>? {
         get { return leftNode as? BSNode }
         set { leftNode = newValue }
     }
+
+    var maxNode: BSNode<T>?
+    var minNode: BSNode<T>?
+    var medianNode: BSNode<T>?
+    // The i'th (zero-based) member of the count members having this value that is
+    // the actual median. If the offset is < the count - 1, then the median value is
+    // the value given by the node, whether or not the total count of values is odd.
+    var medianOffset = 0
 
     /// The number of elements (values) in the tree (NOT the sum of all value counts).
     /// Time complexity: *O(1)*
@@ -62,6 +72,8 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// The sum of all value counts.
     /// Time complexity: *O(1)*
     public private(set) var totalCount = 0
+
+    // MARK: Constructors
 
     private func initializeWithCountedSet(_ countedSet: NSCountedSet) {
         let values = countedSet.allObjects as! [T]
@@ -91,6 +103,8 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         initializeWithCountedSet(NSCountedSet(array: values))
     }
 
+    // MARK: Methods
+
     /// Return the index (BSTreeIndex) of the value, or nil if the tree doesn't have the value.
     /// Time complexity: *O(log(n))*
     /// - Parameter val: The value to look for
@@ -116,7 +130,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         return Int(root?.find(val)?.valueCount ?? 0)
     }
 
-    func updateMedianAfterInsertOne(of val: T) {
+    private func updateMedianAfterInsertOne(of val: T) {
         if totalCount == 1 {
             medianNode = minNode
             medianOffset = 0
@@ -139,7 +153,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         }
     }
 
-    func updateMedianBeforeDeleteOne(of val: T) {
+    private func updateMedianBeforeDeleteOne(of val: T) {
         if totalCount == 1 {
             medianNode = nil
             medianOffset = 0
@@ -163,24 +177,16 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         }
     }
 
-    func processNodeInsertion(_ newNode: BSNode<T>, _ val: T) {
+    private func processNodeInsertion(_ newNode: BSNode<T>, _ val: T) {
         count += 1
-        if minNode == nil || val < minNode!.value {
-            minNode = newNode
-        }
-        else if maxNode == nil || val > maxNode!.value {
-            maxNode = newNode
-        }
+        if minNode == nil || val < minNode!.value { minNode = newNode }
+        if maxNode == nil || val > maxNode!.value { maxNode = newNode }
     }
 
-    func processNodeDeletion(_ val: T) {
+    private func processNodeDeletion(_ val: T) {
         count -= 1
-        if minNode != nil && minNode!.value == val {
-            minNode = root?.minNode
-        }
-        else if maxNode != nil && maxNode!.value == val {
-            maxNode = root?.maxNode
-        }
+        if minNode != nil && minNode!.value == val { minNode = root?.minNode }
+        if maxNode != nil && maxNode!.value == val { maxNode = root?.maxNode }
     }
 
     /// Insert the given number of the given value into the tree. If the value is already in the tree,
@@ -268,6 +274,18 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         delete(val, Int.max)
     }
 
+    /// Remove all values from the tree.
+    /// Time complexity: *O(1)*.
+    public func clear() {
+        root = nil
+        minNode = nil
+        maxNode = nil
+        medianNode = nil
+        medianOffset = 0
+        count = 0
+        totalCount = 0
+     }
+
     /// The height of the tree, i.e. the number of levels minus 1. An empty tree has height -1, a
     /// tree with just a root node has height 0, and a tree with two nodes has height 1.
     /// Time complexity: *O(1)*.
@@ -275,7 +293,6 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         Int(root?.height ?? -1)
     }
 
-    var maxNode: BSNode<T>?
     /// The maximum element in the tree.
     /// Time complexity: *O(1)*.
     public var maximum: Element? {
@@ -285,18 +302,12 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// Time complexity: *O(1)*.
     public var last: Element? { maximum }
 
-    var minNode: BSNode<T>?
     /// The minimum element in the tree.
     /// Time complexity: *O(1)*.
     public var minimum: Element? {
         minNode?.element
     }
 
-    var medianNode: BSNode<T>?
-    // The i'th (zero-based) member of the count members having this value that is
-    // the actual median. If the offset is < the count - 1, then the median value is
-    // the value given by the node, whether or not the total count of values is odd.
-    var medianOffset = 0
     /// Returns zero, one, or two median values. There will be zero values if and only if the tree is
     /// empty. There will be two values if the tree has an even number of values (n), and the n/2 and
     /// n/2 + 1 values (starting with 1) differ. Otherwise one value.
@@ -447,6 +458,11 @@ class SummedBSTree<T>: BSTree<T> where T: AdditiveArithmetic & Comparable {
     override public func insert(_ val: T, _ n: Int) {
         super.insert(val, n)
         for _ in 0 ..< n { sum += val }
+    }
+
+    override public func clear() {
+        super.clear()
+        sum = T.zero
     }
 
     @discardableResult

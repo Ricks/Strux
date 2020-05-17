@@ -103,4 +103,69 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertEqual(tree.totalCount, 1)
     }
 
+    func testClear() {
+        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        XCTAssertFalse(tree.isEmpty)
+        tree.clear()
+        XCTAssertTrue(tree.isEmpty)
+        XCTAssertEqual(tree.height, -1)
+        XCTAssertNil(tree.minimum)
+        XCTAssertNil(tree.maximum)
+        XCTAssertEqual(tree.count, 0)
+        XCTAssertEqual(tree.totalCount, 0)
+        XCTAssertTrue(tree.medians().isEmpty)
+
+        let tree2: SummedBSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        XCTAssertEqual(tree2.sum, 65)
+        tree2.clear()
+        XCTAssertEqual(tree2.sum, 0)
+    }
+
+    func testFromScratch() {
+        let tree = SummedBSTree<Int>()
+        tree.insert(1)
+        XCTAssertEqual(tree.count, 1)
+        XCTAssertEqual(tree.totalCount, 1)
+        XCTAssertEqual(tree.minimum?.value, 1)
+        XCTAssertEqual(tree.maximum?.value, 1)
+        XCTAssertEqual(tree.medians(), [1])
+        XCTAssertEqual(tree.sum, 1)
+        XCTAssertEqual(tree.toValueArray(), [1])
+
+        tree.insert(-1)
+        XCTAssertEqual(tree.count, 2)
+        XCTAssertEqual(tree.totalCount, 2)
+        XCTAssertEqual(tree.minimum?.value, -1)
+        XCTAssertEqual(tree.maximum?.value, 1)
+        XCTAssertEqual(tree.medians(), [-1, 1])
+        XCTAssertEqual(tree.sum, 0)
+        XCTAssertEqual(tree.toValueArray(), [-1, 1])
+
+        tree.insert(1)
+        XCTAssertEqual(tree.count, 2)
+        XCTAssertEqual(tree.totalCount, 3)
+        XCTAssertEqual(tree.minimum?.value, -1)
+        XCTAssertEqual(tree.maximum?.value, 1)
+        XCTAssertEqual(tree.medians(), [1])
+        XCTAssertEqual(tree.sum, 1)
+        XCTAssertEqual(tree.toValueArray(), [-1, 1, 1])
+
+        tree.insert(5)
+        XCTAssertEqual(tree.count, 3)
+        XCTAssertEqual(tree.totalCount, 4)
+        XCTAssertEqual(tree.minimum?.value, -1)
+        XCTAssertEqual(tree.maximum?.value, 5)
+        XCTAssertEqual(tree.medians(), [1])
+        XCTAssertEqual(tree.sum, 6)
+        XCTAssertEqual(tree.toValueArray(), [-1, 1, 1, 5])
+
+        tree.delete(1)
+        XCTAssertEqual(tree.count, 3)
+        XCTAssertEqual(tree.totalCount, 3)
+        XCTAssertEqual(tree.minimum?.value, -1)
+        XCTAssertEqual(tree.maximum?.value, 5)
+        XCTAssertEqual(tree.medians(), [1])
+        XCTAssertEqual(tree.sum, 5)
+        XCTAssertEqual(tree.toValueArray(), [-1, 1, 5])
+    }
 }
