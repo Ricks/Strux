@@ -114,7 +114,7 @@ func dumpNextPointers<T>(_ tree: BSTree<T>) {
     }
 }
 
-func validateTree<T: Comparable>(_ tree: BSTree<T>, _ id: String) {
+func validateTree(_ tree: BSTree<Int>, _ id: String) {
     if !tree.isValid {
         XCTFail("\(id) is not a valid BST")
         print(tree)
@@ -148,7 +148,12 @@ func validateTree<T: Comparable>(_ tree: BSTree<T>, _ id: String) {
         print(tree.description)
     }
     let array = tree.toValueArray()
-    var expectedMedians = [T]()
+    let expectedSum = array.reduce(0, +)
+    if expectedSum != tree.sum {
+        XCTFail("\(id) has sum of \(tree.sum), expected \(expectedSum)")
+        print(tree.descriptionWithTotalCount)
+    }
+    var expectedMedians = [Int]()
     if array.count > 0 {
         let medianIndex = (array.count + 1) / 2 - 1
         expectedMedians.append(array[medianIndex])

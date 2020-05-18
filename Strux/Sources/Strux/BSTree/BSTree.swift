@@ -44,17 +44,19 @@ import Foundation
 /// tree.max.count                 // 2
 /// Array(tree)                    // [(value: -2, count: 1), (value: 32, count: 1), (value: 42, count: 2)]
 /// ```
-public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral {
+public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
     public typealias Element = (value: T, count: Int)
     public typealias Index = BSTreeIndex<T>
 
     // MARK: State
 
+    var god = BNode()
+
     /// The root node of the tree, or nil if the tree is empty. The root node has the tree as parent, so
     /// that all the BSNodes of the tree have parents.
     var root: BSNode<T>? {
-        get { return leftNode as? BSNode }
-        set { leftNode = newValue }
+        get { return god.leftNode as? BSNode }
+        set { god.leftNode = newValue }
     }
 
     var maxNode: BSNode<T>?
@@ -73,33 +75,37 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// Time complexity: *O(1)*
     public private(set) var totalCount = 0
 
+    /// The sum of all values (if T conforms to AdditiveArithmetic).
+    /// Time complexity: *O(1)*
+    private var sumStorage: T?
+
     // MARK: Constructors
 
     private func initializeWithCountedSet(_ countedSet: NSCountedSet) {
-        let values = countedSet.allObjects as! [T]
-        for val in values {
-            insert(val, countedSet.count(for: val))
-        }
+         let values = countedSet.allObjects as! [T]
+         for val in values {
+             insert(val, countedSet.count(for: val))
+         }
     }
 
     /// Initialize with an NSCountedSet.
     /// - Parameter countedSet: NSCountedSet
-    public init(countedSet: NSCountedSet) {
-        super.init()
+    public convenience init(countedSet: NSCountedSet) {
+        self.init()
         initializeWithCountedSet(countedSet)
     }
 
     /// Initialize with an unsorted array of values, which can contain duplicates.
     /// - Parameter values: Array
-    public init(_ values: [T] = [T]()) {
-        super.init()
+    public convenience init(_ values: [T]) {
+        self.init()
         initializeWithCountedSet(NSCountedSet(array: values))
     }
 
     /// Constructor using unsorted array literal. The array can contain duplicates.
     /// - Parameter values: Array literal
-    required public init(arrayLiteral values: T...) {
-        super.init()
+    required public convenience init(arrayLiteral values: T...) {
+        self.init()
         initializeWithCountedSet(NSCountedSet(array: values))
     }
 
@@ -195,7 +201,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// - Parameters:
     ///   - val: The value to insert n of
     ///   - n: The number of val to insert
-    public func insert(_ val: T, _ n: Int) {
+    fileprivate func performInsertion(_ val: T, _ n: Int) {
         guard n >= 1 else { return }
         var insertionNode: BSNode<T>?
         for i in 0 ..< n {
@@ -203,7 +209,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
                 // First time through, make sure we have an insertion node
                 var newNode: Bool
                 if root == nil {
-                    insertionNode = BSNode(val, 1, parent: self, direction: .left)
+                    insertionNode = BSNode(val, 1, parent: god, direction: .left)
                     root = insertionNode
                     newNode = true
                 } else {
@@ -223,13 +229,17 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         }
     }
 
+    public func insert(_ val: T, _ n: Int) {
+        performInsertion(val, n)
+    }
+
     /// Insert one of the given value into the tree. If the value is already in the tree,
     /// the count is incremented by one.
     /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to insert one of
     public func insert(_ val: T) {
-        insert(val, 1)
+        performInsertion(val, 1)
     }
 
     /// Delete the given number of the given value from the tree. If the given number is >= the number
@@ -239,7 +249,7 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     ///   - val: The value to remove n of
     ///   - n: The number of val to remove
     @discardableResult
-    public func delete(_ val: T, _ n: Int) -> Int {
+    fileprivate func performDeletion(_ val: T, _ n: Int) -> Int {
         var numToDelete = 0
         if let thisRoot = root, let deletionNode = thisRoot.find(val) {
             numToDelete = Swift.min(n, Int(deletionNode.valueCount))
@@ -257,13 +267,17 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         return numToDelete
     }
 
+    public func delete(_ val: T, _ n: Int) {
+        performDeletion(val, n)
+    }
+
     /// Delete one of the given value from the tree. If the number of the value already in the tree is
     /// more than one, the number is decremented by one, otherwise the value is removed from the tree.
     /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to remove one of
     public func delete(_ val: T) {
-        delete(val, 1)
+        performDeletion(val, 1)
     }
 
     /// Delete all occurrences of the given value from the tree.
@@ -271,12 +285,12 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
     /// - Parameters:
     ///   - val: The value to remove all occurrences of
     public func deleteAll(_ val: T) {
-        delete(val, Int.max)
+        performDeletion(val, Int.max)
     }
 
     /// Remove all values from the tree.
     /// Time complexity: *O(1)*.
-    public func clear() {
+    fileprivate func performClear() {
         root = nil
         minNode = nil
         maxNode = nil
@@ -284,7 +298,11 @@ public class BSTree<T: Comparable>: BNode, NSCopying, ExpressibleByArrayLiteral 
         medianOffset = 0
         count = 0
         totalCount = 0
-     }
+    }
+
+    func clear() {
+        performClear()
+    }
 
     /// The height of the tree, i.e. the number of levels minus 1. An empty tree has height -1, a
     /// tree with just a root node has height 0, and a tree with two nodes has height 1.
@@ -449,27 +467,63 @@ extension BSTree: Equatable {
 
 }
 
-class SummedBSTree<T>: BSTree<T> where T: AdditiveArithmetic & Comparable {
+extension BSTree where T: AdditiveArithmetic {
 
-    /// The sum of all values.
-    /// Time complexity: *O(1)*
-    public var sum = T.zero
+    private func ensureSumStorageInitialized() {
+        if sumStorage == nil {
+            sumStorage = T.zero
+            for elem in self { addToSumStorage(elem.value, elem.count) }
+        }
+    }
 
-    override public func insert(_ val: T, _ n: Int) {
-        super.insert(val, n)
+    /// The sum of each value times its count.
+    public var sum: T {
+        get {
+            ensureSumStorageInitialized()
+            return sumStorage!
+        }
+        set {
+            ensureSumStorageInitialized()
+            sumStorage = newValue
+        }
+    }
+
+    private func addToSumStorage(_ val: T, _ n: Int) {
         for _ in 0 ..< n { sum += val }
     }
 
-    override public func clear() {
-        super.clear()
-        sum = T.zero
+    private func subtractFromSumStorage(_ val: T, _ n: Int) {
+        for _ in 0 ..< n { sum -= val }
     }
 
-    @discardableResult
-    override public func delete(_ val: T, _ n: Int) -> Int {
-        let numDeleted = super.delete(val, n)
-        for _ in 0 ..< numDeleted { sum -= val }
-        return numDeleted
+    public func insert(_ val: T, _ n: Int) {
+        addToSumStorage(val, n)        // Has to come before performInsertsion() so that sum is initialized correctly.
+        performInsertion(val, n)
+    }
+
+    public func insert(_ val: T) {
+        addToSumStorage(val, 1)        // Has to come before performInsertsion() so that sum is initialized correctly.
+        performInsertion(val, 1)
+    }
+
+    func clear() {
+        performClear()
+        sumStorage = T.zero
+    }
+
+    public func delete(_ val: T, _ n: Int) {
+        let numDeleted = performDeletion(val, n)
+        subtractFromSumStorage(val, numDeleted)
+    }
+
+    public func delete(_ val: T) {
+        let numDeleted = performDeletion(val, 1)
+        subtractFromSumStorage(val, numDeleted)
+    }
+
+    public func deleteAll(_ val: T) {
+        let numDeleted = performDeletion(val, Int.max)
+        subtractFromSumStorage(val, numDeleted)
     }
 
 }

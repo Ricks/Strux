@@ -115,14 +115,14 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertEqual(tree.totalCount, 0)
         XCTAssertTrue(tree.medians().isEmpty)
 
-        let tree2: SummedBSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree2: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
         XCTAssertEqual(tree2.sum, 65)
         tree2.clear()
         XCTAssertEqual(tree2.sum, 0)
     }
 
     func testFromScratch() {
-        let tree = SummedBSTree<Int>()
+        let tree = BSTree<Int>()
         tree.insert(1)
         XCTAssertEqual(tree.count, 1)
         XCTAssertEqual(tree.totalCount, 1)
@@ -167,5 +167,26 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertEqual(tree.medians(), [1])
         XCTAssertEqual(tree.sum, 5)
         XCTAssertEqual(tree.toValueArray(), [-1, 1, 5])
+    }
+
+    func testFromScratch2() {
+        let tree = BSTree<Int>()
+        tree.insert(1)
+        XCTAssertEqual(tree.count, 1)
+        XCTAssertEqual(tree.totalCount, 1)
+        XCTAssertEqual(tree.minimum?.value, 1)
+        XCTAssertEqual(tree.maximum?.value, 1)
+        XCTAssertEqual(tree.medians(), [1])
+        XCTAssertEqual(tree.sum, 1)
+        XCTAssertEqual(tree.toValueArray(), [1])
+
+        tree.insert(2)
+        XCTAssertEqual(tree.count, 2)
+        XCTAssertEqual(tree.totalCount, 2)
+        XCTAssertEqual(tree.minimum?.value, 1)
+        XCTAssertEqual(tree.maximum?.value, 2)
+        XCTAssertEqual(tree.medians(), [1, 2])
+        XCTAssertEqual(tree.sum, 3)
+        XCTAssertEqual(tree.toValueArray(), [1, 2])
     }
 }

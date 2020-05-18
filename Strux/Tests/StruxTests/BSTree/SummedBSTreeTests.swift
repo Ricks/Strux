@@ -12,7 +12,7 @@ import Foundation
 class SummedBSTreeTests: XCTestCase {
 
     func test1() {
-        let tree: SummedBSTree = [0, 9, 9, 3, 2, 5]
+        let tree: BSTree = [0, 9, 9, 3, 2, 5]
         XCTAssertEqual(tree.sum, 28)
         tree.deleteAll(9)
         XCTAssertEqual(tree.sum, 10)
