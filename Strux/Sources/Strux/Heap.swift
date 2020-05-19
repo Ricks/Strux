@@ -1,6 +1,6 @@
 //
 //  Heap.swift
-//  DataStructures
+//  Strux
 //
 //  Created by Richard Clark on 4/20/20.
 //  Copyright © 2020 Richard Clark. All rights reserved.
@@ -121,7 +121,9 @@ public struct Heap<T: Comparable>: Collection {
     /// Remove the first occurrence of the given item from the heap. Complexity is *O(n)*.
     /// - Parameter item: item to remove
     public mutating func remove(_ item: T) {
-        guard let index = array.firstIndex(of: item) else { return }
+        guard let index = array.firstIndex(of: item) else {
+            return
+        }
         array.swapAt(index, count - 1)
         array.removeLast()
         if index < count {

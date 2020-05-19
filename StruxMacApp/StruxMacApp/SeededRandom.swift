@@ -1,10 +1,8 @@
 //
-//  SeededRandom.swift
-//  StruxTests
+//  File.swift
 //  
+//
 //  Created by Richard Clark on 5/5/20.
-//  Copyright © 2020 Richard Clark. All rights reserved.
-//  MIT License (see LICENSE file).
 //
 
 import Foundation

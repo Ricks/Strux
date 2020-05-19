@@ -1,6 +1,6 @@
 //
 //  BinarySearchTree.swift
-//  DataStructures
+//  Strux
 //
 //  Created by Richard Clark on 4/20/20.
 //  Copyright © 2020 Richard Clark. All rights reserved.
@@ -174,7 +174,9 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
     }
 
     fileprivate func performInsertion(_ val: T, _ n: Int) {
-        guard n >= 1 else { return }
+        guard n >= 1 else {
+            return
+        }
         var insertionNode: BSNode<T>?
         for i in 0 ..< n {
             if i == 0 {
@@ -428,11 +430,15 @@ extension BSTree: CustomStringConvertible {
 extension BSTree: Equatable {
 
     public static func == (lhs: BSTree<T>, rhs: BSTree<T>) -> Bool {
-        if lhs.count != rhs.count { return false }
+        if lhs.count != rhs.count {
+            return false
+        }
         var lIndex = lhs.startIndex
         var rIndex = rhs.startIndex
         while lIndex != lhs.endIndex {
-            if lhs[lIndex] != rhs[rIndex] { return false }
+            if lhs[lIndex] != rhs[rIndex] {
+                return false
+            }
             lIndex = lhs.index(after: lIndex)
             rIndex = rhs.index(after: rIndex)
         }

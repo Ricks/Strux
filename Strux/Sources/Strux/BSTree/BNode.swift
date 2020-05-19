@@ -1,6 +1,6 @@
 //
 //  BNode.swift
-//  DataStructures
+//  Strux
 //
 //  Created by Richard Clark on 4/25/20.
 //  Copyright © 2020 Richard Clark. All rights reserved.

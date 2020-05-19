@@ -1,6 +1,6 @@
 //
 //  BSNodeModifyTests.swift
-//  DataStructures
+//  StruxTests
 //
 //  Created by Richard Clark on 4/27/20.
 //  Copyright © 2020 Richard Clark. All rights reserved.
@@ -15,32 +15,32 @@ class BSNodeModifyTests: XCTestCase {
 
     func testInsertDelete() {
         setSeed(5)
-        (0..<100).forEach { treeIndex in
+        (0 ..< 100).forEach { treeIndex in
             print("Tree \(treeIndex) ...")
-            let numInitial = seededRandom(in: 0..<9)
+            let numInitial = seededRandom(in: 0 ..< 9)
             var initialValues = [Int]()
             for _ in 0 ..< numInitial {
-                initialValues.append(seededRandom(in: -5..<100))
+                initialValues.append(seededRandom(in: -5 ..< 100))
             }
             var set = NSCountedSet(array: initialValues)
-            let treeSizish = seededRandom(in: 0..<1000)
+            let treeSizish = seededRandom(in: 0 ..< 1000)
             let tree = BSTree(initialValues)
             (0..<treeSizish).forEach { _ in
-                let val = seededRandom(in: -5..<100)
-                let count = seededRandom(in: 1..<4)
-                let choice = seededRandom(in: 0..<100)
+                let val = seededRandom(in: -5 ..< 100)
+                let count = seededRandom(in: 1 ..< 4)
+                let choice = seededRandom(in: 0 ..< 100)
                 switch choice {
-                case 0-9:
+                case 0 - 9:
                     tree.deleteAll(val)
                     let n = set.count(for: val)
                     for _ in 0 ..< n { set.remove(val) }
-                case 10-19:
+                case 10 - 19:
                     tree.delete(val)
                     set.remove(val)
-                case 20-29:
+                case 20 - 29:
                     tree.delete(val, count)
                     for _ in 0 ..< count { set.remove(val) }
-                case 30-32:
+                case 30 - 32:
                     tree.clear()
                     set = NSCountedSet()
                 default:
@@ -64,7 +64,7 @@ class BSNodeModifyTests: XCTestCase {
                 let treeElements = tree.traverseInOrder()
                 XCTAssertEqual(treeElements.count, vals.count)
                 if vals.count > 0 {
-                    for i in 0..<vals.count {
+                    for i in 0 ..< vals.count {
                         XCTAssertEqual(treeElements[i].value, vals[i])
                         XCTAssertEqual(treeElements[i].count, set.count(for: vals[i]))
                     }

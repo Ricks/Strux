@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D81C90A24743F2D000B56ED /* SeededRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81C90924743F2D000B56ED /* SeededRandom.swift */; };
 		1D9818CC2462054300BC3E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9818CB2462054300BC3E4E /* AppDelegate.swift */; };
 		1D9818CE2462054300BC3E4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9818CD2462054300BC3E4E /* SceneDelegate.swift */; };
 		1D9818D02462054300BC3E4E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9818CF2462054300BC3E4E /* ContentView.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D81C90924743F2D000B56ED /* SeededRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededRandom.swift; sourceTree = "<group>"; };
 		1D9818C82462054300BC3E4E /* StruxApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StruxApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D9818CB2462054300BC3E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D9818CD2462054300BC3E4E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				1D9819472464B37400BC3E4E /* QueueModel.swift */,
 				1D9819452464AEEC00BC3E4E /* HeapModel.swift */,
 				1D98190E246225F800BC3E4E /* BSTreeModel.swift */,
+				1D81C90924743F2D000B56ED /* SeededRandom.swift */,
 				1D9818CF2462054300BC3E4E /* ContentView.swift */,
 				1D9818D12462054900BC3E4E /* Assets.xcassets */,
 				1D9818D62462054900BC3E4E /* LaunchScreen.storyboard */,
@@ -279,7 +282,6 @@
 				1D9818C42462054300BC3E4E /* Sources */,
 				1D9818C52462054300BC3E4E /* Frameworks */,
 				1D9818C62462054300BC3E4E /* Resources */,
-				1D81C906247372E1000B56ED /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -339,26 +341,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		1D81C906247372E1000B56ED /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --config \"$SRCROOT/.swiftlint.yml\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n# Type a script or drag a script file from your workspace to insert its path.\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		1D9818C42462054300BC3E4E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -368,6 +350,7 @@
 				1D9818CC2462054300BC3E4E /* AppDelegate.swift in Sources */,
 				1D9818CE2462054300BC3E4E /* SceneDelegate.swift in Sources */,
 				1D98190F246225F800BC3E4E /* BSTreeModel.swift in Sources */,
+				1D81C90A24743F2D000B56ED /* SeededRandom.swift in Sources */,
 				1D9818D02462054300BC3E4E /* ContentView.swift in Sources */,
 				1D9819482464B37400BC3E4E /* QueueModel.swift in Sources */,
 			);

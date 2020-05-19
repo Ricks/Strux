@@ -1,8 +1,10 @@
 //
 //  SummedBSTreeTests.swift
+//  StruxTests
 //  
-//
 //  Created by Richard Clark on 5/13/20.
+//  Copyright © 2020 Richard Clark. All rights reserved.
+//  MIT License (see LICENSE file).
 //
 
 import XCTest

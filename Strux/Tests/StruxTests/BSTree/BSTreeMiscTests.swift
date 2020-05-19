@@ -1,6 +1,6 @@
 //
 //  BSTreeMiscTests.swift
-//  DataStructures
+//  StruxTests
 //
 //  Created by Richard Clark on 5/4/20.
 //  Copyright © 2020 Richard Clark. All rights reserved.

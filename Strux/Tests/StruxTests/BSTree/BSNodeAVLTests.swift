@@ -1,7 +1,8 @@
 //
 //  BSNodeAVLTests.swift
-//  DataStructuresTests
+//  StruxTests
 //
+//  Created by Richard Clark on 4/25/20.
 //  Copyright © 2020 Richard Clark. All rights reserved.
 //  MIT License (see LICENSE file).
 //
@@ -14,20 +15,30 @@ extension BSNode {
 
     private func isNextCorrectHelper() -> Bool {
         if let pred = inOrderPredecessor {
-            if pred.next !== self { return false }
+            if pred.next !== self {
+                return false
+            }
         }
-        if next !== inOrderSuccessor { return false }
+        if next !== inOrderSuccessor {
+            return false
+        }
         if let thisLeft = left {
-            if !thisLeft.isNextCorrectHelper() { return false }
+            if !thisLeft.isNextCorrectHelper() {
+                return false
+            }
         }
         if let thisRight = right {
-            if !thisRight.isNextCorrectHelper() { return false }
+            if !thisRight.isNextCorrectHelper() {
+                return false
+            }
         }
         return true
     }
 
     var isNextCorrect: Bool {
-        if !isNextCorrectHelper() { return false }
+        if !isNextCorrectHelper() {
+            return false
+        }
         var elems1 = [Element]()
         var node: BSNode<T>? = minNode
         while let thisNode = node {
@@ -48,20 +59,30 @@ extension BSNode {
 
     private func isPrevCorrectHelper() -> Bool {
         if let next = inOrderSuccessor {
-            if next.prev !== self { return false }
+            if next.prev !== self {
+                return false
+            }
         }
-        if prev !== inOrderPredecessor { return false }
+        if prev !== inOrderPredecessor {
+            return false
+        }
         if let thisLeft = left {
-            if !thisLeft.isPrevCorrectHelper() { return false }
+            if !thisLeft.isPrevCorrectHelper() {
+                return false
+            }
         }
         if let thisRight = right {
-            if !thisRight.isPrevCorrectHelper() { return false }
+            if !thisRight.isPrevCorrectHelper() {
+                return false
+            }
         }
         return true
     }
 
     var isPrevCorrect: Bool {
-        if !isPrevCorrectHelper() { return false }
+        if !isPrevCorrectHelper() {
+            return false
+        }
         var elems1 = [Element]()
         var node: BSNode<T>? = maxNode
         while let thisNode = node {

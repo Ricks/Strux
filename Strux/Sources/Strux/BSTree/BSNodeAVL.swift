@@ -1,6 +1,6 @@
 //
 //  BSNodeAVL.swift
-//  DataStructures
+//  Strux
 //
 //  Created by Richard Clark on 4/25/20.
 //  Copyright © 2020 Richard Clark. All rights reserved.
@@ -66,7 +66,9 @@ extension BSNode {
     //           /  \              \
     //         66    99             66
     func rotateLeft() {
-        guard var nodeB = right else { return }
+        guard var nodeB = right else {
+            return
+        }
         if nodeB.leftHeight > nodeB.rightHeight {
             // Special case that needs a double rotation
             nodeB.rotateRight()
@@ -113,7 +115,9 @@ extension BSNode {
     //           /  \                       /
     //          8    29                   29
     func rotateRight() {
-        guard var nodeB = left else { return }
+        guard var nodeB = left else {
+            return
+        }
         if nodeB.leftHeight < nodeB.rightHeight {
             // Special case that needs a double rotation
             nodeB.rotateLeft()
