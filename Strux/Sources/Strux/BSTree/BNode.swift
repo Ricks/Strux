@@ -71,17 +71,17 @@ public class BNode {
     }
 
     /// True if this is a left child node. 
-    public var isLeft: Bool {
+    var isLeft: Bool {
         parentNode?.leftNode === self
     }
 
     /// True if this is a right child node.
-    public var isRight: Bool {
+    var isRight: Bool {
         parentNode?.rightNode === self
     }
 
     /// Number of nodes in the subtree having this node as root. Complexity is O(log(n)).
-    public var nodeCount: Int {
+    var nodeCount: Int {
         1 + (leftNode?.nodeCount ?? 0) + (rightNode?.nodeCount ?? 0)
     }
 
@@ -89,7 +89,7 @@ public class BNode {
     /// assumes that the replacement doesn't change the node order, other than removing the current node
     /// from it.
     /// - Parameter with: The node to replace with, which can be nil
-    public func replace(with other: BNode?) {
+    func replace(with other: BNode?) {
         if parentNode !== other {
             if isLeft {
                 parentNode?.leftNode = other
@@ -101,7 +101,7 @@ public class BNode {
 
     /// Swap this node with the given one, i.e. swap all node pointers.
     /// - Parameter with: The node to swap with
-    public func swap(with other: BNode) {
+    func swap(with other: BNode) {
         let thisIsLeft = isLeft
         let thisParentNode = parentNode
         let thisLeftNode = leftNode

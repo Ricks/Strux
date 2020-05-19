@@ -13,7 +13,7 @@ struct TextView: NSViewRepresentable {
 
     @Binding var text: String
 
-    func makeNSView(context: Self.Context) -> Self.NSViewType{
+    func makeNSView(context: Self.Context) -> Self.NSViewType {
         let view = NSTextView()
         view.isEditable = true
         view.isRulerVisible = true

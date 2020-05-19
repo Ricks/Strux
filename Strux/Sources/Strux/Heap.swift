@@ -99,7 +99,7 @@ public struct Heap<T: Comparable>: Collection {
         array.append(item)
         bubbleUp(count - 1)
     }
-    
+
     /// Remove and return the min or max value from the heap. Complexity is *O(log(n))*.
     /// - Returns: optional item (nil if the heap is empty)
     @discardableResult

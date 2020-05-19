@@ -1,0 +1,12 @@
+disabled_rules:
+  - identifier_name
+  - function_body_length
+  - cyclomatic_complexity
+  - force_cast
+  - force_unwrapping
+  - large_tuple
+  - statement_position
+  - type_body_length
+  - line_length
+  - file_length
+  - trailing_comma

@@ -53,7 +53,7 @@ extension BSNode: CustomStringConvertible {
         return descriptionBox(.withNodeCount).lines.joined(separator: "\n")
     }
 
-    /// Description with each node's nodeCount shown.
+    /// Description with each node's totalCount shown.
     var descriptionWithTotalCount: String {
         return descriptionBox(.withTotalCount).lines.joined(separator: "\n")
     }

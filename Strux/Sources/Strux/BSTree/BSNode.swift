@@ -126,7 +126,7 @@ class BSNode<T: Comparable>: BNode {
         return nil
     }
 
-    public func swap(with other: BSNode) {
+    func swap(with other: BSNode) {
         let otherHeight = other.height
         super.swap(with: other)
         other.height = height

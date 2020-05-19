@@ -18,7 +18,7 @@ extension BSNode {
     ///   - n: The value count.
     /// - Returns: The new node
     @discardableResult
-    func insertLeftChildNode(_ val: T) -> BSNode<T> {
+    private func insertLeftChildNode(_ val: T) -> BSNode<T> {
         let pred = inOrderPredecessor
         let newNode = BSNode(val, 1, parent: self, direction: .left)
         left = newNode
@@ -35,7 +35,7 @@ extension BSNode {
     ///   - n: The value count.
     /// - Returns: The new node
     @discardableResult
-    func insertRightChildNode(_ val: T) -> BSNode<T> {
+    private func insertRightChildNode(_ val: T) -> BSNode<T> {
         let newNode = BSNode(val, 1, parent: self, direction: .right)
         right = newNode
         right!.next = next
@@ -53,22 +53,24 @@ extension BSNode {
     /// - Returns: The existing or newly-inserted node, and a flag indicating whether the node is newly-created
     @discardableResult
     func insert(_ val: T) -> (node: BSNode<T>, new: Bool) {
+        var result: (node: BSNode<T>, new: Bool)
         if val == value {
             valueCount += 1
-            return (self, false)
+            result = (self, false)
         } else if val < value {
             if let thisLeft = left {
-                return thisLeft.insert(val)
+                result = thisLeft.insert(val)
             } else {
-                return (insertLeftChildNode(val), true)
+                result = (insertLeftChildNode(val), true)
              }
         } else {
             if let thisRight = right {
-                return thisRight.insert(val)
+                result = thisRight.insert(val)
             } else {
-                return (insertRightChildNode(val), true)
+                result = (insertRightChildNode(val), true)
             }
         }
+        return result
     }
 
     /// Delete this node

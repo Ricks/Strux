@@ -6,7 +6,7 @@ Well-tested, fully-documented, MIT-licensed data structures written in Swift tha
 
 **Heap**: a min or max heap that can be used as a priority queue.
 
-**BSTree**: a counted, self-balancing (AVL) binary search tree that conforms to the `Collection` protocol, with *O(n)* in-order traversal, and *O(1)* height, count, min, and max.
+**BSTree**: a counted, self-balancing (AVL) binary search tree that conforms to the `BidirectionalCollection` protocol, with *O(n)* in-order traversal, and *O(1)* height, count, min, max, and median.
 
 # Queue
 

@@ -15,12 +15,13 @@ import Foundation
 /// root, and **strictly** less than any value in the subtree, if any, with its right child as root, and
 /// all subtrees of the tree must meet the same condition.
 ///
-/// Insertions, deletions, and queries have time complexity *O(log(n))*. Returning the count (of unique
-/// values), tree height, minimum (first), and maximum (last) values are all *O(1)*. Traversing the tree in
-/// order, min to max, is *O(n)*.
+/// Insertions, deletions, and queries have time complexity *O(log(n))*. Returning the count of unique
+/// values, the count of total values, tree height, minimum, maximum, and median are all *O(1)*.
+/// If the values are numeric, the sum of all values is also available in *O(1)*. Traversing the tree in order,
+/// min to max, is *O(n)*.
 ///
-/// BSTree conforms to the Collection protocol, and meets all of Collection's expected performance
-/// requirements (see above). It also conforms to Equatable, NSCopying, and ExpressibleByArrayLiteral.
+/// BSTree conforms to the BidirectionalCollection protocol, and meets all of that protocol's expected performance
+/// requirements. It also conforms to Equatable, NSCopying, and ExpressibleByArrayLiteral.
 ///
 /// The elements of the Collection are tuples of the form (value: T, count: Int). The indices of the
 /// Collection are of non-numeric type BSTreeIndex<T>.
@@ -29,7 +30,7 @@ import Foundation
 /// let tree: BSTree = [14, -2, 32, 14]  // BSTree is a class, so it can be a "let"
 /// tree.insert(42, 2)             // Insert 2 of value 42
 /// tree.deleteAll(14)             // Delete both 14's
-/// tree.contains(value: -2)       // true
+/// tree.containsValue(-2)       // true
 /// print(tree)
 ///
 ///    32
@@ -38,10 +39,11 @@ import Foundation
 ///
 /// tree.height                    // 1
 /// tree.count                     // 3
-/// tree.min.value                 // -2
-/// tree.min.count                 // 1
-/// tree.max.value                 // 42
-/// tree.max.count                 // 2
+/// tree.totalCount                // 4
+/// tree.minimum                   // -2
+/// tree.maximum                   // 42
+/// tree.medians                   // [32, 42]
+/// tree.sum                       // 114
 /// Array(tree)                    // [(value: -2, count: 1), (value: 32, count: 1), (value: 42, count: 2)]
 /// ```
 public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
@@ -50,7 +52,7 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
 
     // MARK: State
 
-    var god = BNode()
+    private var god = BNode()
 
     /// The root node of the tree, or nil if the tree is empty. The root node has the tree as parent, so
     /// that all the BSNodes of the tree have parents.
@@ -59,13 +61,9 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
         set { god.leftNode = newValue }
     }
 
-    var maxNode: BSNode<T>?
-    var minNode: BSNode<T>?
-    var medianNode: BSNode<T>?
-    // The i'th (zero-based) member of the count members having this value that is
-    // the actual median. If the offset is < the count - 1, then the median value is
-    // the value given by the node, whether or not the total count of values is odd.
-    var medianOffset = 0
+    fileprivate var maxNode: BSNode<T>?
+    fileprivate var minNode: BSNode<T>?
+    fileprivate var medianIndex = ValueIndex<T>()
 
     /// The number of elements (values) in the tree (NOT the sum of all value counts).
     /// Time complexity: *O(1)*
@@ -75,8 +73,6 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
     /// Time complexity: *O(1)*
     public private(set) var totalCount = 0
 
-    /// The sum of all values (if T conforms to AdditiveArithmetic).
-    /// Time complexity: *O(1)*
     private var sumStorage: T?
 
     // MARK: Constructors
@@ -124,7 +120,7 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
     /// Time complexity: *O(log(n))*
     /// - Parameter value: The value to look for
     /// - Returns: true or false
-    public func contains(value: T) -> Bool {
+    public func containsValue(_ value: T) -> Bool {
         return indexOf(value) != nil
     }
 
@@ -138,47 +134,29 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
 
     private func updateMedianAfterInsertOne(of val: T) {
         if totalCount == 1 {
-            medianNode = minNode
-            medianOffset = 0
+            medianIndex = ValueIndex(node: minNode, offset: 0)
         } else if totalCount % 2 == 0 {
-            if medianNode != nil && val < medianNode!.value {
-                medianOffset -= 1
-                if medianOffset < 0 {
-                    medianNode = medianNode?.prev
-                    medianOffset = Int((medianNode?.valueCount ?? 0) - 1)
-                }
-            }
+            if medianIndex.node != nil && val < medianIndex.node!.value {
+                medianIndex = medianIndex.prev
+             }
         } else {
-            if medianNode != nil && val >= medianNode!.value {
-                medianOffset += 1
-                if medianOffset >= (medianNode?.valueCount ?? 0) {
-                    medianNode = medianNode?.next
-                    medianOffset = 0
-                }
+            if medianIndex.node != nil && val >= medianIndex.node!.value {
+                medianIndex = medianIndex.next
             }
         }
     }
 
     private func updateMedianBeforeDeleteOne(of val: T) {
         if totalCount == 1 {
-            medianNode = nil
-            medianOffset = 0
+            medianIndex = ValueIndex(node: nil, offset: 0)
         } else if totalCount % 2 == 0 {
-            if medianNode != nil && (val < medianNode!.value ||
-                val == medianNode!.value && medianOffset == medianNode!.valueCount - 1) {
-                medianOffset += 1
-                if medianOffset >= (medianNode?.valueCount ?? 0) {
-                    medianNode = medianNode?.next
-                    medianOffset = 0
-                }
+            if medianIndex.node != nil && (val < medianIndex.node!.value ||
+                val == medianIndex.node!.value && medianIndex.offsetIsMax) {
+                medianIndex = medianIndex.next
             }
         } else {
-            if medianNode != nil && val >= medianNode!.value {
-                medianOffset -= 1
-                if medianOffset < 0 {
-                    medianNode = medianNode?.prev
-                    medianOffset = Int((medianNode?.valueCount ?? 0) - 1)
-                }
+            if medianIndex.node != nil && val >= medianIndex.node!.value {
+                medianIndex = medianIndex.prev
             }
         }
     }
@@ -195,12 +173,6 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
         if maxNode != nil && maxNode!.value == val { maxNode = root?.maxNode }
     }
 
-    /// Insert the given number of the given value into the tree. If the value is already in the tree,
-    /// the count is incremented by the given number.
-    /// Time complexity: *O(log(n))*.
-    /// - Parameters:
-    ///   - val: The value to insert n of
-    ///   - n: The number of val to insert
     fileprivate func performInsertion(_ val: T, _ n: Int) {
         guard n >= 1 else { return }
         var insertionNode: BSNode<T>?
@@ -229,6 +201,12 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
         }
     }
 
+    /// Insert the given number of the given value into the tree. If the value is already in the tree,
+    /// the count is incremented by the given number.
+    /// Time complexity: *O(log(n))*.
+    /// - Parameters:
+    ///   - val: The value to insert n of
+    ///   - n: The number of val to insert
     public func insert(_ val: T, _ n: Int) {
         performInsertion(val, n)
     }
@@ -242,12 +220,6 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
         performInsertion(val, 1)
     }
 
-    /// Delete the given number of the given value from the tree. If the given number is >= the number
-    /// of the value in the tree, the value is removed completed.
-    /// Time complexity: *O(log(n))*.
-    /// - Parameters:
-    ///   - val: The value to remove n of
-    ///   - n: The number of val to remove
     @discardableResult
     fileprivate func performDeletion(_ val: T, _ n: Int) -> Int {
         var numToDelete = 0
@@ -267,6 +239,12 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
         return numToDelete
     }
 
+    /// Delete the given number of the given value from the tree. If the given number is >= the number
+    /// of the value in the tree, the value is removed completed.
+    /// Time complexity: *O(log(n))*.
+    /// - Parameters:
+    ///   - val: The value to remove n of
+    ///   - n: The number of val to remove
     public func delete(_ val: T, _ n: Int) {
         performDeletion(val, n)
     }
@@ -288,19 +266,18 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
         performDeletion(val, Int.max)
     }
 
-    /// Remove all values from the tree.
-    /// Time complexity: *O(1)*.
     fileprivate func performClear() {
         root = nil
         minNode = nil
         maxNode = nil
-        medianNode = nil
-        medianOffset = 0
+        medianIndex = ValueIndex()
         count = 0
         totalCount = 0
     }
 
-    func clear() {
+    /// Remove all values from the tree. sumStorage cleared in extension below.
+    /// Time complexity: *O(1)*.
+    public func clear() {
         performClear()
     }
 
@@ -311,29 +288,30 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
         Int(root?.height ?? -1)
     }
 
-    /// The maximum element in the tree.
+    /// The maximum element in the tree, or nil if the tree is empty.
     /// Time complexity: *O(1)*.
-    public var maximum: Element? {
-        maxNode?.element
+    public var maximum: T? {
+        maxNode?.value
     }
+
     /// The last (maximum) element of the tree.
     /// Time complexity: *O(1)*.
-    public var last: Element? { maximum }
+    public var last: Element? { maxNode?.element }
 
-    /// The minimum element in the tree.
+    /// The minimum value in the tree, or nil if the tree is empty.
     /// Time complexity: *O(1)*.
-    public var minimum: Element? {
-        minNode?.element
+    public var minimum: T? {
+        minNode?.value
     }
 
     /// Returns zero, one, or two median values. There will be zero values if and only if the tree is
     /// empty. There will be two values if the tree has an even number of values (n), and the n/2 and
     /// n/2 + 1 values (starting with 1) differ. Otherwise one value.
-    public func medians() -> [T] {
+    public var medians: [T] {
         var out = [T]()
-        if let medianNode = medianNode {
+        if let medianNode = medianIndex.node {
             out.append(medianNode.value)
-            if (totalCount % 2 == 0) && (medianOffset == medianNode.valueCount - 1) {
+            if (totalCount % 2 == 0) && medianIndex.offsetIsMax {
                 if let nextNode = medianNode.next {
                     out.append(nextNode.value)
                 }
@@ -396,9 +374,7 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
         let set = NSCountedSet()
         let elems = traverseInOrder()
         for elem in elems {
-            for _ in 0 ..< elem.count {
-                set.add(elem.value)
-            }
+            for _ in 0 ..< elem.count { set.add(elem.value) }
         }
         return set
     }
@@ -406,9 +382,7 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
     public func toValueArray() -> [T] {
         var out = [T]()
         for elem in self {
-            for _ in 0 ..< elem.count {
-                out.append(elem.value)
-            }
+            for _ in 0 ..< elem.count { out.append(elem.value) }
         }
         return out
     }
@@ -433,19 +407,19 @@ extension BSTree: CustomStringConvertible {
     }
 
     /// Description with each node's "next" pointer shown.
-    var descriptionWithNext: String {
+    public var descriptionWithNext: String {
         root?.descriptionWithNext ?? ""
     }
 
     /// Description with each node's node count (the number of nodes in the subtree having that node as root)
     /// shown.
-    var descriptionWithNodeCount: String {
+    public var descriptionWithNodeCount: String {
         root?.descriptionWithNodeCount ?? ""
     }
 
     /// Description with each node's total count (the sum of all valueCount's in the subtree having that node
     /// as root) shown.
-    var descriptionWithTotalCount: String {
+    public var descriptionWithTotalCount: String {
         root?.descriptionWithTotalCount ?? ""
     }
 
@@ -476,7 +450,8 @@ extension BSTree where T: AdditiveArithmetic {
         }
     }
 
-    /// The sum of each value times its count.
+    /// The sum of each value times its count (if T conforms to AdditiveArithmetic).
+    /// Time complexity: *O(1)*
     public var sum: T {
         get {
             ensureSumStorageInitialized()
@@ -506,7 +481,7 @@ extension BSTree where T: AdditiveArithmetic {
         performInsertion(val, 1)
     }
 
-    func clear() {
+    public func clear() {
         performClear()
         sumStorage = T.zero
     }
@@ -524,6 +499,80 @@ extension BSTree where T: AdditiveArithmetic {
     public func deleteAll(_ val: T) {
         let numDeleted = performDeletion(val, Int.max)
         subtractFromSumStorage(val, numDeleted)
+    }
+
+}
+
+private struct ValueIndex<T: Comparable> {
+    weak var node: BSNode<T>?
+    var offset = 0
+
+    private static func maxOffset(_ node: BSNode<T>?) -> Int {
+        return Int((node?.valueCount ?? 0)) - 1
+    }
+
+    var next: ValueIndex<T> {
+        var nNode = node
+        var nOffset = offset + 1
+        if nOffset > ValueIndex.maxOffset(nNode) {
+            nNode = nNode?.next
+            nOffset = 0
+        }
+        return ValueIndex(node: nNode, offset: nOffset)
+    }
+
+    var prev: ValueIndex<T> {
+        var pNode = node
+        var pOffset = offset - 1
+        if pOffset < 0 {
+            pNode = pNode?.prev
+            pOffset = ValueIndex.maxOffset(pNode)
+        }
+        return ValueIndex(node: pNode, offset: pOffset)
+    }
+
+    var offsetIsMax: Bool {
+        offset == ValueIndex.maxOffset(node)
+    }
+
+}
+
+extension BSTree: BidirectionalCollection {
+
+    public var startIndex: Index { BSTreeIndex(node: minNode) }
+    public var endIndex: Index { BSTreeIndex(node: nil) }
+
+    public subscript(i: Index) -> Element {
+        assert((startIndex..<endIndex).contains(i), "Index out of bounds")
+        return (i.node!.value, Int(i.node!.valueCount))
+    }
+
+    public func index(after i: Index) -> Index {
+        return BSTreeIndex(node: i.node?.next)
+    }
+
+    public func index(before i: Index) -> Index {
+        return BSTreeIndex(node: i.node?.prev ?? maxNode)
+    }
+
+}
+
+public struct BSTreeIndex<T: Comparable>: Comparable {
+    weak var node: BSNode<T>?
+
+    public static func == (lhs: BSTreeIndex<T>, rhs: BSTreeIndex<T>) -> Bool {
+        if let lnode = lhs.node, let rnode = rhs.node {
+            return lnode === rnode
+        }
+        return lhs.node == nil && rhs.node == nil
+    }
+
+    public static func < (lhs: BSTreeIndex<T>, rhs: BSTreeIndex<T>) -> Bool {
+        if let lnode = lhs.node, let rnode = rhs.node {
+            return lnode.value < rnode.value
+        }
+        // nil means endIndex, which all other indices are less than
+        return lhs.node != nil && rhs.node == nil
     }
 
 }

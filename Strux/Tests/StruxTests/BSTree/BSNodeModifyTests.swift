@@ -69,13 +69,13 @@ class BSNodeModifyTests: XCTestCase {
                         XCTAssertEqual(treeElements[i].count, set.count(for: vals[i]))
                     }
                 }
-                if tree.minimum?.value != vals.min() {
-                    XCTFail("Tree \(treeIndex) has min value of \(valOrNil(tree.minimum?.value)), " +
+                if tree.minimum != vals.min() {
+                    XCTFail("Tree \(treeIndex) has min value of \(valOrNil(tree.minimum)), " +
                         "expected \(valOrNil(vals.min()))")
                     print(tree)
                 }
-                if tree.maximum?.value != vals.max() {
-                    XCTFail("Tree \(treeIndex) has max value of \(valOrNil(tree.maximum?.value)), " +
+                if tree.maximum != vals.max() {
+                    XCTFail("Tree \(treeIndex) has max value of \(valOrNil(tree.maximum)), " +
                         "expected \(valOrNil(vals.max()))")
                     print(tree)
                 }
