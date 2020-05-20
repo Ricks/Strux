@@ -16,13 +16,13 @@ class BSTreeConstructorTests: XCTestCase {
     func testBasicConstructor() {
         let tree = BSTree<Int>()
         XCTAssertEqual(tree.count, 0)
-        XCTAssertNil(tree.minimum)
-        XCTAssertNil(tree.maximum)
+        XCTAssertNil(tree.firstValue)
+        XCTAssertNil(tree.lastValue)
         tree.insert(4)
         tree.insert(5, 2)
         XCTAssertEqual(tree.count, 2)
-        XCTAssertEqual(tree.minimum!, 4)
-        XCTAssertEqual(tree.maximum!, 5)
+        XCTAssertEqual(tree.firstValue!, 4)
+        XCTAssertEqual(tree.lastValue!, 5)
     }
 
     func testInitWithCountedSet() {

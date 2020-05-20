@@ -9,7 +9,7 @@
 
 import Foundation
 
-/// Note that when only insert and delete are used to modify the tree, the tree should always be valid and
+/// Note that when only insert and remove are used to modify the tree, the tree should always be valid and
 /// balanced. These provide checking.
 extension BSNode {
 

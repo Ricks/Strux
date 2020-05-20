@@ -40,7 +40,7 @@ extension BSNode {
             return false
         }
         var elems1 = [Element]()
-        var node: BSNode<T>? = minNode
+        var node: BSNode<T>? = firstNode
         while let thisNode = node {
             elems1.append((thisNode.value, Int(thisNode.valueCount)))
             node = thisNode.next
@@ -84,7 +84,7 @@ extension BSNode {
             return false
         }
         var elems1 = [Element]()
-        var node: BSNode<T>? = maxNode
+        var node: BSNode<T>? = lastNode
         while let thisNode = node {
             elems1.append((thisNode.value, Int(thisNode.valueCount)))
             node = thisNode.prev
@@ -117,7 +117,7 @@ func dumpNextPointers<T>(_ tree: BSTree<T>) {
     for elem in elems1 { print(elem.value, terminator: " ") }
 
     var elems2 = [BSNode<T>.Element]()
-    var node: BSNode<T>? = tree.root?.minNode
+    var node: BSNode<T>? = tree.root?.firstNode
     while let thisNode = node {
         elems2.append((thisNode.value, Int(thisNode.valueCount)))
         node = thisNode.next
@@ -182,8 +182,8 @@ func validateTree(_ tree: BSTree<Int>, _ id: String) {
             expectedMedians.append(array[medianIndex + 1])
         }
     }
-    if expectedMedians != tree.medians {
-        XCTFail("\(id) has medians of \(tree.medians), expected \(expectedMedians), totalCount = \(tree.totalCount)")
+    if expectedMedians != tree.medianValues {
+        XCTFail("\(id) has medianValues of \(tree.medianValues), expected \(expectedMedians), totalCount = \(tree.totalCount)")
         print(tree.descriptionWithTotalCount)
     }
 }

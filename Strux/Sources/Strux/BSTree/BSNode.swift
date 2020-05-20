@@ -85,20 +85,20 @@ class BSNode<T: Equatable>: BNode {
         right?.height ?? -1
     }
 
-    // The node with the maximum value in the subtree having this node as root. Complexity is *O(log(n))*.
-    var maxNode: BSNode<T> {
-        right?.maxNode ?? self
+    // The node with the first-ordered value in the subtree having this node as root. Complexity is *O(log(n))*.
+    var firstNode: BSNode<T> {
+        left?.firstNode ?? self
     }
 
-    // The node with the minimum value in the subtree having this node as root. Complexity is *O(log(n))*.
-    var minNode: BSNode<T> {
-        left?.minNode ?? self
+    // The node with the last-ordered value in the subtree having this node as root. Complexity is *O(log(n))*.
+    var lastNode: BSNode<T> {
+        right?.lastNode ?? self
     }
 
     // The node of having the next-lowest value, or nil if none. Complexity is *O(log(n))*.
     var inOrderPredecessor: BSNode<T>? {
         if let thisLeft = left {
-            return thisLeft.maxNode
+            return thisLeft.lastNode
         } else {
             var node = self
             while let bsParent = node.parent as? BSNode<T> {
@@ -115,7 +115,7 @@ class BSNode<T: Equatable>: BNode {
     /// The node having the next-highest value, or nil if none. Complexity is *O(log(n))*.
     var inOrderSuccessor: BSNode<T>? {
         if let thisRight = right {
-            return thisRight.minNode
+            return thisRight.firstNode
         } else {
             var node = self
             while let bsParent = node.parent as? BSNode<T> {

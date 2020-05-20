@@ -13,7 +13,7 @@ import Foundation
 
 class BSNodeModifyTests: XCTestCase {
 
-    func testInsertDelete() {
+    func testInsertRemove() {
         setSeed(5)
         (0 ..< 100).forEach { treeIndex in
             print("Tree \(treeIndex) ...")
@@ -31,14 +31,14 @@ class BSNodeModifyTests: XCTestCase {
                 let choice = seededRandom(in: 0 ..< 100)
                 switch choice {
                 case 0 - 9:
-                    tree.deleteAll(val)
+                    tree.removeAll(val)
                     let n = set.count(for: val)
                     for _ in 0 ..< n { set.remove(val) }
                 case 10 - 19:
-                    tree.delete(val)
+                    tree.remove(val)
                     set.remove(val)
                 case 20 - 29:
-                    tree.delete(val, count)
+                    tree.remove(val, count)
                     for _ in 0 ..< count { set.remove(val) }
                 case 30 - 32:
                     tree.clear()
@@ -69,13 +69,13 @@ class BSNodeModifyTests: XCTestCase {
                         XCTAssertEqual(treeElements[i].count, set.count(for: vals[i]))
                     }
                 }
-                if tree.minimum != vals.min() {
-                    XCTFail("Tree \(treeIndex) has min value of \(valOrNil(tree.minimum)), " +
+                if tree.firstValue != vals.min() {
+                    XCTFail("Tree \(treeIndex) has first value of \(valOrNil(tree.firstValue)), " +
                         "expected \(valOrNil(vals.min()))")
                     print(tree)
                 }
-                if tree.maximum != vals.max() {
-                    XCTFail("Tree \(treeIndex) has max value of \(valOrNil(tree.maximum)), " +
+                if tree.lastValue != vals.max() {
+                    XCTFail("Tree \(treeIndex) has last value of \(valOrNil(tree.lastValue)), " +
                         "expected \(valOrNil(vals.max()))")
                     print(tree)
                 }

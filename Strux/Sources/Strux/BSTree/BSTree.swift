@@ -34,7 +34,7 @@ public typealias Ordered<T> = (T, T) -> Bool
 /// ```
 /// let tree = BSTree(14, -2, 32, 14)  // BSTree is a class, so it can be a "let"
 /// tree.insert(42, 2)                 // Insert 2 of value 42
-/// tree.deleteAll(14)                 // Delete both 14's
+/// tree.removeAll(14)                 // Remove both 14's
 /// tree.containsValue(-2)             // true
 /// print(tree)
 ///
@@ -45,9 +45,9 @@ public typealias Ordered<T> = (T, T) -> Bool
 /// tree.height                    // 1
 /// tree.count                     // 3
 /// tree.totalCount                // 4
-/// tree.minimum                   // -2
-/// tree.maximum                   // 42
-/// tree.medians                   // [32, 42]
+/// tree.firstValue                // -2
+/// tree.lastValue                 // 42
+/// tree.medianValues              // [32, 42]
 /// tree.sum                       // 114
 /// Array(tree)                    // [(value: -2, count: 1), (value: 32, count: 1), (value: 42, count: 2)]
 /// ```
@@ -67,8 +67,8 @@ public class BSTree<T: Equatable>: NSCopying {
         set { god.leftNode = newValue }
     }
 
-    fileprivate var maxNode: BSNode<T>?
-    fileprivate var minNode: BSNode<T>?
+    fileprivate var lastNode: BSNode<T>?
+    fileprivate var firstNode: BSNode<T>?
     fileprivate var medianIndex = ValueIndex<T>()
 
     /// The number of elements (values) in the tree (NOT the sum of all value counts).
@@ -142,7 +142,7 @@ public class BSTree<T: Equatable>: NSCopying {
 
     private func updateMedianAfterInsertOne(of val: T) {
         if totalCount == 1 {
-            medianIndex = ValueIndex(node: minNode, offset: 0)
+            medianIndex = ValueIndex(node: firstNode, offset: 0)
         } else if totalCount % 2 == 0 {
             if let node = medianIndex.node, ordered(val, node.value) {
                 medianIndex = medianIndex.prev
@@ -154,7 +154,7 @@ public class BSTree<T: Equatable>: NSCopying {
         }
     }
 
-    private func updateMedianBeforeDeleteOne(of val: T) {
+    private func updateMedianBeforeRemoveOne(of val: T) {
         if totalCount == 1 {
             medianIndex = ValueIndex(node: nil, offset: 0)
         } else if totalCount % 2 == 0 {
@@ -170,18 +170,14 @@ public class BSTree<T: Equatable>: NSCopying {
 
     private func processNodeInsertion(_ newNode: BSNode<T>, _ val: T) {
         count += 1
-        if minNode == nil || ordered(val, minNode!.value) {
-            minNode = newNode
-        }
-        if maxNode == nil || ordered(maxNode!.value, val) {
-            maxNode = newNode
-        }
+        if firstNode == nil || ordered(val, firstNode!.value) { firstNode = newNode }
+        if lastNode  == nil || ordered(lastNode!.value, val)  { lastNode  = newNode }
     }
 
     private func processNodeDeletion(_ val: T) {
         count -= 1
-        if minNode != nil && minNode!.value == val { minNode = root?.minNode }
-        if maxNode != nil && maxNode!.value == val { maxNode = root?.maxNode }
+        if firstNode != nil && firstNode!.value == val { firstNode = root?.firstNode }
+        if lastNode  != nil && lastNode!.value  == val { lastNode  = root?.lastNode }
     }
 
     fileprivate func performInsertion(_ val: T, _ n: Int) {
@@ -247,54 +243,54 @@ public class BSTree<T: Equatable>: NSCopying {
 
     @discardableResult
     fileprivate func performDeletion(_ val: T, _ n: Int) -> Int {
-        var numToDelete = 0
+        var numToRemove = 0
         if let thisRoot = root, let deletionNode = thisRoot.find(val) {
-            numToDelete = Swift.min(n, Int(deletionNode.valueCount))
-            for _ in 0 ..< numToDelete {
-                updateMedianBeforeDeleteOne(of: val)
+            numToRemove = Swift.min(n, Int(deletionNode.valueCount))
+            for _ in 0 ..< numToRemove {
+                updateMedianBeforeRemoveOne(of: val)
                 totalCount -= 1
                 if deletionNode.valueCount > 1 {
                     deletionNode.valueCount -= 1
                 } else {
-                    deletionNode.deleteNode()
+                    deletionNode.removeNode()
                     processNodeDeletion(val)
                 }
             }
         }
-        return numToDelete
+        return numToRemove
     }
 
-    /// Delete the given number of the given value from the tree. If the given number is >= the number
+    /// Remove the given number of the given value from the tree. If the given number is >= the number
     /// of the value in the tree, the value is removed completed.
     /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to remove n of
     ///   - n: The number of val to remove
-    public func delete(_ val: T, _ n: Int) {
+    public func remove(_ val: T, _ n: Int) {
         performDeletion(val, n)
     }
 
-    /// Delete one of the given value from the tree. If the number of the value already in the tree is
+    /// Remove one of the given value from the tree. If the number of the value already in the tree is
     /// more than one, the number is decremented by one, otherwise the value is removed from the tree.
     /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to remove one of
-    public func delete(_ val: T) {
+    public func remove(_ val: T) {
         performDeletion(val, 1)
     }
 
-    /// Delete all occurrences of the given value from the tree.
+    /// Remove all occurrences of the given value from the tree.
     /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to remove all occurrences of
-    public func deleteAll(_ val: T) {
+    public func removeAll(_ val: T) {
         performDeletion(val, Int.max)
     }
 
     fileprivate func performClear() {
         root = nil
-        minNode = nil
-        maxNode = nil
+        firstNode = nil
+        lastNode = nil
         medianIndex = ValueIndex()
         count = 0
         totalCount = 0
@@ -313,26 +309,18 @@ public class BSTree<T: Equatable>: NSCopying {
         Int(root?.height ?? -1)
     }
 
-    /// The maximum element in the tree, or nil if the tree is empty.
+    /// The first value in the tree, or nil if the tree is empty.
     /// Time complexity: *O(1)*.
-    public var maximum: T? {
-        maxNode?.value
-    }
+    public var firstValue: T? { firstNode?.value }
 
-    /// The last (maximum) element of the tree.
+    /// The last value in the tree, or nil if the tree is empty.
     /// Time complexity: *O(1)*.
-    public var last: Element? { maxNode?.element }
-
-    /// The minimum value in the tree, or nil if the tree is empty.
-    /// Time complexity: *O(1)*.
-    public var minimum: T? {
-        minNode?.value
-    }
+    public var lastValue: T? { lastNode?.value }
 
     /// Returns zero, one, or two median values. There will be zero values if and only if the tree is
     /// empty. There will be two values if the tree has an even number of values (n), and the n/2 and
     /// n/2 + 1 values (starting with 1) differ. Otherwise one value.
-    public var medians: [T] {
+    public var medianValues: [T] {
         var out = [T]()
         if let medianNode = medianIndex.node {
             out.append(medianNode.value)
@@ -379,7 +367,7 @@ public class BSTree<T: Equatable>: NSCopying {
 
     /// True if the tree is a valid binary search tree, meaning that the value of the root node is
     /// greater than the value of its left child, and less than that of its right child, and all
-    /// subtrees meet the same requirement. Note that if only the public functions (insert and delete)
+    /// subtrees meet the same requirement. Note that if only the public functions (insert and remove)
     /// are used to modify the tree, it should always be valid.
     public var isValid: Bool {
         root?.isValid ?? true
@@ -387,7 +375,7 @@ public class BSTree<T: Equatable>: NSCopying {
 
     /// True if the tree is balanced, meaning that the height of the left subtree of the root is no more
     /// than one different from the height of the right subtree, and all subtrees meet the same
-    /// requirement. Note that if only the public functions (insert and delete) are used to modify the
+    /// requirement. Note that if only the public functions (insert and remove) are used to modify the
     /// tree, it should always be balanced.
     public var isBalanced: Bool {
         root?.isBalanced ?? true
@@ -544,19 +532,19 @@ extension BSTree where T: AdditiveArithmetic {
         sumStorage = T.zero
     }
 
-    public func delete(_ val: T, _ n: Int) {
-        let numDeleted = performDeletion(val, n)
-        subtractFromSumStorage(val, numDeleted)
+    public func remove(_ val: T, _ n: Int) {
+        let numRemoved = performDeletion(val, n)
+        subtractFromSumStorage(val, numRemoved)
     }
 
-    public func delete(_ val: T) {
-        let numDeleted = performDeletion(val, 1)
-        subtractFromSumStorage(val, numDeleted)
+    public func remove(_ val: T) {
+        let numRemoved = performDeletion(val, 1)
+        subtractFromSumStorage(val, numRemoved)
     }
 
-    public func deleteAll(_ val: T) {
-        let numDeleted = performDeletion(val, Int.max)
-        subtractFromSumStorage(val, numDeleted)
+    public func removeAll(_ val: T) {
+        let numRemoved = performDeletion(val, Int.max)
+        subtractFromSumStorage(val, numRemoved)
     }
 
 }
@@ -597,7 +585,7 @@ private struct ValueIndex<T: Equatable> {
 
 extension BSTree: BidirectionalCollection {
 
-    public var startIndex: Index { BSTreeIndex(node: minNode) }
+    public var startIndex: Index { BSTreeIndex(node: firstNode) }
     public var endIndex: Index { BSTreeIndex(node: nil) }
 
     public subscript(i: Index) -> Element {
@@ -610,7 +598,7 @@ extension BSTree: BidirectionalCollection {
     }
 
     public func index(before i: Index) -> Index {
-        return BSTreeIndex(node: i.node?.prev ?? maxNode)
+        return BSTreeIndex(node: i.node?.prev ?? lastNode)
     }
 
 }

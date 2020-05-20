@@ -31,11 +31,11 @@ class BSTreeModel: ObservableObject {
                     let choice = seededRandom(in: 0..<100)
                     switch choice {
                     case 0-9:
-                        tree.deleteAll(val)
+                        tree.removeAll(val)
                     case 10-19:
-                        tree.delete(val)
+                        tree.remove(val)
                     case 20-29:
-                        tree.delete(val, count)
+                        tree.remove(val, count)
                     case 30-34:
                         tree.clear()
                     default:
@@ -50,8 +50,8 @@ class BSTreeModel: ObservableObject {
                 if tree2 != tree {
                     print("*** tree copy not equal to tree, index = \(treeIndex)")
                 }
-                if tree2.minimum != tree.minimum {
-                    print("*** tree copy minimum not equal to tree minimum, index = \(treeIndex)")
+                if tree2.firstValue != tree.firstValue {
+                    print("*** tree copy firstValue not equal to tree firstValue, index = \(treeIndex)")
                 }
 //                if tree2.height != tree.height {
 //                    print("*** tree copy height not equal to tree height, index = \(treeIndex)")
@@ -61,11 +61,11 @@ class BSTreeModel: ObservableObject {
                 if tree2.last?.value != tree.last?.value {
                     print("*** tree copy tree2.last?.value not equal to tree tree2.last?.value, index = \(treeIndex)")
                 }
-                if tree2.maximum != tree.maximum {
-                    print("*** tree copy minimum not equal to tree minimum, index = \(treeIndex)")
+                if tree2.lastValue != tree.lastValue {
+                    print("*** tree copy lastValue not equal to tree lastValue, index = \(treeIndex)")
                 }
-                if tree2.medians != tree.medians {
-                    print("*** tree copy medians not equal to tree medians, index = \(treeIndex)")
+                if tree2.medianValues != tree.medianValues {
+                    print("*** tree copy medianValues not equal to tree medianValues, index = \(treeIndex)")
                 }
                 if tree2.count != tree.count {
                     print("*** tree copy count not equal to tree count, index = \(treeIndex)")
@@ -125,7 +125,7 @@ class BSTreeModel: ObservableObject {
             tree1.insert(-12)
             tree1.insert(3)
             let tree2 = BSTree<Int>([44, -12, 3])
-            let tree3: BSTree<Int> = [44, -12, 3]
+            let tree3 = BSTree<Int>(44, -12, 3)
             if tree1 != tree2 {
                 print("*** tree1 not equal to tree2")
             }
