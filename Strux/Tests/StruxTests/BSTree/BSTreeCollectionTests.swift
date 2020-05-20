@@ -16,7 +16,7 @@ import Foundation
 class BSTCollectionTests: XCTestCase {
 
     func testBasic() {
-        let tree: BSTree<Int> = []
+        let tree = BSTree<Int>()
         XCTAssertTrue(tree.isEmpty)
         XCTAssertNil(tree.first)
         XCTAssertNil(tree.last)

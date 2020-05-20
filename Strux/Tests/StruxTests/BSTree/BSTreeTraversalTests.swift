@@ -25,7 +25,7 @@ class BSTreeTraversalTests: XCTestCase {
 //          /
 //         4
     func testTraversePreOrder() {
-        let tree1: BSTree<Int> = [2, 5, 9, 4, -1, 44, 99, 9]
+        let tree1 = BSTree(2, 5, 9, 4, -1, 44, 99, 9)
         let elements1 = tree1.traversePreOrder()
         XCTAssertEqual(elements1.count, 7)
         XCTAssertTrue(elements1[0] == (9, 2))
@@ -38,7 +38,7 @@ class BSTreeTraversalTests: XCTestCase {
     }
 
     func testTraversePostOrder() {
-        let tree1: BSTree<Int> = [2, 5, 9, 4, -1, 44, 99, 9]
+        let tree1 = BSTree(2, 5, 9, 4, -1, 44, 99, 9)
         let elements1 = tree1.traversePostOrder()
         XCTAssertEqual(elements1.count, 7)
         XCTAssertTrue(elements1[0] == (-1, 1))
@@ -51,7 +51,7 @@ class BSTreeTraversalTests: XCTestCase {
     }
 
     func testTraverseLevelNodes() {
-        let tree1: BSTree<Int> = [2, 5, 9, 4, -1, 44, 99, 9]
+        let tree1 = BSTree(2, 5, 9, 4, -1, 44, 99, 9)
         let elements1 = tree1.traverseLevelNodes()
         XCTAssertEqual(elements1.count, 7)
         XCTAssertTrue(elements1[0] == (9, 2))

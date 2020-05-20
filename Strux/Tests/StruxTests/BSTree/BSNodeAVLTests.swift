@@ -201,7 +201,8 @@ class BSNodeAVLTests: XCTestCase {
     //   nodeB -> 70          42
     func testRotateLeftNodeBisLeaf() {
         let god = BNode()
-        var root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         root.insert(70)
         var expectedRootDescrip = "42   \n" +
             "  \\  \n" +
@@ -226,11 +227,12 @@ class BSNodeAVLTests: XCTestCase {
     //               99
     func testRotateLeftNodeBHasRightChild() {
         let god = BNode()
-        var root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         root.height = 2
-        let node70 = BSNode(70, parent: root, direction: .right)
+        let node70 = BSNode(70, ordered: ordered, parent: root, direction: .right)
         node70.height = 1
-        _ = BSNode(99, parent: node70, direction: .right)
+        _ = BSNode(99, ordered: ordered, parent: node70, direction: .right)
         var expectedRootDescrip = "42      \n" +
             "  \\     \n" +
             "   70   \n" +
@@ -256,11 +258,12 @@ class BSNodeAVLTests: XCTestCase {
     //         66
     func testRotateLeftNodeBHasLeftChild() {
         let god = BNode()
-        var root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         root.height = 2
-        let node70 = BSNode(70, parent: root, direction: .right)
+        let node70 = BSNode(70, ordered: ordered, parent: root, direction: .right)
         node70.height = 1
-        _ = BSNode(66, parent: node70, direction: .left)
+        _ = BSNode(66, ordered: ordered, parent: node70, direction: .left)
         var expectedRootDescrip = "42   \n" +
             "  \\  \n" +
             "   70\n" +
@@ -286,12 +289,13 @@ class BSNodeAVLTests: XCTestCase {
     //         66    99             66
     func testRotateLeftNodeBHasTwoChildren() {
         let god = BNode()
-        var root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         root.height = 2
-        let node70 = BSNode(70, parent: root, direction: .right)
+        let node70 = BSNode(70, ordered: ordered, parent: root, direction: .right)
         node70.height = 1
-        _ = BSNode(66, parent: node70, direction: .left)
-        _ = BSNode(99, parent: node70, direction: .right)
+        _ = BSNode(66, ordered: ordered, parent: node70, direction: .left)
+        _ = BSNode(99, ordered: ordered, parent: node70, direction: .right)
         var expectedRootDescrip = "42      \n" +
             "  \\     \n" +
             "   70   \n" +
@@ -317,7 +321,8 @@ class BSNodeAVLTests: XCTestCase {
     //   nodeB -> 16                42
     func testRotateRightNodeBisLeaf() {
         let god = BNode()
-        var root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         root.insert(16)
         var expectedRootDescrip = "   42\n" +
             "  /  \n" +
@@ -342,11 +347,12 @@ class BSNodeAVLTests: XCTestCase {
     //          8
     func testRotateRightNodeBHasRightChild() {
         let god = BNode()
-        var root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         root.height = 2
-        let node16 = BSNode(16, parent: root, direction: .left)
+        let node16 = BSNode(16, ordered: ordered, parent: root, direction: .left)
         node16.height = 1
-        _ = BSNode(8, parent: node16, direction: .left)
+        _ = BSNode(8, ordered: ordered, parent: node16, direction: .left)
         var expectedRootDescrip = "     42\n" +
             "    /  \n" +
             "  16   \n" +
@@ -372,11 +378,12 @@ class BSNodeAVLTests: XCTestCase {
     //               29
     func testRotateRightNodeBHasLeftChild() {
         let god = BNode()
-        var root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         root.height = 2
-        let node16 = BSNode(16, parent: root, direction: .left)
+        let node16 = BSNode(16, ordered: ordered, parent: root, direction: .left)
         node16.height = 1
-        _ = BSNode(29, parent: node16, direction: .right)
+        _ = BSNode(29, ordered: ordered, parent: node16, direction: .right)
         var expectedRootDescrip = "   42\n" +
             "  /  \n" +
             "16   \n" +
@@ -402,12 +409,13 @@ class BSNodeAVLTests: XCTestCase {
     //          8    29                   29
     func testRotateRightNodeBHasTwoChildren() {
         let god = BNode()
-        var root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         root.height = 2
-        let node16 = BSNode(16, parent: root, direction: .left)
+        let node16 = BSNode(16, ordered: ordered, parent: root, direction: .left)
         node16.height = 1
-        _ = BSNode(8, parent: node16, direction: .left)
-        _ = BSNode(29, parent: node16, direction: .right)
+        _ = BSNode(8, ordered: ordered, parent: node16, direction: .left)
+        _ = BSNode(29, ordered: ordered, parent: node16, direction: .right)
         var expectedRootDescrip = "     42\n" +
             "    /  \n" +
             "  16   \n" +
@@ -430,17 +438,18 @@ class BSNodeAVLTests: XCTestCase {
 
     func testRebalanceIfNecessary1() {
         let god = BNode()
-        var root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         root.height = 5
-        let node41 = BSNode(41, parent: root, direction: .left)
+        let node41 = BSNode(41, ordered: ordered, parent: root, direction: .left)
         node41.height = 4
-        let node39 = BSNode(39, parent: node41, direction: .left)
+        let node39 = BSNode(39, ordered: ordered, parent: node41, direction: .left)
         node39.height = 3
-        let node34 = BSNode(34, parent: node39, direction: .left)
+        let node34 = BSNode(34, ordered: ordered, parent: node39, direction: .left)
         node34.height = 2
-        let node31 = BSNode(31, parent: node34, direction: .left)
+        let node31 = BSNode(31, ordered: ordered, parent: node34, direction: .left)
         node31.height = 1
-        let node22 = BSNode(22, parent: node31, direction: .left)
+        let node22 = BSNode(22, ordered: ordered, parent: node31, direction: .left)
         node22.height = 0
 
         let expectedRootDescrip = "               42\n" +
@@ -478,7 +487,7 @@ class BSNodeAVLTests: XCTestCase {
     }
 
     func testRotateWrongNode() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         print(tree)
         let nodeMinus20 = tree.root!.find(-20)!
         nodeMinus20.rotateLeft()

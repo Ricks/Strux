@@ -17,12 +17,13 @@ class BSNodeTests: XCTestCase {
 
     func testSwap() {
         let god = BNode()
-        let node42 = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        let node42 = BSNode(42, ordered: ordered, parent: god, direction: .left)
         var root = node42
-        let node52 = BSNode(52, parent: root, direction: .right)
-        let node51 = BSNode(51, parent: node52, direction: .left)
-        let node50 = BSNode(50, parent: node51, direction: .left)
-        let node66 = BSNode(66, parent: node52, direction: .right)
+        let node52 = BSNode(52, ordered: ordered, parent: root, direction: .right)
+        let node51 = BSNode(51, ordered: ordered, parent: node52, direction: .left)
+        let node50 = BSNode(50, ordered: ordered, parent: node51, direction: .left)
+        let node66 = BSNode(66, ordered: ordered, parent: node52, direction: .right)
         root.next = node50
         node50.next = node51
         node51.next = node52

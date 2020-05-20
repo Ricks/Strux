@@ -16,7 +16,7 @@ import Foundation
 class BSTreeNonNumericTests: XCTestCase {
 
     func testStringTree() {
-        let tree: BSTree = ["aaron", "xenon", "Alpha", "Baretta", "Gamma", "Fred"]
+        let tree = BSTree("aaron", "xenon", "Alpha", "Baretta", "Gamma", "Fred")
         print(tree)
         print(Array(tree))
     }

@@ -41,7 +41,7 @@ class BSTreeConstructorTests: XCTestCase {
 
     func testInitWithLiteral() {
         let set = NSCountedSet(array: [-12, 4, 42, 66, 4])
-        let tree: BSTree<Int> = [-12, 4, 42, 66, 4]
+        let tree = BSTree(-12, 4, 42, 66, 4)
         let set2 = tree.toCountedSet()
         XCTAssertEqual(set, set2)
     }

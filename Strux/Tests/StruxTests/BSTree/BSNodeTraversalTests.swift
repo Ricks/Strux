@@ -14,7 +14,7 @@ import Foundation
 class BSNodeTraversalTests: XCTestCase {
 
     func testTraverseInOrderNodes() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         let elements = tree.traverseInOrder()
         let nodes = tree.root!.traverseInOrderNodes()
         XCTAssertEqual(elements.count, nodes.count)
@@ -24,7 +24,7 @@ class BSNodeTraversalTests: XCTestCase {
     }
 
     func testTraverseEmptyTree() {
-        let tree: BSTree<Int> = []
+        let tree = BSTree<Int>()
         XCTAssertTrue(tree.traverseInOrder().isEmpty)
         XCTAssertTrue(tree.traversePreOrder().isEmpty)
         XCTAssertTrue(tree.traversePostOrder().isEmpty)

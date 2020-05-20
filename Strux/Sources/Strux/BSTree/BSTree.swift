@@ -9,6 +9,8 @@
 
 import Foundation
 
+public typealias Ordered<T> = (T, T) -> Bool
+
 /// A counted, self-balancing (AVL) binary search tree. Counted means that there are no duplicate nodes
 /// with the same value, but values have counts associated with them. To be a valid BST, the value of the
 /// root node must be **strictly** greater than any value in the subtree, if any, with its left child as
@@ -46,13 +48,14 @@ import Foundation
 /// tree.sum                       // 114
 /// Array(tree)                    // [(value: -2, count: 1), (value: 32, count: 1), (value: 42, count: 2)]
 /// ```
-public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
+public class BSTree<T: Equatable>: NSCopying {
     public typealias Element = (value: T, count: Int)
     public typealias Index = BSTreeIndex<T>
 
     // MARK: State
 
     private var god = BNode()
+    private var ordered: Ordered<T>
 
     /// The root node of the tree, or nil if the tree is empty. The root node has the tree as parent, so
     /// that all the BSNodes of the tree have parents.
@@ -84,24 +87,26 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
          }
     }
 
-    /// Initialize with an NSCountedSet.
-    /// - Parameter countedSet: NSCountedSet
-    public convenience init(countedSet: NSCountedSet) {
-        self.init()
+    /// Initialize with ordered.
+    public init(ordered: @escaping Ordered<T>) {
+        self.ordered = ordered
+    }
+
+    /// Initialize with an NSCountedSet and ordered.
+    /// - Parameters:
+    ///   - countedSet: NSCountedSet
+    ///   - ordered: ordered ((T, T) -> Bool)
+    public convenience init(countedSet: NSCountedSet, ordered: @escaping Ordered<T>) {
+        self.init(ordered: ordered)
         initializeWithCountedSet(countedSet)
     }
 
-    /// Initialize with an unsorted array of values, which can contain duplicates.
-    /// - Parameter values: Array
-    public convenience init(_ values: [T]) {
-        self.init()
-        initializeWithCountedSet(NSCountedSet(array: values))
-    }
-
-    /// Constructor using unsorted array literal. The array can contain duplicates.
-    /// - Parameter values: Array literal
-    required public convenience init(arrayLiteral values: T...) {
-        self.init()
+    /// Initialize with an unsorted array of values, which can contain duplicates, and a ordered.
+    /// - Parameters:
+    ///   - values: Array
+    ///   - ordered: ordered ((T, T) -> Bool)
+    public convenience init(_ values: [T], ordered: @escaping Ordered<T>) {
+        self.init(ordered: ordered)
         initializeWithCountedSet(NSCountedSet(array: values))
     }
 
@@ -136,11 +141,11 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
         if totalCount == 1 {
             medianIndex = ValueIndex(node: minNode, offset: 0)
         } else if totalCount % 2 == 0 {
-            if medianIndex.node != nil && val < medianIndex.node!.value {
+            if let node = medianIndex.node, ordered(val, node.value) {
                 medianIndex = medianIndex.prev
              }
         } else {
-            if medianIndex.node != nil && val >= medianIndex.node!.value {
+            if let node = medianIndex.node, ordered(val, node.value) {
                 medianIndex = medianIndex.next
             }
         }
@@ -150,12 +155,11 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
         if totalCount == 1 {
             medianIndex = ValueIndex(node: nil, offset: 0)
         } else if totalCount % 2 == 0 {
-            if medianIndex.node != nil && (val < medianIndex.node!.value ||
-                val == medianIndex.node!.value && medianIndex.offsetIsMax) {
+            if let node = medianIndex.node, ordered(val, node.value) || val == node.value && medianIndex.offsetIsMax {
                 medianIndex = medianIndex.next
             }
         } else {
-            if medianIndex.node != nil && val >= medianIndex.node!.value {
+            if let node = medianIndex.node, ordered(node.value, val) {
                 medianIndex = medianIndex.prev
             }
         }
@@ -163,8 +167,12 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
 
     private func processNodeInsertion(_ newNode: BSNode<T>, _ val: T) {
         count += 1
-        if minNode == nil || val < minNode!.value { minNode = newNode }
-        if maxNode == nil || val > maxNode!.value { maxNode = newNode }
+        if minNode == nil || ordered(val, minNode!.value) {
+            minNode = newNode
+        }
+        if maxNode == nil || ordered(val, maxNode!.value) {
+            maxNode = newNode
+        }
     }
 
     private func processNodeDeletion(_ val: T) {
@@ -183,7 +191,7 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
                 // First time through, make sure we have an insertion node
                 var newNode: Bool
                 if root == nil {
-                    insertionNode = BSNode(val, 1, parent: god, direction: .left)
+                    insertionNode = BSNode(val, ordered: ordered, parent: god, direction: .left)
                     root = insertionNode
                     newNode = true
                 } else {
@@ -220,6 +228,18 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
     ///   - val: The value to insert one of
     public func insert(_ val: T) {
         performInsertion(val, 1)
+    }
+
+    /// Insert values from an array.
+    public func insert(_ vals: [T]) {
+        for val in vals {
+            insert(val)
+        }
+    }
+
+    /// Insert multple values.
+    public func insertMultiple(_ vals: T...) {
+        insert(vals)
     }
 
     @discardableResult
@@ -391,7 +411,7 @@ public class BSTree<T: Comparable>: NSCopying, ExpressibleByArrayLiteral {
 
     /// Returns a copy of the tree (a shallow copy if T is a reference type).
     public func copy(with zone: NSZone? = nil) -> Any {
-        return BSTree(countedSet: toCountedSet())
+        return BSTree(countedSet: toCountedSet(), ordered: ordered)
     }
 
 }
@@ -443,6 +463,35 @@ extension BSTree: Equatable {
             rIndex = rhs.index(after: rIndex)
         }
         return true
+    }
+
+}
+
+extension BSTree where T: Comparable {
+
+    public convenience init() {
+        self.init(ordered: { (a: T, b: T) -> Bool in a < b })
+    }
+
+    /// Initialize with an NSCountedSet.
+    /// - Parameter countedSet: NSCountedSet
+    public convenience init(countedSet: NSCountedSet) {
+        self.init()
+        initializeWithCountedSet(countedSet)
+    }
+
+    /// Initialize with an unsorted array of values, which can contain duplicates.
+    /// - Parameter values: Array
+    public convenience init(_ values: [T]) {
+        self.init()
+        initializeWithCountedSet(NSCountedSet(array: values))
+    }
+
+    /// Initialize with an unsorted array of values, which can contain duplicates.
+    /// - Parameter values: Array
+    public convenience init(_ values: T...) {
+        self.init()
+        initializeWithCountedSet(NSCountedSet(array: values))
     }
 
 }
@@ -509,7 +558,7 @@ extension BSTree where T: AdditiveArithmetic {
 
 }
 
-private struct ValueIndex<T: Comparable> {
+private struct ValueIndex<T: Equatable> {
     weak var node: BSNode<T>?
     var offset = 0
 
@@ -563,7 +612,7 @@ extension BSTree: BidirectionalCollection {
 
 }
 
-public struct BSTreeIndex<T: Comparable>: Comparable {
+public struct BSTreeIndex<T: Equatable>: Comparable {
     weak var node: BSNode<T>?
 
     public static func == (lhs: BSTreeIndex<T>, rhs: BSTreeIndex<T>) -> Bool {
@@ -573,9 +622,9 @@ public struct BSTreeIndex<T: Comparable>: Comparable {
         return lhs.node == nil && rhs.node == nil
     }
 
-    public static func < (lhs: BSTreeIndex<T>, rhs: BSTreeIndex<T>) -> Bool {
+    public static func < (lhs: BSTreeIndex, rhs: BSTreeIndex) -> Bool {
         if let lnode = lhs.node, let rnode = rhs.node {
-            return lnode.value < rnode.value
+            return lnode.ordered(lnode.value, rnode.value)
         }
         // nil means endIndex, which all other indices are less than
         return lhs.node != nil && rhs.node == nil

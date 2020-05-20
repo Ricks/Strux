@@ -26,18 +26,18 @@ extension BSNode {
         var maxVal: T?
         if let left = left {
             let res = left.isValidHelper()
-            isValid = res.isValid && value >= res.maxVal
+            isValid = res.isValid && !ordered(value, res.maxVal)
             minVal = res.minVal
             maxVal = res.maxVal
         }
         if let right = right {
             let res = right.isValidHelper()
-            isValid = isValid && res.isValid && value < res.minVal
-            minVal = (minVal == nil) ? res.minVal : min(minVal!, res.minVal)
-            maxVal = (maxVal == nil) ? res.maxVal : max(maxVal!, res.maxVal)
+            isValid = isValid && res.isValid && ordered(value, res.minVal)
+            if minVal == nil || ordered(res.minVal, minVal!) { minVal = res.minVal }
+            if maxVal == nil || ordered(maxVal!, res.maxVal) { maxVal = res.maxVal }
         }
-        minVal = (minVal == nil) ? value : min(minVal!, value)
-        maxVal = (maxVal == nil) ? value : max(maxVal!, value)
+        if minVal == nil || ordered(value, minVal!) { minVal = value }
+        if maxVal == nil || ordered(maxVal!, value) { maxVal = value }
         return (isValid: isValid, minVal: minVal!, maxVal: maxVal!)
     }
 

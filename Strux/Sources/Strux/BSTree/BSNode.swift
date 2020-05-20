@@ -14,22 +14,25 @@ import Foundation
 /// the value of the root node of the subtree must be **strictly** greater than any value in the sub-subtree,
 /// if any, with its left child as root, and **strictly** less than any value in the sub-subtree, if any, with
 /// its right child as root, and all sub-subtrees of the subtree must meet the same condition.
-class BSNode<T: Comparable>: BNode {
-    typealias Element = (value: T, count: Int)
+class BSNode<T: Equatable>: BNode {
+    public typealias Element = (value: T, count: Int)
     /// The node's value
     var value: T
     /// The count of the value, always >= 1
     var valueCount: Int32 = 1
     /// Height of the subtree having this node as parent. Zero if this node is a leaf (no children).
     var height: Int32 = 0
+    /// Ordering function
+    var ordered: Ordered<T>
 
     /// Constructor with value and count
     /// - Parameters:
     ///   - val: The node's value
     ///   - n: The initial count
-    init(_ val: T, _ n: Int, parent: BNode, direction: ChildDirection) {
+    init(_ val: T, _ n: Int, ordered: @escaping Ordered<T>, parent: BNode, direction: ChildDirection) {
         value = val
         valueCount = Int32(n)
+        self.ordered = ordered
         super.init()
         if direction == .left {
             parent.leftNode = self
@@ -40,8 +43,8 @@ class BSNode<T: Comparable>: BNode {
 
     /// Constructor that initializes the value's count to 1
     /// - Parameter val: The node's value
-    convenience init(_ val: T, parent: BNode, direction: ChildDirection) {
-        self.init(val, 1, parent: parent, direction: direction)
+    convenience init(_ val: T, ordered: @escaping Ordered<T>, parent: BNode, direction: ChildDirection) {
+        self.init(val, 1, ordered: ordered, parent: parent, direction: direction)
     }
 
     /// Left child node.
@@ -139,7 +142,7 @@ class BSNode<T: Comparable>: BNode {
     func find(_ val: T) -> BSNode<T>? {
         if val == value {
             return self
-        } else if val < value {
+        } else if ordered(val, value) {
             return left?.find(val)
         }
         return right?.find(val)

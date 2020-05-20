@@ -25,7 +25,8 @@ class BSNodeDescriptionTests: XCTestCase {
 
     func testDescription1() {
         let god = BNode()
-        let root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        let root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         let expectedRootDescrip = "42"
         XCTAssertEqual(root.description, expectedRootDescrip)
         root.insert(12)
@@ -37,7 +38,8 @@ class BSNodeDescriptionTests: XCTestCase {
 
     func testDescription2() {
         let god = BNode()
-        let root = BSNode(42, parent: god, direction: .left)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        let root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         var expectedRootDescrip = "42"
         XCTAssertEqual(root.description, expectedRootDescrip)
         root.insert(70)
@@ -83,10 +85,11 @@ class BSNodeDescriptionTests: XCTestCase {
 
     func testDescription3() {
         let god = BNode()
-        let root = BSNode(42, parent: god, direction: .left)
-        let node69 = BSNode(69, parent: root, direction: .right)
-        _ = BSNode(68, parent: node69, direction: .left)
-        _ = BSNode(70, parent: node69, direction: .right)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        let root = BSNode(42, ordered: ordered, parent: god, direction: .left)
+        let node69 = BSNode(69, ordered: ordered, parent: root, direction: .right)
+        _ = BSNode(68, ordered: ordered, parent: node69, direction: .left)
+        _ = BSNode(70, ordered: ordered, parent: node69, direction: .right)
         let expectedRootDescrip = "42      \n" +
                                   "  \\     \n" +
                                   "   69   \n" +
@@ -97,10 +100,11 @@ class BSNodeDescriptionTests: XCTestCase {
 
     func testDescription4() {
         let god = BNode()
-        let root = BSNode(142, parent: god, direction: .left)
-        let node69 = BSNode(69, parent: root, direction: .right)
-        _ = BSNode(68, parent: node69, direction: .left)
-        _ = BSNode(70, parent: node69, direction: .right)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        let root = BSNode(142, ordered: ordered, parent: god, direction: .left)
+        let node69 = BSNode(69, ordered: ordered, parent: root, direction: .right)
+        _ = BSNode(68, ordered: ordered, parent: node69, direction: .left)
+        _ = BSNode(70, ordered: ordered, parent: node69, direction: .right)
         let expectedRootDescrip = "142      \n" +
                                   "   \\     \n" +
                                   "    69   \n" +
@@ -111,10 +115,11 @@ class BSNodeDescriptionTests: XCTestCase {
 
     func testDescription5() {
         let god = BNode()
-        let root = BSNode(42, parent: god, direction: .left)
-        let node69 = BSNode(69, parent: root, direction: .right)
-        _ = BSNode(168, parent: node69, direction: .left)
-        _ = BSNode(70, parent: node69, direction: .right)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        let root = BSNode(42, ordered: ordered, parent: god, direction: .left)
+        let node69 = BSNode(69, ordered: ordered, parent: root, direction: .right)
+        _ = BSNode(168, ordered: ordered, parent: node69, direction: .left)
+        _ = BSNode(70, ordered: ordered, parent: node69, direction: .right)
         let expectedRootDescrip = " 42      \n" +
                                   "   \\     \n" +
                                   "    69   \n" +
@@ -125,10 +130,11 @@ class BSNodeDescriptionTests: XCTestCase {
 
     func testDescription6() {
         let god = BNode()
-        let root = BSNode(42, parent: god, direction: .left)
-        let node69 = BSNode(69, parent: root, direction: .left)
-        _ = BSNode(68, parent: node69, direction: .left)
-        _ = BSNode(70, parent: node69, direction: .right)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        let root = BSNode(42, ordered: ordered, parent: god, direction: .left)
+        let node69 = BSNode(69, ordered: ordered, parent: root, direction: .left)
+        _ = BSNode(68, ordered: ordered, parent: node69, direction: .left)
+        _ = BSNode(70, ordered: ordered, parent: node69, direction: .right)
         let expectedRootDescrip = "      42\n" +
                                   "     /  \n" +
                                   "   69   \n" +
@@ -139,10 +145,11 @@ class BSNodeDescriptionTests: XCTestCase {
 
     func testDescription7() {
         let god = BNode()
-        let root = BSNode(142, parent: god, direction: .left)
-        let node69 = BSNode(69, parent: root, direction: .left)
-        _ = BSNode(68, parent: node69, direction: .left)
-        _ = BSNode(70, parent: node69, direction: .right)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        let root = BSNode(142, ordered: ordered, parent: god, direction: .left)
+        let node69 = BSNode(69, ordered: ordered, parent: root, direction: .left)
+        _ = BSNode(68, ordered: ordered, parent: node69, direction: .left)
+        _ = BSNode(70, ordered: ordered, parent: node69, direction: .right)
         let expectedRootDescrip = "      142\n" +
                                   "     /   \n" +
                                   "   69    \n" +
@@ -153,22 +160,23 @@ class BSNodeDescriptionTests: XCTestCase {
 
     func testDescription8() {
         let god = BNode()
-        let root = BSNode(14, parent: god, direction: .left)
-        let node69 = BSNode(69, parent: root, direction: .left)
-        _ = BSNode(68, parent: node69, direction: .left)
-        _ = BSNode(170, parent: node69, direction: .right)
+        let ordered = { (a: Int, b: Int) -> Bool in a < b }
+        let root = BSNode(14, ordered: ordered, parent: god, direction: .left)
+        let node69 = BSNode(69, ordered: ordered, parent: root, direction: .left)
+        _ = BSNode(68, ordered: ordered, parent: node69, direction: .left)
+        _ = BSNode(170, ordered: ordered, parent: node69, direction: .right)
         let expectedRootDescrip = "      14 \n" +
                                   "     /   \n" +
                                   "   69    \n" +
                                   "  /  \\   \n" +
                                   "68    170"
         checkDesc(root.description, expectedRootDescrip)
-        let tree2: BSTree<Int> = []
+        let tree2 = BSTree<Int>()
         checkDesc(tree2.description, "")
     }
 
     func testDescriptionWithHeight() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         let expectedHeightDescription = "           _____0-3_____               \n" +
                                         "          /             \\              \n" +
                                         "      -9-1         ______6-2______     \n" +
@@ -177,12 +185,12 @@ class BSNodeDescriptionTests: XCTestCase {
                                         "                  \\               /    \n" +
                                         "                   4(2)-0     12-0     "
         checkDesc(tree.descriptionWithHeight, expectedHeightDescription)
-        let tree2: BSTree<Int> = []
+        let tree2 = BSTree<Int>()
         checkDesc(tree2.descriptionWithHeight, "")
     }
 
     func testDescriptionWithNext() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         let expectedNextDescription =
             "                        _________-9<-0->3__________                               \n" +
             "                       /                           \\                              \n" +
@@ -192,7 +200,7 @@ class BSNodeDescriptionTests: XCTestCase {
             "                                        \\                             /           \n" +
             "                                         3<-4(2)->6          6<-12->65            "
         checkDesc(tree.descriptionWithNext, expectedNextDescription)
-        let tree2: BSTree<Int> = []
+        let tree2 = BSTree<Int>()
         checkDesc(tree2.descriptionWithNext, "")
     }
 

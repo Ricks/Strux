@@ -56,9 +56,9 @@ class BSTreeEquatableTests: XCTestCase {
     }
 
     func testEquatable2() {
-        let tree1: BSTree = [0, 9, 6, -3, 2]
-        let tree2: BSTree = [0, 9, 6, -3, 2, 42]
-        let tree3: BSTree = [0, 9, 6, -3, 11]
+        let tree1 = BSTree(0, 9, 6, -3, 2)
+        let tree2 = BSTree(0, 9, 6, -3, 2, 42)
+        let tree3 = BSTree(0, 9, 6, -3, 11)
         XCTAssertNotEqual(tree1, tree2)
         XCTAssertNotEqual(tree1, tree3)
     }

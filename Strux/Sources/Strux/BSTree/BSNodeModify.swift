@@ -20,7 +20,7 @@ extension BSNode {
     @discardableResult
     private func insertLeftChildNode(_ val: T) -> BSNode<T> {
         let pred = inOrderPredecessor
-        let newNode = BSNode(val, 1, parent: self, direction: .left)
+        let newNode = BSNode(val, ordered: ordered, parent: self, direction: .left)
         left = newNode
         pred?.next = left
         left!.next = self
@@ -36,7 +36,7 @@ extension BSNode {
     /// - Returns: The new node
     @discardableResult
     private func insertRightChildNode(_ val: T) -> BSNode<T> {
-        let newNode = BSNode(val, 1, parent: self, direction: .right)
+        let newNode = BSNode(val, ordered: ordered, parent: self, direction: .right)
         right = newNode
         right!.next = next
         next = right
@@ -57,7 +57,7 @@ extension BSNode {
         if val == value {
             valueCount += 1
             result = (self, false)
-        } else if val < value {
+        } else if ordered(val, value) {
             if let thisLeft = left {
                 result = thisLeft.insert(val)
             } else {

@@ -14,7 +14,7 @@ import Foundation
 class BSTreeMiscTests: XCTestCase {
 
     func testTraverseInOrderNodes() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         XCTAssertTrue(tree.containsValue(4))
         XCTAssertTrue(tree.containsValue(-9))
         XCTAssertTrue(tree.containsValue(12))
@@ -27,7 +27,7 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertEqual(tree.count(of: 4), 2)
         XCTAssertEqual(tree.count(of: 6), 1)
         XCTAssertEqual(tree.count(of: 99), 0)
-        let tree2: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree2 = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         XCTAssertEqual(tree, tree2)
         tree2.insert(4, 0)
         XCTAssertEqual(tree, tree2)
@@ -38,7 +38,7 @@ class BSTreeMiscTests: XCTestCase {
     }
 
     func testDeleteMinNode() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         tree.delete(-20)
         XCTAssertEqual(tree.minimum, -9)
         tree.delete(65)
@@ -46,7 +46,7 @@ class BSTreeMiscTests: XCTestCase {
     }
 
     func testEmptyTree() {
-        let tree: BSTree<Int> = []
+        let tree = BSTree<Int>()
         XCTAssertTrue(tree.isEmpty)
         XCTAssertTrue(tree.isBalanced)
         XCTAssertTrue(tree.isValid)
@@ -57,14 +57,14 @@ class BSTreeMiscTests: XCTestCase {
     }
 
     func testCopy() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         let tree2 = tree.copy() as! BSTree<Int>
         XCTAssertFalse(tree === tree2)
         XCTAssertTrue(tree == tree2)
     }
 
     func testDocumentation() {
-        let tree: BSTree = [14, -2, 32, 14]
+        let tree = BSTree(14, -2, 32, 14)
         tree.insert(42, 2)
         tree.deleteAll(14)
         XCTAssertTrue(tree.containsValue(-2))
@@ -86,7 +86,7 @@ class BSTreeMiscTests: XCTestCase {
     }
 
     func testNodeCheck() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         XCTAssertTrue(tree.root!.isNextCorrect)
         let node6 = tree.root!.right!
         tree.root!.next = node6
@@ -105,7 +105,7 @@ class BSTreeMiscTests: XCTestCase {
     }
 
     func testClear() {
-        let tree: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         XCTAssertFalse(tree.isEmpty)
         tree.clear()
         XCTAssertTrue(tree.isEmpty)
@@ -116,7 +116,7 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertEqual(tree.totalCount, 0)
         XCTAssertTrue(tree.medians.isEmpty)
 
-        let tree2: BSTree = [4, -9, 12, 3, 0, 65, -20, 4, 6]
+        let tree2 = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
         XCTAssertEqual(tree2.sum, 65)
         tree2.clear()
         XCTAssertEqual(tree2.sum, 0)

@@ -20,7 +20,7 @@ opt_in_rules: # some rules are only opt-in
 
   # Rationale: Provides consistency in coding style
   # https://github.com/realm/SwiftLint/blob/master/Rules.md#attributes
-  - attributes
+  #- attributes
 
   # Rationale: Provides consistency in coding style and follows modern practices of the language
   # https://github.com/realm/SwiftLint/blob/master/Rules.md#block-based-kvo
