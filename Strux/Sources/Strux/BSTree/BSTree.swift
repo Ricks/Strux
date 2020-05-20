@@ -148,7 +148,7 @@ public class BSTree<T: Equatable>: NSCopying {
                 medianIndex = medianIndex.prev
              }
         } else {
-            if let node = medianIndex.node, ordered(val, node.value) {
+            if let node = medianIndex.node, !ordered(val, node.value) {
                 medianIndex = medianIndex.next
             }
         }
@@ -162,7 +162,7 @@ public class BSTree<T: Equatable>: NSCopying {
                 medianIndex = medianIndex.next
             }
         } else {
-            if let node = medianIndex.node, ordered(node.value, val) {
+            if let node = medianIndex.node, !ordered(val, node.value) {
                 medianIndex = medianIndex.prev
             }
         }
@@ -173,7 +173,7 @@ public class BSTree<T: Equatable>: NSCopying {
         if minNode == nil || ordered(val, minNode!.value) {
             minNode = newNode
         }
-        if maxNode == nil || ordered(val, maxNode!.value) {
+        if maxNode == nil || ordered(maxNode!.value, val) {
             maxNode = newNode
         }
     }
