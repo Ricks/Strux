@@ -17,22 +17,25 @@ public typealias Ordered<T> = (T, T) -> Bool
 /// root, and **strictly** less than any value in the subtree, if any, with its right child as root, and
 /// all subtrees of the tree must meet the same condition.
 ///
+/// The type of value being stored must be Comparable, or a comparator conforming to the Ordered protocol must
+/// be supplied. The comparator can also be given to override a Comparable type's innate ordering.
+///
 /// Insertions, deletions, and queries have time complexity *O(log(n))*. Returning the count of unique
-/// values, the count of total values, tree height, minimum, maximum, and median are all *O(1)*.
-/// If the values are numeric, the sum of all values is also available in *O(1)*. Traversing the tree in order,
-/// min to max, is *O(n)*.
+/// values, the count of total values, tree height, first, last, and median are all *O(1)*. If the values are
+/// numeric, the sum of all values is also available in *O(1)*. Traversing the tree in order, first to last or
+/// vice-versa, is *O(n)*.
 ///
 /// BSTree conforms to the BidirectionalCollection protocol, and meets all of that protocol's expected performance
-/// requirements. It also conforms to Equatable, NSCopying, and ExpressibleByArrayLiteral.
+/// requirements. It also conforms to Equatable and NSCopying.
 ///
 /// The elements of the Collection are tuples of the form (value: T, count: Int). The indices of the
 /// Collection are of non-numeric type BSTreeIndex<T>.
 ///
 /// ```
-/// let tree: BSTree = [14, -2, 32, 14]  // BSTree is a class, so it can be a "let"
-/// tree.insert(42, 2)             // Insert 2 of value 42
-/// tree.deleteAll(14)             // Delete both 14's
-/// tree.containsValue(-2)       // true
+/// let tree = BSTree(14, -2, 32, 14)  // BSTree is a class, so it can be a "let"
+/// tree.insert(42, 2)                 // Insert 2 of value 42
+/// tree.deleteAll(14)                 // Delete both 14's
+/// tree.containsValue(-2)             // true
 /// print(tree)
 ///
 ///    32
