@@ -171,13 +171,13 @@ public class BSTree<T: Equatable>: NSCopying {
     private func processNodeInsertion(_ newNode: BSNode<T>, _ val: T) {
         count += 1
         if firstNode == nil || ordered(val, firstNode!.value) { firstNode = newNode }
-        if lastNode  == nil || ordered(lastNode!.value, val)  { lastNode  = newNode }
+        if lastNode == nil || ordered(lastNode!.value, val) { lastNode = newNode }
     }
 
     private func processNodeDeletion(_ val: T) {
         count -= 1
         if firstNode != nil && firstNode!.value == val { firstNode = root?.firstNode }
-        if lastNode  != nil && lastNode!.value  == val { lastNode  = root?.lastNode }
+        if lastNode != nil && lastNode!.value == val { lastNode = root?.lastNode }
     }
 
     fileprivate func performInsertion(_ val: T, _ n: Int) {

@@ -183,7 +183,8 @@ func validateTree(_ tree: BSTree<Int>, _ id: String) {
         }
     }
     if expectedMedians != tree.medianValues {
-        XCTFail("\(id) has medianValues of \(tree.medianValues), expected \(expectedMedians), totalCount = \(tree.totalCount)")
+        XCTFail("\(id) has medianValues of \(tree.medianValues), expected \(expectedMedians), " +
+            "totalCount = \(tree.totalCount)")
         print(tree.descriptionWithTotalCount)
     }
 }
