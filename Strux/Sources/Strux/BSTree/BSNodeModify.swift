@@ -54,21 +54,21 @@ extension BSNode {
     @discardableResult
     func insert(_ val: T) -> (node: BSNode<T>, new: Bool) {
         var result: (node: BSNode<T>, new: Bool)
-        if val == value {
-            valueCount += 1
-            result = (self, false)
-        } else if ordered(val, value) {
+        if ordered(val, value) {
             if let thisLeft = left {
                 result = thisLeft.insert(val)
             } else {
                 result = (insertLeftChildNode(val), true)
              }
-        } else {
+        } else if ordered(value, val) {
             if let thisRight = right {
                 result = thisRight.insert(val)
             } else {
                 result = (insertRightChildNode(val), true)
             }
+        } else {
+            valueCount += 1
+            result = (self, false)
         }
         return result
     }

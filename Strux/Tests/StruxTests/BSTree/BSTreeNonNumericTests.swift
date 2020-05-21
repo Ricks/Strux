@@ -16,8 +16,32 @@ import Foundation
 class BSTreeNonNumericTests: XCTestCase {
 
     func testStringTree() {
-        let tree = BSTree("aaron", "xenon", "Alpha", "Baretta", "Gamma", "Fred")
+        let tree = BSTree(["aaron", "xenon", "Alpha", "Baretta", "Gamma", "Fred"]) {
+            $0.lowercased() < $1.lowercased()
+        }
+        tree.insert("AARON")
+        tree.insert("BORON", 4)
         print(tree)
         print(Array(tree))
+        print(tree.firstValue!)
+        print(tree.lastValue!)
+        XCTAssertEqual(tree.toValueArray(), ["aaron", "aaron", "Alpha", "Baretta", "BORON", "BORON", "BORON", "BORON", "Fred", "Gamma", "xenon"])
+        tree.remove("boron")
+        XCTAssertEqual(tree.count(of: "BORON"), 3)
+        tree.remove("boron", 2)
+        XCTAssertEqual(tree.count(of: "BORON"), 1)
+        tree.removeAll("aaron")
+        XCTAssertFalse(tree.containsValue("aaron"))
+        print(tree)
+        tree.insert(["Hepsheba", "Batsheva"])
+        print(tree)
+        tree.insertMultiple("Joshua", "Elphaba")
+        print(tree)
+        XCTAssertTrue(tree.containsValue("Hepsheba"))
+        XCTAssertTrue(tree.containsValue("Batsheva"))
+        XCTAssertTrue(tree.containsValue("Joshua"))
+        XCTAssertTrue(tree.containsValue("Elphaba"))
+        tree.clear()
+        XCTAssertTrue(tree.isEmpty)
     }
 }

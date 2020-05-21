@@ -14,7 +14,7 @@ import Foundation
 /// the value of the root node of the subtree must be **strictly** greater than any value in the sub-subtree,
 /// if any, with its left child as root, and **strictly** less than any value in the sub-subtree, if any, with
 /// its right child as root, and all sub-subtrees of the subtree must meet the same condition.
-class BSNode<T: Equatable>: BNode {
+class BSNode<T>: BNode {
     public typealias Element = (value: T, count: Int)
     /// The node's value
     var value: T
@@ -140,12 +140,15 @@ class BSNode<T: Equatable>: BNode {
     /// - Parameter val: The value to search for.
     /// - Returns: The node containing this value, or nil if the subtree doesn't contain the value.
     func find(_ val: T) -> BSNode<T>? {
-        if val == value {
-            return self
-        } else if ordered(val, value) {
-            return left?.find(val)
+        var result: BSNode<T>?
+        if ordered(val, value) {
+            result = left?.find(val)
+        } else if ordered(value, val) {
+            result = right?.find(val)
+        } else {
+            result = self
         }
-        return right?.find(val)
+        return result
     }
 
     /// The value/count pair of this node, as a tuple (val: T, count: Int)

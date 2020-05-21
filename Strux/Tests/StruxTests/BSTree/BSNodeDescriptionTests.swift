@@ -204,4 +204,32 @@ class BSNodeDescriptionTests: XCTestCase {
         checkDesc(tree2.descriptionWithNext, "")
     }
 
+    func testDescriptionWithNodeCount() {
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
+        let expectedNodeCountDescription = "           _____0-8_____               \n" +
+                                        "          /             \\              \n" +
+                                        "      -9-2         ______6-5______     \n" +
+                                        "     /            /               \\    \n" +
+                                        "-20-1          3-2                 65-2\n" +
+                                        "                  \\               /    \n" +
+                                        "                   4(2)-1     12-1     "
+        checkDesc(tree.descriptionWithNodeCount, expectedNodeCountDescription)
+        let tree2 = BSTree<Int>()
+        checkDesc(tree2.descriptionWithNodeCount, "")
+    }
+
+    func testDescriptionWithTotalCount() {
+        let tree = BSTree(4, -9, 12, 3, 0, 65, -20, 4, 6)
+        let expectedTotalCountDescription = "           _____0-9_____               \n" +
+                                        "          /             \\              \n" +
+                                        "      -9-2         ______6-6______     \n" +
+                                        "     /            /               \\    \n" +
+                                        "-20-1          3-3                 65-2\n" +
+                                        "                  \\               /    \n" +
+                                        "                   4(2)-2     12-1     "
+        checkDesc(tree.descriptionWithTotalCount, expectedTotalCountDescription)
+        let tree2 = BSTree<Int>()
+        checkDesc(tree2.descriptionWithTotalCount, "")
+    }
+
 }

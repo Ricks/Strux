@@ -13,6 +13,10 @@ import Foundation
 
 extension BSNode {
 
+    func equal(_ val1: T, _ val2: T) -> Bool {
+        return !ordered(val1, val2) && !ordered(val2, val1)
+    }
+
     private func isNextCorrectHelper() -> Bool {
         if let pred = inOrderPredecessor {
             if pred.next !== self {
@@ -50,7 +54,7 @@ extension BSNode {
             return false
         }
         for i in 0 ..< elems1.count {
-            if !(elems1[i].value == elems2[i].value && elems1[i].count == elems2[i].count) {
+            if !(equal(elems1[i].value, elems2[i].value) && elems1[i].count == elems2[i].count) {
                 return false
             }
         }
@@ -94,7 +98,7 @@ extension BSNode {
             return false
         }
         for i in 0 ..< elems1.count {
-            if !(elems1[i].value == elems2[i].value && elems1[i].count == elems2[i].count) {
+            if !(equal(elems1[i].value, elems2[i].value) && elems1[i].count == elems2[i].count) {
                 return false
             }
         }
