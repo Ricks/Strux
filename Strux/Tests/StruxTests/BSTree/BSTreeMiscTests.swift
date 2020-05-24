@@ -79,6 +79,10 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertEqual(tree.lastValue, 42)
         XCTAssertEqual(tree.medianValues, [32, 42])
         XCTAssertEqual(tree.sum, 114)
+        XCTAssertEqual(tree.ceilingValue(32), 32)
+        XCTAssertEqual(tree.floorValue(32), 32)
+        XCTAssertEqual(tree.higherValue(32), 42)
+        XCTAssertEqual(tree.lowerValue(32), -2)
         let array = Array(tree)
         XCTAssertTrue(array[0] == (value: -2, count: 1))
         XCTAssertTrue(array[1] == (value: 32, count: 1))
@@ -219,31 +223,30 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertEqual(tree.toValueArray(), [1, 2])
     }
 
+    func helperTestCeiling(_ tree: BSTree<Int>, _ val: Int, _ expectedCeiling: Int?) {
+        if let index = tree.ceilingIndex(val) {
+            XCTAssertEqual(tree[index].value, expectedCeiling)
+        } else if expectedCeiling != nil {
+            XCTFail("Expected \(expectedCeiling!), got nil index")
+        }
+        XCTAssertEqual(tree.ceilingValue(val), expectedCeiling)
+    }
+
     func testCeiling() {
         let tree = BSTree<Int>()
-        XCTAssertNil(tree.ceiling(0))
+        helperTestCeiling(tree, 0, nil)
         tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
-        var index = tree.ceiling(-2)
-        XCTAssertEqual(tree[index!].value, -1)
-        index = tree.ceiling(-1)
-        XCTAssertEqual(tree[index!].value, -1)
-        index = tree.ceiling(0)
-        XCTAssertEqual(tree[index!].value, 1)
-        index = tree.ceiling(1)
-        XCTAssertEqual(tree[index!].value, 1)
-        index = tree.ceiling(2)
-        XCTAssertEqual(tree[index!].value, 2)
-        index = tree.ceiling(3)
-        XCTAssertEqual(tree[index!].value, 4)
-        index = tree.ceiling(5)
-        XCTAssertEqual(tree[index!].value, 6)
-        index = tree.ceiling(14)
-        XCTAssertEqual(tree[index!].value, 15)
-        index = tree.ceiling(15)
-        XCTAssertEqual(tree[index!].value, 15)
-        index = tree.ceiling(22)
-        XCTAssertEqual(tree[index!].value, 22)
-        XCTAssertNil(tree.ceiling(23))
+        helperTestCeiling(tree, -2, -1)
+        helperTestCeiling(tree, -1, -1)
+        helperTestCeiling(tree, 0, 1)
+        helperTestCeiling(tree, 1, 1)
+        helperTestCeiling(tree, 2, 2)
+        helperTestCeiling(tree, 3, 4)
+        helperTestCeiling(tree, 5, 6)
+        helperTestCeiling(tree, 14, 15)
+        helperTestCeiling(tree, 15, 15)
+        helperTestCeiling(tree, 22, 22)
+        helperTestCeiling(tree, 23, nil)
     }
 
     func testCeilingMonkey() {
@@ -258,50 +261,41 @@ class BSTreeMiscTests: XCTestCase {
                 tree.insert(val, count)
                 var lastVal: Int?
                 for (val, _) in tree {
-                    var lookingFor: Int
-                    let expecting = val
-                    lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! + 1) / 2
-                    let foundIndex = tree.ceiling(lookingFor)
-                    let found = tree[foundIndex!].value
-                    if found != expecting {
-                        XCTFail("Looking for \(lookingFor), expected \(expecting), got \(valOrNil(found)), val = \(val), lastVal = \(valOrNil(lastVal))")
-                        print(tree)
-                        exit(1)
-                    }
+                    let lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! + 1) / 2
+                    helperTestCeiling(tree, lookingFor, val)
                     lastVal = val
                 }
                 if lastVal != nil {
-                    XCTAssertNil(tree.ceiling(lastVal! + 1))
+                    helperTestCeiling(tree, lastVal! + 1, nil)
                 }
             }
         }
     }
 
+    func helperTestFloor(_ tree: BSTree<Int>, _ val: Int, _ expectedFloor: Int?) {
+        if let index = tree.floorIndex(val) {
+            XCTAssertEqual(tree[index].value, expectedFloor)
+        } else if expectedFloor != nil {
+            XCTFail("Expected \(expectedFloor!), got nil index")
+        }
+        XCTAssertEqual(tree.floorValue(val), expectedFloor)
+    }
+
     func testFloor() {
         let tree = BSTree<Int>()
-        XCTAssertNil(tree.floor(0))
+        helperTestFloor(tree, 0, nil)
         tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
-        XCTAssertNil(tree.floor(-2))
-        var index = tree.floor(-1)
-        XCTAssertEqual(tree[index!].value, -1)
-        index = tree.floor(0)
-        XCTAssertEqual(tree[index!].value, -1)
-        index = tree.floor(1)
-        XCTAssertEqual(tree[index!].value, 1)
-        index = tree.floor(2)
-        XCTAssertEqual(tree[index!].value, 2)
-        index = tree.floor(3)
-        XCTAssertEqual(tree[index!].value, 2)
-        index = tree.floor(5)
-        XCTAssertEqual(tree[index!].value, 4)
-        index = tree.floor(14)
-        XCTAssertEqual(tree[index!].value, 9)
-        index = tree.floor(15)
-        XCTAssertEqual(tree[index!].value, 15)
-        index = tree.floor(22)
-        XCTAssertEqual(tree[index!].value, 22)
-        index = tree.floor(23)
-        XCTAssertEqual(tree[index!].value, 22)
+        helperTestFloor(tree, -2, nil)
+        helperTestFloor(tree, -1, -1)
+        helperTestFloor(tree, 0, -1)
+        helperTestFloor(tree, 1, 1)
+        helperTestFloor(tree, 2, 2)
+        helperTestFloor(tree, 3, 2)
+        helperTestFloor(tree, 5, 4)
+        helperTestFloor(tree, 14, 9)
+        helperTestFloor(tree, 15, 15)
+        helperTestFloor(tree, 22, 22)
+        helperTestFloor(tree, 23, 22)
     }
 
     func testFloorMonkey() {
@@ -316,53 +310,44 @@ class BSTreeMiscTests: XCTestCase {
                 tree.insert(val, count)
                 var lastVal: Int?
                 for (val, _) in tree {
-                    var lookingFor: Int
-                    let expecting = lastVal
-                    lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! - 1) / 2
-                    let foundIndex = tree.floor(lookingFor)
-                    let found = foundIndex == nil ? nil : tree[foundIndex!].value
-                    if found != expecting {
-                        XCTFail("Looking for \(lookingFor), expected \(valOrNil(expecting)), got \(valOrNil(found)), val = \(val), lastVal = \(valOrNil(lastVal))")
-                        print(tree)
-                        exit(1)
-                    }
+                    let lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! - 1) / 2
+                    helperTestFloor(tree, lookingFor, lastVal)
                     lastVal = val
                 }
                 if !tree.isEmpty {
-                    let foundIndex = tree.floor(tree.lastValue! + 1)
-                    XCTAssertEqual(tree[foundIndex!].value, tree.lastValue)
+                    helperTestFloor(tree, tree.lastValue! + 1, tree.lastValue)
                 }
             }
         }
     }
 
-    func testHigher() {
-        let tree = BSTree<Int>()
-        XCTAssertNil(tree.higher(0))
-        tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
-        var index = tree.higher(-2)
-        XCTAssertEqual(tree[index!].value, -1)
-        index = tree.higher(-1)
-        XCTAssertEqual(tree[index!].value, 1)
-        index = tree.higher(0)
-        XCTAssertEqual(tree[index!].value, 1)
-        index = tree.higher(1)
-        XCTAssertEqual(tree[index!].value, 2)
-        index = tree.higher(2)
-        XCTAssertEqual(tree[index!].value, 4)
-        index = tree.higher(3)
-        XCTAssertEqual(tree[index!].value, 4)
-        index = tree.higher(5)
-        XCTAssertEqual(tree[index!].value, 6)
-        index = tree.higher(14)
-        XCTAssertEqual(tree[index!].value, 15)
-        index = tree.higher(15)
-        XCTAssertEqual(tree[index!].value, 22)
-        XCTAssertNil(tree.higher(22))
-        XCTAssertNil(tree.higher(23))
+    func helperTestHigherValue(_ tree: BSTree<Int>, _ val: Int, _ expectedHigherValue: Int?) {
+        if let index = tree.higherIndex(val) {
+            XCTAssertEqual(tree[index].value, expectedHigherValue)
+        } else if expectedHigherValue != nil {
+            XCTFail("Expected \(expectedHigherValue!), got nil index")
+        }
+        XCTAssertEqual(tree.higherValue(val), expectedHigherValue)
     }
 
-    func testHigherMonkey() {
+    func testHigherValue() {
+        let tree = BSTree<Int>()
+        helperTestHigherValue(tree, 0, nil)
+        tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
+        helperTestHigherValue(tree, -2, -1)
+        helperTestHigherValue(tree, -1, 1)
+        helperTestHigherValue(tree, 0, 1)
+        helperTestHigherValue(tree, 1, 2)
+        helperTestHigherValue(tree, 2, 4)
+        helperTestHigherValue(tree, 3, 4)
+        helperTestHigherValue(tree, 5, 6)
+        helperTestHigherValue(tree, 14, 15)
+        helperTestHigherValue(tree, 15, 22)
+        helperTestHigherValue(tree, 22, nil)
+        helperTestHigherValue(tree, 23, nil)
+    }
+
+    func testHigherValueMonkey() {
         setSeed(5)
         (0 ..< 100).forEach { treeIndex in
             print("Tree \(treeIndex) ...")
@@ -374,50 +359,42 @@ class BSTreeMiscTests: XCTestCase {
                 tree.insert(val, count)
                 var lastVal: Int?
                 for (val, _) in tree {
-                    var lookingFor: Int
-                    let expecting = val
-                    lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! - 1) / 2
-                    let foundIndex = tree.higher(lookingFor)
-                    let found = tree[foundIndex!].value
-                    if found != expecting {
-                        XCTFail("Looking for \(lookingFor), expected \(expecting), got \(valOrNil(found)), val = \(val), lastVal = \(valOrNil(lastVal))")
-                        print(tree)
-                        exit(1)
-                    }
+                    let lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! - 1) / 2
+                    helperTestHigherValue(tree, lookingFor, val)
                     lastVal = val
                 }
                 if lastVal != nil {
-                    XCTAssertNil(tree.higher(lastVal!))
-                    XCTAssertNil(tree.higher(lastVal! + 1))
+                    helperTestHigherValue(tree, lastVal!, nil)
+                    helperTestHigherValue(tree, lastVal! + 1, nil)
                 }
             }
         }
     }
 
-    func testLower() {
+    func helperTestLowerValue(_ tree: BSTree<Int>, _ val: Int, _ expectedLowerValue: Int?) {
+        if let index = tree.lowerIndex(val) {
+            XCTAssertEqual(tree[index].value, expectedLowerValue)
+        } else if expectedLowerValue != nil {
+            XCTFail("Expected \(expectedLowerValue!), got nil index")
+        }
+        XCTAssertEqual(tree.lowerValue(val), expectedLowerValue)
+    }
+
+    func testlowerValue() {
         let tree = BSTree<Int>()
-        XCTAssertNil(tree.higher(0))
+        helperTestLowerValue(tree, 0, nil)
         tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
-        XCTAssertNil(tree.lower(-2))
-        XCTAssertNil(tree.lower(-1))
-        var index = tree.lower(0)
-        XCTAssertEqual(tree[index!].value, -1)
-        index = tree.lower(1)
-        XCTAssertEqual(tree[index!].value, -1)
-        index = tree.lower(2)
-        XCTAssertEqual(tree[index!].value, 1)
-        index = tree.lower(3)
-        XCTAssertEqual(tree[index!].value, 2)
-        index = tree.lower(5)
-        XCTAssertEqual(tree[index!].value, 4)
-        index = tree.lower(14)
-        XCTAssertEqual(tree[index!].value, 9)
-        index = tree.lower(15)
-        XCTAssertEqual(tree[index!].value, 9)
-        index = tree.lower(22)
-        XCTAssertEqual(tree[index!].value, 15)
-        index = tree.lower(23)
-        XCTAssertEqual(tree[index!].value, 22)
+        helperTestLowerValue(tree, -2, nil)
+        helperTestLowerValue(tree, -1, nil)
+        helperTestLowerValue(tree, 0, -1)
+        helperTestLowerValue(tree, 1, -1)
+        helperTestLowerValue(tree, 2, 1)
+        helperTestLowerValue(tree, 3, 2)
+        helperTestLowerValue(tree, 5, 4)
+        helperTestLowerValue(tree, 14, 9)
+        helperTestLowerValue(tree, 15, 9)
+        helperTestLowerValue(tree, 22, 15)
+        helperTestLowerValue(tree, 23, 22)
     }
 
     func testLowerMonkey() {
@@ -432,27 +409,22 @@ class BSTreeMiscTests: XCTestCase {
                 tree.insert(val, count)
                 var lastVal: Int?
                 for (val, _) in tree {
-                    var lookingFor: Int
-                    let expecting = lastVal
-                    lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! + 1) / 2
-                    let foundIndex = tree.lower(lookingFor)
-                    let found = foundIndex == nil ? nil : tree[foundIndex!].value
-                    if found != expecting {
-                        XCTFail("Looking for \(lookingFor), expected \(valOrNil(expecting)), got \(valOrNil(found)), val = \(val), lastVal = \(valOrNil(lastVal))")
-                        print(tree)
-                        exit(1)
-                    }
+                    let lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! + 1) / 2
+                    helperTestLowerValue(tree, lookingFor, lastVal)
                     lastVal = val
                 }
                 if lastVal != nil {
                     let lastIndex = tree.index(before: tree.endIndex)
                     let nextToLastIndex = (lastIndex == tree.startIndex) ? nil : tree.index(before: lastIndex)
 
-                    var index = tree.lower(lastVal!)
+                    var index = tree.lowerIndex(lastVal!)
                     XCTAssertEqual(index, nextToLastIndex)
+                    let expectedValue = nextToLastIndex == nil ? nil : tree[nextToLastIndex!].value
+                    helperTestLowerValue(tree, lastVal!, expectedValue)
 
-                    index = tree.lower(lastVal! + 1)
+                    index = tree.lowerIndex(lastVal! + 1)
                     XCTAssertEqual(index, lastIndex)
+                    helperTestLowerValue(tree, lastVal! + 1, lastVal!)
                 }
             }
         }

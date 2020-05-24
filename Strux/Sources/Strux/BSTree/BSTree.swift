@@ -30,14 +30,17 @@ public typealias Ordered<T> = (T, T) -> Bool
 /// root, and **strictly** less than any value in the subtree, if any, with its right child as root, and
 /// all subtrees of the tree must meet the same condition.
 ///
+/// BSTree provides much the same capabilities as Java's TreeSet, except that it is also counted, and provides
+/// a running median, and, if the values are numeric, a running sum.
+///
 /// The type of value being stored must be Comparable, or a comparator conforming to the Ordered protocol must
 /// be supplied. The comparator can also be given to override a Comparable type's innate ordering (e.g. to make
 /// the ordering of String values case insentitive).
 ///
 /// Insertions, deletions, and queries have time complexity *O(log(n))*. Returning the count of unique
 /// values, the count of total values, tree height, first, last, and median are all *O(1)*. If the values are
-/// numeric, the sum of all values is also available in *O(1)*. Traversing the tree in order, first to last or
-/// vice-versa, is *O(n)*.
+/// numeric, the sum of all values is also available in *O(1)*. Ceiling, floor, higher, and lower functions
+/// are *O(log(n))*. Traversing the tree in order, first to last or vice-versa, is *O(n)*.
 ///
 /// BSTree conforms to the BidirectionalCollection protocol, and meets all of that protocol's expected performance
 /// requirements. It also conforms to Equatable and NSCopying.
@@ -63,6 +66,10 @@ public typealias Ordered<T> = (T, T) -> Bool
 /// tree.lastValue                 // 42
 /// tree.medianValues              // [32, 42]
 /// tree.sum                       // 114
+/// tree.ceilingValue(32)          // 32
+/// tree.floorValue(32)            // 32
+/// tree.higherValue(32)           // 42
+/// tree.lowerValue(32)            // -2
 /// Array(tree)                    // [(value: -2, count: 1), (value: 32, count: 1), (value: 42, count: 2)]
 /// ```
 public class BSTree<T: Equatable>: NSCopying {
@@ -326,38 +333,74 @@ public class BSTree<T: Equatable>: NSCopying {
         Int(root?.height ?? -1)
     }
 
+    /// Index of the first value in the tree, according to the ordering given by the comparator, or by the
+    /// '<' operator. nil if the tree is empty. Note that this differs from startIndex in that it will be nil
+    /// if the tree is empty whereas startIndex will not.
+    /// Time complexity: *O(1)*
+    public var firstIndex: Index? { firstNode == nil ? nil : BSTreeIndex(node: firstNode) }
+
     /// The first value in the tree, according to the ordering given by the comparator, or by the
     /// '<' operator. nil if the tree is empty.
     /// Time complexity: *O(1)*
     public var firstValue: T? { firstNode?.value }
+
+    /// Index of the last value in the tree, according to the ordering given by the comparator, or by the
+    /// '<' operator. nil if the tree is empty. Note that this differs from endIndex in that endIndex is one past
+    /// lastIndex, and is never nil.
+    /// Time complexity: *O(1)*
+    public var lastIndex: Index? { lastNode == nil ? nil : BSTreeIndex(node: lastNode) }
 
     /// The last value in the tree, according to the ordering given by the comparator, or by the
     /// '<' operator. nil if the tree is empty.
     /// Time complexity: *O(1)*
     public var lastValue: T? { lastNode?.value }
 
-    /// Returns zero, one, or two median values. There will be zero values if and only if the tree is
-    /// empty. There will be two values if the tree has an even number of values (n), and the n/2 and
-    /// n/2 + 1 values (starting with 1) differ. Otherwise one value. Time complexity: *O(1)*
-    public var medianValues: [T] {
-        var out = [T]()
+    /// Returns the indices of zero, one, or two median values. There will be zero indices if and only if
+    /// the tree is empty. There will be two indices if the tree has an even number of values (n = totalCount),
+    /// and the n/2 and n/2 + 1 values (starting with 1) differ. Otherwise one index. Time complexity: *O(1)*
+    public var medianIndices: [Index] {
+        var out = [Index]()
         if let medianNode = medianIndex.node {
-            out.append(medianNode.value)
+            out.append(BSTreeIndex(node: medianNode))
             if (totalCount % 2 == 0) && medianIndex.offsetIsMax {
                 if let nextNode = medianNode.next {
-                    out.append(nextNode.value)
+                    out.append(BSTreeIndex(node: nextNode))
                 }
             }
         }
         return out
     }
 
-    public func ceiling(_ val: T) -> Index? {
+    /// Returns zero, one, or two median values. There will be zero indices if and only if
+    /// the tree is empty. There will be two indices if the tree has an even number of values (n = totalCount),
+    /// and the n/2 and n/2 + 1 values (starting with 1) differ. Otherwise one index. Time complexity: *O(1)*
+    public var medianValues: [T] {
+        return medianIndices.map { self[$0].value }
+    }
+
+    /// Returns the index of the least value >= the given value, according to the ordering given by the
+    /// comparator, or by the '<' operator. Returns nil if there is no ceiling. Time complexity: *O(log(n))*
+    /// - Parameter val: The value to find the ceiling of
+    /// - Returns: The index (nil if there is no ceiling value)
+    public func ceilingIndex(_ val: T) -> Index? {
         let ceilingNode = root?.findCeiling(val)
         return (ceilingNode == nil) ? nil : BSTreeIndex(node: ceilingNode)
     }
 
-    public func floor(_ val: T) -> Index? {
+    /// Returns the least value >= the given value, according to the ordering given by the
+    /// comparator, or by the '<' operator. Returns nil if there is no ceiling. Time complexity: *O(log(n))*
+    /// - Parameter val: The value to find the ceiling of
+    /// - Returns: The ceiling value (nil if none)
+    public func ceilingValue(_ val: T) -> T? {
+        let index = ceilingIndex(val)
+        return index == nil ? nil : self[index!].value
+    }
+
+    /// Returns the index of the greatest value <= the given value, according to the ordering given by the
+    /// comparator, or by the '<' operator. Returns nil if there is no floor. Time complexity: *O(log(n))*
+    /// - Parameter val: The value to find the floor of
+    /// - Returns: The index (nil if there is no floor value)
+    public func floorIndex(_ val: T) -> Index? {
         var floorNode: BSNode<T>?
         if let root = root {
             if let node = root.findCeiling(val) {
@@ -369,7 +412,20 @@ public class BSTree<T: Equatable>: NSCopying {
         return (floorNode == nil) ? nil : BSTreeIndex(node: floorNode)
     }
 
-    public func higher(_ val: T) -> Index? {
+    /// Returns the greatest value <= the given value, according to the ordering given by the
+    /// comparator, or by the '<' operator. Returns nil if there is no floor. Time complexity: *O(log(n))*
+    /// - Parameter val: The value to find the floor of
+    /// - Returns: The floor value (nil if none)
+    public func floorValue(_ val: T) -> T? {
+        let index = floorIndex(val)
+        return index == nil ? nil : self[index!].value
+    }
+
+    /// Returns the index of the least value > the given value, according to the ordering given by the
+    /// comparator, or by the '<' operator. Returns nil if there is no higher value. Time complexity: *O(log(n))*
+    /// - Parameter val: The value to find the higher value of
+    /// - Returns: The index (nil if there is no higher value)
+    public func higherIndex(_ val: T) -> Index? {
         var higherNode: BSNode<T>?
         if let root = root {
             if let node = root.findCeiling(val) {
@@ -379,7 +435,20 @@ public class BSTree<T: Equatable>: NSCopying {
         return (higherNode == nil) ? nil : BSTreeIndex(node: higherNode)
     }
 
-    public func lower(_ val: T) -> Index? {
+    /// Returns the least value > the given value, according to the ordering given by the
+    /// comparator, or by the '<' operator. Returns nil if there is no higher value. Time complexity: *O(log(n))*
+    /// - Parameter val: The value to find the higher value of
+    /// - Returns: The higher value (nil if none)
+    public func higherValue(_ val: T) -> T? {
+        let index = higherIndex(val)
+        return index == nil ? nil : self[index!].value
+    }
+
+    /// Returns the index of the greatest value < the given value, according to the ordering given by the
+    /// comparator, or by the '<' operator. Returns nil if there is no lower value. Time complexity: *O(log(n))*
+    /// - Parameter val: The value to find the lower value of
+    /// - Returns: The index (nil if there is no lower value)
+    public func lowerIndex(_ val: T) -> Index? {
         var lowerNode: BSNode<T>?
         if let root = root {
             if let node = root.findCeiling(val) {
@@ -389,6 +458,15 @@ public class BSTree<T: Equatable>: NSCopying {
             }
         }
         return (lowerNode == nil) ? nil : BSTreeIndex(node: lowerNode)
+    }
+
+    /// Returns the greatest value < the given value, according to the ordering given by the
+    /// comparator, or by the '<' operator. Returns nil if there is no lower value. Time complexity: *O(log(n))*
+    /// - Parameter val: The value to find the lower value of
+    /// - Returns: The lower value (nil if none)
+    public func lowerValue(_ val: T) -> T? {
+        let index = lowerIndex(val)
+        return index == nil ? nil : self[index!].value
     }
 
     /// Return the elements of the tree "in order" (from min to max).
