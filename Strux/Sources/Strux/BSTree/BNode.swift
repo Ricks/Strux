@@ -15,7 +15,7 @@ enum ChildDirection {
 }
 
 /// Basic binary node behavior, ensuring integrity of parent and next/prev node pointers.
-public class BNode {
+class BNode {
     private var leftNodeStorage: BNode?
     private var rightNodeStorage: BNode?
     weak private var parentNodeStorage: BNode?

@@ -1,5 +1,5 @@
 //
-//  BinarySearchTree.swift
+//  BSTree.swift
 //  Strux
 //
 //  Created by Richard Clark on 4/20/20.
@@ -9,6 +9,19 @@
 
 import Foundation
 
+/// Type of the comparator that can be supplied to the BSTree constructors to provide an order if the tree values
+/// are not Comparable, or to override the innate ordering.
+///
+/// For example, if we wanted the ordering for String values to be case insensitive:
+/// ```
+/// let tree = BSTree() { (s1: String, s2: String) in
+///     return s1.lowercased() < s2.lowercased()
+/// }
+/// ```
+/// or more succinctly:
+/// ```
+/// let tree = BSTree() { $0.lowercased() < $1.lowercased() }
+/// ```
 public typealias Ordered<T> = (T, T) -> Bool
 
 /// A counted, self-balancing (AVL) binary search tree. Counted means that there are no duplicate nodes
@@ -18,7 +31,8 @@ public typealias Ordered<T> = (T, T) -> Bool
 /// all subtrees of the tree must meet the same condition.
 ///
 /// The type of value being stored must be Comparable, or a comparator conforming to the Ordered protocol must
-/// be supplied. The comparator can also be given to override a Comparable type's innate ordering.
+/// be supplied. The comparator can also be given to override a Comparable type's innate ordering (e.g. to make
+/// the ordering of String values case insentitive).
 ///
 /// Insertions, deletions, and queries have time complexity *O(log(n))*. Returning the count of unique
 /// values, the count of total values, tree height, first, last, and median are all *O(1)*. If the values are
@@ -220,8 +234,7 @@ public class BSTree<T: Equatable>: NSCopying {
         performInsertion(val, n)
     }
 
-    /// Insert one of the given value into the tree. If the value is already in the tree,
-    /// the count is incremented by one.
+    /// Insert the given value into the tree. If the value is already in the tree, the count is incremented by one.
     /// Time complexity: *O(log(n))*.
     /// - Parameters:
     ///   - val: The value to insert one of
@@ -230,13 +243,17 @@ public class BSTree<T: Equatable>: NSCopying {
     }
 
     /// Insert values from an array.
+    /// - Parameters:
+    ///   - vals: The values to insert
     public func insert(_ vals: [T]) {
         for val in vals {
             insert(val)
         }
     }
 
-    /// Insert multple values.
+    /// Insert multple values separated by commas.
+    /// - Parameters:
+    ///   - vals: The values to insert
     public func insertMultiple(_ vals: T...) {
         insert(vals)
     }
@@ -297,29 +314,31 @@ public class BSTree<T: Equatable>: NSCopying {
     }
 
     /// Remove all values from the tree. sumStorage cleared in extension below.
-    /// Time complexity: *O(1)*.
+    /// Time complexity: *O(1)*
     public func clear() {
         performClear()
     }
 
     /// The height of the tree, i.e. the number of levels minus 1. An empty tree has height -1, a
     /// tree with just a root node has height 0, and a tree with two nodes has height 1.
-    /// Time complexity: *O(1)*.
+    /// Time complexity: *O(1)*
     public var height: Int {
         Int(root?.height ?? -1)
     }
 
-    /// The first value in the tree, or nil if the tree is empty.
-    /// Time complexity: *O(1)*.
+    /// The first value in the tree, according to the ordering given by the comparator, or by the
+    /// '<' operator. nil if the tree is empty.
+    /// Time complexity: *O(1)*
     public var firstValue: T? { firstNode?.value }
 
-    /// The last value in the tree, or nil if the tree is empty.
-    /// Time complexity: *O(1)*.
+    /// The last value in the tree, according to the ordering given by the comparator, or by the
+    /// '<' operator. nil if the tree is empty.
+    /// Time complexity: *O(1)*
     public var lastValue: T? { lastNode?.value }
 
     /// Returns zero, one, or two median values. There will be zero values if and only if the tree is
     /// empty. There will be two values if the tree has an even number of values (n), and the n/2 and
-    /// n/2 + 1 values (starting with 1) differ. Otherwise one value.
+    /// n/2 + 1 values (starting with 1) differ. Otherwise one value. Time complexity: *O(1)*
     public var medianValues: [T] {
         var out = [T]()
         if let medianNode = medianIndex.node {
@@ -333,8 +352,47 @@ public class BSTree<T: Equatable>: NSCopying {
         return out
     }
 
+    public func ceiling(_ val: T) -> Index? {
+        let ceilingNode = root?.findCeiling(val)
+        return (ceilingNode == nil) ? nil : BSTreeIndex(node: ceilingNode)
+    }
+
+    public func floor(_ val: T) -> Index? {
+        var floorNode: BSNode<T>?
+        if let root = root {
+            if let node = root.findCeiling(val) {
+                floorNode = (node.value == val) ? node : node.prev
+            } else {
+                floorNode = lastNode
+            }
+        }
+        return (floorNode == nil) ? nil : BSTreeIndex(node: floorNode)
+    }
+
+    public func higher(_ val: T) -> Index? {
+        var higherNode: BSNode<T>?
+        if let root = root {
+            if let node = root.findCeiling(val) {
+                higherNode = (node.value == val) ? node.next : node
+            }
+        }
+        return (higherNode == nil) ? nil : BSTreeIndex(node: higherNode)
+    }
+
+    public func lower(_ val: T) -> Index? {
+        var lowerNode: BSNode<T>?
+        if let root = root {
+            if let node = root.findCeiling(val) {
+                lowerNode = node.prev
+            } else {
+                lowerNode = lastNode
+            }
+        }
+        return (lowerNode == nil) ? nil : BSTreeIndex(node: lowerNode)
+    }
+
     /// Return the elements of the tree "in order" (from min to max).
-    /// Time complexity: *O(n)*.
+    /// Time complexity: *O(n)*
     /// - Returns: An array of elements
     public func traverseInOrder() -> [Element] {
         // Using next pointers (i.e. Collection) is faster than recursive BSNode traverseInOrder.
@@ -392,6 +450,9 @@ public class BSTree<T: Equatable>: NSCopying {
         return set
     }
 
+    /// Returns an array of the values in the tree, in order, and with duplicates. The size of the array
+    /// is equal to totalCount.
+    /// - Returns: Sorted array of values
     public func toValueArray() -> [T] {
         var out = [T]()
         for elem in self {
@@ -409,17 +470,17 @@ public class BSTree<T: Equatable>: NSCopying {
 
 extension BSTree: CustomStringConvertible {
 
-    /// An ASCII-graphics depiction of the tree
+    /// An ASCII-graphics depiction of the tree.
     public var description: String {
         root?.description ?? ""
     }
 
-    /// An ASCII-graphics depiction of the tree, with the height of each node given
+    /// An ASCII-graphics depiction of the tree, with the height of each node given.
     public var descriptionWithHeight: String {
         root?.descriptionWithHeight ?? ""
     }
 
-    /// Description with each node's "next" pointer shown.
+    /// Description with each node's "next" and "prev" pointers shown.
     public var descriptionWithNext: String {
         root?.descriptionWithNext ?? ""
     }
@@ -460,6 +521,7 @@ extension BSTree: Equatable {
 
 extension BSTree where T: Comparable {
 
+    /// Initialize the tree with a default comparator of the type's '<' operator.
     public convenience init() {
         self.init(ordered: { (a: T, b: T) -> Bool in a < b })
     }
@@ -517,31 +579,58 @@ extension BSTree where T: AdditiveArithmetic {
         for _ in 0 ..< n { sum -= val }
     }
 
+    /// Insert the given number of the given value into the tree. If the value is already in the tree,
+    /// the count is incremented by the given number.
+    /// Time complexity: *O(log(n))*.
+    /// - Parameters:
+    ///   - val: The value to insert n of
+    ///   - n: The number of val to insert
     public func insert(_ val: T, _ n: Int) {
         addToSumStorage(val, n)        // Has to come before performInsertsion() so that sum is initialized correctly.
         performInsertion(val, n)
     }
 
+    /// Insert the given value into the tree. If the value is already in the tree, the count is incremented by one.
+    /// Time complexity: *O(log(n))*.
+    /// - Parameters:
+    ///   - val: The value to insert one of
     public func insert(_ val: T) {
         addToSumStorage(val, 1)        // Has to come before performInsertsion() so that sum is initialized correctly.
         performInsertion(val, 1)
     }
 
+    /// Remove all values from the tree. sumStorage cleared in extension below.
+    /// Time complexity: *O(1)*
     public func clear() {
         performClear()
         sumStorage = T.zero
     }
 
+    /// Remove the given number of the given value from the tree. If the given number is >= the number
+    /// of the value in the tree, the value is removed completed.
+    /// Time complexity: *O(log(n))*.
+    /// - Parameters:
+    ///   - val: The value to remove n of
+    ///   - n: The number of val to remove
     public func remove(_ val: T, _ n: Int) {
         let numRemoved = performDeletion(val, n)
         subtractFromSumStorage(val, numRemoved)
     }
 
+    /// Remove one of the given value from the tree. If the number of the value already in the tree is
+    /// more than one, the number is decremented by one, otherwise the value is removed from the tree.
+    /// Time complexity: *O(log(n))*.
+    /// - Parameters:
+    ///   - val: The value to remove one of
     public func remove(_ val: T) {
         let numRemoved = performDeletion(val, 1)
         subtractFromSumStorage(val, numRemoved)
     }
 
+    /// Remove all occurrences of the given value from the tree.
+    /// Time complexity: *O(log(n))*.
+    /// - Parameters:
+    ///   - val: The value to remove all occurrences of
     public func removeAll(_ val: T) {
         let numRemoved = performDeletion(val, Int.max)
         subtractFromSumStorage(val, numRemoved)
@@ -603,6 +692,7 @@ extension BSTree: BidirectionalCollection {
 
 }
 
+/// Non-numeric index type of the Collection.
 public struct BSTreeIndex<T: Equatable>: Comparable {
     weak var node: BSNode<T>?
 

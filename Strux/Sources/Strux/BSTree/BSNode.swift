@@ -136,6 +136,21 @@ class BSNode<T>: BNode {
         height = otherHeight
     }
 
+    /// Find the node in the subtree with the lowest value >= the given one, i.e. the ceiling node.
+    /// - Parameter val: The value to search for.
+    /// - Returns: The node containing the ceiling, or nil if the subtree doesn't have any values >= the given one.
+    func findCeiling(_ val: T) -> BSNode<T>? {
+        var result: BSNode<T>?
+        if ordered(val, value) {
+            result = left?.findCeiling(val) ?? self
+        } else if ordered(value, val) {
+            result = right?.findCeiling(val)
+        } else {
+            result = self
+        }
+        return result
+    }
+
     /// Find a value in the subtree having this node as root. Complexity is *O(log(n))*.
     /// - Parameter val: The value to search for.
     /// - Returns: The node containing this value, or nil if the subtree doesn't contain the value.

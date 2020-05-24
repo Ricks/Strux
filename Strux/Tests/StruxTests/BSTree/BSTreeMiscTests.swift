@@ -218,4 +218,244 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertEqual(tree.sum, 3)
         XCTAssertEqual(tree.toValueArray(), [1, 2])
     }
+
+    func testCeiling() {
+        let tree = BSTree<Int>()
+        XCTAssertNil(tree.ceiling(0))
+        tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
+        var index = tree.ceiling(-2)
+        XCTAssertEqual(tree[index!].value, -1)
+        index = tree.ceiling(-1)
+        XCTAssertEqual(tree[index!].value, -1)
+        index = tree.ceiling(0)
+        XCTAssertEqual(tree[index!].value, 1)
+        index = tree.ceiling(1)
+        XCTAssertEqual(tree[index!].value, 1)
+        index = tree.ceiling(2)
+        XCTAssertEqual(tree[index!].value, 2)
+        index = tree.ceiling(3)
+        XCTAssertEqual(tree[index!].value, 4)
+        index = tree.ceiling(5)
+        XCTAssertEqual(tree[index!].value, 6)
+        index = tree.ceiling(14)
+        XCTAssertEqual(tree[index!].value, 15)
+        index = tree.ceiling(15)
+        XCTAssertEqual(tree[index!].value, 15)
+        index = tree.ceiling(22)
+        XCTAssertEqual(tree[index!].value, 22)
+        XCTAssertNil(tree.ceiling(23))
+    }
+
+    func testCeilingMonkey() {
+        setSeed(5)
+        (0 ..< 100).forEach { treeIndex in
+            print("Tree \(treeIndex) ...")
+            let treeSizish = seededRandom(in: 0 ..< 1000)
+            let tree = BSTree<Int>()
+            (0..<treeSizish).forEach { _ in
+                let val = seededRandom(in: -5 ..< 100)
+                let count = seededRandom(in: 1 ..< 4)
+                tree.insert(val, count)
+                var lastVal: Int?
+                for (val, _) in tree {
+                    var lookingFor: Int
+                    let expecting = val
+                    lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! + 1) / 2
+                    let foundIndex = tree.ceiling(lookingFor)
+                    let found = tree[foundIndex!].value
+                    if found != expecting {
+                        XCTFail("Looking for \(lookingFor), expected \(expecting), got \(valOrNil(found)), val = \(val), lastVal = \(valOrNil(lastVal))")
+                        print(tree)
+                        exit(1)
+                    }
+                    lastVal = val
+                }
+                if lastVal != nil {
+                    XCTAssertNil(tree.ceiling(lastVal! + 1))
+                }
+            }
+        }
+    }
+
+    func testFloor() {
+        let tree = BSTree<Int>()
+        XCTAssertNil(tree.floor(0))
+        tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
+        XCTAssertNil(tree.floor(-2))
+        var index = tree.floor(-1)
+        XCTAssertEqual(tree[index!].value, -1)
+        index = tree.floor(0)
+        XCTAssertEqual(tree[index!].value, -1)
+        index = tree.floor(1)
+        XCTAssertEqual(tree[index!].value, 1)
+        index = tree.floor(2)
+        XCTAssertEqual(tree[index!].value, 2)
+        index = tree.floor(3)
+        XCTAssertEqual(tree[index!].value, 2)
+        index = tree.floor(5)
+        XCTAssertEqual(tree[index!].value, 4)
+        index = tree.floor(14)
+        XCTAssertEqual(tree[index!].value, 9)
+        index = tree.floor(15)
+        XCTAssertEqual(tree[index!].value, 15)
+        index = tree.floor(22)
+        XCTAssertEqual(tree[index!].value, 22)
+        index = tree.floor(23)
+        XCTAssertEqual(tree[index!].value, 22)
+    }
+
+    func testFloorMonkey() {
+        setSeed(5)
+        (0 ..< 100).forEach { treeIndex in
+            print("Tree \(treeIndex) ...")
+            let treeSizish = seededRandom(in: 0 ..< 1000)
+            let tree = BSTree<Int>()
+            (0..<treeSizish).forEach { _ in
+                let val = seededRandom(in: -5 ..< 100)
+                let count = seededRandom(in: 1 ..< 4)
+                tree.insert(val, count)
+                var lastVal: Int?
+                for (val, _) in tree {
+                    var lookingFor: Int
+                    let expecting = lastVal
+                    lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! - 1) / 2
+                    let foundIndex = tree.floor(lookingFor)
+                    let found = foundIndex == nil ? nil : tree[foundIndex!].value
+                    if found != expecting {
+                        XCTFail("Looking for \(lookingFor), expected \(valOrNil(expecting)), got \(valOrNil(found)), val = \(val), lastVal = \(valOrNil(lastVal))")
+                        print(tree)
+                        exit(1)
+                    }
+                    lastVal = val
+                }
+                if !tree.isEmpty {
+                    let foundIndex = tree.floor(tree.lastValue! + 1)
+                    XCTAssertEqual(tree[foundIndex!].value, tree.lastValue)
+                }
+            }
+        }
+    }
+
+    func testHigher() {
+        let tree = BSTree<Int>()
+        XCTAssertNil(tree.higher(0))
+        tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
+        var index = tree.higher(-2)
+        XCTAssertEqual(tree[index!].value, -1)
+        index = tree.higher(-1)
+        XCTAssertEqual(tree[index!].value, 1)
+        index = tree.higher(0)
+        XCTAssertEqual(tree[index!].value, 1)
+        index = tree.higher(1)
+        XCTAssertEqual(tree[index!].value, 2)
+        index = tree.higher(2)
+        XCTAssertEqual(tree[index!].value, 4)
+        index = tree.higher(3)
+        XCTAssertEqual(tree[index!].value, 4)
+        index = tree.higher(5)
+        XCTAssertEqual(tree[index!].value, 6)
+        index = tree.higher(14)
+        XCTAssertEqual(tree[index!].value, 15)
+        index = tree.higher(15)
+        XCTAssertEqual(tree[index!].value, 22)
+        XCTAssertNil(tree.higher(22))
+        XCTAssertNil(tree.higher(23))
+    }
+
+    func testHigherMonkey() {
+        setSeed(5)
+        (0 ..< 100).forEach { treeIndex in
+            print("Tree \(treeIndex) ...")
+            let treeSizish = seededRandom(in: 0 ..< 1000)
+            let tree = BSTree<Int>()
+            (0..<treeSizish).forEach { _ in
+                let val = seededRandom(in: -5 ..< 100)
+                let count = seededRandom(in: 1 ..< 4)
+                tree.insert(val, count)
+                var lastVal: Int?
+                for (val, _) in tree {
+                    var lookingFor: Int
+                    let expecting = val
+                    lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! - 1) / 2
+                    let foundIndex = tree.higher(lookingFor)
+                    let found = tree[foundIndex!].value
+                    if found != expecting {
+                        XCTFail("Looking for \(lookingFor), expected \(expecting), got \(valOrNil(found)), val = \(val), lastVal = \(valOrNil(lastVal))")
+                        print(tree)
+                        exit(1)
+                    }
+                    lastVal = val
+                }
+                if lastVal != nil {
+                    XCTAssertNil(tree.higher(lastVal!))
+                    XCTAssertNil(tree.higher(lastVal! + 1))
+                }
+            }
+        }
+    }
+
+    func testLower() {
+        let tree = BSTree<Int>()
+        XCTAssertNil(tree.higher(0))
+        tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
+        XCTAssertNil(tree.lower(-2))
+        XCTAssertNil(tree.lower(-1))
+        var index = tree.lower(0)
+        XCTAssertEqual(tree[index!].value, -1)
+        index = tree.lower(1)
+        XCTAssertEqual(tree[index!].value, -1)
+        index = tree.lower(2)
+        XCTAssertEqual(tree[index!].value, 1)
+        index = tree.lower(3)
+        XCTAssertEqual(tree[index!].value, 2)
+        index = tree.lower(5)
+        XCTAssertEqual(tree[index!].value, 4)
+        index = tree.lower(14)
+        XCTAssertEqual(tree[index!].value, 9)
+        index = tree.lower(15)
+        XCTAssertEqual(tree[index!].value, 9)
+        index = tree.lower(22)
+        XCTAssertEqual(tree[index!].value, 15)
+        index = tree.lower(23)
+        XCTAssertEqual(tree[index!].value, 22)
+    }
+
+    func testLowerMonkey() {
+        setSeed(5)
+        (0 ..< 100).forEach { treeIndex in
+            print("Tree \(treeIndex) ...")
+            let treeSizish = seededRandom(in: 0 ..< 1000)
+            let tree = BSTree<Int>()
+            (0..<treeSizish).forEach { _ in
+                let val = seededRandom(in: -5 ..< 100)
+                let count = seededRandom(in: 1 ..< 4)
+                tree.insert(val, count)
+                var lastVal: Int?
+                for (val, _) in tree {
+                    var lookingFor: Int
+                    let expecting = lastVal
+                    lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! + 1) / 2
+                    let foundIndex = tree.lower(lookingFor)
+                    let found = foundIndex == nil ? nil : tree[foundIndex!].value
+                    if found != expecting {
+                        XCTFail("Looking for \(lookingFor), expected \(valOrNil(expecting)), got \(valOrNil(found)), val = \(val), lastVal = \(valOrNil(lastVal))")
+                        print(tree)
+                        exit(1)
+                    }
+                    lastVal = val
+                }
+                if lastVal != nil {
+                    let lastIndex = tree.index(before: tree.endIndex)
+                    let nextToLastIndex = (lastIndex == tree.startIndex) ? nil : tree.index(before: lastIndex)
+
+                    var index = tree.lower(lastVal!)
+                    XCTAssertEqual(index, nextToLastIndex)
+
+                    index = tree.lower(lastVal! + 1)
+                    XCTAssertEqual(index, lastIndex)
+                }
+            }
+        }
+    }
+
 }

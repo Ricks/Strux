@@ -49,4 +49,58 @@ class BSNodeTests: XCTestCase {
         print(root.descriptionWithNext)
     }
 
+    func testFindCeiling() {
+        let tree = BSTree(1, 2, 4, 6, 9, 15, 22, -1)
+        guard let root = tree.root else {
+            XCTFail()
+            return
+        }
+        print(tree)
+        XCTAssertEqual(root.findCeiling(-2)?.value, -1)
+        XCTAssertEqual(root.findCeiling(-1)?.value, -1)
+        XCTAssertEqual(root.findCeiling(0)?.value, 1)
+        XCTAssertEqual(root.findCeiling(1)?.value, 1)
+        XCTAssertEqual(root.findCeiling(2)?.value, 2)
+        XCTAssertEqual(root.findCeiling(3)?.value, 4)
+        XCTAssertEqual(root.findCeiling(5)?.value, 6)
+        XCTAssertEqual(root.findCeiling(14)?.value, 15)
+        XCTAssertEqual(root.findCeiling(15)?.value, 15)
+        XCTAssertEqual(root.findCeiling(22)?.value, 22)
+        XCTAssertNil(root.findCeiling(23))
+    }
+
+    func testFindCeilingMonkey() {
+        setSeed(5)
+        (0 ..< 100).forEach { treeIndex in
+            print("Tree \(treeIndex) ...")
+            let treeSizish = seededRandom(in: 0 ..< 1000)
+            let tree = BSTree<Int>()
+            (0..<treeSizish).forEach { _ in
+                let val = seededRandom(in: -5 ..< 100)
+                let count = seededRandom(in: 1 ..< 4)
+                tree.insert(val, count)
+                guard let root = tree.root else { XCTFail(); return }
+                var lastVal: Int?
+                for (val, _) in tree {
+                    var lookingFor: Int
+                    let expecting = val
+                    if lastVal == nil {
+                        lookingFor = val - 1
+                    } else {
+                        lookingFor = (val + lastVal! + 1) / 2
+                    }
+                    let found = root.findCeiling(lookingFor)?.value
+                    if found != expecting {
+                        XCTFail("Looking for \(lookingFor), expected \(expecting), got \(valOrNil(found)), val = \(val), lastVal = \(valOrNil(lastVal))")
+                        print(tree)
+                        exit(1)
+                    }
+                    lastVal = val
+                }
+                if lastVal != nil {
+                    XCTAssertNil(root.findCeiling(lastVal! + 1))
+                }
+            }
+        }
+    }
 }

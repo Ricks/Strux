@@ -95,4 +95,24 @@ class BSNodeModifyTests: XCTestCase {
         XCTAssertEqual(result2.node.valueCount, 2)
         XCTAssertFalse(result2.new)
     }
+
+    func testInsertMultipleValues() {
+        let tree = BSTree<Int>()
+        tree.insert([1, 5, 3])
+        tree.insertMultiple(4, 9, -1)
+        XCTAssertEqual(tree.count, 6)
+        XCTAssertEqual(tree.totalCount, 6)
+        XCTAssertEqual(tree.sum, 21)
+        XCTAssertEqual(tree.firstValue, -1)
+        XCTAssertEqual(tree.lastValue, 9)
+        XCTAssertEqual(tree.medianValues, [3, 4])
+        XCTAssertTrue(tree.containsValue(1))
+        XCTAssertTrue(tree.containsValue(5))
+        XCTAssertTrue(tree.containsValue(3))
+        XCTAssertTrue(tree.containsValue(4))
+        XCTAssertTrue(tree.containsValue(9))
+        XCTAssertTrue(tree.containsValue(-1))
+        XCTAssertFalse(tree.containsValue(42))
+        print(tree)
+    }
 }

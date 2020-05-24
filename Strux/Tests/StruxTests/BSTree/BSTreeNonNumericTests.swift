@@ -44,4 +44,8 @@ class BSTreeNonNumericTests: XCTestCase {
         tree.clear()
         XCTAssertTrue(tree.isEmpty)
     }
+
+    func testStringTree2() {
+        let tree = BSTree() { (s1: String, s2: String) in return s1.lowercased() < s2.lowercased() }
+    }
 }
