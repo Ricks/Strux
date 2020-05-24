@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Classes  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
+
+    <a title="Classes  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+           Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/ricks">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html"> Reference</a>
+      <img class="carat" src="img/carat.png" />
+      Classes  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes.html#/s:5Strux5BNodeC">BNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/BSTree.html">BSTree</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/BSTreeIndex.html">BSTreeIndex</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Heap.html">Heap</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Queue.html">Queue</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:5Strux7Ordereda">Ordered</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>Classes</h1>
+            <p>The following classes are available globally.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Strux5BNodeC"></a>
+                    <a name="//apple_ref/swift/Class/BNode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux5BNodeC">BNode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Basic binary node behavior, ensuring integrity of parent and next/prev node pointers.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BNode</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Strux6BSTreeC"></a>
+                    <a name="//apple_ref/swift/Class/BSTree" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux6BSTreeC">BSTree</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A counted, self-balancing (AVL) binary search tree. Counted means that there are no duplicate nodes
+with the same value, but values have counts associated with them. To be a valid BST, the value of the
+root node must be <strong>strictly</strong> greater than any value in the subtree, if any, with its left child as
+root, and <strong>strictly</strong> less than any value in the subtree, if any, with its right child as root, and
+all subtrees of the tree must meet the same condition.</p>
+
+<p>The type of value being stored must be Comparable, or a comparator conforming to the Ordered protocol must
+be supplied. The comparator can also be given to override a Comparable type&rsquo;s innate ordering (e.g. to make
+the ordering of String values case insentitive).</p>
+
+<p>Insertions, deletions, and queries have time complexity <em>O(log(n))</em>. Returning the count of unique
+values, the count of total values, tree height, first, last, and median are all <em>O(1)</em>. If the values are
+numeric, the sum of all values is also available in <em>O(1)</em>. Traversing the tree in order, first to last or
+vice-versa, is <em>O(n)</em>.</p>
+
+<p>BSTree conforms to the BidirectionalCollection protocol, and meets all of that protocol&rsquo;s expected performance
+requirements. It also conforms to Equatable and NSCopying.</p>
+
+<p>The elements of the Collection are tuples of the form (value: T, count: Int). The indices of the
+Collection are of non-numeric type BSTreeIndex<T>.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">tree</span> <span class="o">=</span> <span class="kt">BSTree</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>  <span class="c1">// BSTree is a class, so it can be a "let"</span>
+<span class="n">tree</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>                 <span class="c1">// Insert 2 of value 42</span>
+<span class="n">tree</span><span class="o">.</span><span class="nf">removeAll</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>                 <span class="c1">// Remove both 14's</span>
+<span class="n">tree</span><span class="o">.</span><span class="nf">containsValue</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>             <span class="c1">// true</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+
+   <span class="mi">32</span>
+  <span class="o">/</span>  <span class="p">\</span>
+<span class="o">-</span><span class="mi">2</span>    <span class="mi">42</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">tree</span><span class="o">.</span><span class="n">height</span>                    <span class="c1">// 1</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">count</span>                     <span class="c1">// 3</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">totalCount</span>                <span class="c1">// 4</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">firstValue</span>                <span class="c1">// -2</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">lastValue</span>                 <span class="c1">// 42</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">medianValues</span>              <span class="c1">// [32, 42]</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">sum</span>                       <span class="c1">// 114</span>
+<span class="kt">Array</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>                    <span class="c1">// [(value: -2, count: 1), (value: 32, count: 1), (value: 42, count: 2)]</span>
+</code></pre>
+
+                        <a href="Classes/BSTree.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">BSTree</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSCopying</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BSTree</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BSTree</span><span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BSTree</span><span class="p">:</span> <span class="kt">BidirectionalCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="https://www.linkedin.com/in/rick-clark-172237194/" target="_blank" rel="external">Rick Clark</a>. All rights reserved. (Last updated: 2020-05-21)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
