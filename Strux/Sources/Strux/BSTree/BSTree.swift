@@ -716,40 +716,6 @@ extension BSTree where T: AdditiveArithmetic {
 
 }
 
-private struct ValueIndex<T: Equatable> {
-    weak var node: BSNode<T>?
-    var offset = 0
-
-    private static func maxOffset(_ node: BSNode<T>?) -> Int {
-        return Int((node?.valueCount ?? 0)) - 1
-    }
-
-    var next: ValueIndex<T> {
-        var nNode = node
-        var nOffset = offset + 1
-        if nOffset > ValueIndex.maxOffset(nNode) {
-            nNode = nNode?.next
-            nOffset = 0
-        }
-        return ValueIndex(node: nNode, offset: nOffset)
-    }
-
-    var prev: ValueIndex<T> {
-        var pNode = node
-        var pOffset = offset - 1
-        if pOffset < 0 {
-            pNode = pNode?.prev
-            pOffset = ValueIndex.maxOffset(pNode)
-        }
-        return ValueIndex(node: pNode, offset: pOffset)
-    }
-
-    var offsetIsMax: Bool {
-        offset == ValueIndex.maxOffset(node)
-    }
-
-}
-
 extension BSTree: BidirectionalCollection {
 
     public var startIndex: Index { BSTreeIndex(node: firstNode) }
