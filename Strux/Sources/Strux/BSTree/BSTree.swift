@@ -174,33 +174,23 @@ public class BSTree<T: Equatable>: NSCopying {
     }
 
     func performInsertion(_ val: T, _ n: Int) {
-        guard n >= 1 else {
-            return
-        }
+        guard n >= 1 else { return }
         var insertionNode: BSNode<T>?
-        for i in 0 ..< n {
-            if i == 0 {
-                // First time through, make sure we have an insertion node
-                var newNode: Bool
-                if root == nil {
-                    insertionNode = BSNode(val, ordered: ordered, parent: god, direction: .left)
-                    root = insertionNode
-                    medianIndex.setInitialNode(root!)
-                    newNode = true
-                } else {
-                    let result = root!.insert(val)
-                    insertionNode = result.node
-                    newNode = result.new
-                }
-                if newNode && insertionNode != nil {
-                    processNodeInsertion(insertionNode!, val)
-                }
-            } else {
-                // Already have the node, just bump up the count
-                insertionNode?.valueCount += 1
-            }
-            totalCount += 1
+        var newNode: Bool
+        if root == nil {
+            insertionNode = BSNode(val, n, ordered: ordered, parent: god, direction: .left)
+            root = insertionNode
+            medianIndex.setInitialNode(root!)
+            newNode = true
+        } else {
+            let result = root!.insert(val, n)
+            insertionNode = result.node
+            newNode = result.new
         }
+        if newNode && insertionNode != nil {
+            processNodeInsertion(insertionNode!, val)
+        }
+        totalCount += n
         medianIndex.updateAfterChange(of: val, n: n, ordered: ordered)
     }
 
@@ -243,18 +233,11 @@ public class BSTree<T: Equatable>: NSCopying {
         var numToRemove = 0
         if let thisRoot = root, let removalNode = thisRoot.find(val) {
             numToRemove = Swift.min(n, Int(removalNode.valueCount))
-            if numToRemove == removalNode.valueCount {
-                medianIndex.aboutToRemoveNode(removalNode)
-            }
-            for _ in 0 ..< numToRemove {
-                totalCount -= 1
-                if removalNode.valueCount > 1 {
-                    removalNode.valueCount -= 1
-                } else {
-                    removalNode.removeNode()
-                    processNodeRemoval(val)
-                }
-            }
+            let removingNode = (numToRemove == removalNode.valueCount)
+            if removingNode { medianIndex.aboutToRemoveNode(removalNode) }
+            removalNode.remove(val, n)
+            if removingNode { processNodeRemoval(val) }
+            totalCount -= numToRemove
             medianIndex.updateAfterChange(of: val, n: -numToRemove, ordered: ordered)
         }
         return numToRemove

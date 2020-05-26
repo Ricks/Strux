@@ -208,7 +208,7 @@ class BSNodeAVLTests: XCTestCase {
         let god = BNode()
         let ordered = { (a: Int, b: Int) -> Bool in a < b }
         var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
-        root.insert(70)
+        root.insert(70, 1)
         var expectedRootDescrip = "42   \n" +
             "  \\  \n" +
         "   70"
@@ -328,7 +328,7 @@ class BSNodeAVLTests: XCTestCase {
         let god = BNode()
         let ordered = { (a: Int, b: Int) -> Bool in a < b }
         var root = BSNode(42, ordered: ordered, parent: god, direction: .left)
-        root.insert(16)
+        root.insert(16, 1)
         var expectedRootDescrip = "   42\n" +
             "  /  \n" +
         "16   "

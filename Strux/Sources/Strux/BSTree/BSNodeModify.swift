@@ -18,9 +18,9 @@ extension BSNode {
     ///   - n: The value count.
     /// - Returns: The new node
     @discardableResult
-    private func insertLeftChildNode(_ val: T) -> BSNode<T> {
+    private func insertLeftChildNode(_ val: T, _ n: Int) -> BSNode<T> {
         let pred = inOrderPredecessor
-        let newNode = BSNode(val, ordered: ordered, parent: self, direction: .left)
+        let newNode = BSNode(val, n, ordered: ordered, parent: self, direction: .left)
         left = newNode
         pred?.next = left
         left!.next = self
@@ -35,8 +35,8 @@ extension BSNode {
     ///   - n: The value count.
     /// - Returns: The new node
     @discardableResult
-    private func insertRightChildNode(_ val: T) -> BSNode<T> {
-        let newNode = BSNode(val, ordered: ordered, parent: self, direction: .right)
+    private func insertRightChildNode(_ val: T, _ n: Int) -> BSNode<T> {
+        let newNode = BSNode(val, n, ordered: ordered, parent: self, direction: .right)
         right = newNode
         right!.next = next
         next = right
@@ -52,22 +52,22 @@ extension BSNode {
     ///   - val: The value to insert or increment the count of
     /// - Returns: The existing or newly-inserted node, and a flag indicating whether the node is newly-created
     @discardableResult
-    func insert(_ val: T) -> (node: BSNode<T>, new: Bool) {
+    func insert(_ val: T, _ n: Int) -> (node: BSNode<T>, new: Bool) {
         var result: (node: BSNode<T>, new: Bool)
         if ordered(val, value) {
             if let thisLeft = left {
-                result = thisLeft.insert(val)
+                result = thisLeft.insert(val, n)
             } else {
-                result = (insertLeftChildNode(val), true)
+                result = (insertLeftChildNode(val, n), true)
              }
         } else if ordered(value, val) {
             if let thisRight = right {
-                result = thisRight.insert(val)
+                result = thisRight.insert(val, n)
             } else {
-                result = (insertRightChildNode(val), true)
+                result = (insertRightChildNode(val, n), true)
             }
         } else {
-            valueCount += 1
+            valueCount += Int32(n)
             result = (self, false)
         }
         return result
@@ -107,4 +107,17 @@ extension BSNode {
             }
         }
     }
+
+    @discardableResult
+    func remove(_ val: T, _ n: Int) -> Int {
+        guard let removalNode = find(val) else { return 0 }
+        let numToRemove = Swift.min(n, Int(removalNode.valueCount))
+        if numToRemove == removalNode.valueCount {
+            removalNode.removeNode()
+        } else {
+            removalNode.valueCount -= Int32(numToRemove)
+        }
+        return numToRemove
+    }
+    
 }

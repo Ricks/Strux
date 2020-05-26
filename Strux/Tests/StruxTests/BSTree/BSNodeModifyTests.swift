@@ -86,11 +86,11 @@ class BSNodeModifyTests: XCTestCase {
     func testReturnsFromInsert() {
         let tree = BSTree<Int>()
         tree.insert(2)
-        let result1 = tree.root!.insert(42)
+        let result1 = tree.root!.insert(42, 1)
         XCTAssertEqual(result1.node.value, 42)
         XCTAssertEqual(result1.node.valueCount, 1)
         XCTAssertTrue(result1.new)
-        let result2 = tree.root!.insert(42)
+        let result2 = tree.root!.insert(42, 1)
         XCTAssertEqual(result2.node.value, 42)
         XCTAssertEqual(result2.node.valueCount, 2)
         XCTAssertFalse(result2.new)

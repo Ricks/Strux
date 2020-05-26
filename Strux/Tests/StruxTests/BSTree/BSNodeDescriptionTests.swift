@@ -29,7 +29,7 @@ class BSNodeDescriptionTests: XCTestCase {
         let root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         let expectedRootDescrip = "42"
         XCTAssertEqual(root.description, expectedRootDescrip)
-        root.insert(12)
+        root.insert(12, 1)
         let expectedRootDescrip2 = "   42\n" +
                                    "  /  \n" +
                                    "12   "
@@ -42,17 +42,17 @@ class BSNodeDescriptionTests: XCTestCase {
         let root = BSNode(42, ordered: ordered, parent: god, direction: .left)
         var expectedRootDescrip = "42"
         XCTAssertEqual(root.description, expectedRootDescrip)
-        root.insert(70)
+        root.insert(70, 1)
         expectedRootDescrip = "42   \n" +
                               "  \\  \n" +
                               "   70"
         checkDesc(root.description, expectedRootDescrip)
-        root.insert(13)
+        root.insert(13, 1)
         expectedRootDescrip = "   42   \n" +
                               "  /  \\  \n" +
                               "13    70"
         checkDesc(root.description, expectedRootDescrip)
-        root.insert(17)
+        root.insert(17, 1)
         expectedRootDescrip = "   __42_   \n" +
                               "  /     \\  \n" +
                               "13       70\n" +
@@ -60,21 +60,21 @@ class BSNodeDescriptionTests: XCTestCase {
                               "   17      "
         print(root.description)
         checkDesc(root.description, expectedRootDescrip)
-        root.insert(69)
+        root.insert(69, 1)
         expectedRootDescrip = "   ___42___   \n" +
                               "  /        \\  \n" +
                               "13          70\n" +
                               "  \\        /  \n" +
                               "   17    69   "
         checkDesc(root.description, expectedRootDescrip)
-        root.insert(12)
+        root.insert(12, 1)
         expectedRootDescrip = "      ___42___   \n" +
                               "     /        \\  \n" +
                               "   13          70\n" +
                               "  /  \\        /  \n" +
                               "12    17    69   "
         checkDesc(root.description, expectedRootDescrip)
-        root.insert(68)
+        root.insert(68, 1)
         expectedRootDescrip = "      ___42___      \n" +
                               "     /        \\     \n" +
                               "   13          69   \n" +
