@@ -110,7 +110,9 @@ extension BSNode {
 
     @discardableResult
     func remove(_ val: T, _ n: Int) -> Int {
-        guard let removalNode = find(val) else { return 0 }
+        guard let removalNode = find(val) else {
+            return 0
+        }
         let numToRemove = Swift.min(n, Int(removalNode.valueCount))
         if numToRemove == removalNode.valueCount {
             removalNode.removeNode()
@@ -119,5 +121,5 @@ extension BSNode {
         }
         return numToRemove
     }
-    
+
 }

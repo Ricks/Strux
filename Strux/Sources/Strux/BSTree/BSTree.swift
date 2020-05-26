@@ -174,7 +174,9 @@ public class BSTree<T: Equatable>: NSCopying {
     }
 
     func performInsertion(_ val: T, _ n: Int) {
-        guard n >= 1 else { return }
+        guard n >= 1 else {
+            return
+        }
         var insertionNode: BSNode<T>?
         var newNode: Bool
         if root == nil {
