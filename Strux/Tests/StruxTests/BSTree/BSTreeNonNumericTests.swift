@@ -15,10 +15,7 @@ import Foundation
 
 class BSTreeNonNumericTests: XCTestCase {
 
-    func testStringTree() {
-        let tree = BSTree(["aaron", "xenon", "Alpha", "Baretta", "Gamma", "Fred"]) {
-            $0.lowercased() < $1.lowercased()
-        }
+    func helperTestCaseInsensitiveStrings(_ tree: BSTree<String>) {
         tree.insert("AARON")
         tree.insert("BORON", 4)
         print(tree)
@@ -45,7 +42,18 @@ class BSTreeNonNumericTests: XCTestCase {
         XCTAssertTrue(tree.isEmpty)
     }
 
+    func testStringTree() {
+        let tree = BSTree(["aaron", "xenon", "Alpha", "Baretta", "Gamma", "Fred"]) {
+            $0.lowercased() < $1.lowercased()
+        }
+        helperTestCaseInsensitiveStrings(tree)
+    }
+
     func testStringTree2() {
-        let tree = BSTree() { (s1: String, s2: String) in return s1.lowercased() < s2.lowercased() }
+        let tree = BSTree<String>() {
+            (s1: String, s2: String) in return s1.lowercased() < s2.lowercased()
+        }
+        tree.insertMultiple("aaron", "xenon", "Alpha", "Baretta", "Gamma", "Fred")
+        helperTestCaseInsensitiveStrings(tree)
     }
 }

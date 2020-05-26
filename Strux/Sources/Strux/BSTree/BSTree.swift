@@ -90,7 +90,7 @@ public class BSTree<T: Equatable>: NSCopying {
 
     fileprivate var lastNode: BSNode<T>?
     fileprivate var firstNode: BSNode<T>?
-    fileprivate var medianIndex = ValueIndex<T>()
+    fileprivate var medianIndex = MedianIndex<T>()
 
     /// The number of elements (values) in the tree (NOT the sum of all value counts).
     /// Time complexity: *O(1)*
@@ -161,34 +161,6 @@ public class BSTree<T: Equatable>: NSCopying {
         return Int(root?.find(val)?.valueCount ?? 0)
     }
 
-    private func updateMedianAfterInsertOne(of val: T) {
-        if totalCount == 1 {
-            medianIndex = ValueIndex(node: firstNode, offset: 0)
-        } else if totalCount % 2 == 0 {
-            if let node = medianIndex.node, ordered(val, node.value) {
-                medianIndex = medianIndex.prev
-             }
-        } else {
-            if let node = medianIndex.node, !ordered(val, node.value) {
-                medianIndex = medianIndex.next
-            }
-        }
-    }
-
-    private func updateMedianBeforeRemoveOne(of val: T) {
-        if totalCount == 1 {
-            medianIndex = ValueIndex(node: nil, offset: 0)
-        } else if totalCount % 2 == 0 {
-            if let node = medianIndex.node, ordered(val, node.value) || val == node.value && medianIndex.offsetIsMax {
-                medianIndex = medianIndex.next
-            }
-        } else {
-            if let node = medianIndex.node, !ordered(val, node.value) {
-                medianIndex = medianIndex.prev
-            }
-        }
-    }
-
     private func processNodeInsertion(_ newNode: BSNode<T>, _ val: T) {
         count += 1
         if firstNode == nil || ordered(val, firstNode!.value) { firstNode = newNode }
@@ -213,6 +185,7 @@ public class BSTree<T: Equatable>: NSCopying {
                 if root == nil {
                     insertionNode = BSNode(val, ordered: ordered, parent: god, direction: .left)
                     root = insertionNode
+                    medianIndex.setInitialNode(root!)
                     newNode = true
                 } else {
                     let result = root!.insert(val)
@@ -227,8 +200,8 @@ public class BSTree<T: Equatable>: NSCopying {
                 insertionNode?.valueCount += 1
             }
             totalCount += 1
-            updateMedianAfterInsertOne(of: val)
         }
+        medianIndex.updateAfterChange(of: val, n: n, ordered: ordered)
     }
 
     /// Insert the given number of the given value into the tree. If the value is already in the tree,
@@ -266,21 +239,22 @@ public class BSTree<T: Equatable>: NSCopying {
     }
 
     @discardableResult
-    fileprivate func performDeletion(_ val: T, _ n: Int) -> Int {
+    fileprivate func performRemoval(_ val: T, _ n: Int) -> Int {
         var numToRemove = 0
         if let thisRoot = root, let deletionNode = thisRoot.find(val) {
             numToRemove = Swift.min(n, Int(deletionNode.valueCount))
             for _ in 0 ..< numToRemove {
-                updateMedianBeforeRemoveOne(of: val)
                 totalCount -= 1
                 if deletionNode.valueCount > 1 {
                     deletionNode.valueCount -= 1
                 } else {
+                    medianIndex.aboutToRemoveNode(deletionNode)
                     deletionNode.removeNode()
                     processNodeDeletion(val)
                 }
             }
         }
+        medianIndex.updateAfterChange(of: val, n: -numToRemove, ordered: ordered)
         return numToRemove
     }
 
@@ -291,7 +265,7 @@ public class BSTree<T: Equatable>: NSCopying {
     ///   - val: The value to remove n of
     ///   - n: The number of val to remove
     public func remove(_ val: T, _ n: Int) {
-        performDeletion(val, n)
+        performRemoval(val, n)
     }
 
     /// Remove one of the given value from the tree. If the number of the value already in the tree is
@@ -300,7 +274,7 @@ public class BSTree<T: Equatable>: NSCopying {
     /// - Parameters:
     ///   - val: The value to remove one of
     public func remove(_ val: T) {
-        performDeletion(val, 1)
+        performRemoval(val, 1)
     }
 
     /// Remove all occurrences of the given value from the tree.
@@ -308,14 +282,14 @@ public class BSTree<T: Equatable>: NSCopying {
     /// - Parameters:
     ///   - val: The value to remove all occurrences of
     public func removeAll(_ val: T) {
-        performDeletion(val, Int.max)
+        performRemoval(val, Int.max)
     }
 
     fileprivate func performClear() {
         root = nil
         firstNode = nil
         lastNode = nil
-        medianIndex = ValueIndex()
+        medianIndex = MedianIndex<T>()
         count = 0
         totalCount = 0
     }
@@ -359,23 +333,14 @@ public class BSTree<T: Equatable>: NSCopying {
     /// the tree is empty. There will be two indices if the tree has an even number of values (n = totalCount),
     /// and the n/2 and n/2 + 1 values (starting with 1) differ. Otherwise one index. Time complexity: *O(1)*
     public var medianIndices: [Index] {
-        var out = [Index]()
-        if let medianNode = medianIndex.node {
-            out.append(BSTreeIndex(node: medianNode))
-            if (totalCount % 2 == 0) && medianIndex.offsetIsMax {
-                if let nextNode = medianNode.next {
-                    out.append(BSTreeIndex(node: nextNode))
-                }
-            }
-        }
-        return out
+        medianIndex.medianNodes.map { BSTreeIndex(node: $0) }
     }
 
     /// Returns zero, one, or two median values. There will be zero indices if and only if
     /// the tree is empty. There will be two indices if the tree has an even number of values (n = totalCount),
     /// and the n/2 and n/2 + 1 values (starting with 1) differ. Otherwise one index. Time complexity: *O(1)*
     public var medianValues: [T] {
-        return medianIndices.map { self[$0].value }
+        return medianIndex.medianNodes.map { $0.value }
     }
 
     /// Returns the index of the least value >= the given value, according to the ordering given by the
@@ -691,7 +656,7 @@ extension BSTree where T: AdditiveArithmetic {
     ///   - val: The value to remove n of
     ///   - n: The number of val to remove
     public func remove(_ val: T, _ n: Int) {
-        let numRemoved = performDeletion(val, n)
+        let numRemoved = performRemoval(val, n)
         subtractFromSumStorage(val, numRemoved)
     }
 
@@ -701,7 +666,7 @@ extension BSTree where T: AdditiveArithmetic {
     /// - Parameters:
     ///   - val: The value to remove one of
     public func remove(_ val: T) {
-        let numRemoved = performDeletion(val, 1)
+        let numRemoved = performRemoval(val, 1)
         subtractFromSumStorage(val, numRemoved)
     }
 
@@ -710,7 +675,7 @@ extension BSTree where T: AdditiveArithmetic {
     /// - Parameters:
     ///   - val: The value to remove all occurrences of
     public func removeAll(_ val: T) {
-        let numRemoved = performDeletion(val, Int.max)
+        let numRemoved = performRemoval(val, Int.max)
         subtractFromSumStorage(val, numRemoved)
     }
 
