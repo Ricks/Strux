@@ -245,7 +245,9 @@ class MedianIndexTests: XCTestCase {
     }
 
     func testDeleteNode2() {
-        let tree = BSTree(2)
+        let tree = BSTree<Int>()
+        XCTAssertEqual(tree.medianIndex.description, "node = nil, halfIndex = -1")
+        tree.insert(2)
         if let msg = helperTestIndex(tree.medianIndex, 2, 0) {
             XCTFail(msg)
             print(tree)
@@ -314,6 +316,7 @@ class MedianIndexTests: XCTestCase {
             XCTFail(msg)
             print(tree)
         }
+        XCTAssertEqual(tree.medianIndex.description, "node = 7, halfIndex = 6")
     }
 
 }
