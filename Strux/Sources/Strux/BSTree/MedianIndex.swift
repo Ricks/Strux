@@ -11,7 +11,7 @@
 
 import Foundation
 
-struct MedianIndex<T> {
+struct MedianIndex<T>: CustomStringConvertible {
     weak var node: BSNode<T>?
     var halfIndex = 0
 
@@ -24,30 +24,25 @@ struct MedianIndex<T> {
         Int(node?.valueCount ?? 0) * 2
     }
 
-    private mutating func moveToNext() {
-        halfIndex -= numHalves
-        node = node?.next
-    }
-
-    private mutating func moveToPrev() {
-        node = node?.prev
-        halfIndex += numHalves
-    }
-
     private mutating func normalize() {
         while halfIndex >= numHalves && node?.next != nil {
-            moveToNext()
+            halfIndex -= numHalves
+            node = node?.next
         }
         while halfIndex < 0 && node?.prev != nil {
-            moveToPrev()
+            node = node?.prev
+            halfIndex += numHalves
         }
     }
 
     private mutating func denormalize() {
         if node?.next != nil {
-            moveToNext()
+ //           print("denormalize: this node = \(node!), moving to next = \(node!.next!), halfIndex = \(halfIndex), numHalves = \(numHalves)")
+            halfIndex -= numHalves
+            node = node?.next
         } else if node?.prev != nil {
-            moveToPrev()
+            node = node?.prev
+            halfIndex += numHalves
         } else {
             self.node = nil
             halfIndex = 0
@@ -58,6 +53,7 @@ struct MedianIndex<T> {
         if nodeToBeRemoved === node {
             denormalize()
         }
+//        print("aboutToRemoveNode: nodeToBeRemoved = \(nodeToBeRemoved.value), self = \(self)")
     }
 
     mutating func updateAfterChange(of val: T, n: Int, ordered: Ordered<T>) {
@@ -65,6 +61,7 @@ struct MedianIndex<T> {
             halfIndex += (ordered(val, node.value) ? -n : n)
             normalize()
         }
+//        print("updateAfterChange: of \(val), n = \(n), self = \(self)")
     }
 
     var medianNodes: [BSNode<T>] {
@@ -76,6 +73,10 @@ struct MedianIndex<T> {
             }
         }
         return out
+    }
+
+    var description: String {
+        "node = \(valOrNil(node?.value)), halfIndex = \(halfIndex)"
     }
 
 }

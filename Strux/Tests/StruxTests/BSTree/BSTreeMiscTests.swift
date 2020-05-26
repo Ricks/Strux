@@ -65,8 +65,11 @@ class BSTreeMiscTests: XCTestCase {
 
     func testDocumentation() {
         let tree = BSTree(14, -2, 32, 14)
+        print(tree)
         tree.insert(42, 2)
+        print(tree)
         tree.removeAll(14)
+        print(tree)
         XCTAssertTrue(tree.containsValue(-2))
         let expectedDescrip = "   32      \n" +
                               "  /  \\     \n" +

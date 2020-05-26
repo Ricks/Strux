@@ -88,9 +88,9 @@ public class BSTree<T: Equatable>: NSCopying {
         set { god.leftNode = newValue }
     }
 
-    fileprivate var lastNode: BSNode<T>?
-    fileprivate var firstNode: BSNode<T>?
-    fileprivate var medianIndex = MedianIndex<T>()
+    var lastNode: BSNode<T>?
+    var firstNode: BSNode<T>?
+    var medianIndex = MedianIndex<T>()
 
     /// The number of elements (values) in the tree (NOT the sum of all value counts).
     /// Time complexity: *O(1)*
@@ -167,13 +167,13 @@ public class BSTree<T: Equatable>: NSCopying {
         if lastNode == nil || ordered(lastNode!.value, val) { lastNode = newNode }
     }
 
-    private func processNodeDeletion(_ val: T) {
+    private func processNodeRemoval(_ val: T) {
         count -= 1
         if firstNode != nil && firstNode!.value == val { firstNode = root?.firstNode }
         if lastNode != nil && lastNode!.value == val { lastNode = root?.lastNode }
     }
 
-    fileprivate func performInsertion(_ val: T, _ n: Int) {
+    func performInsertion(_ val: T, _ n: Int) {
         guard n >= 1 else {
             return
         }
@@ -239,22 +239,24 @@ public class BSTree<T: Equatable>: NSCopying {
     }
 
     @discardableResult
-    fileprivate func performRemoval(_ val: T, _ n: Int) -> Int {
+    func performRemoval(_ val: T, _ n: Int) -> Int {
         var numToRemove = 0
-        if let thisRoot = root, let deletionNode = thisRoot.find(val) {
-            numToRemove = Swift.min(n, Int(deletionNode.valueCount))
+        if let thisRoot = root, let removalNode = thisRoot.find(val) {
+            numToRemove = Swift.min(n, Int(removalNode.valueCount))
+            if numToRemove == removalNode.valueCount {
+                medianIndex.aboutToRemoveNode(removalNode)
+            }
             for _ in 0 ..< numToRemove {
                 totalCount -= 1
-                if deletionNode.valueCount > 1 {
-                    deletionNode.valueCount -= 1
+                if removalNode.valueCount > 1 {
+                    removalNode.valueCount -= 1
                 } else {
-                    medianIndex.aboutToRemoveNode(deletionNode)
-                    deletionNode.removeNode()
-                    processNodeDeletion(val)
+                    removalNode.removeNode()
+                    processNodeRemoval(val)
                 }
             }
+            medianIndex.updateAfterChange(of: val, n: -numToRemove, ordered: ordered)
         }
-        medianIndex.updateAfterChange(of: val, n: -numToRemove, ordered: ordered)
         return numToRemove
     }
 
@@ -285,7 +287,7 @@ public class BSTree<T: Equatable>: NSCopying {
         performRemoval(val, Int.max)
     }
 
-    fileprivate func performClear() {
+    func performClear() {
         root = nil
         firstNode = nil
         lastNode = nil
