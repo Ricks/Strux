@@ -13,10 +13,10 @@ import Foundation
 
 struct MedianIndex<T>: CustomStringConvertible {
     weak var node: BSNode<T>?
-    var halfIndex = 0
+    var halfIndex = -1
 
-    mutating func setInitialNode(_ initialNode: BSNode<T>) {
-        node = initialNode
+    private mutating func setToNil() {
+        node = nil
         halfIndex = -1
     }
 
@@ -24,36 +24,34 @@ struct MedianIndex<T>: CustomStringConvertible {
         Int(node?.valueCount ?? 0) * 2
     }
 
+    private mutating func moveToNext() {
+        halfIndex -= numHalves
+        node = node?.next
+    }
+
+    private mutating func moveToPrev() {
+        node = node?.prev
+        halfIndex += numHalves
+    }
+
     private mutating func normalize() {
-        while halfIndex >= numHalves && node?.next != nil {
-            halfIndex -= numHalves
-            node = node?.next
-        }
-        while halfIndex < 0 && node?.prev != nil {
-            node = node?.prev
-            halfIndex += numHalves
-        }
+        while halfIndex >= numHalves && node?.next != nil { moveToNext() }
+        while halfIndex < 0 && node?.prev != nil { moveToPrev() }
     }
 
     private mutating func denormalize() {
-        if node?.next != nil {
- //           print("denormalize: this node = \(node!), moving to next = \(node!.next!), halfIndex = \(halfIndex), numHalves = \(numHalves)")
-            halfIndex -= numHalves
-            node = node?.next
-        } else if node?.prev != nil {
-            node = node?.prev
-            halfIndex += numHalves
-        } else {
-            self.node = nil
-            halfIndex = 0
-        }
+        if node?.next != nil { moveToNext() }
+        else if node?.prev != nil { moveToPrev() }
+        else { setToNil() }
+    }
+
+    mutating func setInitialNode(_ initialNode: BSNode<T>) {
+        node = initialNode
+        halfIndex = -1
     }
 
     mutating func aboutToRemoveNode(_ nodeToBeRemoved: BSNode<T>) {
-        if nodeToBeRemoved === node {
-            denormalize()
-        }
-//        print("aboutToRemoveNode: nodeToBeRemoved = \(nodeToBeRemoved.value), self = \(self)")
+        if nodeToBeRemoved === node { denormalize() }
     }
 
     mutating func updateAfterChange(of val: T, n: Int, ordered: Ordered<T>) {
@@ -61,7 +59,6 @@ struct MedianIndex<T>: CustomStringConvertible {
             halfIndex += (ordered(val, node.value) ? -n : n)
             normalize()
         }
-//        print("updateAfterChange: of \(val), n = \(n), self = \(self)")
     }
 
     var medianNodes: [BSNode<T>] {

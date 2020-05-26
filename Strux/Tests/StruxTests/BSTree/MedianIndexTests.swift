@@ -15,11 +15,11 @@ import Foundation
 class MedianIndexTests: XCTestCase {
 
     func helperTestIndex(_ mIndex: MedianIndex<Int>,
-                         _ expectedValue: Int,
+                         _ expectedValue: Int?,
                          _ expectedHalfIndex: Int) -> String? {
         let value = mIndex.node?.value
         if value != expectedValue || mIndex.halfIndex != expectedHalfIndex {
-            let msg = "Expected median of val = \(expectedValue), halfOffsest = \(expectedHalfIndex), " +
+            let msg = "Expected median of val = \(valOrNil(expectedValue)), halfOffsest = \(expectedHalfIndex), " +
                       "got val = \(valOrNil(value)), halfOffset = \(mIndex.halfIndex)"
             return msg
         }
@@ -37,10 +37,6 @@ class MedianIndexTests: XCTestCase {
 
     func test1() {
         let tree = BSTree(2)
-//        let ordered: Ordered<Int> = { $0 < $1 }
-//        var medianIndex = MedianIndex<Int>()
-//        medianIndex.setInitialNode(tree.root!)
-//        medianIndex.updateAfterChange(of: 2, n: 1, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 2, 0) {
             XCTFail(msg)
             print(tree)
@@ -51,7 +47,6 @@ class MedianIndexTests: XCTestCase {
         }
 
         tree.insert(2)
-//        medianIndex.updateAfterChange(of: 2, n: 1, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 2, 1) {
             XCTFail(msg)
             print(tree)
@@ -62,7 +57,6 @@ class MedianIndexTests: XCTestCase {
         }
 
         tree.remove(2)
-//        medianIndex.updateAfterChange(of: 2, n: -1, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 2, 0) {
             XCTFail(msg)
             print(tree)
@@ -73,7 +67,6 @@ class MedianIndexTests: XCTestCase {
         }
 
         tree.insert(4, 7)
-//        medianIndex.updateAfterChange(of: 4, n: 7, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 4, 5) {
             XCTFail(msg)
             print(tree)
@@ -84,7 +77,6 @@ class MedianIndexTests: XCTestCase {
         }
 
         tree.insert(7, 7)
-//        medianIndex.updateAfterChange(of: 7, n: 7, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 4, 12) {
             XCTFail(msg)
             print(tree)
@@ -95,7 +87,6 @@ class MedianIndexTests: XCTestCase {
         }
 
         tree.remove(4, 6)
-//        medianIndex.updateAfterChange(of: 4, n: -6, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 7, 4) {
             XCTFail(msg)
             print(tree)
@@ -108,12 +99,8 @@ class MedianIndexTests: XCTestCase {
 
     func test2() {
         let tree = BSTree<Int>()
-//        let ordered: Ordered<Int> = { $0 < $1 }
-//        var medianIndex = MedianIndex<Int>()
 
         tree.insert(2, 6)
-//        medianIndex.setInitialNode(tree.root!)
-//        medianIndex.updateAfterChange(of: 2, n: 6, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 2, 5) {
             XCTFail(msg)
             print(tree)
@@ -124,7 +111,6 @@ class MedianIndexTests: XCTestCase {
         }
 
         tree.insert(4, 7)
-//        medianIndex.updateAfterChange(of: 4, n: 7, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 4, 0) {
             XCTFail(msg)
             print(tree)
@@ -135,8 +121,7 @@ class MedianIndexTests: XCTestCase {
         }
 
         tree.remove(4, 6)
-//        medianIndex.updateAfterChange(of: 4, n: -6, ordered: ordered)
-        if let msg = helperTestIndex(tree.medianIndex, 2, 6) {
+       if let msg = helperTestIndex(tree.medianIndex, 2, 6) {
             XCTFail(msg)
             print(tree)
         }
@@ -148,16 +133,10 @@ class MedianIndexTests: XCTestCase {
 
     func test3() {
         let tree = BSTree<Int>()
-//        let ordered: Ordered<Int> = { $0 < $1 }
-//        var medianIndex = MedianIndex<Int>()
 
         tree.insert(4, 7)
-//        medianIndex.setInitialNode(tree.root!)
-//        medianIndex.updateAfterChange(of: 4, n: 7, ordered: ordered)
         tree.insert(2, 3)
-//        medianIndex.updateAfterChange(of: 2, n: 3, ordered: ordered)
         tree.insert(7, 3)
-//        medianIndex.updateAfterChange(of: 7, n: 3, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 4, 6) {
             XCTFail(msg)
             print(tree)
@@ -168,7 +147,6 @@ class MedianIndexTests: XCTestCase {
         }
 
         tree.remove(4, 6)
-//        medianIndex.updateAfterChange(of: 4, n: -6, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 4, 0) {
             XCTFail(msg)
             print(tree)
@@ -181,14 +159,9 @@ class MedianIndexTests: XCTestCase {
 
     func test4() {
         let tree = BSTree<Int>()
-//        let ordered: Ordered<Int> = { $0 < $1 }
-//        var medianIndex = MedianIndex<Int>()
 
         tree.insert(4, 7)
-//        medianIndex.setInitialNode(tree.root!)
-//        medianIndex.updateAfterChange(of: 4, n: 7, ordered: ordered)
         tree.insert(2, 7)
-//        medianIndex.updateAfterChange(of: 2, n: 7, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 2, 13) {
             XCTFail(msg)
             print(tree)
@@ -201,10 +174,6 @@ class MedianIndexTests: XCTestCase {
 
     func testDeleteNode() {
         let tree = BSTree(2)
-//        let ordered: Ordered<Int> = { $0 < $1 }
-//        var medianIndex = MedianIndex<Int>()
-//        medianIndex.setInitialNode(tree.root!)
-//        medianIndex.updateAfterChange(of: 2, n: 1, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 2, 0) {
             XCTFail(msg)
             print(tree)
@@ -217,7 +186,6 @@ class MedianIndexTests: XCTestCase {
         tree.insert(2)
         print(tree)
         print("")
-//        medianIndex.updateAfterChange(of: 2, n: 1, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 2, 1) {
             XCTFail(msg)
             print(tree)
@@ -230,7 +198,6 @@ class MedianIndexTests: XCTestCase {
         tree.remove(2)
         print(tree)
         print("")
-//        medianIndex.updateAfterChange(of: 2, n: -1, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 2, 0) {
             XCTFail(msg)
             print(tree)
@@ -243,7 +210,6 @@ class MedianIndexTests: XCTestCase {
         tree.insert(4, 7)
         print(tree)
         print("")
-//        medianIndex.updateAfterChange(of: 4, n: 7, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 4, 5) {
             XCTFail(msg)
             print(tree)
@@ -256,7 +222,6 @@ class MedianIndexTests: XCTestCase {
         tree.insert(7, 7)
         print(tree)
         print("")
-//       medianIndex.updateAfterChange(of: 7, n: 7, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 4, 12) {
             XCTFail(msg)
             print(tree)
@@ -266,12 +231,82 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-//        medianIndex.aboutToRemoveNode(tree.root!)
         tree.remove(4, 7)
         print(tree)
         print("")
-//        medianIndex.updateAfterChange(of: 4, n: -7, ordered: ordered)
         if let msg = helperTestIndex(tree.medianIndex, 7, 5) {
+            XCTFail(msg)
+            print(tree)
+        }
+        if let msg = helperTestMedianNodes(tree.medianIndex, [7]) {
+            XCTFail(msg)
+            print(tree)
+        }
+    }
+
+    func testDeleteNode2() {
+        let tree = BSTree(2)
+        if let msg = helperTestIndex(tree.medianIndex, 2, 0) {
+            XCTFail(msg)
+            print(tree)
+        }
+        if let msg = helperTestMedianNodes(tree.medianIndex, [2]) {
+            XCTFail(msg)
+            print(tree)
+        }
+
+        tree.insert(2)
+        print(tree)
+        print("")
+        if let msg = helperTestIndex(tree.medianIndex, 2, 1) {
+            XCTFail(msg)
+            print(tree)
+        }
+        if let msg = helperTestMedianNodes(tree.medianIndex, [2]) {
+            XCTFail(msg)
+            print(tree)
+        }
+
+        tree.remove(2, 2)
+        print(tree)
+        print("")
+        if let msg = helperTestIndex(tree.medianIndex, nil, -1) {
+            XCTFail(msg)
+            print(tree)
+        }
+        if let msg = helperTestMedianNodes(tree.medianIndex, []) {
+            XCTFail(msg)
+            print(tree)
+        }
+
+        tree.insert(4, 7)
+        print(tree)
+        print("")
+        if let msg = helperTestIndex(tree.medianIndex, 4, 6) {
+            XCTFail(msg)
+            print(tree)
+        }
+        if let msg = helperTestMedianNodes(tree.medianIndex, [4]) {
+            XCTFail(msg)
+            print(tree)
+        }
+
+        tree.insert(7, 7)
+        print(tree)
+        print("")
+        if let msg = helperTestIndex(tree.medianIndex, 4, 13) {
+            XCTFail(msg)
+            print(tree)
+        }
+        if let msg = helperTestMedianNodes(tree.medianIndex, [4, 7]) {
+            XCTFail(msg)
+            print(tree)
+        }
+
+        tree.remove(4, 7)
+        print(tree)
+        print("")
+        if let msg = helperTestIndex(tree.medianIndex, 7, 6) {
             XCTFail(msg)
             print(tree)
         }
