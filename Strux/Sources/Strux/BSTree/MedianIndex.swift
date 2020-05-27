@@ -15,11 +15,6 @@ struct MedianIndex<T>: CustomStringConvertible {
     weak var node: BSNode<T>?
     var halfIndex = -1
 
-    private mutating func setToNil() {
-        node = nil
-        halfIndex = -1
-    }
-
     private var numHalves: Int {
         Int(node?.valueCount ?? 0) * 2
     }
@@ -43,6 +38,11 @@ struct MedianIndex<T>: CustomStringConvertible {
         if node?.next != nil { moveToNext() }
         else if node?.prev != nil { moveToPrev() }
         else { setToNil() }
+    }
+
+    mutating func setToNil() {
+        node = nil
+        halfIndex = -1
     }
 
     mutating func setInitialNode(_ initialNode: BSNode<T>) {

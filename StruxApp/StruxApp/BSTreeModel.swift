@@ -109,7 +109,7 @@ class BSTreeModel: ObservableObject {
                 let arr1 = tree.traverseInOrder()
                 let arr2 = tree.traversePreOrder()
                 let arr3 = tree.traversePostOrder()
-                let arr4 = tree.traverseLevelNodes()
+                let arr4 = tree.traverseByLevel()
                 if arr1.count != arr2.count || arr2.count != arr3.count || arr3.count != arr4.count {
                     print("*** traversal counts not same, index = \(treeIndex)")
                 }

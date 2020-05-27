@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Strux/Sources/Strux/BSTree/BSTreeGeneralQueries.swift">
+   </FileRef>
+   <FileRef
       location = "group:Strux">
    </FileRef>
    <FileRef

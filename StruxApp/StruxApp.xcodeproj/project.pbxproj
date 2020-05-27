@@ -51,7 +51,6 @@
 		1D98192B2462320500BC3E4E /* BSNodeModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeModify.swift; sourceTree = "<group>"; };
 		1D98192C2462320500BC3E4E /* BSNodeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeDescription.swift; sourceTree = "<group>"; };
 		1D98192D2462320500BC3E4E /* BSNodeTraverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeTraverse.swift; sourceTree = "<group>"; };
-		1D98192E2462320500BC3E4E /* BSTreeCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeCollection.swift; sourceTree = "<group>"; };
 		1D98192F2462320500BC3E4E /* BSNodeCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeCheck.swift; sourceTree = "<group>"; };
 		1D9819302462320500BC3E4E /* BSTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTree.swift; sourceTree = "<group>"; };
 		1D9819312462320500BC3E4E /* BNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNode.swift; sourceTree = "<group>"; };
@@ -63,6 +62,8 @@
 		1D98193E2462320500BC3E4E /* Strux.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Strux.xcscheme; sourceTree = "<group>"; };
 		1D9819452464AEEC00BC3E4E /* HeapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeapModel.swift; sourceTree = "<group>"; };
 		1D9819472464B37400BC3E4E /* QueueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueModel.swift; sourceTree = "<group>"; };
+		1DB96B2B247E0287000E1AD4 /* BSTreeModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeModify.swift; sourceTree = "<group>"; };
+		1DB96B2C247E040D000E1AD4 /* BSTreeValueQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeValueQueries.swift; sourceTree = "<group>"; };
 		1DDFD6752467634C0000D02F /* Strux */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Strux; path = ../Strux; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,14 +202,15 @@
 		1D98192A2462320500BC3E4E /* BSTree */ = {
 			isa = PBXGroup;
 			children = (
+				1D9819312462320500BC3E4E /* BNode.swift */,
+				1D9819322462320500BC3E4E /* BSNode.swift */,
 				1D98192B2462320500BC3E4E /* BSNodeModify.swift */,
 				1D98192C2462320500BC3E4E /* BSNodeDescription.swift */,
 				1D98192D2462320500BC3E4E /* BSNodeTraverse.swift */,
-				1D98192E2462320500BC3E4E /* BSTreeCollection.swift */,
 				1D98192F2462320500BC3E4E /* BSNodeCheck.swift */,
 				1D9819302462320500BC3E4E /* BSTree.swift */,
-				1D9819312462320500BC3E4E /* BNode.swift */,
-				1D9819322462320500BC3E4E /* BSNode.swift */,
+				1DB96B2B247E0287000E1AD4 /* BSTreeModify.swift */,
+				1DB96B2C247E040D000E1AD4 /* BSTreeValueQueries.swift */,
 				1D9819332462320500BC3E4E /* BSNodeAVL.swift */,
 			);
 			path = BSTree;
@@ -499,7 +501,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Scipio.StruxApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -519,7 +521,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Scipio.StruxApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

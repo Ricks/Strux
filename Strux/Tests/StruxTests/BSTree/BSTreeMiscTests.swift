@@ -82,14 +82,19 @@ class BSTreeMiscTests: XCTestCase {
         XCTAssertEqual(tree.lastValue, 42)
         XCTAssertEqual(tree.medianValues, [32, 42])
         XCTAssertEqual(tree.sum, 114)
+        XCTAssertEqual(tree.ceilingValue(30), 32)
         XCTAssertEqual(tree.ceilingValue(32), 32)
         XCTAssertEqual(tree.floorValue(32), 32)
+        XCTAssertEqual(tree.floorValue(35), 32)
         XCTAssertEqual(tree.higherValue(32), 42)
         XCTAssertEqual(tree.lowerValue(32), -2)
         let array = Array(tree)
         XCTAssertTrue(array[0] == (value: -2, count: 1))
         XCTAssertTrue(array[1] == (value: 32, count: 1))
         XCTAssertTrue(array[2] == (value: 42, count: 2))
+        for elem in tree {
+            print("value = \(elem.value), count = \(elem.count)")
+        }
     }
 
     func testNodeCheck() {

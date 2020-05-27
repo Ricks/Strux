@@ -52,7 +52,7 @@ class BSTreeTraversalTests: XCTestCase {
 
     func testTraverseLevelNodes() {
         let tree1 = BSTree(2, 5, 9, 4, -1, 44, 99, 9)
-        let elements1 = tree1.traverseLevelNodes()
+        let elements1 = tree1.traverseByLevel()
         XCTAssertEqual(elements1.count, 7)
         XCTAssertTrue(elements1[0] == (9, 2))
         XCTAssertTrue(elements1[1] == (2, 1))

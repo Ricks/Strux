@@ -28,6 +28,6 @@ class BSNodeTraversalTests: XCTestCase {
         XCTAssertTrue(tree.traverseInOrder().isEmpty)
         XCTAssertTrue(tree.traversePreOrder().isEmpty)
         XCTAssertTrue(tree.traversePostOrder().isEmpty)
-        XCTAssertTrue(tree.traverseLevelNodes().isEmpty)
+        XCTAssertTrue(tree.traverseByLevel().isEmpty)
     }
 }
