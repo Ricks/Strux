@@ -29,7 +29,7 @@ public typealias Ordered<T> = (T, T) -> Bool
 /// capabilities as Java's TreeSet, except that it is also counted, provides a running median, and, if the
 /// values are numeric, provides a running sum.
 ///
-/// The type of value being stored must be Comparable, or a comparator of type Ordered must
+/// The type of value being stored must be Comparable, or a comparator of type `Ordered` must
 /// be supplied. The comparator can also be given to override a Comparable type's innate ordering (e.g. to make
 /// the ordering of String values case insentitive). If a comparator isn't given, the ordering is from min
 /// to max.
@@ -192,6 +192,10 @@ extension BSTree where T: Comparable {
         initializeWithCountedSet(NSCountedSet(array: values))
     }
 
+}
+
+extension BSTree {
+
     // MARK: Traversal
 
     /// Return the elements of the tree in sorted order from first to last, according to the ordering
@@ -233,8 +237,7 @@ extension BSTree where T: Comparable {
     /// - Returns: NSCountedSet
     public func toCountedSet() -> NSCountedSet {
         let set = NSCountedSet()
-        let elems = traverseInOrder()
-        for elem in elems {
+        for elem in self {
             for _ in 0 ..< elem.count { set.add(elem.value) }
         }
         return set

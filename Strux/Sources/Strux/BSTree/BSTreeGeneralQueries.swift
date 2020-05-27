@@ -10,7 +10,7 @@
 import Foundation
 
 extension BSTree {
-    
+
     // MARK: General Queries
 
     /// The number of elements (unique values) in the tree (NOT the sum of all value counts, which is
@@ -65,7 +65,8 @@ extension BSTree {
 
     /// Returns zero, one, or two median values. There will be zero values if and only if
     /// the tree is empty. There will be two values if the tree's totalCount is a multiple of 2
-    /// and the values at positions n/2 and n/2 + 1 (starting with 1) differ. Otherwise one value. Time complexity: *O(1)*
+    /// and the values at positions n/2 and n/2 + 1 (starting with 1) differ. Otherwise one value.
+    /// Time complexity: *O(1)*
     public var medianValues: [T] {
         return medianIndex.medianNodes.map { $0.value }
     }
