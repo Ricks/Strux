@@ -19,7 +19,7 @@ class BSTreeConstructorTests: XCTestCase {
         XCTAssertNil(tree.firstValue)
         XCTAssertNil(tree.lastValue)
         tree.insert(4)
-        tree.insert(5, 2)
+        tree.insert(5, count: 2)
         XCTAssertEqual(tree.count, 2)
         XCTAssertEqual(tree.firstValue!, 4)
         XCTAssertEqual(tree.lastValue!, 5)

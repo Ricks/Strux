@@ -78,7 +78,7 @@ class BSNodeTests: XCTestCase {
             (0..<treeSizish).forEach { _ in
                 let val = seededRandom(in: -5 ..< 100)
                 let count = seededRandom(in: 1 ..< 4)
-                tree.insert(val, count)
+                tree.insert(val, count: count)
                 guard let root = tree.root else { XCTFail(); return }
                 var lastVal: Int?
                 for (val, _) in tree {

@@ -66,7 +66,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.insert(4, 7)
+        tree.insert(4, count: 7)
         if let msg = helperTestIndex(tree.medianIndex, 4, 5) {
             XCTFail(msg)
             print(tree)
@@ -76,7 +76,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.insert(7, 7)
+        tree.insert(7, count: 7)
         if let msg = helperTestIndex(tree.medianIndex, 4, 12) {
             XCTFail(msg)
             print(tree)
@@ -86,7 +86,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.remove(4, 6)
+        tree.remove(4, count: 6)
         if let msg = helperTestIndex(tree.medianIndex, 7, 4) {
             XCTFail(msg)
             print(tree)
@@ -100,7 +100,7 @@ class MedianIndexTests: XCTestCase {
     func test2() {
         let tree = BSTree<Int>()
 
-        tree.insert(2, 6)
+        tree.insert(2, count: 6)
         if let msg = helperTestIndex(tree.medianIndex, 2, 5) {
             XCTFail(msg)
             print(tree)
@@ -110,7 +110,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.insert(4, 7)
+        tree.insert(4, count: 7)
         if let msg = helperTestIndex(tree.medianIndex, 4, 0) {
             XCTFail(msg)
             print(tree)
@@ -120,7 +120,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.remove(4, 6)
+        tree.remove(4, count: 6)
        if let msg = helperTestIndex(tree.medianIndex, 2, 6) {
             XCTFail(msg)
             print(tree)
@@ -134,9 +134,9 @@ class MedianIndexTests: XCTestCase {
     func test3() {
         let tree = BSTree<Int>()
 
-        tree.insert(4, 7)
-        tree.insert(2, 3)
-        tree.insert(7, 3)
+        tree.insert(4, count: 7)
+        tree.insert(2, count: 3)
+        tree.insert(7, count: 3)
         if let msg = helperTestIndex(tree.medianIndex, 4, 6) {
             XCTFail(msg)
             print(tree)
@@ -146,7 +146,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.remove(4, 6)
+        tree.remove(4, count: 6)
         if let msg = helperTestIndex(tree.medianIndex, 4, 0) {
             XCTFail(msg)
             print(tree)
@@ -160,8 +160,8 @@ class MedianIndexTests: XCTestCase {
     func test4() {
         let tree = BSTree<Int>()
 
-        tree.insert(4, 7)
-        tree.insert(2, 7)
+        tree.insert(4, count: 7)
+        tree.insert(2, count: 7)
         if let msg = helperTestIndex(tree.medianIndex, 2, 13) {
             XCTFail(msg)
             print(tree)
@@ -207,7 +207,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.insert(4, 7)
+        tree.insert(4, count: 7)
         print(tree)
         print("")
         if let msg = helperTestIndex(tree.medianIndex, 4, 5) {
@@ -219,7 +219,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.insert(7, 7)
+        tree.insert(7, count: 7)
         print(tree)
         print("")
         if let msg = helperTestIndex(tree.medianIndex, 4, 12) {
@@ -231,7 +231,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.remove(4, 7)
+        tree.remove(4, count: 7)
         print(tree)
         print("")
         if let msg = helperTestIndex(tree.medianIndex, 7, 5) {
@@ -269,7 +269,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.remove(2, 2)
+        tree.remove(2, count: 2)
         print(tree)
         print("")
         if let msg = helperTestIndex(tree.medianIndex, nil, -1) {
@@ -281,7 +281,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.insert(4, 7)
+        tree.insert(4, count: 7)
         print(tree)
         print("")
         if let msg = helperTestIndex(tree.medianIndex, 4, 6) {
@@ -293,7 +293,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.insert(7, 7)
+        tree.insert(7, count: 7)
         print(tree)
         print("")
         if let msg = helperTestIndex(tree.medianIndex, 4, 13) {
@@ -305,7 +305,7 @@ class MedianIndexTests: XCTestCase {
             print(tree)
         }
 
-        tree.remove(4, 7)
+        tree.remove(4, count: 7)
         print(tree)
         print("")
         if let msg = helperTestIndex(tree.medianIndex, 7, 6) {

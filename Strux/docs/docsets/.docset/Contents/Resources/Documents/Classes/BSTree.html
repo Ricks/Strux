@@ -101,7 +101,7 @@ with the same value, but values have counts associated with them. BSTree provide
 capabilities as Java&rsquo;s TreeSet, except that it is also counted, provides a running median, and, if the
 values are numeric, provides a running sum.</p>
 
-<p>The type of value being stored must be Comparable, or a comparator of type Ordered must
+<p>The type of value being stored must be Comparable, or a comparator of type <code><a href="../Typealiases.html#/s:5Strux7Ordereda">Ordered</a></code> must
 be supplied. The comparator can also be given to override a Comparable type&rsquo;s innate ordering (e.g. to make
 the ordering of String values case insentitive). If a comparator isn&rsquo;t given, the ordering is from min
 to max.</p>
@@ -132,7 +132,6 @@ Collection are of non-numeric type BSTreeIndex<T>.</p>
 <span class="n">tree</span><span class="o">.</span><span class="n">lastValue</span>                 <span class="c1">// 42</span>
 <span class="n">tree</span><span class="o">.</span><span class="n">medianValues</span>              <span class="c1">// [32, 42]</span>
 <span class="n">tree</span><span class="o">.</span><span class="n">sum</span>                       <span class="c1">// 114</span>
-<span class="n">tree</span><span class="o">.</span><span class="nf">indexOf</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>               <span class="c1">// BSTreeIndex type</span>
 <span class="n">tree</span><span class="o">.</span><span class="nf">containsValue</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>         <span class="c1">// true</span>
 <span class="n">tree</span><span class="o">.</span><span class="nf">ceilingValue</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>          <span class="c1">// 32</span>
 <span class="n">tree</span><span class="o">.</span><span class="nf">ceilingValue</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>          <span class="c1">// 32</span>
@@ -148,6 +147,14 @@ Collection are of non-numeric type BSTreeIndex<T>.</p>
 <span class="n">value</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">value</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">value</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">let</span> <span class="nv">index</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="nf">indexOf</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>    <span class="c1">// Type BSTreeIndex&lt;Int&gt;</span>
+<span class="k">if</span> <span class="k">let</span> <span class="nv">index</span> <span class="o">=</span> <span class="n">index</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">index2</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="nv">before</span><span class="p">:</span> <span class="n">index</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"value = </span><span class="se">\(</span><span class="n">tree</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="se">)</span><span class="s">, count = </span><span class="se">\(</span><span class="n">tree</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">value</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
 </code></pre>
 
           </div>
@@ -155,94 +162,6 @@ Collection are of non-numeric type BSTreeIndex<T>.</p>
 
         <section class="section">
           <div class="section-content">
-            <div class="task-group">
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:ST7ElementQa"></a>
-                    <a name="//apple_ref/swift/Alias/Element" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ST7ElementQa">Element</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Element</span> <span class="o">=</span> <span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sl5IndexQa"></a>
-                    <a name="//apple_ref/swift/Alias/Index" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sl5IndexQa">Index</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">Index</span> <span class="o">=</span> <span class="kt"><a href="../Structs/BSTreeIndex.html">BSTreeIndex</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:5Strux6BSTreeC4copy4withyp10ObjectiveC6NSZoneVSg_tF"></a>
-                    <a name="//apple_ref/swift/Method/copy(with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Strux6BSTreeC4copy4withyp10ObjectiveC6NSZoneVSg_tF">copy(with:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Returns a copy of the tree (a shallow copy if T is a reference type).</p>
-
-<p>Example:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">tree</span> <span class="o">=</span> <span class="kt">BSTree</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">tree2</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="nf">copy</span><span class="p">()</span> <span class="k">as!</span> <span class="kt">BSTree</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span>
-</code></pre>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">copy</span><span class="p">(</span><span class="n">with</span> <span class="nv">zone</span><span class="p">:</span> <span class="kt">NSZone</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
             <div class="task-group">
               <div class="task-name-container">
                 <a name="/Constructors"></a>
@@ -421,6 +340,51 @@ Collection are of non-numeric type BSTreeIndex<T>.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/Copying"></a>
+                <a name="//apple_ref/swift/Section/Copying" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Copying"></a>
+                  <h3 class="section-name"><p>Copying</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Strux6BSTreeC4copy4withyp10ObjectiveC6NSZoneVSg_tF"></a>
+                    <a name="//apple_ref/swift/Method/copy(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux6BSTreeC4copy4withyp10ObjectiveC6NSZoneVSg_tF">copy(with:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a copy of the tree (a shallow copy if T is a reference type).</p>
+
+<p>Example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">tree</span> <span class="o">=</span> <span class="kt">BSTree</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">tree2</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="nf">copy</span><span class="p">()</span> <span class="k">as!</span> <span class="kt">BSTree</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">copy</span><span class="p">(</span><span class="n">with</span> <span class="nv">zone</span><span class="p">:</span> <span class="kt">NSZone</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/Modifying%20the%20Tree"></a>
                 <a name="//apple_ref/swift/Section/Modifying the Tree" class="dashAnchor"></a>
                 <div class="section-name-container">
@@ -430,66 +394,6 @@ Collection are of non-numeric type BSTreeIndex<T>.</p>
                 </div>
               </div>
               <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:5Strux6BSTreeC6insertyyx_SitF"></a>
-                    <a name="//apple_ref/swift/Method/insert(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Strux6BSTreeC6insertyyx_SitF">insert(_:<wbr>_:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Insert the given number of the given value into the tree. If the value is already in the tree,
-the count is incremented by the given number.
-Time complexity: <em>O(logN)</em></p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="n">_</span> <span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>val</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The value to insert n of</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>n</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The number of val to insert</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -540,56 +444,9 @@ by one. Time complexity: <em>O(logN)</em></p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Strux6BSTreeC6insertyySayxGF"></a>
+                    <a name="/s:5Strux6BSTreeC6insertyyxd_tF"></a>
                     <a name="//apple_ref/swift/Method/insert(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Strux6BSTreeC6insertyySayxGF">insert(_:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Insert values from an array. Time complexity: <em>O(log(Nm))</em> , where m is the number of values being
-inserted.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="n">_</span> <span class="nv">vals</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">])</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>vals</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The values to insert</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:5Strux6BSTreeC14insertMultipleyyxd_tF"></a>
-                    <a name="//apple_ref/swift/Method/insertMultiple(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Strux6BSTreeC14insertMultipleyyxd_tF">insertMultiple(_:<wbr>)</a>
+                    <a class="token" href="#/s:5Strux6BSTreeC6insertyyxd_tF">insert(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -605,7 +462,7 @@ values being inserted.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">insertMultiple</span><span class="p">(</span><span class="n">_</span> <span class="nv">vals</span><span class="p">:</span> <span class="kt">T</span><span class="o">...</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="n">_</span> <span class="nv">vals</span><span class="p">:</span> <span class="kt">T</span><span class="o">...</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -634,9 +491,9 @@ values being inserted.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Strux6BSTreeC6removeyyx_SitF"></a>
-                    <a name="//apple_ref/swift/Method/remove(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Strux6BSTreeC6removeyyx_SitF">remove(_:<wbr>_:<wbr>)</a>
+                    <a name="/s:5Strux6BSTreeC6insert1n2ofySi_xtF"></a>
+                    <a name="//apple_ref/swift/Method/insert(n:of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux6BSTreeC6insert1n2ofySi_xtF">insert(n:<wbr>of:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -644,8 +501,8 @@ values being inserted.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Remove the given number of the given value from the tree. If the given number is &gt;= the number
-of the value in the tree, the value is removed completed.
+                        <p>Insert the given number of the given value into the tree. If the value is already in the tree,
+the count is incremented by the given number.
 Time complexity: <em>O(logN)</em></p>
 
                       </div>
@@ -653,7 +510,7 @@ Time complexity: <em>O(logN)</em></p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">remove</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="n">_</span> <span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">of</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -669,7 +526,7 @@ Time complexity: <em>O(logN)</em></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The value to remove n of</p>
+                                  <p>The value to insert n of</p>
                                 </div>
                               </td>
                             </tr>
@@ -681,7 +538,54 @@ Time complexity: <em>O(logN)</em></p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The number of val to remove</p>
+                                  <p>The number of val to insert</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Strux6BSTreeC11insertArrayyySayxGF"></a>
+                    <a name="//apple_ref/swift/Method/insertArray(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux6BSTreeC11insertArrayyySayxGF">insertArray(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Insert values from an array. Time complexity: <em>O(log(Nm))</em> , where m is the number of values being
+inserted.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">insertArray</span><span class="p">(</span><span class="n">_</span> <span class="nv">vals</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>vals</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The values to insert</p>
                                 </div>
                               </td>
                             </tr>
@@ -742,9 +646,69 @@ Time complexity: <em>O(logN)</em></p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Strux6BSTreeC9removeAllyyxF"></a>
-                    <a name="//apple_ref/swift/Method/removeAll(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Strux6BSTreeC9removeAllyyxF">removeAll(_:<wbr>)</a>
+                    <a name="/s:5Strux6BSTreeC6remove1n2ofySi_xtF"></a>
+                    <a name="//apple_ref/swift/Method/remove(n:of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux6BSTreeC6remove1n2ofySi_xtF">remove(n:<wbr>of:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove the given number of the given value from the tree. If the given number is &gt;= the number
+of the value in the tree, the value is removed completed.
+Time complexity: <em>O(logN)</em></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">remove</span><span class="p">(</span><span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">of</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>val</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The value to remove n of</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>n</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of val to remove</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Strux6BSTreeC9removeAll2ofyx_tF"></a>
+                    <a name="//apple_ref/swift/Method/removeAll(of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux6BSTreeC9removeAll2ofyx_tF">removeAll(of:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -760,7 +724,7 @@ Time complexity: <em>O(logN)</em></p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeAll</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeAll</span><span class="p">(</span><span class="n">of</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -829,9 +793,9 @@ Time complexity: <em>O(logN)</em></p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Strux6BSTreeC7indexOfyAA0B5IndexVyxGSgxF"></a>
-                    <a name="//apple_ref/swift/Method/indexOf(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Strux6BSTreeC7indexOfyAA0B5IndexVyxGSgxF">indexOf(_:<wbr>)</a>
+                    <a name="/s:5Strux6BSTreeC5indexyAA0B5IndexVyxGSgxF"></a>
+                    <a name="//apple_ref/swift/Method/index(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux6BSTreeC5indexyAA0B5IndexVyxGSgxF">index(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -847,7 +811,7 @@ Time complexity: <em>O(logN)</em></p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">indexOf</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">index</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Index</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -931,9 +895,9 @@ Time complexity: <em>O(logN)</em></p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:5Strux6BSTreeC5count2ofSix_tF"></a>
-                    <a name="//apple_ref/swift/Method/count(of:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:5Strux6BSTreeC5count2ofSix_tF">count(of:<wbr>)</a>
+                    <a name="/s:5Strux6BSTreeC5countySixF"></a>
+                    <a name="//apple_ref/swift/Method/count(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux6BSTreeC5countySixF">count(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -949,7 +913,7 @@ Time complexity: <em>O(logN)</em></p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">count</span><span class="p">(</span><span class="n">of</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">count</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>
@@ -1000,7 +964,7 @@ comparator, or by the &lsquo;&lt;&rsquo; operator. Returns nil if there is no ce
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">ceilingIndex</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">ceilingIndex</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Index</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -1102,7 +1066,7 @@ comparator, or by the &lsquo;&lt;&rsquo; operator. Returns nil if there is no fl
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">floorIndex</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">floorIndex</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Index</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -1204,7 +1168,7 @@ comparator, or by the &lsquo;&lt;&rsquo; operator. Returns nil if there is no hi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">higherIndex</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">higherIndex</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Index</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -1306,7 +1270,7 @@ comparator, or by the &lsquo;&lt;&rsquo; operator. Returns nil if there is no lo
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">lowerIndex</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">lowerIndex</span><span class="p">(</span><span class="n">_</span> <span class="nv">val</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Index</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -1509,7 +1473,7 @@ empty whereas startIndex will not. Time complexity: <em>O(1)</em></p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">firstIndex</span><span class="p">:</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">firstIndex</span><span class="p">:</span> <span class="kt">Index</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -1568,7 +1532,7 @@ lastIndex, and is never nil. Time complexity: <em>O(1)</em></p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">lastIndex</span><span class="p">:</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">lastIndex</span><span class="p">:</span> <span class="kt">Index</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -1627,7 +1591,7 @@ complexity: <em>O(1)</em></p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">medianIndices</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">medianIndices</span><span class="p">:</span> <span class="p">[</span><span class="kt">Index</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -1649,7 +1613,8 @@ complexity: <em>O(1)</em></p>
                       <div class="abstract">
                         <p>Returns zero, one, or two median values. There will be zero values if and only if
 the tree is empty. There will be two values if the tree&rsquo;s totalCount is a multiple of 2
-and the values at positions n/2 and n/2 + 1 (starting with 1) differ. Otherwise one value. Time complexity: <em>O(1)</em></p>
+and the values at positions n/2 and n/2 + 1 (starting with 1) differ. Otherwise one value.
+Time complexity: <em>O(1)</em></p>
 
                       </div>
                       <div class="declaration">
@@ -1698,7 +1663,7 @@ Time complexity: <em>O(N)</em></p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">traverseInOrder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Classes/BSTree.html#/s:ST7ElementQa">Element</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">traverseInOrder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Element</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -1730,7 +1695,7 @@ element returned.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">traversePreOrder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Classes/BSTree.html#/s:ST7ElementQa">Element</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">traversePreOrder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Element</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -1762,7 +1727,7 @@ element returned.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">traversePostOrder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Classes/BSTree.html#/s:ST7ElementQa">Element</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">traversePostOrder</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Element</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -1793,7 +1758,7 @@ element returned.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">traverseByLevel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Classes/BSTree.html#/s:ST7ElementQa">Element</a></span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">traverseByLevel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Element</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -1808,11 +1773,11 @@ element returned.</p>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Converting/Comparing"></a>
-                <a name="//apple_ref/swift/Section/Converting/Comparing" class="dashAnchor"></a>
+                <a name="/Converting"></a>
+                <a name="//apple_ref/swift/Section/Converting" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/Converting/Comparing"></a>
-                  <h3 class="section-name"><p>Converting/Comparing</p>
+                  <a class="section-name-link" href="#/Converting"></a>
+                  <h3 class="section-name"><p>Converting</p>
 </h3>
                 </div>
               </div>
@@ -1861,8 +1826,8 @@ element returned.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns an array of the values in the tree, in order, and with duplicates. The size of the array
-is equal to totalCount.</p>
+                        <p>Returns an array of the values in the tree, in order, and with duplicates, if there are any values with
+a count greater than one. The size of the array is equal to <code><a href="../Classes/BSTree.html#/s:5Strux6BSTreeC10totalCountSivp">totalCount</a></code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1880,6 +1845,19 @@ is equal to totalCount.</p>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Comparing"></a>
+                <a name="//apple_ref/swift/Section/Comparing" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Comparing"></a>
+                  <h3 class="section-name"><p>Comparing</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -2098,7 +2076,7 @@ as root) shown.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">startIndex</span><span class="p">:</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">startIndex</span><span class="p">:</span> <span class="kt">Index</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -2124,7 +2102,7 @@ as root) shown.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">endIndex</span><span class="p">:</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">endIndex</span><span class="p">:</span> <span class="kt">Index</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -2150,7 +2128,7 @@ as root) shown.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">i</span><span class="p">:</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BSTree.html#/s:ST7ElementQa">Element</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">i</span><span class="p">:</span> <span class="kt">Index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Element</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -2176,7 +2154,7 @@ as root) shown.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">index</span><span class="p">(</span><span class="n">after</span> <span class="nv">i</span><span class="p">:</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">index</span><span class="p">(</span><span class="n">after</span> <span class="nv">i</span><span class="p">:</span> <span class="kt">Index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Index</span></code></pre>
 
                         </div>
                       </div>
@@ -2202,7 +2180,7 @@ as root) shown.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">index</span><span class="p">(</span><span class="n">before</span> <span class="nv">i</span><span class="p">:</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/BSTree.html#/s:Sl5IndexQa">Index</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">index</span><span class="p">(</span><span class="n">before</span> <span class="nv">i</span><span class="p">:</span> <span class="kt">Index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Index</span></code></pre>
 
                         </div>
                       </div>
@@ -2354,7 +2332,7 @@ as root) shown.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Initialize with an unsorted array of values, which can contain duplicates.</p>
+                        <p>Initialize with a comma-separated list of values, which can contain duplicates.</p>
 
                       </div>
                       <div class="declaration">
@@ -2435,7 +2413,7 @@ as root) shown.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://www.linkedin.com/in/rick-clark-172237194/" target="_blank" rel="external">Rick Clark</a>. All rights reserved. (Last updated: 2020-05-26)</p>
+      <p>&copy; 2020 <a class="link" href="https://www.linkedin.com/in/rick-clark-172237194/" target="_blank" rel="external">Rick Clark</a>. All rights reserved. (Last updated: 2020-05-27)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

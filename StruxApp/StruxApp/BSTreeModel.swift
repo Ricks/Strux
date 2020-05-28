@@ -135,7 +135,7 @@ class BSTreeModel: ObservableObject {
             if tree1.indexOf(44) == nil {
                 print("*** Can't get index of 44")
             }
-            if !tree1.containsValue(44) {
+            if !tree1.contains(44) {
                 print("*** Doesn't contain")
             }
             if tree2.count(of: 44) != 1 {

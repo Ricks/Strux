@@ -163,7 +163,7 @@ class BSTreeValueTests: XCTestCase {
     func testCeiling() {
         let tree = BSTree<Int>()
         helperTestCeiling(tree, 0, nil)
-        tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
+        tree.insert(1, 2, 4, 6, 9, 15, 22, -1)
         helperTestCeiling(tree, -2, -1)
         helperTestCeiling(tree, -1, -1)
         helperTestCeiling(tree, 0, 1)
@@ -186,7 +186,7 @@ class BSTreeValueTests: XCTestCase {
             (0..<treeSizish).forEach { _ in
                 let val = seededRandom(in: -5 ..< 100)
                 let count = seededRandom(in: 1 ..< 4)
-                tree.insert(val, count)
+                tree.insert(val, count: count)
                 var lastVal: Int?
                 for (val, _) in tree {
                     let lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! + 1) / 2
@@ -212,7 +212,7 @@ class BSTreeValueTests: XCTestCase {
     func testFloor() {
         let tree = BSTree<Int>()
         helperTestFloor(tree, 0, nil)
-        tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
+        tree.insert(1, 2, 4, 6, 9, 15, 22, -1)
         helperTestFloor(tree, -2, nil)
         helperTestFloor(tree, -1, -1)
         helperTestFloor(tree, 0, -1)
@@ -235,7 +235,7 @@ class BSTreeValueTests: XCTestCase {
             (0..<treeSizish).forEach { _ in
                 let val = seededRandom(in: -5 ..< 100)
                 let count = seededRandom(in: 1 ..< 4)
-                tree.insert(val, count)
+                tree.insert(val, count: count)
                 var lastVal: Int?
                 for (val, _) in tree {
                     let lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! - 1) / 2
@@ -261,7 +261,7 @@ class BSTreeValueTests: XCTestCase {
     func testHigherValue() {
         let tree = BSTree<Int>()
         helperTestHigherValue(tree, 0, nil)
-        tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
+        tree.insert(1, 2, 4, 6, 9, 15, 22, -1)
         helperTestHigherValue(tree, -2, -1)
         helperTestHigherValue(tree, -1, 1)
         helperTestHigherValue(tree, 0, 1)
@@ -284,7 +284,7 @@ class BSTreeValueTests: XCTestCase {
             (0..<treeSizish).forEach { _ in
                 let val = seededRandom(in: -5 ..< 100)
                 let count = seededRandom(in: 1 ..< 4)
-                tree.insert(val, count)
+                tree.insert(val, count: count)
                 var lastVal: Int?
                 for (val, _) in tree {
                     let lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! - 1) / 2
@@ -311,7 +311,7 @@ class BSTreeValueTests: XCTestCase {
     func testlowerValue() {
         let tree = BSTree<Int>()
         helperTestLowerValue(tree, 0, nil)
-        tree.insertMultiple(1, 2, 4, 6, 9, 15, 22, -1)
+        tree.insert(1, 2, 4, 6, 9, 15, 22, -1)
         helperTestLowerValue(tree, -2, nil)
         helperTestLowerValue(tree, -1, nil)
         helperTestLowerValue(tree, 0, -1)
@@ -334,7 +334,7 @@ class BSTreeValueTests: XCTestCase {
             (0..<treeSizish).forEach { _ in
                 let val = seededRandom(in: -5 ..< 100)
                 let count = seededRandom(in: 1 ..< 4)
-                tree.insert(val, count)
+                tree.insert(val, count: count)
                 var lastVal: Int?
                 for (val, _) in tree {
                     let lookingFor = (lastVal == nil) ? val - 1 : (val + lastVal! + 1) / 2

@@ -54,9 +54,9 @@ struct MedianIndex<T>: CustomStringConvertible {
         if nodeToBeRemoved === node { denormalize() }
     }
 
-    mutating func updateAfterChange(of val: T, n: Int, ordered: Ordered<T>) {
+    mutating func updateAfterChange(of val: T, count: Int, ordered: Ordered<T>) {
         if let node = node {
-            halfIndex += (ordered(val, node.value) ? -n : n)
+            halfIndex += (ordered(val, node.value) ? -count : count)
             normalize()
         }
     }

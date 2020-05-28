@@ -38,7 +38,7 @@ class BSNodeModifyTests: XCTestCase {
                     tree.remove(val)
                     set.remove(val)
                 case 20 - 29:
-                    tree.remove(val, count)
+                    tree.remove(val, count: count)
                     for _ in 0 ..< count { set.remove(val) }
                 case 30 - 32:
                     tree.clear()
@@ -47,7 +47,7 @@ class BSNodeModifyTests: XCTestCase {
                     if count == 1 {
                         tree.insert(val)
                     } else {
-                        tree.insert(val, count)
+                        tree.insert(val, count: count)
                     }
                     for _ in 0 ..< count { set.add(val) }
                 }
@@ -57,7 +57,7 @@ class BSNodeModifyTests: XCTestCase {
                 }
                 for val in set {
                     let intVal = val as! Int
-                    XCTAssertEqual(tree.count(of: intVal), set.count(for: intVal))
+                    XCTAssertEqual(tree.count(intVal), set.count(for: intVal))
                 }
                 let vals = (set.allObjects as! [Int]).sorted()
                 XCTAssertEqual(tree.count, vals.count)
@@ -98,56 +98,56 @@ class BSNodeModifyTests: XCTestCase {
 
     func testInsertMultipleValues() {
         let tree = BSTree<Int>()
-        tree.insert([1, 5, 3])
-        tree.insertMultiple(4, 9, -1)
+        tree.insertFrom([1, 5, 3])
+        tree.insert(4, 9, -1)
         XCTAssertEqual(tree.count, 6)
         XCTAssertEqual(tree.totalCount, 6)
         XCTAssertEqual(tree.sum, 21)
         XCTAssertEqual(tree.firstValue, -1)
         XCTAssertEqual(tree.lastValue, 9)
         XCTAssertEqual(tree.medianValues, [3, 4])
-        XCTAssertTrue(tree.containsValue(1))
-        XCTAssertTrue(tree.containsValue(5))
-        XCTAssertTrue(tree.containsValue(3))
-        XCTAssertTrue(tree.containsValue(4))
-        XCTAssertTrue(tree.containsValue(9))
-        XCTAssertTrue(tree.containsValue(-1))
-        XCTAssertFalse(tree.containsValue(42))
+        XCTAssertTrue(tree.contains(1))
+        XCTAssertTrue(tree.contains(5))
+        XCTAssertTrue(tree.contains(3))
+        XCTAssertTrue(tree.contains(4))
+        XCTAssertTrue(tree.contains(9))
+        XCTAssertTrue(tree.contains(-1))
+        XCTAssertFalse(tree.contains(42))
         print(tree)
     }
 
     func testRemoveNonExistentValue() {
         let tree = BSTree<Int>()
         tree.insert([1, 5, 3])
-        tree.insertMultiple(4, 9, -1)
+        tree.insert(4, 9, -1)
         XCTAssertEqual(tree.count, 6)
         XCTAssertEqual(tree.totalCount, 6)
         XCTAssertEqual(tree.sum, 21)
         XCTAssertEqual(tree.firstValue, -1)
         XCTAssertEqual(tree.lastValue, 9)
         XCTAssertEqual(tree.medianValues, [3, 4])
-        XCTAssertTrue(tree.containsValue(1))
-        XCTAssertTrue(tree.containsValue(5))
-        XCTAssertTrue(tree.containsValue(3))
-        XCTAssertTrue(tree.containsValue(4))
-        XCTAssertTrue(tree.containsValue(9))
-        XCTAssertTrue(tree.containsValue(-1))
-        XCTAssertFalse(tree.containsValue(42))
+        XCTAssertTrue(tree.contains(1))
+        XCTAssertTrue(tree.contains(5))
+        XCTAssertTrue(tree.contains(3))
+        XCTAssertTrue(tree.contains(4))
+        XCTAssertTrue(tree.contains(9))
+        XCTAssertTrue(tree.contains(-1))
+        XCTAssertFalse(tree.contains(42))
 
-        tree.remove(5, 2)
+        tree.remove(5, count: 2)
         XCTAssertEqual(tree.count, 5)
         XCTAssertEqual(tree.totalCount, 5)
         XCTAssertEqual(tree.sum, 16)
         XCTAssertEqual(tree.firstValue, -1)
         XCTAssertEqual(tree.lastValue, 9)
         XCTAssertEqual(tree.medianValues, [3])
-        XCTAssertTrue(tree.containsValue(1))
-        XCTAssertFalse(tree.containsValue(5))
-        XCTAssertTrue(tree.containsValue(3))
-        XCTAssertTrue(tree.containsValue(4))
-        XCTAssertTrue(tree.containsValue(9))
-        XCTAssertTrue(tree.containsValue(-1))
-        XCTAssertFalse(tree.containsValue(42))
+        XCTAssertTrue(tree.contains(1))
+        XCTAssertFalse(tree.contains(5))
+        XCTAssertTrue(tree.contains(3))
+        XCTAssertTrue(tree.contains(4))
+        XCTAssertTrue(tree.contains(9))
+        XCTAssertTrue(tree.contains(-1))
+        XCTAssertFalse(tree.contains(42))
         XCTAssertEqual(tree.toValueArray(), [-1, 1, 3, 4, 9])
 
         tree.remove(5)
@@ -157,13 +157,59 @@ class BSNodeModifyTests: XCTestCase {
         XCTAssertEqual(tree.firstValue, -1)
         XCTAssertEqual(tree.lastValue, 9)
         XCTAssertEqual(tree.medianValues, [3])
-        XCTAssertTrue(tree.containsValue(1))
-        XCTAssertFalse(tree.containsValue(5))
-        XCTAssertTrue(tree.containsValue(3))
-        XCTAssertTrue(tree.containsValue(4))
-        XCTAssertTrue(tree.containsValue(9))
-        XCTAssertTrue(tree.containsValue(-1))
-        XCTAssertFalse(tree.containsValue(42))
+        XCTAssertTrue(tree.contains(1))
+        XCTAssertFalse(tree.contains(5))
+        XCTAssertTrue(tree.contains(3))
+        XCTAssertTrue(tree.contains(4))
+        XCTAssertTrue(tree.contains(9))
+        XCTAssertTrue(tree.contains(-1))
+        XCTAssertFalse(tree.contains(42))
         XCTAssertEqual(tree.toValueArray(), [-1, 1, 3, 4, 9])
+    }
+
+    func testAllTypesOfInsertionAndRemoval() {
+        let tree = BSTree<Int>()
+
+        tree.insert([1, 5, 3])
+        tree.insert(4, 9, -1)
+        XCTAssertEqual(tree.count, 6)
+        XCTAssertEqual(tree.totalCount, 6)
+        XCTAssertEqual(tree.sum, 21)
+
+        tree.insert(5)
+        XCTAssertEqual(tree.count, 6)
+        XCTAssertEqual(tree.totalCount, 7)
+        XCTAssertEqual(tree.sum, 26)
+
+        tree.insert(3, count: 7)
+        XCTAssertEqual(tree.count, 6)
+        XCTAssertEqual(tree.totalCount, 14)
+        XCTAssertEqual(tree.sum, 47)
+
+        tree.remove(9)
+        XCTAssertEqual(tree.count, 5)
+        XCTAssertEqual(tree.totalCount, 13)
+        XCTAssertEqual(tree.sum, 38)
+
+        tree.remove(3, count: 2)
+        XCTAssertEqual(tree.count, 5)
+        XCTAssertEqual(tree.totalCount, 11)
+        XCTAssertEqual(tree.sum, 32)
+
+        tree.removeAll(3)
+        XCTAssertEqual(tree.count, 4)
+        XCTAssertEqual(tree.totalCount, 5)
+        XCTAssertEqual(tree.sum, 14)
+
+        tree.remove(4, -1)
+        XCTAssertEqual(tree.count, 2)
+        XCTAssertEqual(tree.totalCount, 3)
+        XCTAssertEqual(tree.sum, 11)
+
+        tree.remove([1, 5, 5, 5])
+        XCTAssertEqual(tree.count, 0)
+        XCTAssertEqual(tree.totalCount, 0)
+        XCTAssertEqual(tree.sum, 0)
+        XCTAssertTrue(tree.isEmpty)
     }
 }
