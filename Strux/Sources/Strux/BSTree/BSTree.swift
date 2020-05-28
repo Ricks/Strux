@@ -158,7 +158,7 @@ public class BSTree<T: Equatable>: NSCopying {
     /// - Parameters:
     ///   - values: Array
     ///   - ordered: Ordered ((T, T) -> Bool)
-    public convenience init<S>(_ vals: S, ordered: @escaping Ordered<T>) where S : Sequence, S.Element == T {
+    public convenience init<S>(_ vals: S, ordered: @escaping Ordered<T>) where S: Sequence, S.Element == T {
         self.init(ordered: ordered)
         var values = [T]()
         for val in vals { values.append(val) }
@@ -196,7 +196,7 @@ extension BSTree where T: Comparable {
 
     /// Initialize with an unsorted sequence of values, which can contain duplicates.
     /// - Parameter values: Array
-    public convenience init<S>(_ vals: S) where S : Sequence, S.Element == T {
+    public convenience init<S>(_ vals: S) where S: Sequence, S.Element == T {
         self.init()
         var values = [T]()
         for val in vals { values.append(val) }
@@ -305,7 +305,7 @@ extension BSTree {
     /// of values being inserted.
     /// - Parameters:
     ///   - vals: The values to insert
-    public func insert<S>(_ vals: S) where S : Sequence, S.Element == T {
+    public func insert<S>(_ vals: S) where S: Sequence, S.Element == T {
         for val in vals { performInsertion(val, 1) }
     }
 
@@ -342,7 +342,7 @@ extension BSTree {
     /// number of values being removed.
     /// - Parameters:
     ///   - vals: The values to insert
-    public func remove<S>(_ vals: S) where S : Sequence, S.Element == T {
+    public func remove<S>(_ vals: S) where S: Sequence, S.Element == T {
         for val in vals {
             performRemoval(val, 1)
         }
@@ -770,7 +770,7 @@ extension BSTree where T: AdditiveArithmetic {
     }
 
     /// :nodoc:
-    public func insertFrom<S>(_ vals: S) where S : Sequence, S.Element == T {
+    public func insertFrom<S>(_ vals: S) where S: Sequence, S.Element == T {
         for val in vals {
             // Has to come before performInsertsion() so that sum is initialized correctly.
             addToSumStorage(val, 1)
@@ -799,7 +799,7 @@ extension BSTree where T: AdditiveArithmetic {
     }
 
     /// :nodoc:
-    public func remove<S>(_ vals: S) where S : Sequence, S.Element == T {
+    public func remove<S>(_ vals: S) where S: Sequence, S.Element == T {
         for val in vals {
             let numRemoved = performRemoval(val, 1)
             subtractFromSumStorage(val, numRemoved)
