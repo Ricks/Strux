@@ -119,7 +119,7 @@ be supplied. The comparator can also be given to override a Comparable type&rsqu
 the ordering of String values case insentitive). If a comparator isn&rsquo;t given, the ordering is from min
 to max.</p>
 
-<p>Insertions, deletions, and specific value queries (indexOf, containsValue, ceiling, floor, higher, lower)
+<p>Insertions, deletions, and specific value queries (index, contains, count, ceiling, floor, higher, lower)
 have time complexity <em>O(logN)</em>. General queries, i.e. the count of unique values, the count of total values,
 tree height, first, last, and median are all <em>O(1)</em>. If the values are numeric, the sum of all values is
 also available in <em>O(1)</em>. Traversing the tree in order, first to last or vice-versa, is <em>O(N)</em>.</p>
@@ -129,9 +129,10 @@ performance requirements. It also conforms to Equatable and NSCopying.</p>
 
 <p>The elements of the Collection are tuples of the form (value: T, count: Int). The indices of the
 Collection are of non-numeric type BSTreeIndex<T>.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">tree</span> <span class="o">=</span> <span class="kt">BSTree</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>  <span class="c1">// Don't need comparator, because Int is Comparable</span>
-<span class="n">tree</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>                 <span class="c1">// Insert 2 of value 42</span>
-<span class="n">tree</span><span class="o">.</span><span class="nf">removeAll</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>                 <span class="c1">// Remove both 14's</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">tree</span> <span class="o">=</span> <span class="kt">BSTree</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>  <span class="c1">// Don't need comparator, because Int is Comparable</span>
+<span class="n">tree</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">tree</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="nv">count</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>      <span class="c1">// Insert 2 of value 42</span>
+<span class="n">tree</span><span class="o">.</span><span class="nf">removeAll</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>             <span class="c1">// Remove both 14's</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
 
    <span class="mi">32</span>
@@ -145,7 +146,8 @@ Collection are of non-numeric type BSTreeIndex<T>.</p>
 <span class="n">tree</span><span class="o">.</span><span class="n">lastValue</span>                 <span class="c1">// 42</span>
 <span class="n">tree</span><span class="o">.</span><span class="n">medianValues</span>              <span class="c1">// [32, 42]</span>
 <span class="n">tree</span><span class="o">.</span><span class="n">sum</span>                       <span class="c1">// 114</span>
-<span class="n">tree</span><span class="o">.</span><span class="nf">containsValue</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>         <span class="c1">// true</span>
+<span class="n">tree</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>              <span class="c1">// true</span>
+<span class="n">tree</span><span class="o">.</span><span class="nf">count</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>                 <span class="c1">// 2</span>
 <span class="n">tree</span><span class="o">.</span><span class="nf">ceilingValue</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>          <span class="c1">// 32</span>
 <span class="n">tree</span><span class="o">.</span><span class="nf">ceilingValue</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>          <span class="c1">// 32</span>
 <span class="n">tree</span><span class="o">.</span><span class="nf">floorValue</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>            <span class="c1">// 32</span>
@@ -194,7 +196,7 @@ Collection are of non-numeric type BSTreeIndex<T>.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://www.linkedin.com/in/rick-clark-172237194/" target="_blank" rel="external">Rick Clark</a>. All rights reserved. (Last updated: 2020-05-27)</p>
+      <p>&copy; 2020 <a class="link" href="https://www.linkedin.com/in/rick-clark-172237194/" target="_blank" rel="external">Rick Clark</a>. All rights reserved. (Last updated: 2020-05-28)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

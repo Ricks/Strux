@@ -13,15 +13,15 @@ import Foundation
 /// are not Comparable, or to override the innate ordering.
 ///
 /// For example, if we wanted the ordering for String values to be case insensitive:
-/// ```
+/// ````
 /// let tree = BSTree() { (s1: String, s2: String) in
 ///     return s1.lowercased() < s2.lowercased()
 /// }
-/// ```
+/// ````
 /// or more succinctly:
-/// ```
+/// ````
 /// let tree = BSTree() { $0.lowercased() < $1.lowercased() }
-/// ```
+/// ````
 public typealias Ordered<T> = (T, T) -> Bool
 
 /// A counted, self-balancing (AVL) binary search tree. Counted means that there are no duplicate nodes
@@ -34,7 +34,7 @@ public typealias Ordered<T> = (T, T) -> Bool
 /// the ordering of String values case insentitive). If a comparator isn't given, the ordering is from min
 /// to max.
 ///
-/// Insertions, deletions, and specific value queries (indexOf, contains, ceiling, floor, higher, lower)
+/// Insertions, deletions, and specific value queries (index, contains, count, ceiling, floor, higher, lower)
 /// have time complexity *O(logN)*. General queries, i.e. the count of unique values, the count of total values,
 /// tree height, first, last, and median are all *O(1)*. If the values are numeric, the sum of all values is
 /// also available in *O(1)*. Traversing the tree in order, first to last or vice-versa, is *O(N)*.
@@ -48,8 +48,8 @@ public typealias Ordered<T> = (T, T) -> Bool
 /// ```
 /// let tree = BSTree(14, 32, 14)  // Don't need comparator, because Int is Comparable
 /// tree.insert(-2)
-/// tree.insert(42, count: 2)              // Insert 2 of value 42
-/// tree.removeAll(14)                 // Remove both 14's
+/// tree.insert(42, count: 2)      // Insert 2 of value 42
+/// tree.removeAll(14)             // Remove both 14's
 /// print(tree)
 ///
 ///    32
