@@ -105,7 +105,7 @@ public class BSTree<T: Equatable>: NSCopying {
     var firstNode: BSNode<T>?
     var medianIndex = MedianIndex<T>()
 
-    /// The root node of the tree, or nil if the tree is empty. The root node has the tree as parent, so
+    /// The root node of the tree, or nil if the tree is empty. The root node has god as parent, so
     /// that all the BSNodes of the tree have parents.
     var root: BSNode<T>? {
         get { return god.leftNode as? BSNode }
@@ -366,7 +366,7 @@ extension BSTree {
 
     // MARK: Value-Specific Queries
 
-    /// Return the index (BSTreeIndex) of the value, or nil if the tree doesn't have the value.
+    /// Return the index (`BSTreeIndex`) of the value, or nil if the tree doesn't have the value.
     /// Time complexity: *O(logN)*
     /// - Parameter val: The value to look for
     /// - Returns: index, or nil if not found
@@ -557,9 +557,7 @@ extension BSTree {
     public func traverseInOrder() -> [Element] {
         // Using next pointers (i.e. Collection) is faster than recursive BSNode traverseInOrder.
         var out = [Element]()
-        for element in self {
-            out.append(element)
-        }
+        for element in self { out.append(element) }
         return out
     }
 
@@ -640,11 +638,11 @@ extension BSTree: CustomStringConvertible {
     ///
     /// Example:
     ///```
-    ///    __42_
-    ///   /     \
-    /// 13       70(2)
-    ///   \
-    ///    17
+    ///      __42_
+    ///     /     \
+    ///   13       70(2)
+    ///  /  \
+    /// 9    17
     ///```
     public var description: String {
         root?.description ?? ""
