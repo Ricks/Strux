@@ -1,0 +1,16 @@
+#!/bin/sh
+jazzy --swift-build-tool spm
+cd Sources
+swiftlint
+read -p "Continue? " shallContinue
+if [[ $shallContinue != "y" ]]
+then
+    exit
+fi
+read -p "Commit message (return to use editor): " commitMsg
+if [[ $commitMsg == "" ]]
+then
+    git commit -a
+else
+    git commit -a -m "$commitMsg"
+fi
