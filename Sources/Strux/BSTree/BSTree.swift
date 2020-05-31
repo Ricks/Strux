@@ -295,8 +295,8 @@ extension BSTree {
     /// the count is incremented by the given number.
     /// Time complexity: *O(logN)*
     /// - Parameters:
-    ///   - val: The value to insert n of
-    ///   - n: The number of val to insert
+    ///   - val: The value to insert count of
+    ///   - count: The number of val to insert
     public func insert(_ val: T, count: Int) {
         performInsertion(val, count)
     }
@@ -332,8 +332,8 @@ extension BSTree {
     /// of the value in the tree, the value is removed completed.
     /// Time complexity: *O(logN)*
     /// - Parameters:
-    ///   - val: The value to remove n of
-    ///   - n: The number of val to remove
+    ///   - val: The value to remove count of
+    ///   - count: The number of val to remove
     public func remove(_ val: T, count: Int) {
         performRemoval(val, count)
     }

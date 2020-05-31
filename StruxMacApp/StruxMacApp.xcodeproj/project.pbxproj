@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D0FEE8A24846BD0001F8732 /* Strux in Frameworks */ = {isa = PBXBuildFile; productRef = 1D0FEE8924846BD0001F8732 /* Strux */; };
 		1D81C90C24743F56000B56ED /* SeededRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81C90B24743F56000B56ED /* SeededRandom.swift */; };
 		1D84C247246F456B00B436CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D84C246246F456B00B436CA /* AppDelegate.swift */; };
 		1D84C249246F456B00B436CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D84C248246F456B00B436CA /* ContentView.swift */; };
@@ -38,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D0FEE8A24846BD0001F8732 /* Strux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +113,7 @@
 			);
 			name = StruxMacApp;
 			packageProductDependencies = (
+				1D0FEE8924846BD0001F8732 /* Strux */,
 			);
 			productName = StruxMacApp;
 			productReference = 1D84C243246F456B00B436CA /* StruxMacApp.app */;
@@ -323,7 +326,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = Scipio.StruxMacApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -347,7 +350,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = Scipio.StruxMacApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -373,6 +376,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D0FEE8924846BD0001F8732 /* Strux */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Strux;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1D84C23B246F456B00B436CA /* Project object */;
 }
