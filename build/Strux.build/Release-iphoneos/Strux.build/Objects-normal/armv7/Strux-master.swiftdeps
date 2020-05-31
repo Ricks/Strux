@@ -1,0 +1,15 @@
+version: "Apple Swift version 5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
+options: "88586e8a1079b7fc05f6e1704a0524de"
+build_time: [1590799181, 679464000]
+inputs:
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/BSTree/BNode.swift": [9223372036, 854775807]
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/BSTree/BSNode.swift": [9223372036, 854775807]
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/BSTree/BSNodeAVL.swift": [9223372036, 854775807]
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/BSTree/BSNodeCheck.swift": [9223372036, 854775807]
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/BSTree/BSNodeDescription.swift": [9223372036, 854775807]
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/BSTree/BSNodeModify.swift": [9223372036, 854775807]
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/BSTree/BSNodeTraverse.swift": [9223372036, 854775807]
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/BSTree/BSTree.swift": [9223372036, 854775807]
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/BSTree/MedianIndex.swift": [9223372036, 854775807]
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/Heap.swift": [9223372036, 854775807]
+  "/Users/Rick/Swift/Strux2/Strux/Strux/Sources/Strux/Queue.swift": [9223372036, 854775807]

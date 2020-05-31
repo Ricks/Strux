@@ -56,7 +56,7 @@ struct ContentView: View {
                 TextView(text: $queueModel.output)
                     .font(.title)
                     .frame(height: 50)
-                Text("Time: \(queueModel.time, specifier: "%.2f")")
+                Text("Time: \((queueModel.time, specifier: "%.2f"))")
             }
             Spacer()
             Group {

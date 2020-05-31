@@ -17,7 +17,7 @@
 		1D98190F246225F800BC3E4E /* BSTreeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98190E246225F800BC3E4E /* BSTreeModel.swift */; };
 		1D9819462464AEEC00BC3E4E /* HeapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9819452464AEEC00BC3E4E /* HeapModel.swift */; };
 		1D9819482464B37400BC3E4E /* QueueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9819472464B37400BC3E4E /* QueueModel.swift */; };
-		1DDFD677246763630000D02F /* Strux in Frameworks */ = {isa = PBXBuildFile; productRef = 1DDFD676246763630000D02F /* Strux */; };
+		1DF073DA248322EE004720EC /* Strux in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF073D9248322EE004720EC /* Strux */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DDFD677246763630000D02F /* Strux in Frameworks */,
+				1DF073DA248322EE004720EC /* Strux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +291,7 @@
 			);
 			name = StruxApp;
 			packageProductDependencies = (
-				1DDFD676246763630000D02F /* Strux */,
+				1DF073D9248322EE004720EC /* Strux */,
 			);
 			productName = StruxApp;
 			productReference = 1D9818C82462054300BC3E4E /* StruxApp.app */;
@@ -550,7 +550,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1DDFD676246763630000D02F /* Strux */ = {
+		1DF073D9248322EE004720EC /* Strux */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Strux;
 		};

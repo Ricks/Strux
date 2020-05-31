@@ -132,13 +132,13 @@ class BSTreeModel: ObservableObject {
             if tree2 != tree3 {
                 print("*** tree1 not equal to tree2")
             }
-            if tree1.indexOf(44) == nil {
+            if tree1.index(44) == nil {
                 print("*** Can't get index of 44")
             }
             if !tree1.contains(44) {
                 print("*** Doesn't contain")
             }
-            if tree2.count(of: 44) != 1 {
+            if tree2.count(44) != 1 {
                 print("*** Count of 44 not 1")
             }
             DispatchQueue.main.async {

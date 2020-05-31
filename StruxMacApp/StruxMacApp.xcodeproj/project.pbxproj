@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,6 @@
 		1D84C24B246F456D00B436CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D84C24A246F456D00B436CA /* Assets.xcassets */; };
 		1D84C24E246F456D00B436CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D84C24D246F456D00B436CA /* Preview Assets.xcassets */; };
 		1D84C251246F456D00B436CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D84C24F246F456D00B436CA /* Main.storyboard */; };
-		1D84C269246F45CA00B436CA /* Strux in Frameworks */ = {isa = PBXBuildFile; productRef = 1D84C268246F45CA00B436CA /* Strux */; };
 		1D84C26D246F473200B436CA /* QueueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D84C26A246F473200B436CA /* QueueModel.swift */; };
 		1D84C26E246F473200B436CA /* BSTreeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D84C26B246F473200B436CA /* BSTreeModel.swift */; };
 		1D84C26F246F473200B436CA /* HeapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D84C26C246F473200B436CA /* HeapModel.swift */; };
@@ -39,7 +38,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D84C269246F45CA00B436CA /* Strux in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,7 +111,6 @@
 			);
 			name = StruxMacApp;
 			packageProductDependencies = (
-				1D84C268246F45CA00B436CA /* Strux */,
 			);
 			productName = StruxMacApp;
 			productReference = 1D84C243246F456B00B436CA /* StruxMacApp.app */;
@@ -376,13 +373,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		1D84C268246F45CA00B436CA /* Strux */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Strux;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1D84C23B246F456B00B436CA /* Project object */;
 }
