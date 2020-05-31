@@ -1,4 +1,0 @@
-module Strux {
-header "Strux-Swift.h"
-export *
-}
