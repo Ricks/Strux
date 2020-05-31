@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Structures  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
+
+    <a title="Structures  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+           Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/ricks">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html"> Reference</a>
+      <img class="carat" src="img/carat.png" />
+      Structures  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/BSTree.html">BSTree</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/BSTreeIndex.html">BSTreeIndex</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Heap.html">Heap</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Queue.html">Queue</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Typealiases.html#/s:5Strux7Ordereda">Ordered</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>Structures</h1>
+            <p>The following structures are available globally.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/BidirectionalCollection"></a>
+                <a name="//apple_ref/swift/Section/BidirectionalCollection" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/BidirectionalCollection"></a>
+                  <h3 class="section-name"><p>BidirectionalCollection</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Strux11BSTreeIndexV"></a>
+                    <a name="//apple_ref/swift/Struct/BSTreeIndex" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux11BSTreeIndexV">BSTreeIndex</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Non-numeric index type of BSTree.</p>
+
+                        <a href="Structs/BSTreeIndex.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">BSTreeIndex</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Comparable</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Strux4HeapV"></a>
+                    <a name="//apple_ref/swift/Struct/Heap" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux4HeapV">Heap</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Min (default) or max heap. A heap is a tree-based data structure that can be used to efficiently
+implement a priority queue. It gives <em>O(1)</em> read (peek) access to the min or max value, and can be
+updated via a pop or push in <em>O(log(n))</em> time. Removing an arbitrary element takes <em>O(n)</em> time.</p>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">pq</span> <span class="o">=</span> <span class="kt">Heap</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">isMin</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">startingValues</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">72</span><span class="p">])</span>     <span class="c1">// Max heap</span>
+<span class="n">pq</span><span class="o">.</span><span class="n">isEmpty</span>                 <span class="c1">// false</span>
+<span class="n">pq</span><span class="o">.</span><span class="n">count</span>                   <span class="c1">// 7</span>
+<span class="k">let</span> <span class="nv">max</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="nf">pop</span><span class="p">()</span>         <span class="c1">// max = 99, removes 99 from the heap</span>
+<span class="k">let</span> <span class="nv">currentMax</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="nf">peek</span><span class="p">()</span> <span class="c1">// currentMax = 72, leaves heap the same</span>
+<span class="n">pq</span><span class="o">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>               <span class="c1">// Adds 100 to the heap</span>
+<span class="n">pq</span><span class="o">.</span><span class="nf">peek</span><span class="p">()</span>                  <span class="c1">// 100</span>
+<span class="n">pq</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>             <span class="c1">// true</span>
+<span class="n">pq</span><span class="o">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>                 <span class="c1">// Adds another 3</span>
+<span class="n">pq</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>               <span class="c1">// Removes one of the 3's from the heap</span>
+<span class="n">pq</span><span class="o">.</span><span class="nf">push</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>                <span class="c1">// Adds another -1</span>
+<span class="n">pq</span><span class="o">.</span><span class="nf">removeAll</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>           <span class="c1">// Removes both -1's</span>
+<span class="n">pq</span><span class="o">.</span><span class="nf">clear</span><span class="p">()</span>                 <span class="c1">// Removes all values</span>
+<span class="n">pq</span><span class="o">.</span><span class="n">isEmpty</span>                 <span class="c1">// true</span>
+</code></pre>
+
+                        <a href="Structs/Heap.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Heap</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Collection</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Comparable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:5Strux5QueueV"></a>
+                    <a name="//apple_ref/swift/Struct/Queue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:5Strux5QueueV">Queue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Standard queue (FIFO) - items are added at one end of the queue, and removed from the other.
+add() and remove() are <em>O(1)</em> (amortized for remove()). Queue conforms to the Collection and
+ExpressibleByArrayLiteral protocols.</p>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">q</span> <span class="o">=</span> <span class="kt">Queue</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">q</span><span class="o">.</span><span class="n">isEmpty</span>             <span class="c1">// true</span>
+<span class="n">q</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="nf">peek</span><span class="p">()</span>              <span class="c1">// 3</span>
+<span class="n">q</span><span class="o">.</span><span class="n">count</span>               <span class="c1">// 2</span>
+<span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>                  <span class="c1">// 3</span>
+<span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>                  <span class="c1">// 7</span>
+<span class="k">let</span> <span class="nv">val</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="nf">remove</span><span class="p">()</span>  <span class="c1">// val = 3</span>
+<span class="n">q</span><span class="o">.</span><span class="nf">peek</span><span class="p">()</span>              <span class="c1">// 7</span>
+<span class="n">q</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>         <span class="c1">// true</span>
+</code></pre>
+
+                        <a href="Structs/Queue.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Queue</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Collection</span><span class="p">,</span> <span class="kt">ExpressibleByArrayLiteral</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="https://www.linkedin.com/in/rick-clark-172237194/" target="_blank" rel="external">Rick Clark</a>. All rights reserved. (Last updated: 2020-05-31)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

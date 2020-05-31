@@ -1,6 +1,5 @@
 .DS_Store
 .build
-docs/
 xcuserdata/
 mydocs/
 Instruments.trace/
