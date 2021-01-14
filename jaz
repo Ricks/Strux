@@ -1,0 +1,2 @@
+#jazzy --swift-build-tool spm
+jazzy -x -workspace,Strux.xcworkspace,-scheme,Strux

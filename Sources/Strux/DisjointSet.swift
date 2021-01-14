@@ -9,7 +9,7 @@
 
 import Foundation
 
-/// A disjoint-set data structure, also known as union-find or merge-find data structure. The data structure stores
+/// A disjoint-set data structure, also known as union-find or merge-find. The data structure stores
 /// associations between unique values of type T. Two values are in the same subset if there are associations that
 /// link them. The structure allows you to quickly determine whether two values are in the same subset.
 ///
@@ -25,7 +25,7 @@ import Foundation
 /// per-operation basis. Individual union and find operations can take longer than a constant times α(n) time, but
 /// each operation causes the disjoint-set forest to adjust itself so that successive operations are faster.
 /// Disjoint-set forests are both asymptotically optimal and practically efficient.
-class DisjointSet<T: Hashable>: CustomStringConvertible {
+public class DisjointSet<T: Hashable>: CustomStringConvertible {
 
     private class Node<T: Hashable> {
         let value: T

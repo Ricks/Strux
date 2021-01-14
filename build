@@ -1,0 +1,1 @@
+xcodebuild -workspace Strux.xcworkspace -scheme Strux

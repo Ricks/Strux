@@ -64,7 +64,6 @@
 		1D9819472464B37400BC3E4E /* QueueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueModel.swift; sourceTree = "<group>"; };
 		1DB96B2B247E0287000E1AD4 /* BSTreeModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeModify.swift; sourceTree = "<group>"; };
 		1DB96B2C247E040D000E1AD4 /* BSTreeValueQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeValueQueries.swift; sourceTree = "<group>"; };
-		1DDFD6752467634C0000D02F /* Strux */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Strux; path = ../Strux; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +81,6 @@
 		1D9818BF2462054300BC3E4E = {
 			isa = PBXGroup;
 			children = (
-				1DDFD6752467634C0000D02F /* Strux */,
 				1D9818CA2462054300BC3E4E /* StruxApp */,
 				1D9818C92462054300BC3E4E /* Products */,
 				1D9818E12462212A00BC3E4E /* Frameworks */,

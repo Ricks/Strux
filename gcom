@@ -1,5 +1,5 @@
 #!/bin/sh
-jazzy --swift-build-tool spm
+jaz
 cd Sources
 swiftlint
 read -p "Continue? " shallContinue

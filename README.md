@@ -7,3 +7,6 @@ Well-tested, fully-documented, MIT-licensed data structures written in Swift tha
 **[Heap](https://ricks.github.io/Strux/Structs/Heap.html)**: a min or max heap that can be used as a priority queue.
 
 **[BSTree](https://ricks.github.io/Strux/Classes/BSTree.html)**: a counted, self-balancing (AVL) binary search tree that conforms to the `BidirectionalCollection` protocol, with *O(N)* in-order traversal, and *O(1)* height, count, first, last, median, and (if the type is numeric) sum.
+
+**[DisjointSet](https://ricks.github.io/Strux/Classes/DisjointSet.html)**: A disjoint set data structure, also known as
+union-find, or merge-find.
