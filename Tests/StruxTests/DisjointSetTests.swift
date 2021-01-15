@@ -56,6 +56,7 @@ class DisjointSetTests: XCTestCase {
         let actualLines = Set("\(ds)".split(separator: "\n").map { String($0) })
         print(actualLines)
         XCTAssertEqual(expectedLines, actualLines)
+        print(ds)
     }
 
     func testDisjointSet2() {

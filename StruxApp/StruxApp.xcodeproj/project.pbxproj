@@ -17,6 +17,7 @@
 		1D98190F246225F800BC3E4E /* BSTreeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98190E246225F800BC3E4E /* BSTreeModel.swift */; };
 		1D9819462464AEEC00BC3E4E /* HeapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9819452464AEEC00BC3E4E /* HeapModel.swift */; };
 		1D9819482464B37400BC3E4E /* QueueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9819472464B37400BC3E4E /* QueueModel.swift */; };
+		1DB41A1625B1430C002B3B24 /* DisjointSetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB41A1525B1430B002B3B24 /* DisjointSetModel.swift */; };
 		1DF073DA248322EE004720EC /* Strux in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF073D9248322EE004720EC /* Strux */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		1D98193E2462320500BC3E4E /* Strux.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Strux.xcscheme; sourceTree = "<group>"; };
 		1D9819452464AEEC00BC3E4E /* HeapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeapModel.swift; sourceTree = "<group>"; };
 		1D9819472464B37400BC3E4E /* QueueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueModel.swift; sourceTree = "<group>"; };
+		1DB41A1525B1430B002B3B24 /* DisjointSetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DisjointSetModel.swift; path = StruxApp/DisjointSetModel.swift; sourceTree = "<group>"; };
 		1DB96B2B247E0287000E1AD4 /* BSTreeModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeModify.swift; sourceTree = "<group>"; };
 		1DB96B2C247E040D000E1AD4 /* BSTreeValueQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeValueQueries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +83,7 @@
 		1D9818BF2462054300BC3E4E = {
 			isa = PBXGroup;
 			children = (
+				1DB41A1525B1430B002B3B24 /* DisjointSetModel.swift */,
 				1D9818CA2462054300BC3E4E /* StruxApp */,
 				1D9818C92462054300BC3E4E /* Products */,
 				1D9818E12462212A00BC3E4E /* Frameworks */,
@@ -302,7 +305,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Richard Clark";
 				TargetAttributes = {
 					1D9818C72462054300BC3E4E = {
@@ -346,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DB41A1625B1430C002B3B24 /* DisjointSetModel.swift in Sources */,
 				1D9819462464AEEC00BC3E4E /* HeapModel.swift in Sources */,
 				1D9818CC2462054300BC3E4E /* AppDelegate.swift in Sources */,
 				1D9818CE2462054300BC3E4E /* SceneDelegate.swift in Sources */,
@@ -396,6 +400,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -456,6 +461,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

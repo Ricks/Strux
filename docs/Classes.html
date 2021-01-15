@@ -23,7 +23,7 @@
         <a class="header-link" href="index.html">
            Docs
         </a>
-         (100% documented)
+         (99% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -210,11 +210,12 @@ link them. The structure allows you to quickly determine whether two values are 
 
 <p>There are two methods used to set the associations and determine whether two values are in the same subset:</p>
 
-<p><strong>union(v1, v2)</strong> merges the subsets containing v1 and v2, if they&rsquo;re not already in the same subset</p>
+<p><strong>union(v1, v2)</strong> merges the subsets containing v1 and v2, if they&rsquo;re not already in the same subset.</p>
 
-<p><strong>find(v)</strong> returns the root value of the subset. Two values v1 and v2 are in the same subset if find(v1) = find(v2)</p>
+<p><strong>find(v)</strong> returns the root value of the subset. Two values v1 and v2 are in the same subset iff find(v1)
+    = find(v2).</p>
 
-<p>From Wikipedia: While there are several ways of implementing disjoint-set data structures, in practice they are
+<p><em>From Wikipedia</em>: While there are several ways of implementing disjoint-set data structures, in practice they are
 often identified with a particular implementation called a disjoint-set forest. This is a specialized type of
 forest which performs unions and finds in near constant amortized time. To perform a sequence of m addition,
 union, or find operations on a disjoint-set forest with n nodes requires total time O(mα(n)), where α(n) is the
@@ -222,14 +223,19 @@ extremely slow-growing inverse Ackermann function. Disjoint-set forests do not g
 per-operation basis. Individual union and find operations can take longer than a constant times α(n) time, but
 each operation causes the disjoint-set forest to adjust itself so that successive operations are faster.
 Disjoint-set forests are both asymptotically optimal and practically efficient.</p>
-<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ds</span> <span class="o">=</span> <span class="kt">DisjointSet</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">ds</span> <span class="o">=</span> <span class="kt">DisjointSet</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="n">ds</span><span class="o">.</span><span class="nf">union</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">ds</span><span class="o">.</span><span class="nf">union</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>     <span class="c1">// 1</span>
 <span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>     <span class="c1">// 3</span>
 <span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>     <span class="c1">// 3</span>
-<span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>     <span class="c1">// 3</span>
+<span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>     <span class="c1">// 3   (2, 3, and 4 are in the same subset)</span>
 <span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>     <span class="c1">// 5</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+
+<span class="mi">4</span><span class="p">:</span> <span class="n">root</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="mi">2</span><span class="p">:</span> <span class="n">root</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="mi">3</span><span class="p">:</span> <span class="n">root</span> <span class="o">=</span> <span class="mi">3</span>
 </code></pre>
 
                         <a href="Classes/DisjointSet.html" class="slightly-smaller">See more</a>
@@ -253,7 +259,7 @@ Disjoint-set forests are both asymptotically optimal and practically efficient.<
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2021 <a class="link" href="https://www.linkedin.com/in/rick-clark-172237194/" target="_blank" rel="external">Rick Clark</a>. All rights reserved. (Last updated: 2021-01-14)</p>
+      <p>&copy; 2021 <a class="link" href="https://www.linkedin.com/in/rick-clark-172237194/" target="_blank" rel="external">Rick Clark</a>. All rights reserved. (Last updated: 2021-01-15)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

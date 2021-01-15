@@ -1,6 +1,12 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/Rick/Swift/Strux/Strux/Sources/Strux/DisjointSet.swift",
+      "line": 78,
+      "symbol": "DisjointSet.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/Rick/Swift/Strux/Strux"
 }
