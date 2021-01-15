@@ -208,9 +208,11 @@ Collection are of non-numeric type BSTreeIndex<T>.</p>
 associations between unique values of type T. Two values are in the same subset if there are associations that
 link them. The structure allows you to quickly determine whether two values are in the same subset.</p>
 
-<p>There are two methods used to set the associations and determine whether two values are in the same subset:
-   union(v1, v2) merges the subsets containing v1 and v2, if they&rsquo;re not already in the same subset
-   find(v) returns the root value of the subset. Two values v1 and v2 are in the same subset if find(v1) = find(v2)</p>
+<p>There are two methods used to set the associations and determine whether two values are in the same subset:</p>
+
+<p><strong>union(v1, v2)</strong> merges the subsets containing v1 and v2, if they&rsquo;re not already in the same subset</p>
+
+<p><strong>find(v)</strong> returns the root value of the subset. Two values v1 and v2 are in the same subset if find(v1) = find(v2)</p>
 
 <p>From Wikipedia: While there are several ways of implementing disjoint-set data structures, in practice they are
 often identified with a particular implementation called a disjoint-set forest. This is a specialized type of
@@ -220,6 +222,15 @@ extremely slow-growing inverse Ackermann function. Disjoint-set forests do not g
 per-operation basis. Individual union and find operations can take longer than a constant times α(n) time, but
 each operation causes the disjoint-set forest to adjust itself so that successive operations are faster.
 Disjoint-set forests are both asymptotically optimal and practically efficient.</p>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">ds</span> <span class="o">=</span> <span class="kt">DisjointSet</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">ds</span><span class="o">.</span><span class="nf">union</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="nf">union</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>     <span class="c1">// 1</span>
+<span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>     <span class="c1">// 3</span>
+<span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>     <span class="c1">// 3</span>
+<span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>     <span class="c1">// 3</span>
+<span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>     <span class="c1">// 5</span>
+</code></pre>
 
                         <a href="Classes/DisjointSet.html" class="slightly-smaller">See more</a>
                       </div>

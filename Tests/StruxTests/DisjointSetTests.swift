@@ -54,6 +54,7 @@ class DisjointSetTests: XCTestCase {
             expectedLines.insert("\(i): root = \(ds.find(i))")
         }
         let actualLines = Set("\(ds)".split(separator: "\n").map { String($0) })
+        print(actualLines)
         XCTAssertEqual(expectedLines, actualLines)
     }
 
