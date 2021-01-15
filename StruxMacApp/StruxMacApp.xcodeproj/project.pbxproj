@@ -17,6 +17,7 @@
 		1D84C26D246F473200B436CA /* QueueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D84C26A246F473200B436CA /* QueueModel.swift */; };
 		1D84C26E246F473200B436CA /* BSTreeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D84C26B246F473200B436CA /* BSTreeModel.swift */; };
 		1D84C26F246F473200B436CA /* HeapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D84C26C246F473200B436CA /* HeapModel.swift */; };
+		1DB41A1B25B25070002B3B24 /* DisjointSetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB41A1A25B25070002B3B24 /* DisjointSetModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		1D84C26A246F473200B436CA /* QueueModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueueModel.swift; path = ../../../Strux/StruxApp/StruxApp/QueueModel.swift; sourceTree = "<group>"; };
 		1D84C26B246F473200B436CA /* BSTreeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BSTreeModel.swift; path = ../../../Strux/StruxApp/StruxApp/BSTreeModel.swift; sourceTree = "<group>"; };
 		1D84C26C246F473200B436CA /* HeapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeapModel.swift; path = ../../../Strux/StruxApp/StruxApp/HeapModel.swift; sourceTree = "<group>"; };
+		1DB41A1A25B25070002B3B24 /* DisjointSetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjointSetModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				1D84C248246F456B00B436CA /* ContentView.swift */,
 				1D84C26A246F473200B436CA /* QueueModel.swift */,
 				1D84C26C246F473200B436CA /* HeapModel.swift */,
+				1DB41A1A25B25070002B3B24 /* DisjointSetModel.swift */,
 				1D84C26B246F473200B436CA /* BSTreeModel.swift */,
 				1D81C90B24743F56000B56ED /* SeededRandom.swift */,
 				1D84C24A246F456D00B436CA /* Assets.xcassets */,
@@ -174,6 +177,7 @@
 				1D84C26F246F473200B436CA /* HeapModel.swift in Sources */,
 				1D84C249246F456B00B436CA /* ContentView.swift in Sources */,
 				1D84C247246F456B00B436CA /* AppDelegate.swift in Sources */,
+				1DB41A1B25B25070002B3B24 /* DisjointSetModel.swift in Sources */,
 				1D84C26E246F473200B436CA /* BSTreeModel.swift in Sources */,
 				1D84C26D246F473200B436CA /* QueueModel.swift in Sources */,
 			);

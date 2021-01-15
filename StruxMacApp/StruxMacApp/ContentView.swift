@@ -29,6 +29,7 @@ struct ContentView: View {
     @ObservedObject var treeModel = BSTreeModel()
     @ObservedObject var heapModel = HeapModel()
     @ObservedObject var queueModel = QueueModel()
+    @ObservedObject var disjointSetModel = DisjointSetModel()
     var body: some View {
         VStack {
             Group {
@@ -59,6 +60,16 @@ struct ContentView: View {
                     .font(.title)
                     .frame(height: 50)
                 Text("Time: \(treeModel.time, specifier: "%.2f")")
+            }
+            Spacer()
+            Group {
+                Button(action: { self.disjointSetModel.startProcessing() }) {
+                    Text("DisjointSet")
+                }
+                TextView(text: $disjointSetModel.output)
+                    .font(.title)
+                    .frame(height: 50)
+                Text("Time: \(disjointSetModel.time, specifier: "%.2f")")
             }
             Spacer()
         }

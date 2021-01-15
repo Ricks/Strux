@@ -63,7 +63,7 @@
 		1D98193E2462320500BC3E4E /* Strux.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Strux.xcscheme; sourceTree = "<group>"; };
 		1D9819452464AEEC00BC3E4E /* HeapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeapModel.swift; sourceTree = "<group>"; };
 		1D9819472464B37400BC3E4E /* QueueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueModel.swift; sourceTree = "<group>"; };
-		1DB41A1525B1430B002B3B24 /* DisjointSetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DisjointSetModel.swift; path = StruxApp/DisjointSetModel.swift; sourceTree = "<group>"; };
+		1DB41A1525B1430B002B3B24 /* DisjointSetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DisjointSetModel.swift; path = ../../StruxMacApp/StruxMacApp/DisjointSetModel.swift; sourceTree = "<group>"; };
 		1DB96B2B247E0287000E1AD4 /* BSTreeModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeModify.swift; sourceTree = "<group>"; };
 		1DB96B2C247E040D000E1AD4 /* BSTreeValueQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeValueQueries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,7 +83,6 @@
 		1D9818BF2462054300BC3E4E = {
 			isa = PBXGroup;
 			children = (
-				1DB41A1525B1430B002B3B24 /* DisjointSetModel.swift */,
 				1D9818CA2462054300BC3E4E /* StruxApp */,
 				1D9818C92462054300BC3E4E /* Products */,
 				1D9818E12462212A00BC3E4E /* Frameworks */,
@@ -104,6 +103,7 @@
 				1D9818CB2462054300BC3E4E /* AppDelegate.swift */,
 				1D9818CD2462054300BC3E4E /* SceneDelegate.swift */,
 				1D9819472464B37400BC3E4E /* QueueModel.swift */,
+				1DB41A1525B1430B002B3B24 /* DisjointSetModel.swift */,
 				1D9819452464AEEC00BC3E4E /* HeapModel.swift */,
 				1D98190E246225F800BC3E4E /* BSTreeModel.swift */,
 				1D81C90924743F2D000B56ED /* SeededRandom.swift */,
