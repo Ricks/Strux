@@ -24,7 +24,7 @@ class HeapModel: ObservableObject {
                     self.output = "Heap \(heapIndex) ...\n"
                 }
                 let initialValues = [44, -12, 3]
-                let heapSizish = seededRandom(in: 0..<100000)
+                let heapSizish = seededRandom(in: 0..<10000)
                 var heap = Heap<Int>(isMin: true, startingValues: initialValues)
                 (0..<heapSizish).forEach { _ in
                     let val = seededRandom(in: -5..<100)

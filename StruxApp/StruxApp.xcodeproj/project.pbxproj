@@ -32,40 +32,9 @@
 		1D9818D72462054900BC3E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1D9818D92462054900BC3E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D98190E246225F800BC3E4E /* BSTreeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeModel.swift; sourceTree = "<group>"; };
-		1D9819142462320500BC3E4E /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		1D9819172462320500BC3E4E /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
-		1D9819182462320500BC3E4E /* HeapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeapTests.swift; sourceTree = "<group>"; };
-		1D98191A2462320500BC3E4E /* BSTreeCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeCollectionTests.swift; sourceTree = "<group>"; };
-		1D98191B2462320500BC3E4E /* BSTreeTraversalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeTraversalTests.swift; sourceTree = "<group>"; };
-		1D98191C2462320500BC3E4E /* BSNodeAVLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeAVLTests.swift; sourceTree = "<group>"; };
-		1D98191D2462320500BC3E4E /* BSTreeEquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeEquatableTests.swift; sourceTree = "<group>"; };
-		1D98191E2462320500BC3E4E /* BSTreeConstructorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeConstructorTests.swift; sourceTree = "<group>"; };
-		1D98191F2462320500BC3E4E /* BSNodeDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeDescriptionTests.swift; sourceTree = "<group>"; };
-		1D9819202462320500BC3E4E /* BSNodeTraversalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeTraversalTests.swift; sourceTree = "<group>"; };
-		1D9819212462320500BC3E4E /* BSNodeModifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeModifyTests.swift; sourceTree = "<group>"; };
-		1D9819222462320500BC3E4E /* BSTreeMiscTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeMiscTests.swift; sourceTree = "<group>"; };
-		1D9819232462320500BC3E4E /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
-		1D9819242462320500BC3E4E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		1D9819252462320500BC3E4E /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		1D9819262462320500BC3E4E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		1D9819292462320500BC3E4E /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
-		1D98192B2462320500BC3E4E /* BSNodeModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeModify.swift; sourceTree = "<group>"; };
-		1D98192C2462320500BC3E4E /* BSNodeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeDescription.swift; sourceTree = "<group>"; };
-		1D98192D2462320500BC3E4E /* BSNodeTraverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeTraverse.swift; sourceTree = "<group>"; };
-		1D98192F2462320500BC3E4E /* BSNodeCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeCheck.swift; sourceTree = "<group>"; };
-		1D9819302462320500BC3E4E /* BSTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTree.swift; sourceTree = "<group>"; };
-		1D9819312462320500BC3E4E /* BNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNode.swift; sourceTree = "<group>"; };
-		1D9819322462320500BC3E4E /* BSNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNode.swift; sourceTree = "<group>"; };
-		1D9819332462320500BC3E4E /* BSNodeAVL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeAVL.swift; sourceTree = "<group>"; };
-		1D9819342462320500BC3E4E /* Heap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heap.swift; sourceTree = "<group>"; };
-		1D9819372462320500BC3E4E /* package.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = package.xcworkspace; sourceTree = "<group>"; };
-		1D98193B2462320500BC3E4E /* xcschememanagement.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = xcschememanagement.plist; sourceTree = "<group>"; };
-		1D98193E2462320500BC3E4E /* Strux.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Strux.xcscheme; sourceTree = "<group>"; };
 		1D9819452464AEEC00BC3E4E /* HeapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeapModel.swift; sourceTree = "<group>"; };
 		1D9819472464B37400BC3E4E /* QueueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueModel.swift; sourceTree = "<group>"; };
 		1DB41A1525B1430B002B3B24 /* DisjointSetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DisjointSetModel.swift; path = ../../StruxMacApp/StruxMacApp/DisjointSetModel.swift; sourceTree = "<group>"; };
-		1DB96B2B247E0287000E1AD4 /* BSTreeModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeModify.swift; sourceTree = "<group>"; };
-		1DB96B2C247E040D000E1AD4 /* BSTreeValueQueries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeValueQueries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,152 +96,8 @@
 		1D9818E12462212A00BC3E4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1D9819132462320500BC3E4E /* Strux */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		1D9819132462320500BC3E4E /* Strux */ = {
-			isa = PBXGroup;
-			children = (
-				1D9819142462320500BC3E4E /* LICENSE */,
-				1D9819152462320500BC3E4E /* Tests */,
-				1D9819242462320500BC3E4E /* README.md */,
-				1D9819252462320500BC3E4E /* .gitignore */,
-				1D9819262462320500BC3E4E /* Package.swift */,
-				1D9819272462320500BC3E4E /* Sources */,
-				1D9819352462320500BC3E4E /* .swiftpm */,
-			);
-			name = Strux;
-			path = ../Strux;
-			sourceTree = "<group>";
-		};
-		1D9819152462320500BC3E4E /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				1D9819162462320500BC3E4E /* StruxTests */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		1D9819162462320500BC3E4E /* StruxTests */ = {
-			isa = PBXGroup;
-			children = (
-				1D9819172462320500BC3E4E /* XCTestManifests.swift */,
-				1D9819182462320500BC3E4E /* HeapTests.swift */,
-				1D9819192462320500BC3E4E /* BSTree */,
-				1D9819232462320500BC3E4E /* QueueTests.swift */,
-			);
-			path = StruxTests;
-			sourceTree = "<group>";
-		};
-		1D9819192462320500BC3E4E /* BSTree */ = {
-			isa = PBXGroup;
-			children = (
-				1D98191A2462320500BC3E4E /* BSTreeCollectionTests.swift */,
-				1D98191B2462320500BC3E4E /* BSTreeTraversalTests.swift */,
-				1D98191C2462320500BC3E4E /* BSNodeAVLTests.swift */,
-				1D98191D2462320500BC3E4E /* BSTreeEquatableTests.swift */,
-				1D98191E2462320500BC3E4E /* BSTreeConstructorTests.swift */,
-				1D98191F2462320500BC3E4E /* BSNodeDescriptionTests.swift */,
-				1D9819202462320500BC3E4E /* BSNodeTraversalTests.swift */,
-				1D9819212462320500BC3E4E /* BSNodeModifyTests.swift */,
-				1D9819222462320500BC3E4E /* BSTreeMiscTests.swift */,
-			);
-			path = BSTree;
-			sourceTree = "<group>";
-		};
-		1D9819272462320500BC3E4E /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				1D9819282462320500BC3E4E /* Strux */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		1D9819282462320500BC3E4E /* Strux */ = {
-			isa = PBXGroup;
-			children = (
-				1D9819292462320500BC3E4E /* Queue.swift */,
-				1D98192A2462320500BC3E4E /* BSTree */,
-				1D9819342462320500BC3E4E /* Heap.swift */,
-			);
-			path = Strux;
-			sourceTree = "<group>";
-		};
-		1D98192A2462320500BC3E4E /* BSTree */ = {
-			isa = PBXGroup;
-			children = (
-				1D9819312462320500BC3E4E /* BNode.swift */,
-				1D9819322462320500BC3E4E /* BSNode.swift */,
-				1D98192B2462320500BC3E4E /* BSNodeModify.swift */,
-				1D98192C2462320500BC3E4E /* BSNodeDescription.swift */,
-				1D98192D2462320500BC3E4E /* BSNodeTraverse.swift */,
-				1D98192F2462320500BC3E4E /* BSNodeCheck.swift */,
-				1D9819302462320500BC3E4E /* BSTree.swift */,
-				1DB96B2B247E0287000E1AD4 /* BSTreeModify.swift */,
-				1DB96B2C247E040D000E1AD4 /* BSTreeValueQueries.swift */,
-				1D9819332462320500BC3E4E /* BSNodeAVL.swift */,
-			);
-			path = BSTree;
-			sourceTree = "<group>";
-		};
-		1D9819352462320500BC3E4E /* .swiftpm */ = {
-			isa = PBXGroup;
-			children = (
-				1D9819362462320500BC3E4E /* xcode */,
-			);
-			path = .swiftpm;
-			sourceTree = "<group>";
-		};
-		1D9819362462320500BC3E4E /* xcode */ = {
-			isa = PBXGroup;
-			children = (
-				1D9819372462320500BC3E4E /* package.xcworkspace */,
-				1D9819382462320500BC3E4E /* xcuserdata */,
-				1D98193C2462320500BC3E4E /* xcshareddata */,
-			);
-			path = xcode;
-			sourceTree = "<group>";
-		};
-		1D9819382462320500BC3E4E /* xcuserdata */ = {
-			isa = PBXGroup;
-			children = (
-				1D9819392462320500BC3E4E /* Rick.xcuserdatad */,
-			);
-			path = xcuserdata;
-			sourceTree = "<group>";
-		};
-		1D9819392462320500BC3E4E /* Rick.xcuserdatad */ = {
-			isa = PBXGroup;
-			children = (
-				1D98193A2462320500BC3E4E /* xcschemes */,
-			);
-			path = Rick.xcuserdatad;
-			sourceTree = "<group>";
-		};
-		1D98193A2462320500BC3E4E /* xcschemes */ = {
-			isa = PBXGroup;
-			children = (
-				1D98193B2462320500BC3E4E /* xcschememanagement.plist */,
-			);
-			path = xcschemes;
-			sourceTree = "<group>";
-		};
-		1D98193C2462320500BC3E4E /* xcshareddata */ = {
-			isa = PBXGroup;
-			children = (
-				1D98193D2462320500BC3E4E /* xcschemes */,
-			);
-			path = xcshareddata;
-			sourceTree = "<group>";
-		};
-		1D98193D2462320500BC3E4E /* xcschemes */ = {
-			isa = PBXGroup;
-			children = (
-				1D98193E2462320500BC3E4E /* Strux.xcscheme */,
-			);
-			path = xcschemes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,6 +257,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -486,6 +312,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

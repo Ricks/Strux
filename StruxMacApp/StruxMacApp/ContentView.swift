@@ -39,7 +39,7 @@ struct ContentView: View {
                 TextView(text: $queueModel.output)
                     .font(.title)
                     .frame(height: 50)
-                Text("Time: \(queueModel.time, specifier: "%.2f")")
+                Text("Time: \(String(format: "%.2f", queueModel.time))")
             }
             Spacer()
             Group {
@@ -49,7 +49,7 @@ struct ContentView: View {
                 TextView(text: $heapModel.output)
                     .font(.title)
                     .frame(height: 50)
-                Text("Time: \(heapModel.time, specifier: "%.2f")")
+                Text("Time: \(String(format: "%.2f", heapModel.time))")
             }
             Spacer()
             Group {
@@ -59,7 +59,7 @@ struct ContentView: View {
                 TextView(text: $treeModel.output)
                     .font(.title)
                     .frame(height: 50)
-                Text("Time: \(treeModel.time, specifier: "%.2f")")
+                Text("Time: \(String(format: "%.2f", treeModel.time))")
             }
             Spacer()
             Group {
@@ -69,7 +69,7 @@ struct ContentView: View {
                 TextView(text: $disjointSetModel.output)
                     .font(.title)
                     .frame(height: 50)
-                Text("Time: \(disjointSetModel.time, specifier: "%.2f")")
+                Text("Time: \(String(format: "%.2f", disjointSetModel.time))")
             }
             Spacer()
         }
