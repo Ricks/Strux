@@ -1,6 +1,8 @@
 # Strux
+[![Swift Versions](https://img.shields.io/badge/Swift-4%2C5-green.svg)](https://swift.org)
+[![SPM Compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/)
 
-Well-tested, fully-documented, MIT-licensed data structures written in Swift that are compatible with Swift 4 and Swift 5. Currently it has three data structures:
+Well-tested, fully-documented, MIT-licensed data structures written in Swift that are compatible with Swift 4 and Swift 5. Currently it has four data structures:
 
 **[Queue](https://ricks.github.io/Strux/Structs/Queue.html)**: a queue with *O(1)* addition and removal.
 
