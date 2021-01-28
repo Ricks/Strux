@@ -71,7 +71,7 @@ class BSNodeTests: XCTestCase {
 
     func testFindCeilingMonkey() {
         setSeed(5)
-        (0 ..< 100).forEach { treeIndex in
+        (0 ..< numTestTrees).forEach { treeIndex in
             print("Tree \(treeIndex) ...")
             let treeSizish = seededRandom(in: 0 ..< 1000)
             let tree = BSTree<Int>()

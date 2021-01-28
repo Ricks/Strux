@@ -13,6 +13,8 @@ import XCTest
 import Foundation
 @testable import Strux
 
+let numTestTrees = 100
+
 class BSTreeEquatableTests: XCTestCase {
 
     func testRandom() {
@@ -23,7 +25,7 @@ class BSTreeEquatableTests: XCTestCase {
     }
 
     func testEquatable() {
-        for treeIndex in 0 ..< 100 {
+        for treeIndex in 0 ..< numTestTrees {
             print(treeIndex)
             var toInsert1 = [Int]()
             for _ in 0 ..< 1000 {

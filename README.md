@@ -16,7 +16,7 @@ union-find, or merge-find.
 
 ## Installation
 
-Strux requires Swift 4.0 at a minimum and supports all subsequent Swift versions. Strux can be installed via the Swift Package Manager (SPM), CocoaPods, or Carthage dependency managers (see below).
+Strux requires Swift 4.0 at a minimum and supports all subsequent Swift versions. Strux can be installed via the Swift Package Manager (SPM) or CocoaPods dependency managers (see below). I recommend SPM if you're not already using CocoaPods.
 
 Add the following line to any Swift files that reference a Strux data structure:
 ```swift

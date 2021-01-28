@@ -481,7 +481,7 @@ class BSNodeAVLTests: XCTestCase {
 
     func testRebalanceIfNecessary2() {
         setSeed(5)
-        (0..<100).forEach { treeIndex in
+        (0..<numTestTrees).forEach { treeIndex in
             let treeSize = seededRandom(in: 0..<100)
             let tree = BSTree<Int>()
             (0..<treeSize).forEach { _ in

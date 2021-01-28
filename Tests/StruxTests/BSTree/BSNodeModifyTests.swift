@@ -15,7 +15,7 @@ class BSNodeModifyTests: XCTestCase {
 
     func testInsertRemove() {
         setSeed(5)
-        (0 ..< 100).forEach { treeIndex in
+        (0 ..< numTestTrees).forEach { treeIndex in
             print("Tree \(treeIndex) ...")
             let numInitial = seededRandom(in: 0 ..< 9)
             var initialValues = [Int]()

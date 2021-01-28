@@ -179,7 +179,7 @@ class BSTreeValueTests: XCTestCase {
 
     func testCeilingMonkey() {
         setSeed(5)
-        (0 ..< 100).forEach { treeIndex in
+        (0 ..< numTestTrees).forEach { treeIndex in
             print("Tree \(treeIndex) ...")
             let treeSizish = seededRandom(in: 0 ..< 1000)
             let tree = BSTree<Int>()
@@ -228,7 +228,7 @@ class BSTreeValueTests: XCTestCase {
 
     func testFloorMonkey() {
         setSeed(5)
-        (0 ..< 100).forEach { treeIndex in
+        (0 ..< numTestTrees).forEach { treeIndex in
             print("Tree \(treeIndex) ...")
             let treeSizish = seededRandom(in: 0 ..< 1000)
             let tree = BSTree<Int>()
@@ -277,7 +277,7 @@ class BSTreeValueTests: XCTestCase {
 
     func testHigherValueMonkey() {
         setSeed(5)
-        (0 ..< 100).forEach { treeIndex in
+        (0 ..< numTestTrees).forEach { treeIndex in
             print("Tree \(treeIndex) ...")
             let treeSizish = seededRandom(in: 0 ..< 1000)
             let tree = BSTree<Int>()
@@ -327,7 +327,7 @@ class BSTreeValueTests: XCTestCase {
 
     func testLowerMonkey() {
         setSeed(5)
-        (0 ..< 100).forEach { treeIndex in
+        (0 ..< numTestTrees).forEach { treeIndex in
             print("Tree \(treeIndex) ...")
             let treeSizish = seededRandom(in: 0 ..< 1000)
             let tree = BSTree<Int>()
