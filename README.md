@@ -4,6 +4,7 @@
 [![CocoaPods Version](https://img.shields.io/cocoapods/v/Strux.svg)](https://cocoapods.org/pods/Strux)
 [![Test Coverage](http://scipioapps.storage.googleapis.com/mystrux/codecov.svg)](http://scipioapps.storage.googleapis.com/mystrux/codecov.html)
 [![Documentation](http://scipioapps.storage.googleapis.com/mystrux/doccov.svg)](https://ricks.github.io/Strux/index.html)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Well-tested, fully-documented, MIT-licensed data structures written in Swift that are compatible with Swift 4 and Swift 5. Currently it has four data structures:
 
