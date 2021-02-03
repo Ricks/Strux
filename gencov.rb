@@ -84,6 +84,7 @@ elsif pctFloat >= 60
 end
 
 system "curl \"https://img.shields.io/badge/coverage-#{pct}%25-#{color}\" > #{badge_file}"
+system "gsutil rm gs://scipioapps/mystrux/codecov.html"
 system "gsutil rm gs://scipioapps/mystrux/codecov.svg"
 system "gsutil -h \"Cache-Control: no-cache\" cp #{text_file} gs://scipioapps/mystrux/codecov.html"
 system "gsutil -h \"Cache-Control: no-cache\" cp #{badge_file} gs://scipioapps/mystrux/codecov.svg"
