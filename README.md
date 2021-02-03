@@ -42,3 +42,7 @@ With the Podfile at the top-level directory of the project, enter:
 ```
 pod install
 ```
+
+## Documentation
+
+**[Here](https://ricks.github.io/Strux/index.html)**
