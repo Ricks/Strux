@@ -25,6 +25,7 @@ Add the following line to any Swift files that reference a Strux data structure:
 ```swift
 import Strux
 ```
+Alternatively you can add selected Strux source files to your project.
 
 ### Swift Package Manager (SPM)
 
