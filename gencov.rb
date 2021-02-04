@@ -104,4 +104,4 @@ if !system "gsutil acl ch -u AllUsers:R gs://scipioapps/mystrux/codecov.svg"
     print "test exit - couldn't set acl for codecov.svg 😞\n"
     exit 1
 end
-print "test success 🤠 YEEE HAW!\n"
+print "test success 🤠 YEEE HAW!\n\n"

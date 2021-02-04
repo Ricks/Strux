@@ -10,7 +10,7 @@ loutMatch = lout.match("Found 0 violations, 0 serious")
 if !!!loutMatch
     print "1 or more lint violations:"
     print lout
-    print "exit with error 😞\n"
+    print "lint exit with error 😞\n"
     exit 1
 end
-print "lint success 🤠 YEEE HAW!\n"
+print "lint success 🤠 YEEE HAW!\n\n"
