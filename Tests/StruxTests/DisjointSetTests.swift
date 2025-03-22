@@ -16,7 +16,7 @@ class Solution {
         // Sort edges, queries by distance
         let sortedEdges = edgeList.sorted() { $0[2] < $1[2] }
         let sortedQueries = queries.sorted() { $0[2] < $1[2] }
-        let ds = DisjointSet<Int>()
+        let ds = DisjointSetTree<Int>()
         var resultDict = [[Int]: Bool]()
 
         var edgeIndex = 0
@@ -41,9 +41,11 @@ class Solution {
 class DisjointSetTests: XCTestCase {
 
     func testDisjointSet1() {
-        let ds = DisjointSet<Int>()
+        let ds = DisjointSetTree<Int>()
         ds.union(2, 3)
+        XCTAssertEqual(ds.count, 1)
         ds.union(3, 4)
+        XCTAssertEqual(ds.count, 1)
         XCTAssertNotEqual(ds.find(1), ds.find(2))
         XCTAssertEqual(ds.find(2), ds.find(3))
         XCTAssertEqual(ds.find(3), ds.find(4))
@@ -60,7 +62,7 @@ class DisjointSetTests: XCTestCase {
     }
 
     func testDisjointSet2() {
-        let ds = DisjointSet<Int>()
+        let ds = DisjointSetTree<Int>()
         ds.union(1, 2)
         ds.union(2, 3)
         ds.union(3, 2)
@@ -73,7 +75,7 @@ class DisjointSetTests: XCTestCase {
     }
 
     func testClear() {
-        let ds = DisjointSet<Int>()
+        let ds = DisjointSetTree<Int>()
         ds.union(1, 2)
         ds.union(2, 3)
         ds.union(3, 4)
@@ -94,6 +96,27 @@ class DisjointSetTests: XCTestCase {
         XCTAssertEqual(ds.find(2), ds.find(3))
         XCTAssertEqual(ds.find(3), ds.find(4))
         XCTAssertEqual(ds.find(4), ds.find(5))
+    }
+    
+    func testcontains() {
+        let ds = DisjointSetTree<Int>()
+        ds.union(1, 2)
+        XCTAssertTrue(ds.contains(1))
+        XCTAssertTrue(ds.contains(2))
+        XCTAssertFalse(ds.contains(3))
+    }
+    
+    func testMakeSubset() {
+        let ds = DisjointSetTree<Int>()
+        ds.makeSubset(1)
+        XCTAssertEqual(ds.count, 1)
+        ds.makeSubset(2)
+        XCTAssertEqual(ds.count, 2)
+        XCTAssertEqual(ds.find(1), 1)
+        XCTAssertEqual(ds.find(2), 2)
+        ds.union(1, 2)
+        XCTAssertEqual(ds.count, 1)
+        XCTAssertEqual(ds.find(1), ds.find(2))
     }
 
     func testDistanceLimitedPathsExist() {

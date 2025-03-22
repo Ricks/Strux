@@ -82,7 +82,7 @@ struct ContentView: View {
             Spacer()
             Group {
                 Button(action: { self.disjointSetModel.startProcessing() }) {
-                    Text("DisjointSet")
+                    Text("DisjointSetTree")
                 }
                 TextView(text: $disjointSetModel.output)
                     .font(.title)

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>DisjointSet Class Reference</title>
+    <title>DisjointSetTree Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Class/DisjointSet" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Class/DisjointSetTree" class="dashAnchor"></a>
 
-    <a title="DisjointSet Class Reference"></a>
+    <a title="DisjointSetTree Class Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">Strux Reference</a>
       <img class="carat" src="../img/carat.png" />
-      DisjointSet Class Reference
+      DisjointSetTree Class Reference
     </p>
 
     <div class="content-wrapper">
@@ -57,7 +57,7 @@
                 <a class="nav-group-task-link" href="../Classes/BSTree.html">BSTree</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Classes/DisjointSet.html">DisjointSet</a>
+                <a class="nav-group-task-link" href="../Classes/DisjointSetTree.html">DisjointSetTree</a>
               </li>
             </ul>
           </li>
@@ -89,10 +89,10 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>DisjointSet</h1>
+            <h1>DisjointSetTree</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DisjointSet</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">CustomStringConvertible</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DisjointSetTree</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">CustomStringConvertible</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
 
                 </div>
               </div>
@@ -115,7 +115,7 @@ extremely slow-growing inverse Ackermann function. Disjoint-set forests do not g
 per-operation basis. Individual union and find operations can take longer than a constant times α(n) time, but
 each operation causes the disjoint-set forest to adjust itself so that successive operations are faster.
 Disjoint-set forests are both asymptotically optimal and practically efficient.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">ds</span> <span class="o">=</span> <span class="kt">DisjointSet</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">ds</span> <span class="o">=</span> <span class="kt">DisjointSetTree</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="n">ds</span><span class="o">.</span><span class="nf">union</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">ds</span><span class="o">.</span><span class="nf">union</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">ds</span><span class="o">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>     <span class="c1">// 1</span>
@@ -285,7 +285,7 @@ Disjoint-set forests are both asymptotically optimal and practically efficient.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Clear the set, i.e. remove all associations and make it like a newly-created DisjointSet.</p>
+                        <p>Clear the set, i.e. remove all associations and make it like a newly-created DisjointSetTree.</p>
 
                       </div>
                       <div class="declaration">

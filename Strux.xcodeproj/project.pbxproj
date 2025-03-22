@@ -1,933 +1,640 @@
 // !$*UTF8*$!
 {
-   archiveVersion = "1";
-   objectVersion = "46";
-   objects = {
-      "OBJ_1" = {
-         isa = "PBXProject";
-         attributes = {
-            LastSwiftMigration = "9999";
-            LastUpgradeCheck = "9999";
-         };
-         buildConfigurationList = "OBJ_2";
-         compatibilityVersion = "Xcode 3.2";
-         developmentRegion = "en";
-         hasScannedForEncodings = "0";
-         knownRegions = (
-            "en"
-         );
-         mainGroup = "OBJ_5";
-         productRefGroup = "OBJ_44";
-         projectDirPath = ".";
-         targets = (
-            "Strux::Strux",
-            "Strux::SwiftPMPackageDescription",
-            "Strux::StruxPackageTests::ProductTarget",
-            "Strux::StruxTests"
-         );
-      };
-      "OBJ_10" = {
-         isa = "PBXFileReference";
-         path = "BNode.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_100" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_34";
-      };
-      "OBJ_101" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_35";
-      };
-      "OBJ_102" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_36";
-      };
-      "OBJ_103" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_37";
-      };
-      "OBJ_104" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_38";
-      };
-      "OBJ_105" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_39";
-      };
-      "OBJ_106" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_40";
-      };
-      "OBJ_107" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_41";
-      };
-      "OBJ_108" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_42";
-      };
-      "OBJ_109" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_43";
-      };
-      "OBJ_11" = {
-         isa = "PBXFileReference";
-         path = "BSNode.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_110" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_111"
-         );
-      };
-      "OBJ_111" = {
-         isa = "PBXBuildFile";
-         fileRef = "Strux::Strux::Product";
-      };
-      "OBJ_112" = {
-         isa = "PBXTargetDependency";
-         target = "Strux::Strux";
-      };
-      "OBJ_12" = {
-         isa = "PBXFileReference";
-         path = "BSNodeAVL.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_13" = {
-         isa = "PBXFileReference";
-         path = "BSNodeCheck.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_14" = {
-         isa = "PBXFileReference";
-         path = "BSNodeDescription.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_15" = {
-         isa = "PBXFileReference";
-         path = "BSNodeModify.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_16" = {
-         isa = "PBXFileReference";
-         path = "BSNodeTraverse.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_17" = {
-         isa = "PBXFileReference";
-         path = "BSTree.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_18" = {
-         isa = "PBXFileReference";
-         path = "MedianIndex.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_19" = {
-         isa = "PBXFileReference";
-         path = "DisjointSet.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_2" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_3",
-            "OBJ_4"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_20" = {
-         isa = "PBXFileReference";
-         path = "Heap.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_21" = {
-         isa = "PBXFileReference";
-         path = "Queue.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_22" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_23"
-         );
-         name = "Tests";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_23" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_24",
-            "OBJ_39",
-            "OBJ_40",
-            "OBJ_41",
-            "OBJ_42",
-            "OBJ_43"
-         );
-         name = "StruxTests";
-         path = "Tests/StruxTests";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_24" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_25",
-            "OBJ_26",
-            "OBJ_27",
-            "OBJ_28",
-            "OBJ_29",
-            "OBJ_30",
-            "OBJ_31",
-            "OBJ_32",
-            "OBJ_33",
-            "OBJ_34",
-            "OBJ_35",
-            "OBJ_36",
-            "OBJ_37",
-            "OBJ_38"
-         );
-         name = "BSTree";
-         path = "BSTree";
-         sourceTree = "<group>";
-      };
-      "OBJ_25" = {
-         isa = "PBXFileReference";
-         path = "BSNodeAVLTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_26" = {
-         isa = "PBXFileReference";
-         path = "BSNodeDescriptionTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_27" = {
-         isa = "PBXFileReference";
-         path = "BSNodeModifyTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_28" = {
-         isa = "PBXFileReference";
-         path = "BSNodeTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_29" = {
-         isa = "PBXFileReference";
-         path = "BSNodeTraversalTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_3" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_OBJC_ARC = "YES";
-            COMBINE_HIDPI_IMAGES = "YES";
-            COPY_PHASE_STRIP = "NO";
-            DEBUG_INFORMATION_FORMAT = "dwarf";
-            DYLIB_INSTALL_NAME_BASE = "@rpath";
-            ENABLE_NS_ASSERTIONS = "YES";
-            GCC_OPTIMIZATION_LEVEL = "0";
-            GCC_PREPROCESSOR_DEFINITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE=1",
-               "DEBUG=1"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            ONLY_ACTIVE_ARCH = "YES";
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)",
-               "-DXcode"
-            );
-            PRODUCT_NAME = "$(TARGET_NAME)";
-            SDKROOT = "macosx";
-            SUPPORTED_PLATFORMS = (
-               "macosx",
-               "iphoneos",
-               "iphonesimulator",
-               "appletvos",
-               "appletvsimulator",
-               "watchos",
-               "watchsimulator"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE",
-               "DEBUG"
-            );
-            SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-            USE_HEADERMAP = "NO";
-         };
-         name = "Debug";
-      };
-      "OBJ_30" = {
-         isa = "PBXFileReference";
-         path = "BSTreeCollectionTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_31" = {
-         isa = "PBXFileReference";
-         path = "BSTreeConstructorTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_32" = {
-         isa = "PBXFileReference";
-         path = "BSTreeEquatableTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_33" = {
-         isa = "PBXFileReference";
-         path = "BSTreeMiscTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_34" = {
-         isa = "PBXFileReference";
-         path = "BSTreeNonNumericTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_35" = {
-         isa = "PBXFileReference";
-         path = "BSTreeTraversalTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_36" = {
-         isa = "PBXFileReference";
-         path = "BSTreeValueTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_37" = {
-         isa = "PBXFileReference";
-         path = "MedianIndexTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_38" = {
-         isa = "PBXFileReference";
-         path = "SummedBSTreeTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_39" = {
-         isa = "PBXFileReference";
-         path = "DisjointSetTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_4" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_OBJC_ARC = "YES";
-            COMBINE_HIDPI_IMAGES = "YES";
-            COPY_PHASE_STRIP = "YES";
-            DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-            DYLIB_INSTALL_NAME_BASE = "@rpath";
-            GCC_OPTIMIZATION_LEVEL = "s";
-            GCC_PREPROCESSOR_DEFINITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE=1"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)",
-               "-DXcode"
-            );
-            PRODUCT_NAME = "$(TARGET_NAME)";
-            SDKROOT = "macosx";
-            SUPPORTED_PLATFORMS = (
-               "macosx",
-               "iphoneos",
-               "iphonesimulator",
-               "appletvos",
-               "appletvsimulator",
-               "watchos",
-               "watchsimulator"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE"
-            );
-            SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-            USE_HEADERMAP = "NO";
-         };
-         name = "Release";
-      };
-      "OBJ_40" = {
-         isa = "PBXFileReference";
-         path = "HeapTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_41" = {
-         isa = "PBXFileReference";
-         path = "QueueTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_42" = {
-         isa = "PBXFileReference";
-         path = "SeededRandom.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_43" = {
-         isa = "PBXFileReference";
-         path = "XCTestManifests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_44" = {
-         isa = "PBXGroup";
-         children = (
-            "Strux::StruxTests::Product",
-            "Strux::Strux::Product"
-         );
-         name = "Products";
-         path = "";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "OBJ_47" = {
-         isa = "PBXFileReference";
-         path = "docs";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_48" = {
-         isa = "PBXFileReference";
-         path = "Strux.xcworkspace";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_49" = {
-         isa = "PBXFileReference";
-         path = "StruxMacApp";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_5" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_6",
-            "OBJ_7",
-            "OBJ_22",
-            "OBJ_44",
-            "OBJ_47",
-            "OBJ_48",
-            "OBJ_49",
-            "OBJ_50",
-            "OBJ_51",
-            "OBJ_52",
-            "OBJ_53",
-            "OBJ_54",
-            "OBJ_55",
-            "OBJ_56"
-         );
-         path = "";
-         sourceTree = "<group>";
-      };
-      "OBJ_50" = {
-         isa = "PBXFileReference";
-         path = "StruxApp";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_51" = {
-         isa = "PBXFileReference";
-         path = "gcom";
-         sourceTree = "<group>";
-      };
-      "OBJ_52" = {
-         isa = "PBXFileReference";
-         path = "LICENSE";
-         sourceTree = "<group>";
-      };
-      "OBJ_53" = {
-         isa = "PBXFileReference";
-         path = "jaz";
-         sourceTree = "<group>";
-      };
-      "OBJ_54" = {
-         isa = "PBXFileReference";
-         path = "README.md";
-         sourceTree = "<group>";
-      };
-      "OBJ_55" = {
-         isa = "PBXFileReference";
-         path = "Strux.podspec";
-         sourceTree = "<group>";
-      };
-      "OBJ_56" = {
-         isa = "PBXFileReference";
-         path = "build";
-         sourceTree = "<group>";
-      };
-      "OBJ_58" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_59",
-            "OBJ_60"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_59" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "Strux.xcodeproj/Strux_Info.plist";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "Strux";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "4.0";
-            TARGET_NAME = "Strux";
-         };
-         name = "Debug";
-      };
-      "OBJ_6" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         path = "Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_60" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "Strux.xcodeproj/Strux_Info.plist";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "Strux";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "4.0";
-            TARGET_NAME = "Strux";
-         };
-         name = "Release";
-      };
-      "OBJ_61" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_62",
-            "OBJ_63",
-            "OBJ_64",
-            "OBJ_65",
-            "OBJ_66",
-            "OBJ_67",
-            "OBJ_68",
-            "OBJ_69",
-            "OBJ_70",
-            "OBJ_71",
-            "OBJ_72",
-            "OBJ_73"
-         );
-      };
-      "OBJ_62" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_10";
-      };
-      "OBJ_63" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_11";
-      };
-      "OBJ_64" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_12";
-      };
-      "OBJ_65" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_13";
-      };
-      "OBJ_66" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_14";
-      };
-      "OBJ_67" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_15";
-      };
-      "OBJ_68" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_16";
-      };
-      "OBJ_69" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_17";
-      };
-      "OBJ_7" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_8"
-         );
-         name = "Sources";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_70" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_18";
-      };
-      "OBJ_71" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_19";
-      };
-      "OBJ_72" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_20";
-      };
-      "OBJ_73" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_21";
-      };
-      "OBJ_74" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-         );
-      };
-      "OBJ_76" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_77",
-            "OBJ_78"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_77" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "4",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk",
-               "-package-description-version",
-               "4.0.0"
-            );
-            SWIFT_VERSION = "4.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_78" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "4",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk",
-               "-package-description-version",
-               "4.0.0"
-            );
-            SWIFT_VERSION = "4.0";
-         };
-         name = "Release";
-      };
-      "OBJ_79" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_80"
-         );
-      };
-      "OBJ_8" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_9",
-            "OBJ_19",
-            "OBJ_20",
-            "OBJ_21"
-         );
-         name = "Strux";
-         path = "Sources/Strux";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_80" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_6";
-      };
-      "OBJ_82" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_83",
-            "OBJ_84"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_83" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-         };
-         name = "Debug";
-      };
-      "OBJ_84" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-         };
-         name = "Release";
-      };
-      "OBJ_85" = {
-         isa = "PBXTargetDependency";
-         target = "Strux::StruxTests";
-      };
-      "OBJ_87" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_88",
-            "OBJ_89"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_88" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "Strux.xcodeproj/StruxTests_Info.plist";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "4.0";
-            TARGET_NAME = "StruxTests";
-         };
-         name = "Debug";
-      };
-      "OBJ_89" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "Strux.xcodeproj/StruxTests_Info.plist";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "4.0";
-            TARGET_NAME = "StruxTests";
-         };
-         name = "Release";
-      };
-      "OBJ_9" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_10",
-            "OBJ_11",
-            "OBJ_12",
-            "OBJ_13",
-            "OBJ_14",
-            "OBJ_15",
-            "OBJ_16",
-            "OBJ_17",
-            "OBJ_18"
-         );
-         name = "BSTree";
-         path = "BSTree";
-         sourceTree = "<group>";
-      };
-      "OBJ_90" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_91",
-            "OBJ_92",
-            "OBJ_93",
-            "OBJ_94",
-            "OBJ_95",
-            "OBJ_96",
-            "OBJ_97",
-            "OBJ_98",
-            "OBJ_99",
-            "OBJ_100",
-            "OBJ_101",
-            "OBJ_102",
-            "OBJ_103",
-            "OBJ_104",
-            "OBJ_105",
-            "OBJ_106",
-            "OBJ_107",
-            "OBJ_108",
-            "OBJ_109"
-         );
-      };
-      "OBJ_91" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_25";
-      };
-      "OBJ_92" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_26";
-      };
-      "OBJ_93" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_27";
-      };
-      "OBJ_94" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_28";
-      };
-      "OBJ_95" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_29";
-      };
-      "OBJ_96" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_30";
-      };
-      "OBJ_97" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_31";
-      };
-      "OBJ_98" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_32";
-      };
-      "OBJ_99" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_33";
-      };
-      "Strux::Strux" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_58";
-         buildPhases = (
-            "OBJ_61",
-            "OBJ_74"
-         );
-         dependencies = (
-         );
-         name = "Strux";
-         productName = "Strux";
-         productReference = "Strux::Strux::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "Strux::Strux::Product" = {
-         isa = "PBXFileReference";
-         path = "Strux.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "Strux::StruxPackageTests::ProductTarget" = {
-         isa = "PBXAggregateTarget";
-         buildConfigurationList = "OBJ_82";
-         buildPhases = (
-         );
-         dependencies = (
-            "OBJ_85"
-         );
-         name = "StruxPackageTests";
-         productName = "StruxPackageTests";
-      };
-      "Strux::StruxTests" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_87";
-         buildPhases = (
-            "OBJ_90",
-            "OBJ_110"
-         );
-         dependencies = (
-            "OBJ_112"
-         );
-         name = "StruxTests";
-         productName = "StruxTests";
-         productReference = "Strux::StruxTests::Product";
-         productType = "com.apple.product-type.bundle.unit-test";
-      };
-      "Strux::StruxTests::Product" = {
-         isa = "PBXFileReference";
-         path = "StruxTests.xctest";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "Strux::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_76";
-         buildPhases = (
-            "OBJ_79"
-         );
-         dependencies = (
-         );
-         name = "StruxPackageDescription";
-         productName = "StruxPackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-   };
-   rootObject = "OBJ_1";
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		"Strux::StruxPackageTests::ProductTarget" /* StruxPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_82 /* Build configuration list for PBXAggregateTarget "StruxPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_85 /* PBXTargetDependency */,
+			);
+			name = StruxPackageTests;
+			productName = StruxPackageTests;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		A9E5AAD82D8E6DC400CCB124 /* DisjointSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5AAD72D8E6DC400CCB124 /* DisjointSet.swift */; };
+		A9E5AAD92D8E6DC400CCB124 /* DisjointSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5AAD72D8E6DC400CCB124 /* DisjointSet.swift */; };
+		A9E5AADA2D8E6DC500CCB124 /* DisjointSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5AAD72D8E6DC400CCB124 /* DisjointSet.swift */; };
+		OBJ_100 /* BSTreeNonNumericTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* BSTreeNonNumericTests.swift */; };
+		OBJ_101 /* BSTreeTraversalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* BSTreeTraversalTests.swift */; };
+		OBJ_102 /* BSTreeValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* BSTreeValueTests.swift */; };
+		OBJ_103 /* MedianIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* MedianIndexTests.swift */; };
+		OBJ_104 /* SummedBSTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* SummedBSTreeTests.swift */; };
+		OBJ_105 /* DisjointSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* DisjointSetTests.swift */; };
+		OBJ_106 /* HeapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* HeapTests.swift */; };
+		OBJ_107 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* QueueTests.swift */; };
+		OBJ_108 /* SeededRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* SeededRandom.swift */; };
+		OBJ_109 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* XCTestManifests.swift */; };
+		OBJ_111 /* Strux.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Strux::Strux::Product" /* Strux.framework */; };
+		OBJ_62 /* BNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* BNode.swift */; };
+		OBJ_63 /* BSNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* BSNode.swift */; };
+		OBJ_64 /* BSNodeAVL.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* BSNodeAVL.swift */; };
+		OBJ_65 /* BSNodeCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* BSNodeCheck.swift */; };
+		OBJ_66 /* BSNodeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* BSNodeDescription.swift */; };
+		OBJ_67 /* BSNodeModify.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* BSNodeModify.swift */; };
+		OBJ_68 /* BSNodeTraverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* BSNodeTraverse.swift */; };
+		OBJ_69 /* BSTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* BSTree.swift */; };
+		OBJ_70 /* MedianIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* MedianIndex.swift */; };
+		OBJ_71 /* DisjointSetTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* DisjointSetTree.swift */; };
+		OBJ_72 /* Heap.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Heap.swift */; };
+		OBJ_73 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Queue.swift */; };
+		OBJ_80 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_91 /* BSNodeAVLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* BSNodeAVLTests.swift */; };
+		OBJ_92 /* BSNodeDescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* BSNodeDescriptionTests.swift */; };
+		OBJ_93 /* BSNodeModifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* BSNodeModifyTests.swift */; };
+		OBJ_94 /* BSNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* BSNodeTests.swift */; };
+		OBJ_95 /* BSNodeTraversalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* BSNodeTraversalTests.swift */; };
+		OBJ_96 /* BSTreeCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* BSTreeCollectionTests.swift */; };
+		OBJ_97 /* BSTreeConstructorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* BSTreeConstructorTests.swift */; };
+		OBJ_98 /* BSTreeEquatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* BSTreeEquatableTests.swift */; };
+		OBJ_99 /* BSTreeMiscTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* BSTreeMiscTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A9E5AAD52D8DF9DB00CCB124 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Strux::Strux";
+			remoteInfo = Strux;
+		};
+		A9E5AAD62D8DF9DB00CCB124 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Strux::StruxTests";
+			remoteInfo = StruxTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A9E5AAD72D8E6DC400CCB124 /* DisjointSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjointSet.swift; sourceTree = "<group>"; };
+		OBJ_10 /* BNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNode.swift; sourceTree = "<group>"; };
+		OBJ_11 /* BSNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNode.swift; sourceTree = "<group>"; };
+		OBJ_12 /* BSNodeAVL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeAVL.swift; sourceTree = "<group>"; };
+		OBJ_13 /* BSNodeCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeCheck.swift; sourceTree = "<group>"; };
+		OBJ_14 /* BSNodeDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeDescription.swift; sourceTree = "<group>"; };
+		OBJ_15 /* BSNodeModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeModify.swift; sourceTree = "<group>"; };
+		OBJ_16 /* BSNodeTraverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeTraverse.swift; sourceTree = "<group>"; };
+		OBJ_17 /* BSTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTree.swift; sourceTree = "<group>"; };
+		OBJ_18 /* MedianIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedianIndex.swift; sourceTree = "<group>"; };
+		OBJ_19 /* DisjointSetTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjointSetTree.swift; sourceTree = "<group>"; };
+		OBJ_20 /* Heap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heap.swift; sourceTree = "<group>"; };
+		OBJ_21 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		OBJ_25 /* BSNodeAVLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeAVLTests.swift; sourceTree = "<group>"; };
+		OBJ_26 /* BSNodeDescriptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeDescriptionTests.swift; sourceTree = "<group>"; };
+		OBJ_27 /* BSNodeModifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeModifyTests.swift; sourceTree = "<group>"; };
+		OBJ_28 /* BSNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeTests.swift; sourceTree = "<group>"; };
+		OBJ_29 /* BSNodeTraversalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeTraversalTests.swift; sourceTree = "<group>"; };
+		OBJ_30 /* BSTreeCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeCollectionTests.swift; sourceTree = "<group>"; };
+		OBJ_31 /* BSTreeConstructorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeConstructorTests.swift; sourceTree = "<group>"; };
+		OBJ_32 /* BSTreeEquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeEquatableTests.swift; sourceTree = "<group>"; };
+		OBJ_33 /* BSTreeMiscTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeMiscTests.swift; sourceTree = "<group>"; };
+		OBJ_34 /* BSTreeNonNumericTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeNonNumericTests.swift; sourceTree = "<group>"; };
+		OBJ_35 /* BSTreeTraversalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeTraversalTests.swift; sourceTree = "<group>"; };
+		OBJ_36 /* BSTreeValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeValueTests.swift; sourceTree = "<group>"; };
+		OBJ_37 /* MedianIndexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedianIndexTests.swift; sourceTree = "<group>"; };
+		OBJ_38 /* SummedBSTreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummedBSTreeTests.swift; sourceTree = "<group>"; };
+		OBJ_39 /* DisjointSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjointSetTests.swift; sourceTree = "<group>"; };
+		OBJ_40 /* HeapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeapTests.swift; sourceTree = "<group>"; };
+		OBJ_41 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
+		OBJ_42 /* SeededRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededRandom.swift; sourceTree = "<group>"; };
+		OBJ_43 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		OBJ_47 /* docs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = docs; sourceTree = SOURCE_ROOT; };
+		OBJ_48 /* Strux.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = Strux.xcworkspace; sourceTree = SOURCE_ROOT; };
+		OBJ_49 /* StruxMacApp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StruxMacApp; sourceTree = SOURCE_ROOT; };
+		OBJ_50 /* StruxApp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StruxApp; sourceTree = SOURCE_ROOT; };
+		OBJ_51 /* gcom */ = {isa = PBXFileReference; lastKnownFileType = text; path = gcom; sourceTree = "<group>"; };
+		OBJ_52 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		OBJ_53 /* jaz */ = {isa = PBXFileReference; lastKnownFileType = text; path = jaz; sourceTree = "<group>"; };
+		OBJ_54 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_55 /* Strux.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Strux.podspec; sourceTree = "<group>"; };
+		OBJ_56 /* build */ = {isa = PBXFileReference; lastKnownFileType = text; path = build; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		"Strux::Strux::Product" /* Strux.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Strux.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Strux::StruxTests::Product" /* StruxTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = StruxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_110 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_111 /* Strux.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		OBJ_22 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_23 /* StruxTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_23 /* StruxTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_24 /* BSTree */,
+				OBJ_39 /* DisjointSetTests.swift */,
+				OBJ_40 /* HeapTests.swift */,
+				OBJ_41 /* QueueTests.swift */,
+				OBJ_42 /* SeededRandom.swift */,
+				OBJ_43 /* XCTestManifests.swift */,
+			);
+			name = StruxTests;
+			path = Tests/StruxTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_24 /* BSTree */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_25 /* BSNodeAVLTests.swift */,
+				OBJ_26 /* BSNodeDescriptionTests.swift */,
+				OBJ_27 /* BSNodeModifyTests.swift */,
+				OBJ_28 /* BSNodeTests.swift */,
+				OBJ_29 /* BSNodeTraversalTests.swift */,
+				OBJ_30 /* BSTreeCollectionTests.swift */,
+				OBJ_31 /* BSTreeConstructorTests.swift */,
+				OBJ_32 /* BSTreeEquatableTests.swift */,
+				OBJ_33 /* BSTreeMiscTests.swift */,
+				OBJ_34 /* BSTreeNonNumericTests.swift */,
+				OBJ_35 /* BSTreeTraversalTests.swift */,
+				OBJ_36 /* BSTreeValueTests.swift */,
+				OBJ_37 /* MedianIndexTests.swift */,
+				OBJ_38 /* SummedBSTreeTests.swift */,
+			);
+			path = BSTree;
+			sourceTree = "<group>";
+		};
+		OBJ_44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"Strux::StruxTests::Product" /* StruxTests.xctest */,
+				"Strux::Strux::Product" /* Strux.framework */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_22 /* Tests */,
+				OBJ_44 /* Products */,
+				OBJ_47 /* docs */,
+				OBJ_48 /* Strux.xcworkspace */,
+				OBJ_49 /* StruxMacApp */,
+				OBJ_50 /* StruxApp */,
+				OBJ_51 /* gcom */,
+				OBJ_52 /* LICENSE */,
+				OBJ_53 /* jaz */,
+				OBJ_54 /* README.md */,
+				OBJ_55 /* Strux.podspec */,
+				OBJ_56 /* build */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* Strux */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* Strux */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* BSTree */,
+				A9E5AAD72D8E6DC400CCB124 /* DisjointSet.swift */,
+				OBJ_19 /* DisjointSetTree.swift */,
+				OBJ_20 /* Heap.swift */,
+				OBJ_21 /* Queue.swift */,
+			);
+			name = Strux;
+			path = Sources/Strux;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_9 /* BSTree */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_10 /* BNode.swift */,
+				OBJ_11 /* BSNode.swift */,
+				OBJ_12 /* BSNodeAVL.swift */,
+				OBJ_13 /* BSNodeCheck.swift */,
+				OBJ_14 /* BSNodeDescription.swift */,
+				OBJ_15 /* BSNodeModify.swift */,
+				OBJ_16 /* BSNodeTraverse.swift */,
+				OBJ_17 /* BSTree.swift */,
+				OBJ_18 /* MedianIndex.swift */,
+			);
+			path = BSTree;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		"Strux::Strux" /* Strux */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_58 /* Build configuration list for PBXNativeTarget "Strux" */;
+			buildPhases = (
+				OBJ_61 /* Sources */,
+				OBJ_74 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Strux;
+			productName = Strux;
+			productReference = "Strux::Strux::Product" /* Strux.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Strux::StruxTests" /* StruxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_87 /* Build configuration list for PBXNativeTarget "StruxTests" */;
+			buildPhases = (
+				OBJ_90 /* Sources */,
+				OBJ_110 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_112 /* PBXTargetDependency */,
+			);
+			name = StruxTests;
+			productName = StruxTests;
+			productReference = "Strux::StruxTests::Product" /* StruxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"Strux::SwiftPMPackageDescription" /* StruxPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_76 /* Build configuration list for PBXNativeTarget "StruxPackageDescription" */;
+			buildPhases = (
+				OBJ_79 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StruxPackageDescription;
+			productName = StruxPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"Strux::StruxPackageTests::ProductTarget" = {
+						LastSwiftMigration = 1610;
+					};
+				};
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Strux" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_44 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"Strux::Strux" /* Strux */,
+				"Strux::SwiftPMPackageDescription" /* StruxPackageDescription */,
+				"Strux::StruxPackageTests::ProductTarget" /* StruxPackageTests */,
+				"Strux::StruxTests" /* StruxTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_62 /* BNode.swift in Sources */,
+				OBJ_63 /* BSNode.swift in Sources */,
+				OBJ_64 /* BSNodeAVL.swift in Sources */,
+				OBJ_65 /* BSNodeCheck.swift in Sources */,
+				OBJ_66 /* BSNodeDescription.swift in Sources */,
+				OBJ_67 /* BSNodeModify.swift in Sources */,
+				OBJ_68 /* BSNodeTraverse.swift in Sources */,
+				OBJ_69 /* BSTree.swift in Sources */,
+				OBJ_70 /* MedianIndex.swift in Sources */,
+				OBJ_71 /* DisjointSetTree.swift in Sources */,
+				A9E5AAD92D8E6DC400CCB124 /* DisjointSet.swift in Sources */,
+				OBJ_72 /* Heap.swift in Sources */,
+				OBJ_73 /* Queue.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_80 /* Package.swift in Sources */,
+				A9E5AAD82D8E6DC400CCB124 /* DisjointSet.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_91 /* BSNodeAVLTests.swift in Sources */,
+				OBJ_92 /* BSNodeDescriptionTests.swift in Sources */,
+				OBJ_93 /* BSNodeModifyTests.swift in Sources */,
+				OBJ_94 /* BSNodeTests.swift in Sources */,
+				OBJ_95 /* BSNodeTraversalTests.swift in Sources */,
+				A9E5AADA2D8E6DC500CCB124 /* DisjointSet.swift in Sources */,
+				OBJ_96 /* BSTreeCollectionTests.swift in Sources */,
+				OBJ_97 /* BSTreeConstructorTests.swift in Sources */,
+				OBJ_98 /* BSTreeEquatableTests.swift in Sources */,
+				OBJ_99 /* BSTreeMiscTests.swift in Sources */,
+				OBJ_100 /* BSTreeNonNumericTests.swift in Sources */,
+				OBJ_101 /* BSTreeTraversalTests.swift in Sources */,
+				OBJ_102 /* BSTreeValueTests.swift in Sources */,
+				OBJ_103 /* MedianIndexTests.swift in Sources */,
+				OBJ_104 /* SummedBSTreeTests.swift in Sources */,
+				OBJ_105 /* DisjointSetTests.swift in Sources */,
+				OBJ_106 /* HeapTests.swift in Sources */,
+				OBJ_107 /* QueueTests.swift in Sources */,
+				OBJ_108 /* SeededRandom.swift in Sources */,
+				OBJ_109 /* XCTestManifests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_112 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Strux::Strux" /* Strux */;
+			targetProxy = A9E5AAD52D8DF9DB00CCB124 /* PBXContainerItemProxy */;
+		};
+		OBJ_85 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Strux::StruxTests" /* StruxTests */;
+			targetProxy = A9E5AAD62D8DF9DB00CCB124 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Strux.xcodeproj/Strux_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Strux;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Strux;
+			};
+			name = Debug;
+		};
+		OBJ_60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Strux.xcodeproj/Strux_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Strux;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Strux;
+			};
+			name = Release;
+		};
+		OBJ_77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 4 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk -package-description-version 4.0.0";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		OBJ_78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 4 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk -package-description-version 4.0.0";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		OBJ_83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		OBJ_84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		OBJ_88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Strux.xcodeproj/StruxTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = StruxTests;
+			};
+			name = Debug;
+		};
+		OBJ_89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Strux.xcodeproj/StruxTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = StruxTests;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_2 /* Build configuration list for PBXProject "Strux" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_58 /* Build configuration list for PBXNativeTarget "Strux" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_59 /* Debug */,
+				OBJ_60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_76 /* Build configuration list for PBXNativeTarget "StruxPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_77 /* Debug */,
+				OBJ_78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_82 /* Build configuration list for PBXAggregateTarget "StruxPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_83 /* Debug */,
+				OBJ_84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_87 /* Build configuration list for PBXNativeTarget "StruxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_88 /* Debug */,
+				OBJ_89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
 }

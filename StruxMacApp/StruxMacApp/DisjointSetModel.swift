@@ -22,7 +22,7 @@ class DisjointSetModel: ObservableObject {
         DispatchQueue.global().async {
             (0..<100).forEach { dsIndex in
                 DispatchQueue.main.async {
-                    self.output = "DisjointSet \(dsIndex) ...\n"
+                    self.output = "DisjointSetTree \(dsIndex) ...\n"
                 }
                 let setSize = seededRandom(in: 1 ..< 100000)
                 let numSubsets = seededRandom(in: 1 ..< 100)
@@ -34,7 +34,7 @@ class DisjointSetModel: ObservableObject {
                     subsetMap[val] = subsetIndex
                 }
 
-                let ds = DisjointSet<Int>()
+                let ds = DisjointSetTree<Int>()
                 for subsetIndex in 0 ..< numSubsets {
                     let subsetArray = Array(subsets[subsetIndex])
                     if subsetArray.count > 0 {
