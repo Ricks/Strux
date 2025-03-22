@@ -7,12 +7,9 @@
 
 import Foundation
 
-extension Comparable {
-    func lessThan(_ other: any Comparable) -> Bool {
-        guard let other = other as? Self else {
-            fatalError("Type mismatch in Comparable elements")
-        }
-        return self < other
+extension DisjointSet where T: Comparable {
+    private func convertValueSetToArrayOfStrings(_ set: Set<T>) -> [String] {
+        Array(set).sorted().map { "\($0)" }
     }
 }
 
@@ -20,27 +17,11 @@ struct DisjointSet<T: Hashable>: CustomStringConvertible {
     private var subsetDict = [Int: Set<T>]()
     private var keyDict = [T: Int]()
     private var maxKey = 0
- 
-    func sortIfComparable<U>(_ array: [U]) -> [U] {
-        guard !array.isEmpty else { return [] }
-        
-        // Check if all elements are the same Comparable type
-        guard let first = array.first as? any Comparable else { return array }
-        let elementType = type(of: first)
-        for element in array {
-            guard let comparable = element as? any Comparable,
-                  type(of: comparable) == elementType else { return array }
-        }
-        
-        // Safe to sort now that we've verified uniform Comparable type
-        let result = array.sorted { a, b in
-            let aComparable = a as! any Comparable
-            let bComparable = b as! any Comparable
-            return aComparable.lessThan(bComparable)
-        }
-        return result
+    
+    private func convertValueSetToArrayOfStrings(_ set: Set<T>) -> [String] {
+        set.map { "\($0)" }.sorted()
     }
-
+     
     var description: String {
         var description = ""
         let subs = self.subsets()
@@ -51,13 +32,8 @@ struct DisjointSet<T: Hashable>: CustomStringConvertible {
             description = valueCount() == 1 ? "1 value total" : "\(valueCount()) values total" + "\n"
             for i in 0 ..< subs.count {
                 description += "subset: "
-                if T.self is any Comparable.Type {
-                    let sortedArray = sortIfComparable(Array(subs[i]))
-                    description += sortedArray.map { "\($0)" }.joined(separator: " ")
-                } else {
-                    description += subs[i].map { "\($0)" }.sorted().joined(separator: " ")
-                }
-                if i < subs.count - 1 {
+                description += convertValueSetToArrayOfStrings(subs[i]).joined(separator: " ")
+                 if i < subs.count - 1 {
                     description += "\n"
                 }
             }
