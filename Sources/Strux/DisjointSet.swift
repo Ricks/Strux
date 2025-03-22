@@ -75,6 +75,22 @@ struct DisjointSet<T: Hashable>: CustomStringConvertible {
         return keyDict[value1] == keyDict[value2]
     }
     
+    public func valueCount() -> Int {
+        return keyDict.keys.count
+    }
+    
+    public func subsetCount() -> Int {
+        return subsetDict.values.count
+    }
+    
+    public func subsets() -> [Set<T>] {
+        return Array(subsetDict.values)
+    }
+    
+    public func values() -> [T] {
+        return Array(keyDict.keys)
+    }
+    
     mutating public func clear() {
         subsetDict = [:]
         keyDict = [:]

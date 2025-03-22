@@ -24,12 +24,13 @@
 		A9E5AAD82D8E6DC400CCB124 /* DisjointSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5AAD72D8E6DC400CCB124 /* DisjointSet.swift */; };
 		A9E5AAD92D8E6DC400CCB124 /* DisjointSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5AAD72D8E6DC400CCB124 /* DisjointSet.swift */; };
 		A9E5AADA2D8E6DC500CCB124 /* DisjointSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5AAD72D8E6DC400CCB124 /* DisjointSet.swift */; };
+		A9E5AADC2D8F153F00CCB124 /* DisjointSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5AADB2D8F152E00CCB124 /* DisjointSetTests.swift */; };
 		OBJ_100 /* BSTreeNonNumericTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* BSTreeNonNumericTests.swift */; };
 		OBJ_101 /* BSTreeTraversalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* BSTreeTraversalTests.swift */; };
 		OBJ_102 /* BSTreeValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* BSTreeValueTests.swift */; };
 		OBJ_103 /* MedianIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* MedianIndexTests.swift */; };
 		OBJ_104 /* SummedBSTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* SummedBSTreeTests.swift */; };
-		OBJ_105 /* DisjointSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* DisjointSetTests.swift */; };
+		OBJ_105 /* DisjointSetTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* DisjointSetTreeTests.swift */; };
 		OBJ_106 /* HeapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* HeapTests.swift */; };
 		OBJ_107 /* QueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* QueueTests.swift */; };
 		OBJ_108 /* SeededRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* SeededRandom.swift */; };
@@ -78,6 +79,7 @@
 
 /* Begin PBXFileReference section */
 		A9E5AAD72D8E6DC400CCB124 /* DisjointSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjointSet.swift; sourceTree = "<group>"; };
+		A9E5AADB2D8F152E00CCB124 /* DisjointSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjointSetTests.swift; sourceTree = "<group>"; };
 		OBJ_10 /* BNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNode.swift; sourceTree = "<group>"; };
 		OBJ_11 /* BSNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNode.swift; sourceTree = "<group>"; };
 		OBJ_12 /* BSNodeAVL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSNodeAVL.swift; sourceTree = "<group>"; };
@@ -104,7 +106,7 @@
 		OBJ_36 /* BSTreeValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTreeValueTests.swift; sourceTree = "<group>"; };
 		OBJ_37 /* MedianIndexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedianIndexTests.swift; sourceTree = "<group>"; };
 		OBJ_38 /* SummedBSTreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummedBSTreeTests.swift; sourceTree = "<group>"; };
-		OBJ_39 /* DisjointSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjointSetTests.swift; sourceTree = "<group>"; };
+		OBJ_39 /* DisjointSetTreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisjointSetTreeTests.swift; sourceTree = "<group>"; };
 		OBJ_40 /* HeapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeapTests.swift; sourceTree = "<group>"; };
 		OBJ_41 /* QueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueTests.swift; sourceTree = "<group>"; };
 		OBJ_42 /* SeededRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededRandom.swift; sourceTree = "<group>"; };
@@ -155,7 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_24 /* BSTree */,
-				OBJ_39 /* DisjointSetTests.swift */,
+				OBJ_39 /* DisjointSetTreeTests.swift */,
+				A9E5AADB2D8F152E00CCB124 /* DisjointSetTests.swift */,
 				OBJ_40 /* HeapTests.swift */,
 				OBJ_41 /* QueueTests.swift */,
 				OBJ_42 /* SeededRandom.swift */,
@@ -380,13 +383,14 @@
 				OBJ_96 /* BSTreeCollectionTests.swift in Sources */,
 				OBJ_97 /* BSTreeConstructorTests.swift in Sources */,
 				OBJ_98 /* BSTreeEquatableTests.swift in Sources */,
+				A9E5AADC2D8F153F00CCB124 /* DisjointSetTests.swift in Sources */,
 				OBJ_99 /* BSTreeMiscTests.swift in Sources */,
 				OBJ_100 /* BSTreeNonNumericTests.swift in Sources */,
 				OBJ_101 /* BSTreeTraversalTests.swift in Sources */,
 				OBJ_102 /* BSTreeValueTests.swift in Sources */,
 				OBJ_103 /* MedianIndexTests.swift in Sources */,
 				OBJ_104 /* SummedBSTreeTests.swift in Sources */,
-				OBJ_105 /* DisjointSetTests.swift in Sources */,
+				OBJ_105 /* DisjointSetTreeTests.swift in Sources */,
 				OBJ_106 /* HeapTests.swift in Sources */,
 				OBJ_107 /* QueueTests.swift in Sources */,
 				OBJ_108 /* SeededRandom.swift in Sources */,
