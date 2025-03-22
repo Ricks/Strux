@@ -13,7 +13,18 @@ struct DisjointSet<T: Hashable>: CustomStringConvertible {
     private var maxKey = 0
     
     var description: String {
-        return ""
+        var description = ""
+        let subs = self.subsets()
+        if subs.count == 0 {
+            return "Empty"
+        }
+        for i in 0 ..< subs.count {
+            description += "Subset: " + subs[i].map { "\($0)" }.sorted().joined(separator: " ")
+            if i < subs.count - 1 {
+                description += "\n"
+            }
+        }
+        return description
     }
     
     public init() {
