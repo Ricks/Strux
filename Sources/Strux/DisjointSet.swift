@@ -11,17 +11,10 @@ struct DisjointSet<T: Hashable & Comparable>: CustomStringConvertible {
     private var subsetDict = [Int: Set<T>]()
     private var keyDict = [T: Int]()
     private var maxKey = 0
-    
-    private func sortedSubsets() -> [Set<T>] {
-        let arr: [Set<T>] = Array(subsetDict.values)
-        return arr.sorted { (first: Set<T>, second: Set<T>) -> Bool in
-            return first.min()! < second.min()!
-        }
-    }
 
     var description: String {
         var description = ""
-        let subs = sortedSubsets()
+        let subs = subsets
         if subs.count == 0 {
             description = "Empty"
         } else {
@@ -107,7 +100,10 @@ struct DisjointSet<T: Hashable & Comparable>: CustomStringConvertible {
     }
     
     public var subsets: [Set<T>] {
-        return Array(subsetDict.values)
+        let arr: [Set<T>] = Array(subsetDict.values)
+        return arr.sorted { (first: Set<T>, second: Set<T>) -> Bool in
+            return first.min()! < second.min()!
+        }
     }
     
     public var values: [T] {
