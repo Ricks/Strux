@@ -38,7 +38,7 @@ class Solution {
 
 }
 
-class DisjointSetTests: XCTestCase {
+class DisjointSetTreeTests: XCTestCase {
 
     func testDisjointSet1() {
         let ds = DisjointSetTree<Int>()

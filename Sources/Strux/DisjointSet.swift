@@ -7,41 +7,35 @@
 
 import Foundation
 
-extension DisjointSet where T: Comparable {
-    private func convertValueSetToArrayOfStrings(_ set: Set<T>) -> [String] {
-        Array(set).sorted().map { "\($0)" }
-    }
-}
-
-struct DisjointSet<T: Hashable>: CustomStringConvertible {
+struct DisjointSet<T: Hashable & Comparable>: CustomStringConvertible {
     private var subsetDict = [Int: Set<T>]()
     private var keyDict = [T: Int]()
     private var maxKey = 0
     
-    private func convertValueSetToArrayOfStrings(_ set: Set<T>) -> [String] {
-        set.map { "\($0)" }.sorted()
+    private func sortedSubsets() -> [Set<T>] {
+        let arr: [Set<T>] = Array(subsetDict.values)
+        return arr.sorted { (first: Set<T>, second: Set<T>) -> Bool in
+            return first.min()! < second.min()!
+        }
     }
-     
+
     var description: String {
         var description = ""
-        let subs = self.subsets()
+        let subs = sortedSubsets()
         if subs.count == 0 {
             description = "Empty"
         } else {
-            description = subs.count == 1 ? "1 subset\n" : "\(subs.count) subsets, "
-            description = valueCount() == 1 ? "1 value total" : "\(valueCount()) values total" + "\n"
+            description = subs.count == 1 ? "1 subset, " : "\(subs.count) subsets, "
+            description += valueCount == 1 ? "1 value total\n" : "\(valueCount) values total\n"
             for i in 0 ..< subs.count {
                 description += "subset: "
-                description += convertValueSetToArrayOfStrings(subs[i]).joined(separator: " ")
+                description += subs[i].sorted().map { "\($0)" }.joined(separator: ", ")
                  if i < subs.count - 1 {
                     description += "\n"
                 }
             }
         }
         return description
-    }
-
-    public init() {
     }
 
     public func subset(of value: T) -> Set<T>? {
@@ -100,19 +94,23 @@ struct DisjointSet<T: Hashable>: CustomStringConvertible {
         return keyDict[value1] == keyDict[value2]
     }
     
-    public func valueCount() -> Int {
+    public var valueCount: Int {
         return keyDict.keys.count
     }
     
-    public func subsetCount() -> Int {
+    public var subsetCount: Int {
         return subsetDict.values.count
     }
     
-    public func subsets() -> [Set<T>] {
+    public var isEmpty: Bool {
+        return subsetDict.isEmpty
+    }
+    
+    public var subsets: [Set<T>] {
         return Array(subsetDict.values)
     }
     
-    public func values() -> [T] {
+    public var values: [T] {
         return Array(keyDict.keys)
     }
     
