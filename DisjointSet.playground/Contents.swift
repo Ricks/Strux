@@ -1,10 +1,3 @@
-//
-//  DisjointSet.swift
-//  Strux
-//
-//  Created by Rick Clark on 3/21/25.
-//
-
 import Foundation
 
 struct DisjointSet<T: Hashable & Comparable>: CustomStringConvertible {
@@ -60,11 +53,13 @@ struct DisjointSet<T: Hashable & Comparable>: CustomStringConvertible {
     }
 
     mutating public func merge(_ values: [T]) {
+        print("\nmerge(): values = \(values)\n   subsetDict = \(subsetDict)\n   keyDict = \(keyDict)")
         var keyValuePairs = [(Int, T)]()
         for value in values {
             let key = insertVal(value)
             keyValuePairs.append((key, value))
         }
+        print("   keyValuePairs = \(keyValuePairs)\n   updated subsetDict = \(subsetDict)\n   updated keyDict = \(keyDict)")
         if keyValuePairs.count > 1 {
             let (mainKey, value) = keyValuePairs.removeFirst()
             keyDict[value] = mainKey
@@ -80,6 +75,7 @@ struct DisjointSet<T: Hashable & Comparable>: CustomStringConvertible {
                 }
             }
         }
+        print("   final subsetDict = \(subsetDict)\n   final keyDict = \(keyDict)")
     }
     
     mutating public func merge(_ values: T...) {
@@ -141,3 +137,34 @@ struct Location: Hashable, Comparable, CustomStringConvertible {
         return "(row: \(row), col: \(col))"
     }
 }
+
+class Solution {
+    func numIslands(_ grid: [[Character]]) -> Int {
+        let m = grid.count
+        let n = grid[0].count
+        for i in 0 ..< m {
+            print(grid[i])
+        }
+        print("")
+        var ds = DisjointSet<Location>()
+        for i in 0 ..< m {
+            for j in 0 ..< n {
+                if grid[i][j] == "1" {
+                    var toMerge = [Location(row: i, col: j)]
+                    // Get the islands (if any) in the up and left directions
+                    if i > 0 && grid[i - 1][j] == "1" {
+                        toMerge.append(Location(row: i - 1, col: j))
+                    }
+                    if j > 0 && grid[i][j - 1] == "1" {
+                        toMerge.append(Location(row: i, col: j - 1))
+                    }
+                    ds.merge(toMerge)
+                }
+            }
+        }
+        return ds.subsetCount
+    }
+}
+
+let numIslands = Solution().numIslands([["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]])
+print("numIslands = \(numIslands)")
